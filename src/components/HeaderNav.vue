@@ -2,10 +2,10 @@
   <header class="nav-wrap">
     <div class="container nav-inner">
       <div class="brand">
-        <div class="logo" aria-hidden="true" />
+        <img class="logo" src="/dtcc-logo.png" alt="Digital Twin Cities Centre logo" />
         <div class="brand-text">
           <strong>Digital Twin</strong>
-          <span>Cities Centre</span>
+          <strong>Cities Centre</strong>
         </div>
       </div>
       <nav class="menu">
@@ -32,8 +32,8 @@
   box-shadow: 0 2px 12px rgba(0,0,0,0.35);
 }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-.brand { display: flex; align-items: center; gap: 12px; color: white; }
-.logo { width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(160deg, #9AD7CF, #F6D456); }
+.brand { display: flex; align-items: center; gap: 10px; color: white; }
+.logo { width: 34px; height: auto; display: block; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.35)); }
 .brand-text { display: grid; font-size: 12px; line-height: 1; }
 .brand-text strong { color: white; font-weight: 700; letter-spacing: .02em; }
 .brand-text span { color: #cfd3da; letter-spacing: .02em; }
