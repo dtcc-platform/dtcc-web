@@ -50,7 +50,6 @@
 }
 
 /* Character Styles */
-.subheading-brödtext-montserrat — 20pt,
 .subheading-brodtext-20 {
   font-family: var(--unnamed-font-family-montserrat);
   font-style: var(--unnamed-font-style-normal);
@@ -61,7 +60,6 @@
   color: var(--unnamed-color-27252a);
 }
 
-.brödtext-montserrat — 20pt,
 .brodtext-20 {
   font-family: var(--unnamed-font-family-montserrat);
   font-style: var(--unnamed-font-style-normal);
@@ -72,7 +70,6 @@
   color: var(--unnamed-color-27252a);
 }
 
-.menu — 20pt,
 .menu-20 {
   font-family: var(--unnamed-font-family-montserrat);
   font-style: var(--unnamed-font-style-normal);
@@ -123,4 +120,3 @@
   letter-spacing: var(--unnamed-character-spacing--0-3);
   color: var(--unnamed-color-27252a);
 }
-
