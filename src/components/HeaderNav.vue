@@ -9,7 +9,7 @@
         </div>
       </div>
       <nav class="menu">
-        <a href="#projects">Products</a>
+        <a href="#projects">Projects</a>
         <a href="#partners">Partners</a>
         <a href="#about">About us</a>
         <a href="#news">News</a>
@@ -25,9 +25,11 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(16,16,22,0.7);
+  /* Darker, closer to the mock */
+  background: linear-gradient(180deg, rgba(8,8,12,0.96) 0%, rgba(10,10,14,0.92) 100%);
   backdrop-filter: saturate(140%) blur(6px);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.35);
 }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
 .brand { display: flex; align-items: center; gap: 12px; color: white; }
@@ -42,4 +44,3 @@
   .menu { display: none; }
 }
 </style>
-
