@@ -1,7 +1,7 @@
 <template>
   <section id="projects" class="section">
     <div class="container">
-      <h3 class="h3-30" style="text-align:center;margin-bottom:20px">Latest projects</h3>
+      <h3 class="h3-30 section-title">Latest projects</h3>
       <div class="cards">
         <template v-if="items.length">
           <article v-for="p in items" :key="p.id" class="card project">
@@ -119,4 +119,8 @@ const items = computed(() => {
 .project a { color: var(--cta-f26a2e); font-weight: 600; }
 @media (max-width: 1100px) { .cards { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 700px) { .cards { grid-template-columns: 1fr; } }
+</style>
+
+<style scoped>
+.section-title { text-align: center; margin-bottom: 20px; }
 </style>

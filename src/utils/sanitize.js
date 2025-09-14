@@ -6,7 +6,7 @@ export function sanitizeUrl(input) {
   if (url.startsWith('/') || url.startsWith('./') || url.startsWith('../')) return url
   try {
     const u = new URL(url)
-    const allowed = ['http:', 'https:']
+    const allowed = ['http:', 'https:'] // Reject data:, blob:, javascript:, etc.
     if (!allowed.includes(u.protocol)) return '#'
     return u.toString()
   } catch {
@@ -40,4 +40,3 @@ export function allowBrText(input) {
   return escaped
     .replace(/&lt;br\s*\/?&gt;/gi, '<br>')
 }
-
