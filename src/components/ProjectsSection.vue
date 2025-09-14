@@ -57,7 +57,7 @@ const runtimeItems = ref([])
 
 onMounted(async () => {
   try {
-    const idx = await fetch('/projects/index.json', { cache: 'no-store' })
+    const idx = await fetch('/content/projects/index.json', { cache: 'no-store' })
     if (!idx.ok) return
     const payload = await idx.json()
     const arr = Array.isArray(payload.items) ? payload.items : Array.isArray(payload) ? payload : []
@@ -65,7 +65,7 @@ onMounted(async () => {
     const resolved = []
     for (const it of bases) {
       const base = it.base || it.name || it.file || it.id
-      const jsonPath = it.json || (base ? `/projects/${base}.json` : null)
+      const jsonPath = it.json || (base ? `/content/projects/${base}.json` : null)
       let data = {}
       if (jsonPath) {
         try { const r = await fetch(jsonPath, { cache: 'no-store' }); if (r.ok) data = await r.json() } catch (_) {}
@@ -76,7 +76,7 @@ onMounted(async () => {
       const date = it.date || data.date || data.published || data.updated || null
       let image = sanitizeSrc(it.image || data.image || null)
       if (!image && base) {
-        const tryUrls = [`/projects/${base}.jpeg`, `/projects/${base}.jpg`, `/projects/${base}.png`]
+        const tryUrls = [`/content/projects/${base}.jpeg`, `/content/projects/${base}.jpg`, `/content/projects/${base}.png`]
         for (const u of tryUrls) {
           try { const head = await fetch(u, { method: 'HEAD' }); if (head.ok) { image = sanitizeSrc(u); break } } catch (_) {}
         }

@@ -41,7 +41,7 @@ News — Build‑Time Source (Alternative)
 - Fields are the same as the runtime JSON. Items sort by `date` descending if provided.
 
 Projects — Quick Start (Runtime — recommended)
-1) Add/Update the manifest at `public/projects/index.json`.
+1) Add/Update the manifest at `public/content/projects/index.json`.
    - Format mirrors News: either an array of base names or an array of objects with overrides.
    - Examples:
      {
@@ -51,7 +51,7 @@ Projects — Quick Start (Runtime — recommended)
        ]
      }
 
-2) Create per‑item JSON files in `public/projects/` with the same base name:
+2) Create per‑item JSON files in `public/content/projects/` with the same base name:
    - Required: `title`
    - Optional: `summary` | `excerpt` | `description`, `url` | `link`, `date`, `image`
    - Example `public/projects/urban-comfort.json`:
@@ -64,7 +64,7 @@ Projects — Quick Start (Runtime — recommended)
 
 3) Provide an image for each project.
    - Preferred: Set `image` in the manifest or item JSON.
-   - If not set, the app probes `/projects/<base>.jpeg`, then `.jpg`, then `.png`.
+   - If not set, the app probes `/content/projects/<base>.jpeg`, then `.jpg`, then `.png`.
 
 Projects — Build‑Time Source (Alternative)
 - Place `src/projects/<name>.json` and matching `src/projects/<name>.(jpeg|jpg|png)`.
