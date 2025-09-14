@@ -25,8 +25,8 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  /* Darker, closer to the mock */
-  background: linear-gradient(180deg, rgba(8,8,12,0.96) 0%, rgba(10,10,14,0.92) 100%);
+  /* Slightly more transparent (~10% lower opacity) */
+  background: linear-gradient(180deg, rgba(8,8,12,0.86) 0%, rgba(10,10,14,0.83) 100%);
   backdrop-filter: saturate(140%) blur(6px);
   border-bottom: 1px solid rgba(255,255,255,0.06);
   box-shadow: 0 2px 12px rgba(0,0,0,0.35);

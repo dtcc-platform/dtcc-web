@@ -1,5 +1,5 @@
 <template>
-  <section class="hero gradient-hero" @mouseenter="paused = true" @mouseleave="paused = false" role="region" aria-roledescription="carousel" :aria-label="`Hero slideshow (${slides.length} slides)`">
+  <section class="hero gradient-hero" role="region" aria-roledescription="carousel" :aria-label="`Hero slideshow (${slides.length} slides)`">
     <!-- Background media (video or image) -->
     <div class="media">
       <transition name="fade" mode="out-in">
@@ -11,7 +11,7 @@
           :poster="currentSlide.poster || ''"
           autoplay
           muted
-          loop
+          :loop="currentSlide.loop === true"
           playsinline
           preload="auto"
         ></video>
@@ -49,12 +49,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
-
-// Public prop to control the interval (seconds)
-const props = defineProps({
-  intervalSec: { type: Number, default: 2 }
-})
+import { ref, computed } from 'vue'
 
 const slides = [
   {
@@ -83,23 +78,7 @@ const slides = [
 
 const current = ref(0)
 const currentSlide = computed(() => slides[current.value])
-const paused = ref(false)
-let timer
-
-const startTimer = () => {
-  stopTimer()
-  timer = setInterval(() => {
-    if (!paused.value) next()
-  }, Math.max(1000, props.intervalSec * 1000))
-}
-const stopTimer = () => timer && clearInterval(timer)
-
-function next() { current.value = (current.value + 1) % slides.length }
 function go(i) { current.value = i }
-
-onMounted(startTimer)
-onUnmounted(stopTimer)
-watch(() => props.intervalSec, startTimer)
 
 // Decorative star field helpers
 function rand(seed) {
