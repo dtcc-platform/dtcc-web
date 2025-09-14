@@ -3,7 +3,7 @@
     <div class="container inner">
       <div class="logo" aria-hidden="true"></div>
       <div class="text">
-        <h3 class="h3-30" style="color:#FADA36">We are always looking for talented students to supervise for theses and support the work of the Centre.</h3>
+        <h3 class="h3-30" style="color:#FADA36">We are always looking for talented students to supervise in their theses and to support the work of the Centre.</h3>
       </div>
     </div>
   </section>
