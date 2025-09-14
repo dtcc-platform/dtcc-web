@@ -38,7 +38,10 @@
 .grid .brodtext-20 { color: #ffffff; }
 .grid .brodtext-20 a { color: #ffffff; text-decoration: none; }
 .grid .brodtext-20 a:hover { text-decoration: underline; }
-.legal { border-top: 1px solid rgba(255,255,255,0.08); margin-top: 20px; padding-top: 16px; color: var(--unnamed-color-fada36); }
+.legal { border-top: 1px solid rgba(255,255,255,0.08); margin-top: 20px; padding-top: 16px; color: var(--unnamed-color-fada36); text-align: center; }
+/* Ensure legal text stays yellow even if it has .muted */
+.legal .brodtext-20,
+.legal .muted { color: var(--unnamed-color-fada36); }
 @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
 </style>
