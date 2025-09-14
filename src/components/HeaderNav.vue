@@ -1,13 +1,13 @@
 <template>
   <header class="nav-wrap">
     <div class="container nav-inner">
-      <div class="brand">
+      <a class="brand" href="/" aria-label="Digital Twin Cities Centre — Home">
         <img class="logo" src="/dtcc-logo.png" alt="Digital Twin Cities Centre logo" />
         <div class="brand-text">
           <strong>Digital Twin</strong>
           <strong>Cities Centre</strong>
         </div>
-      </div>
+      </a>
       <nav class="menu">
         <a href="#projects">Projects</a>
         <a href="#partners">Partners</a>
@@ -32,7 +32,7 @@
   box-shadow: 0 2px 12px rgba(0,0,0,0.35);
 }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-.brand { display: flex; align-items: center; gap: 10px; color: white; }
+.brand { display: flex; align-items: center; gap: 10px; color: white; text-decoration: none; }
 .logo { width: 34px; height: auto; display: block; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.35)); }
 .brand-text { display: grid; font-size: 12px; line-height: 1; }
 .brand-text strong { color: white; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
