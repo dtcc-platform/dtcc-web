@@ -7,7 +7,7 @@ Overview
   - `<type>` is `news` or `projects`.
 
 News — Quick Start (Runtime — recommended)
-1) Add/Update the manifest at `public/news/index.json`.
+1) Add/Update the manifest at `public/content/news/index.json`.
    - Use either an array of base names or objects.
    - Base name refers to the `public/news/<base>.json` metadata file.
    - Example:
@@ -18,10 +18,10 @@ News — Quick Start (Runtime — recommended)
        ]
      }
 
-2) Create per‑item JSON files in `public/news/` with the same base name:
+2) Create per‑item JSON files in `public/content/news/` with the same base name:
    - Required: `title`
    - Optional: `summary` (or `excerpt`), `url` (or `link`), `date` (ISO or parsable), `eyebrow`, `image`
-   - Example `public/news/webinar-june12.json`:
+   - Example `public/content/news/webinar-june12.json`:
      {
        "title": "Create tool webinar — Join us on June 12th",
        "summary": "A short intro for the webinar and how to sign up.",
@@ -31,8 +31,8 @@ News — Quick Start (Runtime — recommended)
      }
 
 3) Provide an image for each item.
-   - Preferred: Set `image` in the manifest or in the item JSON (absolute path like `/news/<base>.jpeg` or external URL).
-   - If `image` is not set, the app will probe for `/news/<base>.jpeg`, then `.jpg`, then `.png`.
+   - Preferred: Set `image` in the manifest or in the item JSON (absolute path like `/content/news/<base>.jpeg` or external URL).
+   - If `image` is not set, the app will probe for `/content/news/<base>.jpeg`, then `.jpg`, then `.png`.
    - External images are allowed (CORS permitting). If your server blocks HEAD requests, set `image` explicitly to avoid probing.
 
 News — Build‑Time Source (Alternative)

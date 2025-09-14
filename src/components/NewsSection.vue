@@ -47,7 +47,7 @@ const runtimeItems = ref([])
 
 onMounted(async () => {
   try {
-    const idx = await fetch('/news/index.json', { cache: 'no-store' })
+    const idx = await fetch('/content/news/index.json', { cache: 'no-store' })
     if (!idx.ok) return
     const payload = await idx.json()
     const arr = Array.isArray(payload.items) ? payload.items : Array.isArray(payload) ? payload : []
@@ -59,7 +59,7 @@ onMounted(async () => {
     const resolved = []
     for (const it of bases) {
       const base = it.base || it.name || it.file || it.id
-      const jsonPath = it.json || (base ? `/news/${base}.json` : null)
+      const jsonPath = it.json || (base ? `/content/news/${base}.json` : null)
       let data = {}
       if (jsonPath) {
         try {
@@ -76,7 +76,7 @@ onMounted(async () => {
       let image = sanitizeSrc(it.image || data.image || null)
       if (!image && base) {
         // Probe for available local image extension
-        const tryUrls = [`/news/${base}.jpeg`, `/news/${base}.jpg`, `/news/${base}.png`]
+        const tryUrls = [`/content/news/${base}.jpeg`, `/content/news/${base}.jpg`, `/content/news/${base}.png`]
         for (const u of tryUrls) {
           try {
             const head = await fetch(u, { method: 'HEAD' })

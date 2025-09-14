@@ -10,5 +10,13 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [vue()],
     base,
+    build: {
+      rollupOptions: {
+        input: {
+          main: 'index.html',
+          news: 'news/index.html',
+        }
+      }
+    }
   }
 })
