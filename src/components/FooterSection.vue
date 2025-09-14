@@ -14,7 +14,7 @@
       </div>
       <div>
         <div class="eyebrow">Contact</div>
-        <div class="brodtext-20 muted">Martin Nauer<br/>Student & Coordinator<br/>dtcc@chalmers.se</div>
+        <div class="brodtext-20 muted">Bernd Ketzler<br/>Scientific Coordinator<br/>dtcc@chalmers.se</div>
       </div>
       <div>
         <div class="eyebrow">Follow</div>
