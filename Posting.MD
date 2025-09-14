@@ -88,3 +88,16 @@ Local Development
 - Install deps: `npm install`
 - Start dev server: `npm run dev`
 - Build production: `npm run build` (output in `dist/`)
+
+Deployment — GitHub Pages
+- This repo includes a GitHub Actions workflow at `.github/workflows/deploy.yml` that builds and publishes the site to GitHub Pages.
+- Steps to enable:
+  1) Push the repo to GitHub.
+  2) In GitHub → Settings → Pages, set Source to “GitHub Actions”.
+  3) Ensure your default branch is `main` (or `master`); the workflow listens to both.
+- Vite `base` path is auto-configured for project pages:
+  - When building on GitHub Actions, `vite.config.js` sets `base` to `/<repo>/`.
+  - When running locally, `base` is `/` so local dev isn’t affected.
+- After the workflow runs, your site is available at:
+  - Project page: `https://<user>.github.io/<repo>/`
+  - User/Org page (if using `<user>.github.io` repo): `https://<user>.github.io/`

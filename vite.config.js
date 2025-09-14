@@ -2,7 +2,13 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [vue()],
+export default defineConfig(({ mode }) => {
+  // Auto-detect GitHub Pages builds and set the proper base path
+  const isGhActions = process.env.GITHUB_ACTIONS === 'true'
+  const repo = process.env.GITHUB_REPOSITORY?.split('/')?.pop() || ''
+  const base = isGhActions && repo ? `/${repo}/` : '/'
+  return {
+    plugins: [vue()],
+    base,
+  }
 })
-
