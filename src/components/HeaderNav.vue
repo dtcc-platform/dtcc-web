@@ -35,7 +35,7 @@
 .brand { display: flex; align-items: center; gap: 10px; color: white; }
 .logo { width: 34px; height: auto; display: block; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.35)); }
 .brand-text { display: grid; font-size: 12px; line-height: 1; }
-.brand-text strong { color: white; font-weight: 700; letter-spacing: .02em; }
+.brand-text strong { color: white; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
 .brand-text span { color: #cfd3da; letter-spacing: .02em; }
 .menu { display: flex; gap: 20px; }
 .menu a { color: var(--unnamed-color-fada36); font-size: 14px; text-transform: uppercase; letter-spacing: .08em; }

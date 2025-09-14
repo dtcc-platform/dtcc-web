@@ -13,6 +13,7 @@
           muted
           loop
           playsinline
+          preload="auto"
         ></video>
         <img
           v-else-if="currentSlide.image"
@@ -59,8 +60,8 @@ const slides = [
   {
     id: 0,
     title: 'A smarter city starts<br>with a digital twin.',
-    // Provide an optional image or video for each slide
-    // image: '/hero.jpg',
+    video: '/ssstik.io_1757779073094.mp4',
+    poster: ''
   },
   {
     id: 1,
@@ -69,10 +70,6 @@ const slides = [
   {
     id: 2,
     title: 'From data to decisions —<br>creating liveable cities.',
-    // Example video usage; place an mp4 at public/hero.mp4
-    // Remove or change path to your asset
-    video: '/hero.mp4',
-    poster: ''
   },
   {
     id: 3,
