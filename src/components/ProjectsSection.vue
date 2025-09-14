@@ -46,6 +46,7 @@
 
 <script setup>
 import { computed, ref, onMounted } from 'vue'
+import { sanitizeUrl, sanitizeSrc } from '../utils/sanitize'
 
 // Build-time source from src/projects
 const jsonModules = import.meta.glob('../projects/*.json', { eager: true, import: 'default' })
@@ -71,13 +72,13 @@ onMounted(async () => {
       }
       const title = it.title || data.title || data.name || base || 'Untitled project'
       const summary = it.summary || data.summary || data.excerpt || data.description || ''
-      const url = it.url || data.url || data.link || '#'
+      const url = sanitizeUrl(it.url || data.url || data.link || '#')
       const date = it.date || data.date || data.published || data.updated || null
-      let image = it.image || data.image || null
+      let image = sanitizeSrc(it.image || data.image || null)
       if (!image && base) {
         const tryUrls = [`/projects/${base}.jpeg`, `/projects/${base}.jpg`, `/projects/${base}.png`]
         for (const u of tryUrls) {
-          try { const head = await fetch(u, { method: 'HEAD' }); if (head.ok) { image = u; break } } catch (_) {}
+          try { const head = await fetch(u, { method: 'HEAD' }); if (head.ok) { image = sanitizeSrc(u); break } } catch (_) {}
         }
       }
       if (!image) continue
@@ -100,9 +101,11 @@ const items = computed(() => {
     if (!img) continue
     const title = data.title || data.name || name
     const summary = data.summary || data.excerpt || data.description || ''
-    const url = data.url || data.link || '#'
+    const url = sanitizeUrl(data.url || data.link || '#')
     const date = data.date || data.published || data.updated || null
-    result.push({ id: name, title, summary, url, image: img, date })
+    const image = sanitizeSrc(img)
+    if (!image) continue
+    result.push({ id: name, title, summary, url, image, date })
   }
   result.sort((a, b) => (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0))
   return result

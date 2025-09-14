@@ -35,6 +35,7 @@
 
 <script setup>
 import { computed, ref, onMounted } from 'vue'
+import { sanitizeUrl, sanitizeSrc } from '../utils/sanitize'
 
 // Load JSON files and images from src/news
 // Each item requires a matching image with the same base name
@@ -68,18 +69,18 @@ onMounted(async () => {
       }
       const title = it.title || data.title || data.headline || base || 'Untitled'
       const summary = it.summary || data.summary || data.excerpt || ''
-      const url = it.url || data.url || data.link || '#'
+      const url = sanitizeUrl(it.url || data.url || data.link || '#')
       const eyebrow = it.eyebrow || data.eyebrow || 'News'
       const date = it.date || data.date || data.published || data.publishedAt || data.time || null
 
-      let image = it.image || data.image || null
+      let image = sanitizeSrc(it.image || data.image || null)
       if (!image && base) {
         // Probe for available local image extension
         const tryUrls = [`/news/${base}.jpeg`, `/news/${base}.jpg`, `/news/${base}.png`]
         for (const u of tryUrls) {
           try {
             const head = await fetch(u, { method: 'HEAD' })
-            if (head.ok) { image = u; break }
+            if (head.ok) { image = sanitizeSrc(u); break }
           } catch (_) { /* ignore */ }
         }
       }
@@ -106,10 +107,12 @@ const items = computed(() => {
 
     const title = data.title || data.headline || name
     const summary = data.summary || data.excerpt || ''
-    const url = data.url || data.link || '#'
+    const url = sanitizeUrl(data.url || data.link || '#')
     const eyebrow = data.eyebrow || 'News'
     const date = data.date || data.published || data.publishedAt || data.time || null
-    result.push({ id: name, title, summary, url, eyebrow, image: img, date })
+    const image = sanitizeSrc(img)
+    if (!image) continue
+    result.push({ id: name, title, summary, url, eyebrow, image, date })
   }
   result.sort((a, b) => (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0))
   return result

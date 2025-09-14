@@ -31,7 +31,7 @@
     </div>
     <div class="container hero-inner">
       <transition name="fade" mode="out-in">
-        <h1 class="h1-80 title" :key="slides[current].id" v-html="slides[current].title"></h1>
+        <h1 class="h1-80 title" :key="slides[current].id" v-html="safeTitle"></h1>
       </transition>
       <div class="dots" aria-label="carousel navigation">
         <button
@@ -50,6 +50,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { allowBrText } from '../utils/sanitize'
 
 const BASE_URL = import.meta.env.BASE_URL || '/'
 const slides = [
@@ -80,6 +81,9 @@ const slides = [
 const current = ref(0)
 const currentSlide = computed(() => slides[current.value])
 function go(i) { current.value = i }
+
+// Sanitize slide titles; allow only <br>
+const safeTitle = computed(() => allowBrText(String(currentSlide.value?.title || '')))
 
 // Decorative star field helpers
 function rand(seed) {
