@@ -9,7 +9,7 @@
         </div>
       </a>
       <nav class="menu">
-        <a href="#projects">Projects</a>
+        <a :href="base + 'projects/'">Projects</a>
         <a href="#partners">Partners</a>
         <a href="#about">About us</a>
         <a :href="base + 'news/'">News</a>
