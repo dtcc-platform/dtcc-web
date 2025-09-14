@@ -53,7 +53,7 @@ import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 
 // Public prop to control the interval (seconds)
 const props = defineProps({
-  intervalSec: { type: Number, default: 6 }
+  intervalSec: { type: Number, default: 2 }
 })
 
 const slides = [
