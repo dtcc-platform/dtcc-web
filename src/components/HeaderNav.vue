@@ -1,8 +1,8 @@
 <template>
   <header class="nav-wrap">
     <div class="container nav-inner">
-      <a class="brand" href="/" aria-label="Digital Twin Cities Centre — Home">
-        <img class="logo" src="/dtcc-logo.png" alt="Digital Twin Cities Centre logo" />
+      <a class="brand" :href="base" aria-label="Digital Twin Cities Centre — Home">
+        <img class="logo" :src="base + 'dtcc-logo.png'" alt="Digital Twin Cities Centre logo" />
         <div class="brand-text">
           <strong>Digital Twin</strong>
           <strong>Cities Centre</strong>
@@ -19,6 +19,10 @@
     </div>
   </header>
 </template>
+
+<script setup>
+const base = import.meta.env.BASE_URL || '/'
+</script>
 
 <style scoped>
 .nav-wrap {
