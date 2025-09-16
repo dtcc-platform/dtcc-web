@@ -2,9 +2,17 @@ DTCC Web — Content Posting Guide
 
 Overview
 - This project supports two ways to publish News and Projects:
-  - Build‑time from `src/<type>`: add matching `name.json` + `name.jpeg` (or `.jpg` / `.png`).
-  - Runtime from `public/<type>`: a manifest at `public/<type>/index.json` (+ item JSONs). Runtime items override build‑time ones.
+  - Build-time from `src/<type>`: add matching `name.json` + `name.jpeg` (or `.jpg` / `.png`).
+  - Runtime from `public/<type>`: a manifest at `public/<type>/index.json` (+ item JSONs). Runtime items override build-time ones.
   - `<type>` is `news` or `projects`.
+
+Automated News Drafting
+- Run `python3 news_item_wizard.py` to interactively draft runtime news items with Gemini Pro.
+- Requirements:
+  - `pip install google-generativeai`
+  - `export GEMINI_API_KEY="<your token>"`
+- The wizard collects headline + bullet points, calls Gemini for a JSON draft, lets you approve/adjust the URL/image, writes `public/content/news/<slug>.json`, and updates the manifest (`public/content/news/index.json`).
+- If the generated file exists, the script asks before overwriting.
 
 News — Quick Start (Runtime — recommended)
 1) Add/Update the manifest at `public/content/news/index.json`.
