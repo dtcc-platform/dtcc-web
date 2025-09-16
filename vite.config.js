@@ -15,6 +15,7 @@ export default defineConfig(({ mode }) => {
         input: {
           main: 'index.html',
           news: 'news/index.html',
+          newsDetail: 'news/detail.html',
           projects: 'projects/index.html',
           about: 'about/index.html',
         }

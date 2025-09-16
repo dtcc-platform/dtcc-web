@@ -1,23 +1,18 @@
 <template>
-  <main>
+  <main v-if="item">
     <!-- Intro gradient section -->
     <section class="section gradient-sunrise intro">
       <div class="container grid2">
         <div>
           <div class="eyebrow">News:</div>
-          <h1 class="h2-50">Digital Twins for circularity</h1>
+          <h1 class="h2-50" v-text="item.title"></h1>
         </div>
         <div>
-          <p class="brodtext-20 muted">
-            After three years of collaboration, research, and co‑creation with cities across Europe, we’re excited to announce that the CREATE tool is finally complete! As part of the EU‑funded DUT project CREATE, we’ve developed an innovative solution to support cities in adopting more circular urban planning practices.
-          </p>
-          <p class="brodtext-20 muted">
-            We’ll be presenting the final version of the tool in a live webinar on June 12th, from 11:30 to 12:30 CET, and we’d love for you to join us.
-          </p>
+          <p class="brodtext-20 muted" v-text="item.intro || item.summary || ''" />
         </div>
       </div>
       <div class="container">
-        <div class="hero-img card"></div>
+        <div class="hero-img card" :style="{ backgroundImage: heroImageStyle }"></div>
       </div>
     </section>
 
@@ -25,15 +20,10 @@
     <section class="section gradient-sunrise body">
       <div class="container grid2">
         <div>
-          <h2 class="h3-30">Placeholder<br>headline</h2>
+          <h2 class="h3-30" v-text="item.subheading || 'Details'" />
         </div>
         <div>
-          <p class="brodtext-20 muted">
-            The centre’s vision is to establish the Digital Twin City concept as the foundation for digital planning, design, construction, and management of sustainable, intelligent, and liveable cities and regions throughout Sweden by 2030.
-          </p>
-          <p class="brodtext-20 muted">
-            This will be achieved by serving as a national and collaborative arena with an open Digital Twin platform that enables the exchange and accessibility of relevant spatial, user and qualitative data as well as the development of cutting‑edge tools and methods that support informed decision‑making based on simulations to forecast the response of design interventions. The centre explores, develops, and disseminates digital strategies, services, and business models that deliver value to Swedish society at large.
-          </p>
+          <p class="brodtext-20 muted" v-for="(p, i) in bodyParas" :key="i" v-text="p" />
         </div>
       </div>
     </section>
@@ -70,20 +60,12 @@
       <div class="container">
         <h3 class="h3-30 section-title">Related posts</h3>
         <div class="cards">
-          <article class="card project">
-            <div class="img" style="background-image:url('https://images.unsplash.com/photo-1494516192674-b82b5f1e61dc?q=80&w=1200&auto=format&fit=crop')"></div>
+          <article v-for="r in related" :key="r.id" class="card project">
+            <div class="img" :style="{ backgroundImage: r.image ? `url(${r.image})` : undefined }"></div>
             <div class="body">
-              <h4 class="h3-30">Placeholder news.</h4>
-              <p class="brodtext-20 muted">Urban densification influences wind, temperature, noise, daylight and air quality...</p>
-              <a href="#" class="more">Read more »</a>
-            </div>
-          </article>
-          <article class="card project">
-            <div class="img" style="background-image:url('https://images.unsplash.com/photo-1518306727298-4c17e1bf6942?q=80&w=1200&auto=format&fit=crop')"></div>
-            <div class="body">
-              <h4 class="h3-30">Placeholder news.</h4>
-              <p class="brodtext-20 muted">Developing decision support systems to help making informed decisions ...</p>
-              <a href="#" class="more">Read more »</a>
+              <h4 class="h3-30" v-text="r.title" />
+              <p class="brodtext-20 muted" v-text="r.summary || ''" />
+              <a :href="detailHref(r.id)" class="more">Read more »</a>
             </div>
           </article>
         </div>
@@ -92,10 +74,81 @@
   </main>
 </template>
 
+<script setup>
+import { ref, onMounted, computed } from 'vue'
+import { sanitizeSrc } from '../utils/sanitize'
+
+const params = new URLSearchParams(location.search)
+const slug = params.get('slug')
+const item = ref(null)
+const related = ref([])
+const heroImageStyle = computed(() => item.value?.image ? `url(${item.value.image})` : undefined)
+
+const bodyParas = computed(() => {
+  const body = item.value?.body || ''
+  if (!body) return []
+  if (Array.isArray(body)) return body
+  return String(body).split(/\n\n+/).map(s => s.trim()).filter(Boolean)
+})
+
+const base = import.meta.env.BASE_URL || '/'
+const detailHref = (slug) => `${base}news/detail.html?slug=${encodeURIComponent(slug)}`
+
+onMounted(async () => {
+  if (!slug) return
+  try {
+    const r = await fetch(`/content/news/${slug}.json`, { cache: 'no-store' })
+    if (!r.ok) return
+    const data = await r.json()
+    let image = sanitizeSrc(data.image || null)
+    if (!image) {
+      for (const u of [`/content/news/${slug}.jpeg`, `/content/news/${slug}.jpg`, `/content/news/${slug}.png`]) {
+        try { const h = await fetch(u, { method: 'HEAD' }); if (h.ok) { image = sanitizeSrc(u); break } } catch(_) {}
+      }
+    }
+    item.value = {
+      id: slug,
+      title: data.title || slug,
+      intro: data.intro || data.summary || '',
+      subheading: data.subheading || data.headline || 'Details',
+      body: data.body || '',
+      image,
+    }
+    // Load related posts (up to 2)
+    const idx = await fetch('/content/news/index.json', { cache: 'no-store' })
+    if (idx.ok) {
+      const payload = await idx.json()
+      const arr = Array.isArray(payload.items) ? payload.items : Array.isArray(payload) ? payload : []
+      const bases = arr.map((it) => (typeof it === 'string' ? { base: it } : it)).filter(it => (it.base || it.name || it.id) !== slug)
+      const resolved = []
+      for (const it of bases) {
+        const base = it.base || it.name || it.id
+        let data2 = {}
+        try { const r2 = await fetch(`/content/news/${base}.json`, { cache: 'no-store' }); if (r2.ok) data2 = await r2.json() } catch(_) {}
+        let img = sanitizeSrc(it.image || data2.image || null)
+        if (!img) {
+          for (const u of [`/content/news/${base}.jpeg`, `/content/news/${base}.jpg`, `/content/news/${base}.png`]) {
+            try { const h = await fetch(u, { method: 'HEAD' }); if (h.ok) { img = sanitizeSrc(u); break } } catch(_) {}
+          }
+        }
+        if (!img) continue
+        resolved.push({ id: base, title: data2.title || base, summary: data2.summary || data2.excerpt || '', image: img, date: data2.date || null, order: Number(data2.order) })
+      }
+      if (resolved.some(x => Number.isFinite(x.order))) {
+        resolved.sort((a, b) => (a.order ?? 1e9) - (b.order ?? 1e9))
+      } else {
+        resolved.sort((a, b) => (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0))
+      }
+      related.value = resolved.slice(0, 2)
+    }
+  } catch (_) {}
+})
+</script>
+
 <style scoped>
 .intro { padding-top: 36px; }
 .grid2 { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items: center; }
-.hero-img { height: 380px; border-radius: 14px; margin-top: 16px; background: url('https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?q=80&w=1400&auto=format&fit=crop') center/cover no-repeat; }
+.hero-img { height: 380px; border-radius: 14px; margin-top: 16px; background: #000 center/cover no-repeat; }
 
 .body { padding-top: 24px; padding-bottom: 24px; }
 
@@ -118,4 +171,3 @@
   .related .cards { grid-template-columns: 1fr; }
 }
 </style>
-
