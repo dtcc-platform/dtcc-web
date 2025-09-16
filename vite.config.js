@@ -18,6 +18,7 @@ export default defineConfig(({ mode }) => {
           newsDetail: 'news/detail.html',
           projects: 'projects/index.html',
           projectsDetail: 'projects/detail.html',
+          contact: 'contact/index.html',
           about: 'about/index.html',
         }
       }
