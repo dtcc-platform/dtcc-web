@@ -26,7 +26,7 @@
             <div class="body">
               <h4 class="h3-30" v-text="p.title" />
               <p class="brodtext-20 muted" v-text="p.description || p.summary || p.excerpt" />
-              <a :href="p.url || '#'" class="more">Read more »</a>
+              <a :href="detailHref(p.id)" class="more">Read more »</a>
             </div>
           </article>
         </div>
@@ -116,6 +116,8 @@ const items = computed(() => {
   return result
 })
 
+const base = import.meta.env.BASE_URL || '/'
+const detailHref = (slug) => `${base}projects/detail.html?slug=${encodeURIComponent(slug)}`
 const visibleItems = computed(() => items.value.slice(0, visibleCount.value))
 </script>
 

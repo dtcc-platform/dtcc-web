@@ -1,6 +1,10 @@
 {
   "title": "4D digital twin for underground, and natural hazards",
   "description": "Developing decision-support systems using 4D data to model underground networks and natural hazards.",
+  "intro": "Decision-support systems using 4D data for underground networks and hazards.",
+  "body": "We combine subsurface models, utility networks and time-series sensing to create predictive tools.\n\nThe twin supports scenario analysis for maintenance and resilience planning.",
+  "subheading": "Project details",
+  "image": "https://images.unsplash.com/photo-1518306727298-4c17e1bf6942?q=80&w=1200&auto=format&fit=crop",
   "url": "/projects/underground-4d",
   "date": "2025-02-14",
   "order": 2

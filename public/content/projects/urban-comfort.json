@@ -1,6 +1,10 @@
 {
   "title": "Urban Environmental Comfort Design",
   "description": "Urban densification influences wind, temperature, noise, daylight and air quality at both city scale and street level.",
+  "intro": "Urban densification influences wind, temperature, noise, daylight and air quality.",
+  "body": "This project studies how densification impacts environmental comfort metrics and how to design for better outcomes using twins.\n\nWe integrate microclimate, noise, daylight and air quality datasets into a city-scale model.",
+  "subheading": "Project details",
+  "image": "https://images.unsplash.com/photo-1494516192674-b82b5f1e61dc?q=80&w=1200&auto=format&fit=crop",
   "url": "/projects/urban-comfort",
   "date": "2025-03-02",
   "order": 1
