@@ -11,7 +11,7 @@
       <nav class="menu">
         <a :href="base + 'projects/'">Projects</a>
         <a href="#partners">Partners</a>
-        <a href="#about">About us</a>
+        <a :href="base + 'about/'">About us</a>
         <a :href="base + 'news/'">News</a>
         <a href="#events">Events</a>
         <a href="#contact">Contact</a>
