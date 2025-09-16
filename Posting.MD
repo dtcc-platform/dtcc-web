@@ -13,6 +13,7 @@ Automated News Drafting
   - `export GEMINI_API_KEY="<your token>"`
 - The wizard collects headline + bullet points, calls Gemini for a JSON draft, lets you approve/adjust the URL/image, writes `public/content/news/<slug>.json`, and updates the manifest (`public/content/news/index.json`).
 - If the generated file exists, the script asks before overwriting.
+- This LLM-assisted workflow is experimental. Always review the draft carefully and make any edits needed before approving.
 
 News — Quick Start (Runtime — recommended)
 1) Add/Update the manifest at `public/content/news/index.json`.
