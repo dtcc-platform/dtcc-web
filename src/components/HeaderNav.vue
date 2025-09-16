@@ -13,7 +13,7 @@
         <a href="#partners">Partners</a>
         <a :href="base + 'about/'">About us</a>
         <a :href="base + 'news/'">News</a>
-        <a href="#events">Events</a>
+        <a :href="base + 'events/'">Events</a>
         <a :href="base + 'contact/'">Contact</a>
       </nav>
     </div>

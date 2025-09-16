@@ -1,0 +1,11 @@
+{
+  "items": [
+    { "id": "summer-seminar", "title": "DTCC Summer Seminar", "date": "2025-06-12", "timeStart": "11:30", "timeEnd": "12:30", "location": "on‑line" },
+    { "id": "twin-workshop", "title": "Hands-on Digital Twin Workshop", "date": "2025-06-19", "timeStart": "13:00", "timeEnd": "16:30", "location": "A Working Lab, Gothenburg" },
+    { "id": "open-day", "title": "DTCC Open Day", "date": "2025-07-03", "timeStart": "09:30", "timeEnd": "15:00", "location": "Campus" },
+    { "id": "webinar-digital-urbanism", "title": "Webinar: Digital Urbanism", "date": "2025-07-10", "timeStart": "12:00", "timeEnd": "13:00", "location": "on‑line" },
+    { "id": "panel-resilience", "title": "Panel: Urban Resilience via Twins", "date": "2025-07-18", "timeStart": "14:00", "timeEnd": "15:30", "location": "Hybrid" },
+    { "id": "training-data-pipelines", "title": "Training: Data Pipelines 101", "date": "2025-08-01", "timeStart": "10:00", "timeEnd": "12:00", "location": "Lab 2" }
+  ]
+}
+
