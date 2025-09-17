@@ -41,6 +41,7 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue'
 import { sanitizeUrl, sanitizeSrc } from '../utils/sanitize'
+import { withBase, resolveUrl } from '../utils/paths.js'
 
 // Build-time fallback from src/projects
 const jsonModules = import.meta.glob('../projects/*.json', { eager: true, import: 'default' })
@@ -51,9 +52,23 @@ const runtimeItems = ref([])
 const visibleCount = ref(4)
 const showMore = () => { visibleCount.value = Math.min(visibleCount.value + 4, items.value.length) }
 
+const normalizeImage = (value) => {
+  if (!value) return null
+  return sanitizeSrc(resolveUrl(value))
+}
+
+const normalizeLink = (value) => {
+  if (!value) return '#'
+  const trimmed = value.trim()
+  if (!trimmed || trimmed === '#') return '#'
+  const resolved = resolveUrl(trimmed)
+  if (typeof resolved !== 'string') return '#'
+  return resolved.startsWith('/') ? resolved : sanitizeUrl(resolved)
+}
+
 onMounted(async () => {
   try {
-    const idx = await fetch('/content/projects/index.json', { cache: 'no-store' })
+    const idx = await fetch(withBase('content/projects/index.json'), { cache: 'no-store' })
     if (!idx.ok) return
     const payload = await idx.json()
     const arr = Array.isArray(payload.items) ? payload.items : Array.isArray(payload) ? payload : []
@@ -61,21 +76,28 @@ onMounted(async () => {
     const resolved = []
     for (const it of bases) {
       const base = it.base || it.name || it.file || it.id
-      const jsonPath = it.json || (base ? `/content/projects/${base}.json` : null)
+      const jsonPath = it.json || (base ? `content/projects/${base}.json` : null)
       let data = {}
       if (jsonPath) {
-        try { const r = await fetch(jsonPath, { cache: 'no-store' }); if (r.ok) data = await r.json() } catch (_) {}
+        try {
+          const r = await fetch(resolveUrl(jsonPath), { cache: 'no-store' })
+          if (r.ok) data = await r.json()
+        } catch (_) {}
       }
       const title = it.title || data.title || data.name || base || 'Untitled project'
       const description = it.description || data.description || data.summary || data.excerpt || ''
-      const url = sanitizeUrl(it.url || data.url || data.link || '#')
+      const url = normalizeLink(it.url || data.url || data.link || '')
       const date = it.date || data.date || data.published || data.updated || null
       const order = Number.isFinite(Number(it.order)) ? Number(it.order) : (Number.isFinite(Number(data.order)) ? Number(data.order) : undefined)
-      let image = sanitizeSrc(it.image || data.image || null)
+      let image = normalizeImage(it.image || data.image || null)
       if (!image && base) {
-        const tryUrls = [`/content/projects/${base}.jpeg`, `/content/projects/${base}.jpg`, `/content/projects/${base}.png`]
+        const tryUrls = ['jpeg', 'jpg', 'png']
+          .map(ext => resolveUrl(`content/projects/${base}.${ext}`))
         for (const u of tryUrls) {
-          try { const head = await fetch(u, { method: 'HEAD' }); if (head.ok) { image = sanitizeSrc(u); break } } catch (_) {}
+          try {
+            const head = await fetch(u, { method: 'HEAD' })
+            if (head.ok) { image = sanitizeSrc(u); break }
+          } catch (_) {}
         }
       }
       if (!image) continue
@@ -98,11 +120,11 @@ const items = computed(() => {
       imageModules[`../projects/${name}.jpeg`] ||
       imageModules[`../projects/${name}.jpg`] ||
       imageModules[`../projects/${name}.png`]
-    const image = sanitizeSrc(img)
+    const image = sanitizeSrc(resolveUrl(img))
     if (!image) continue
     const title = data.title || data.name || name
     const description = data.description || data.summary || data.excerpt || ''
-    const url = sanitizeUrl(data.url || data.link || '#')
+    const url = normalizeLink(data.url || data.link || '')
     const date = data.date || data.published || data.updated || null
     const order = Number.isFinite(Number(data.order)) ? Number(data.order) : undefined
     result.push({ id: name, title, description, url, image, date, order })
@@ -116,8 +138,7 @@ const items = computed(() => {
   return result
 })
 
-const base = import.meta.env.BASE_URL || '/'
-const detailHref = (slug) => `${base}projects/detail.html?slug=${encodeURIComponent(slug)}`
+const detailHref = (slug) => withBase(`projects/detail.html?slug=${encodeURIComponent(slug)}`)
 const visibleItems = computed(() => items.value.slice(0, visibleCount.value))
 </script>
 

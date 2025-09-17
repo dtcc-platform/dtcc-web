@@ -34,6 +34,16 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { sanitizeUrl } from '../utils/sanitize'
+import { resolveUrl } from '../utils/paths.js'
+
+const normalizeLink = (value) => {
+  if (!value) return ''
+  const trimmed = value.trim()
+  if (!trimmed || trimmed === '#') return ''
+  const resolved = resolveUrl(trimmed)
+  if (typeof resolved !== 'string') return ''
+  return resolved.startsWith('/') ? resolved : sanitizeUrl(resolved)
+}
 
 const params = new URLSearchParams(location.search)
 const slug = params.get('slug')
@@ -68,7 +78,7 @@ const bodyParas = computed(() => {
 onMounted(async () => {
   if (!slug) return
   try {
-    const r = await fetch(`/content/events/${slug}.json`, { cache: 'no-store' })
+    const r = await fetch(resolveUrl(`content/events/${slug}.json`), { cache: 'no-store' })
     if (!r.ok) return
     const data = await r.json()
     item.value = {
@@ -81,7 +91,7 @@ onMounted(async () => {
       timeEnd: data.timeEnd || null,
       location: data.location || null,
       meta: data.meta || null,
-      registration: sanitizeUrl(data.registration || ''),
+      registration: normalizeLink(data.registration || ''),
     }
   } catch (_) {}
 })
@@ -98,4 +108,3 @@ onMounted(async () => {
   .grid2 { grid-template-columns: 1fr; }
 }
 </style>
-

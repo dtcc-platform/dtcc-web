@@ -36,6 +36,7 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue'
 import { sanitizeUrl, sanitizeSrc } from '../utils/sanitize'
+import { withBase, resolveUrl } from '../utils/paths.js'
 
 // Load JSON files and images from src/news
 // Each item requires a matching image with the same base name
@@ -45,9 +46,23 @@ const imageModules = import.meta.glob('../news/*.{jpg,jpeg,png}', { eager: true,
 // Runtime-loaded items from /public/news via fetch
 const runtimeItems = ref([])
 
+const normalizeImage = (value) => {
+  if (!value) return null
+  return sanitizeSrc(resolveUrl(value))
+}
+
+const normalizeLink = (value) => {
+  if (!value) return '#'
+  const trimmed = value.trim()
+  if (!trimmed || trimmed === '#') return '#'
+  const resolved = resolveUrl(trimmed)
+  if (typeof resolved !== 'string') return '#'
+  return resolved.startsWith('/') ? resolved : sanitizeUrl(resolved)
+}
+
 onMounted(async () => {
   try {
-    const idx = await fetch('/content/news/index.json', { cache: 'no-store' })
+    const idx = await fetch(withBase('content/news/index.json'), { cache: 'no-store' })
     if (!idx.ok) return
     const payload = await idx.json()
     const arr = Array.isArray(payload.items) ? payload.items : Array.isArray(payload) ? payload : []
@@ -59,24 +74,25 @@ onMounted(async () => {
     const resolved = []
     for (const it of bases) {
       const base = it.base || it.name || it.file || it.id
-      const jsonPath = it.json || (base ? `/content/news/${base}.json` : null)
+      const jsonPath = it.json || (base ? `content/news/${base}.json` : null)
       let data = {}
       if (jsonPath) {
         try {
-          const r = await fetch(jsonPath, { cache: 'no-store' })
+          const r = await fetch(resolveUrl(jsonPath), { cache: 'no-store' })
           if (r.ok) data = await r.json()
         } catch (_) { /* ignore */ }
       }
       const title = it.title || data.title || data.headline || base || 'Untitled'
       const summary = it.summary || data.summary || data.excerpt || ''
-      const url = sanitizeUrl(it.url || data.url || data.link || '#')
+      const url = normalizeLink(it.url || data.url || data.link || '')
       const eyebrow = it.eyebrow || data.eyebrow || 'News'
       const date = it.date || data.date || data.published || data.publishedAt || data.time || null
 
-      let image = sanitizeSrc(it.image || data.image || null)
+      let image = normalizeImage(it.image || data.image || null)
       if (!image && base) {
         // Probe for available local image extension
-        const tryUrls = [`/content/news/${base}.jpeg`, `/content/news/${base}.jpg`, `/content/news/${base}.png`]
+        const tryUrls = ['jpeg', 'jpg', 'png']
+          .map(ext => resolveUrl(`content/news/${base}.${ext}`))
         for (const u of tryUrls) {
           try {
             const head = await fetch(u, { method: 'HEAD' })
@@ -107,10 +123,10 @@ const items = computed(() => {
 
     const title = data.title || data.headline || name
     const summary = data.summary || data.excerpt || ''
-    const url = sanitizeUrl(data.url || data.link || '#')
+    const url = normalizeLink(data.url || data.link || '')
     const eyebrow = data.eyebrow || 'News'
     const date = data.date || data.published || data.publishedAt || data.time || null
-    const image = sanitizeSrc(img)
+    const image = sanitizeSrc(resolveUrl(img))
     if (!image) continue
     result.push({ id: name, title, summary, url, eyebrow, image, date })
   }

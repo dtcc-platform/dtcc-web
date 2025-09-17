@@ -77,6 +77,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { sanitizeSrc } from '../utils/sanitize'
+import { withBase, resolveUrl } from '../utils/paths.js'
 
 const params = new URLSearchParams(location.search)
 const slug = params.get('slug')
@@ -91,18 +92,22 @@ const bodyParas = computed(() => {
   return String(body).split(/\n\n+/).map(s => s.trim()).filter(Boolean)
 })
 
-const base = import.meta.env.BASE_URL || '/'
-const detailHref = (slug) => `${base}news/detail.html?slug=${encodeURIComponent(slug)}`
+const detailHref = (slug) => withBase(`news/detail.html?slug=${encodeURIComponent(slug)}`)
+
+const normalizeImage = (value) => {
+  if (!value) return null
+  return sanitizeSrc(resolveUrl(value))
+}
 
 onMounted(async () => {
   if (!slug) return
   try {
-    const r = await fetch(`/content/news/${slug}.json`, { cache: 'no-store' })
+    const r = await fetch(resolveUrl(`content/news/${slug}.json`), { cache: 'no-store' })
     if (!r.ok) return
     const data = await r.json()
-    let image = sanitizeSrc(data.image || null)
+    let image = normalizeImage(data.image || null)
     if (!image) {
-      for (const u of [`/content/news/${slug}.jpeg`, `/content/news/${slug}.jpg`, `/content/news/${slug}.png`]) {
+      for (const u of ['jpeg', 'jpg', 'png'].map(ext => resolveUrl(`content/news/${slug}.${ext}`))) {
         try { const h = await fetch(u, { method: 'HEAD' }); if (h.ok) { image = sanitizeSrc(u); break } } catch(_) {}
       }
     }
@@ -115,7 +120,7 @@ onMounted(async () => {
       image,
     }
     // Load related posts (up to 2)
-    const idx = await fetch('/content/news/index.json', { cache: 'no-store' })
+    const idx = await fetch(withBase('content/news/index.json'), { cache: 'no-store' })
     if (idx.ok) {
       const payload = await idx.json()
       const arr = Array.isArray(payload.items) ? payload.items : Array.isArray(payload) ? payload : []
@@ -124,10 +129,10 @@ onMounted(async () => {
       for (const it of bases) {
         const base = it.base || it.name || it.id
         let data2 = {}
-        try { const r2 = await fetch(`/content/news/${base}.json`, { cache: 'no-store' }); if (r2.ok) data2 = await r2.json() } catch(_) {}
-        let img = sanitizeSrc(it.image || data2.image || null)
+        try { const r2 = await fetch(resolveUrl(`content/news/${base}.json`), { cache: 'no-store' }); if (r2.ok) data2 = await r2.json() } catch(_) {}
+        let img = normalizeImage(it.image || data2.image || null)
         if (!img) {
-          for (const u of [`/content/news/${base}.jpeg`, `/content/news/${base}.jpg`, `/content/news/${base}.png`]) {
+          for (const u of ['jpeg', 'jpg', 'png'].map(ext => resolveUrl(`content/news/${base}.${ext}`))) {
             try { const h = await fetch(u, { method: 'HEAD' }); if (h.ok) { img = sanitizeSrc(u); break } } catch(_) {}
           }
         }

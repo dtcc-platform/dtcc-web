@@ -37,14 +37,20 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue'
 import { sanitizeSrc } from '../utils/sanitize'
+import { withBase, resolveUrl } from '../utils/paths.js'
 
 const runtimeItems = ref([])
 const visibleCount = ref(4)
 const showMore = () => { visibleCount.value = Math.min(visibleCount.value + 4, items.value.length) }
 
+const normalizeImage = (value) => {
+  if (!value) return null
+  return sanitizeSrc(resolveUrl(value))
+}
+
 onMounted(async () => {
   try {
-    const idx = await fetch('/content/news/index.json', { cache: 'no-store' })
+    const idx = await fetch(withBase('content/news/index.json'), { cache: 'no-store' })
     if (!idx.ok) return
     const payload = await idx.json()
     const arr = Array.isArray(payload.items) ? payload.items : Array.isArray(payload) ? payload : []
@@ -52,16 +58,20 @@ onMounted(async () => {
     const resolved = []
     for (const it of bases) {
       const base = it.base || it.name || it.file || it.id
-      const jsonPath = it.json || (base ? `/content/news/${base}.json` : null)
+      const jsonPath = it.json || (base ? `content/news/${base}.json` : null)
       let data = {}
       if (jsonPath) {
-        try { const r = await fetch(jsonPath, { cache: 'no-store' }); if (r.ok) data = await r.json() } catch (_) {}
+        try {
+          const r = await fetch(resolveUrl(jsonPath), { cache: 'no-store' })
+          if (r.ok) data = await r.json()
+        } catch (_) {}
       }
       const title = data.title || base
       const summary = data.summary || data.excerpt || data.description || ''
-      let image = sanitizeSrc(it.image || data.image || null)
+      let image = normalizeImage(it.image || data.image || null)
       if (!image && base) {
-        const tryUrls = [`/content/news/${base}.jpeg`, `/content/news/${base}.jpg`, `/content/news/${base}.png`]
+        const tryUrls = ['jpeg', 'jpg', 'png']
+          .map(ext => resolveUrl(`content/news/${base}.${ext}`))
         for (const u of tryUrls) {
           try { const head = await fetch(u, { method: 'HEAD' }); if (head.ok) { image = sanitizeSrc(u); break } } catch (_) {}
         }
@@ -82,8 +92,7 @@ onMounted(async () => {
 })
 
 const items = computed(() => runtimeItems.value)
-const base = import.meta.env.BASE_URL || '/'
-const detailHref = (slug) => `${base}news/detail.html?slug=${encodeURIComponent(slug)}`
+const detailHref = (slug) => withBase(`news/detail.html?slug=${encodeURIComponent(slug)}`)
 const visibleItems = computed(() => items.value.slice(0, visibleCount.value))
 </script>
 

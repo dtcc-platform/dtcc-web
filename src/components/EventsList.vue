@@ -33,7 +33,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 
-const base = import.meta.env.BASE_URL || '/'
+import { withBase } from '../utils/paths.js'
 const items = ref([])
 
 const suffixDay = (n) => {
@@ -56,11 +56,13 @@ function formatMeta(e) {
   } catch (_) { return e.location || '' }
 }
 
-function detailHref(slug) { return `${base}events/detail.html?slug=${encodeURIComponent(slug)}` }
+function detailHref(slug) {
+  return withBase(`events/detail.html?slug=${encodeURIComponent(slug)}`)
+}
 
 onMounted(async () => {
   try {
-    const r = await fetch('/content/events/index.json', { cache: 'no-store' })
+    const r = await fetch(withBase('content/events/index.json'), { cache: 'no-store' })
     if (!r.ok) return
     const payload = await r.json()
     const arr = Array.isArray(payload.items) ? payload.items : Array.isArray(payload) ? payload : []
@@ -87,4 +89,3 @@ onMounted(async () => {
   .meta { text-align: left; }
 }
 </style>
-

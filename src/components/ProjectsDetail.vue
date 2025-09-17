@@ -53,6 +53,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { sanitizeSrc, sanitizeUrl } from '../utils/sanitize'
+import { withBase, resolveUrl } from '../utils/paths.js'
 
 const params = new URLSearchParams(location.search)
 const slug = params.get('slug')
@@ -67,18 +68,31 @@ const bodyParas = computed(() => {
   return String(body).split(/\n\n+/).map(s => s.trim()).filter(Boolean)
 })
 
-const base = import.meta.env.BASE_URL || '/'
-const detailHref = (slug) => `${base}projects/detail.html?slug=${encodeURIComponent(slug)}`
+const detailHref = (slug) => withBase(`projects/detail.html?slug=${encodeURIComponent(slug)}`)
+
+const normalizeImage = (value) => {
+  if (!value) return null
+  return sanitizeSrc(resolveUrl(value))
+}
+
+const normalizeLink = (value) => {
+  if (!value) return ''
+  const trimmed = value.trim()
+  if (!trimmed || trimmed === '#') return ''
+  const resolved = resolveUrl(trimmed)
+  if (typeof resolved !== 'string') return ''
+  return resolved.startsWith('/') ? resolved : sanitizeUrl(resolved)
+}
 
 onMounted(async () => {
   if (!slug) return
   try {
-    const r = await fetch(`/content/projects/${slug}.json`, { cache: 'no-store' })
+    const r = await fetch(resolveUrl(`content/projects/${slug}.json`), { cache: 'no-store' })
     if (!r.ok) return
     const data = await r.json()
-    let image = sanitizeSrc(data.image || null)
+    let image = normalizeImage(data.image || null)
     if (!image) {
-      for (const u of [`/content/projects/${slug}.jpeg`, `/content/projects/${slug}.jpg`, `/content/projects/${slug}.png`]) {
+      for (const u of ['jpeg', 'jpg', 'png'].map(ext => resolveUrl(`content/projects/${slug}.${ext}`))) {
         try { const h = await fetch(u, { method: 'HEAD' }); if (h.ok) { image = sanitizeSrc(u); break } } catch(_) {}
       }
     }
@@ -89,11 +103,11 @@ onMounted(async () => {
       subheading: data.subheading || data.headline || 'Details',
       body: data.body || data.details || '',
       image,
-      url: sanitizeUrl(data.url || data.link || ''),
+      url: normalizeLink(data.url || data.link || ''),
       date: data.date || data.updated || null,
     }
     // Load related projects (up to 2)
-    const idx = await fetch('/content/projects/index.json', { cache: 'no-store' })
+    const idx = await fetch(withBase('content/projects/index.json'), { cache: 'no-store' })
     if (idx.ok) {
       const payload = await idx.json()
       const arr = Array.isArray(payload.items) ? payload.items : Array.isArray(payload) ? payload : []
@@ -104,10 +118,10 @@ onMounted(async () => {
       for (const it of bases) {
         const baseSlug = it.base || it.name || it.id
         let data2 = {}
-        try { const r2 = await fetch(`/content/projects/${baseSlug}.json`, { cache: 'no-store' }); if (r2.ok) data2 = await r2.json() } catch(_) {}
-        let img = sanitizeSrc(it.image || data2.image || null)
+        try { const r2 = await fetch(resolveUrl(`content/projects/${baseSlug}.json`), { cache: 'no-store' }); if (r2.ok) data2 = await r2.json() } catch(_) {}
+        let img = normalizeImage(it.image || data2.image || null)
         if (!img) {
-          for (const u of [`/content/projects/${baseSlug}.jpeg`, `/content/projects/${baseSlug}.jpg`, `/content/projects/${baseSlug}.png`]) {
+          for (const u of ['jpeg', 'jpg', 'png'].map(ext => resolveUrl(`content/projects/${baseSlug}.${ext}`))) {
             try { const h = await fetch(u, { method: 'HEAD' }); if (h.ok) { img = sanitizeSrc(u); break } } catch(_) {}
           }
         }
@@ -145,4 +159,3 @@ onMounted(async () => {
   .related .cards { grid-template-columns: 1fr; }
 }
 </style>
-
