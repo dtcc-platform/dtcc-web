@@ -22,6 +22,7 @@ export default defineConfig(({ mode }) => {
           projectsDetail: 'projects/detail.html',
           contact: 'contact/index.html',
           about: 'about/index.html',
+          chat: 'chat/index.html',
         }
       }
     }

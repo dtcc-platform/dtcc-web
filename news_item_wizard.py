@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Interactive helper that drafts DTCC news entries with Gemini."""
+"""Draft DTCC news items with Gemini from the CLI or an HTTP API."""
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import re
@@ -38,9 +39,10 @@ def ensure_api_key() -> str:
 
 def slugify(value: str) -> str:
     value = value.strip().lower()
-    value = re.sub(r"[^a-z0-9\-\s]", "", value)
     value = value.replace("&", " and ")
+    value = re.sub(r"[^a-z0-9\-\s]", "", value)
     value = RE_WHITESPACE.sub("-", value).strip("-")
+    value = re.sub(r"-+", "-", value)
     return value or "news-entry"
 
 
@@ -50,8 +52,10 @@ def gather_context() -> DraftContext:
     if not title:
         raise DraftError("A headline is required to describe the news item.")
 
-    print("\nAdd a few bullet points describing the announcement."
-          " Press ENTER on an empty line to finish.")
+    print(
+        "\nAdd a few bullet points describing the announcement."
+        " Press ENTER on an empty line to finish."
+    )
     bullet_lines: List[str] = []
     while True:
         try:
@@ -79,7 +83,7 @@ def load_gemini_model(api_key: str):
         import google.generativeai as genai
     except ImportError as exc:  # pragma: no cover - import guard
         raise DraftError(
-            "Install the google-generativeai package to continue: pip install google-generativeai"
+            "Install the google-generativeai package: pip install google-generativeai"
         ) from exc
 
     genai.configure(api_key=api_key)
@@ -142,14 +146,26 @@ def repo_paths() -> Dict[str, Path]:
     return {"root": root, "news_dir": news_dir, "manifest": manifest_path}
 
 
-def write_item(slug: str, data: Dict[str, Any], news_dir: Path) -> Path:
+def write_item(
+    slug: str,
+    data: Dict[str, Any],
+    news_dir: Path,
+    *,
+    force: bool = False,
+    interactive: bool = True,
+) -> Path:
     news_dir.mkdir(parents=True, exist_ok=True)
     item_path = news_dir / f"{slug}.json"
 
-    if item_path.exists():
-        print(f"Warning: {item_path} already exists.")
-        if not confirm("Overwrite existing file?"):
-            raise DraftError("Aborted by user before overwriting existing news item.")
+    if item_path.exists() and not force:
+        if interactive:
+            print(f"Warning: {item_path} already exists.")
+            if not confirm("Overwrite existing file?"):
+                raise DraftError("Aborted before overwriting existing news item.")
+        else:
+            raise DraftError(
+                f"{item_path} already exists. Retry with 'force' enabled to overwrite."
+            )
 
     with item_path.open("w", encoding="utf-8") as fh:
         json.dump(data, fh, ensure_ascii=True, indent=2)
@@ -177,7 +193,9 @@ def manifest_contains(items: List[Any], slug: str) -> bool:
     return False
 
 
-def update_manifest(manifest_path: Path, slug: str, image: Optional[str]) -> None:
+def update_manifest(
+    manifest_path: Path, slug: str, image: Optional[str], *, quiet: bool = False
+) -> bool:
     manifest = load_manifest(manifest_path)
     items = manifest.setdefault("items", [])
 
@@ -185,14 +203,13 @@ def update_manifest(manifest_path: Path, slug: str, image: Optional[str]) -> Non
         raise DraftError(f"Manifest {manifest_path} should contain a list under 'items'.")
 
     if manifest_contains(items, slug):
-        print(f"Manifest already references '{slug}'. Skipping manifest update.")
-        return
+        if not quiet:
+            print(f"Manifest already references '{slug}'. Skipping manifest update.")
+        return False
 
-    entry: Any
+    entry: Any = {"base": slug}
     if image:
-        entry = {"base": slug, "image": image}
-    else:
-        entry = {"base": slug}
+        entry["image"] = image
 
     items.append(entry)
 
@@ -200,8 +217,10 @@ def update_manifest(manifest_path: Path, slug: str, image: Optional[str]) -> Non
         json.dump(manifest, fh, ensure_ascii=True, indent=2)
         fh.write("\n")
 
+    return True
 
-def main() -> None:
+
+def run_cli() -> None:
     try:
         context = gather_context()
         api_key = ensure_api_key()
@@ -234,7 +253,7 @@ def main() -> None:
 
     paths = repo_paths()
     try:
-        item_path = write_item(context.slug, draft, paths["news_dir"])
+        item_path = write_item(context.slug, draft, paths["news_dir"], interactive=True)
         update_manifest(paths["manifest"], context.slug, image)
     except DraftError as exc:
         print(f"Error: {exc}", file=sys.stderr)
@@ -243,6 +262,143 @@ def main() -> None:
     print("\nSaved new news item at:")
     print(f" - Metadata: {item_path}")
     print(f" - Manifest: {paths['manifest']}")
+
+
+def create_service(model: Any):  # pragma: no cover - HTTP server helper
+    try:
+        from fastapi import FastAPI, HTTPException
+        from fastapi.middleware.cors import CORSMiddleware
+        from pydantic import BaseModel, Field, validator
+    except ImportError as exc:
+        raise DraftError(
+            "Install FastAPI support: pip install fastapi uvicorn[standard]"
+        ) from exc
+
+    paths = repo_paths()
+
+    app = FastAPI(title="DTCC News Wizard", version="0.1.0")
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=os.environ.get("NEWS_WIZARD_ALLOW_ORIGINS", "*").split(","),
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    class DraftPayload(BaseModel):
+        title: str
+        bullets: List[str]
+        slug: Optional[str] = None
+        tone: Optional[str] = None
+
+        @validator("title")
+        def clean_title(cls, value: str) -> str:
+            value = value.strip()
+            if not value:
+                raise ValueError("Title is required")
+            return value
+
+        @validator("bullets")
+        def clean_bullets(cls, values: List[str]) -> List[str]:
+            cleaned = [line.strip() for line in values if line and line.strip()]
+            if not cleaned:
+                raise ValueError("Provide at least one supporting bullet point")
+            return cleaned
+
+    class SavePayload(BaseModel):
+        slug: str
+        payload: Dict[str, Any]
+        manifest_image: Optional[str] = Field(default=None, alias="manifestImage")
+        force: bool = False
+
+        @validator("slug")
+        def clean_slug(cls, value: str) -> str:
+            value = slugify(value)
+            if not value:
+                raise ValueError("Slug is required")
+            return value
+
+        @validator("payload")
+        def ensure_title(cls, value: Dict[str, Any]) -> Dict[str, Any]:
+            if not isinstance(value, dict) or not value.get("title"):
+                raise ValueError("payload.title is required")
+            return value
+
+    @app.post("/api/news/draft")
+    def draft_news(payload: DraftPayload):
+        slug = slugify(payload.slug or payload.title)
+        bullet_text = "\n".join(f"- {line}" for line in payload.bullets)
+        context = DraftContext(
+            title=payload.title,
+            summary_points=bullet_text,
+            slug=slug,
+            tone=payload.tone or None,
+        )
+        try:
+            draft = request_draft(model, context)
+        except DraftError as exc:
+            raise HTTPException(status_code=502, detail=str(exc)) from exc
+        return {"slug": slug, "draft": draft}
+
+    @app.post("/api/news/save")
+    def save_news(payload: SavePayload):
+        image = payload.manifest_image or payload.payload.get("image")
+        try:
+            item_path = write_item(
+                payload.slug,
+                payload.payload,
+                paths["news_dir"],
+                force=payload.force,
+                interactive=False,
+            )
+            update_manifest(paths["manifest"], payload.slug, image, quiet=True)
+        except DraftError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+        return {
+            "itemPath": str(item_path.relative_to(paths["root"])),
+            "manifestPath": str(paths["manifest"].relative_to(paths["root"])),
+        }
+
+    @app.get("/api/news/health")
+    def healthcheck():
+        return {"status": "ok", "newsDir": str(paths["news_dir"]) }
+
+    return app
+
+
+def run_server(host: str, port: int) -> None:
+    try:
+        api_key = ensure_api_key()
+        model = load_gemini_model(api_key)
+        app = create_service(model)
+    except DraftError as exc:
+        print(f"Error: {exc}", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        import uvicorn
+    except ImportError as exc:  # pragma: no cover - import guard
+        print("Install uvicorn to run the API server: pip install uvicorn[standard]", file=sys.stderr)
+        sys.exit(1)
+
+    uvicorn.run(app, host=host, port=port)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__ or "News drafting helper")
+    parser.add_argument(
+        "--serve",
+        action="store_true",
+        help="Run an HTTP API instead of the interactive CLI",
+    )
+    parser.add_argument("--host", default="127.0.0.1", help="Bind host for --serve mode")
+    parser.add_argument("--port", type=int, default=8000, help="Bind port for --serve mode")
+    args = parser.parse_args()
+
+    if args.serve:
+        run_server(args.host, args.port)
+    else:
+        run_cli()
 
 
 if __name__ == "__main__":

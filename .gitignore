@@ -17,6 +17,7 @@ out/
 
 # Vite cache
 .vite/
+node_modules/.vite/
 
 # Optional caches
 .cache/
@@ -44,4 +45,3 @@ coverage/
 *.swo
 *.tmp
 ~$*
-
