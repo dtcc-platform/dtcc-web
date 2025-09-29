@@ -21,6 +21,7 @@ export default defineConfig(({ mode }) => {
           projects: 'projects/index.html',
           projectsDetail: 'projects/detail.html',
           contact: 'contact/index.html',
+          gallery: 'gallery/index.html',
           about: 'about/index.html',
           chat: 'chat/index.html',
         }

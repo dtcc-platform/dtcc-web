@@ -15,6 +15,7 @@
         <a :href="base + 'news/'">News</a>
         <a :href="base + 'events/'">Events</a>
         <a :href="base + 'contact/'">Contact</a>
+        <a :href="base + 'gallery/'">Gallery</a>
       </nav>
     </div>
   </header>
