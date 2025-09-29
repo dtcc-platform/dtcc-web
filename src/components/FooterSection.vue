@@ -10,7 +10,7 @@
       </div>
       <div>
         <div class="eyebrow">Address</div>
-        <div class="brodtext-20 muted">Kvarnberg, Lab<br/>Sven Hultins gata 6,<br/>Gothenburg, Sweden</div>
+        <div class="brodtext-20 muted">Chalmers University of Technology,<br/>412 96 Gothenburg</div>
       </div>
       <div>
         <div class="eyebrow">Contact</div>
