@@ -1,0 +1,7 @@
+{
+  "items": [
+    { "base": "city-scan" },
+    { "base": "wind-tunnel" },
+    { "base": "campus-model" }
+  ]
+}
