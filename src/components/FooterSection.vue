@@ -10,7 +10,7 @@
       </div>
       <div>
         <div class="eyebrow">Address</div>
-        <div class="brodtext-20 muted">Chalmers University of Technology,<br/>412 96 Gothenburg</div>
+        <div class="address">Chalmers University of Technology,<br/>412 96 Gothenburg</div>
       </div>
       <div>
         <div class="eyebrow">Contact</div>
@@ -38,6 +38,12 @@
 .grid .brodtext-20 { color: #ffffff; }
 .grid .brodtext-20 a { color: #ffffff; text-decoration: none; }
 .grid .brodtext-20 a:hover { text-decoration: underline; }
+.address {
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: var(--weight-300, 300);
+}
 .legal { border-top: 1px solid rgba(255,255,255,0.08); margin-top: 20px; padding-top: 16px; color: var(--unnamed-color-fada36); text-align: center; }
 /* Ensure legal text stays yellow even if it has .muted */
 .legal .brodtext-20,
