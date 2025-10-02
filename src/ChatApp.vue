@@ -2,7 +2,7 @@
   <div class="page-shell">
     <HeaderNav />
     <main class="chat-main">
-      <ChatWizard />
+      <PostWizard />
     </main>
     <FooterSection />
   </div>
@@ -11,7 +11,7 @@
 <script setup>
 import HeaderNav from './components/HeaderNav.vue'
 import FooterSection from './components/FooterSection.vue'
-import ChatWizard from './components/ChatWizard.vue'
+import PostWizard from './components/PostWizard.vue'
 </script>
 
 <style scoped>
@@ -35,4 +35,3 @@ import ChatWizard from './components/ChatWizard.vue'
   }
 }
 </style>
-
