@@ -9,13 +9,7 @@
         </div>
       </a>
       <nav class="menu">
-        <a :href="base + 'projects/'">Projects</a>
-        <a href="#partners">Partners</a>
-        <a :href="base + 'about/'">About us</a>
-        <a :href="base + 'news/'">News</a>
-        <a :href="base + 'events/'">Events</a>
-        <a :href="base + 'gallery/'">Gallery</a>
-        <a :href="base + 'contact/'">Contact</a>
+        <a v-for="link in navLinks" :key="link.label" :href="link.href">{{ link.label }}</a>
       </nav>
     </div>
   </header>
@@ -23,6 +17,16 @@
 
 <script setup>
 const base = import.meta.env.BASE_URL || '/'
+
+const navLinks = [
+  { label: 'Projects', href: `${base}projects/` },
+  { label: 'Partners', href: '#partners' },
+  { label: 'About us', href: `${base}about/` },
+  { label: 'News', href: `${base}news/` },
+  { label: 'Events', href: `${base}events/`, disabled: true },
+  { label: 'Gallery', href: `${base}gallery/` },
+  { label: 'Contact', href: `${base}contact/` },
+].filter((link) => !link.disabled)
 </script>
 
 <style scoped>
