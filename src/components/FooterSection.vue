@@ -18,7 +18,10 @@
       </div>
       <div>
         <div class="eyebrow">Follow</div>
-        <div class="brodtext-20 muted"><a href="#">LinkedIn</a><br/><a href="#">Instagram</a></div>
+        <div class="brodtext-20 muted">
+          <a href="https://www.linkedin.com/company/digital-twin-cities-centre/" target="_blank" rel="noopener">LinkedIn</a>
+          <!-- <br><a href="#">Instagram</a> -->
+        </div>
       </div>
     </div>
     <div class="container legal">

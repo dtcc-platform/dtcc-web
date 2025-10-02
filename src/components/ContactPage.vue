@@ -4,14 +4,14 @@
     <section class="section gradient-sunrise intro">
       <div class="container grid2">
         <div>
-          <h1 class="h2-50">Contact page:<br>Operative management team</h1>
+          <h1 class="h3-30">Operative management team</h1>
           <div class="links">
             <a class="more" :href="base + 'about/'">About us »</a>
           </div>
         </div>
         <div>
           <p class="brodtext-20 muted">
-            The operational management team is responsible for the daily operations of the centre,
+            The Operational Management Team is responsible for the daily operations of the centre,
             including promoting its activities and achievements, managing finances, providing technical support,
             preparing project reports, and maintaining relations with the funding organization.
           </p>
@@ -33,7 +33,7 @@
     <section class="section gradient-sunrise board">
       <div class="container grid2">
         <div>
-          <h2 class="h3-30">Board of directors</h2>
+          <h2 class="h3-30">Board of Directors</h2>
         </div>
         <div>
           <p class="brodtext-20 muted">
@@ -54,6 +54,31 @@
         </div>
       </div>
     </section>
+
+    <!-- International Advisory Board -->
+    <section class="section gradient-sunrise advisory">
+      <div class="container grid2">
+        <div>
+          <h2 class="h3-30">International Advisory Board</h2>
+        </div>
+        <div>
+          <p class="brodtext-20 muted">
+            External advisors provide independent perspectives, benchmark DTCC internationally, and suggest
+            new collaborations that strengthen our research agenda.
+          </p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="people">
+          <div class="person" v-for="(p, i) in advisory" :key="i">
+            <div class="avatar" :style="{ backgroundImage: `url(${p.image})` }"></div>
+            <div class="name" v-text="p.name" />
+            <div class="role muted" v-text="p.role" />
+            <a class="more" :href="p.email">Mail to »</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </template>
 
@@ -64,29 +89,13 @@ const img1 = 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=8
 const img2 = 'https://images.unsplash.com/photo-1531123414780-f74287bb2a3b?q=80&w=800&auto=format&fit=crop'
 const img3 = 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=800&auto=format&fit=crop'
 
-const management = [
-  { name: 'Placeholder name', role: 'Placeholder for title', email: '#', image: img1 },
-  { name: 'Placeholder name', role: 'Placeholder for title', email: '#', image: img2 },
-  { name: 'Placeholder name', role: 'Placeholder for title', email: '#', image: img1 },
-  { name: 'Placeholder name', role: 'Placeholder for title', email: '#', image: img3 },
-  { name: 'Placeholder name', role: 'Placeholder for title', email: '#', image: img2 },
-  { name: 'Placeholder name', role: 'Placeholder for title', email: '#', image: img3 },
-]
+const makeMember = (image) => ({ name: 'Placeholder name', role: 'Placeholder for title', email: '#', image })
 
-const board = [
-  { name: 'Placeholder name', role: 'Placeholder for title', email: '#', image: img1 },
-  { name: 'Placeholder name', role: 'Placeholder for title', email: '#', image: img2 },
-  { name: 'Placeholder name', role: 'Placeholder for title', email: '#', image: img3 },
-  { name: 'Placeholder name', role: 'Placeholder for title', email: '#', image: img1 },
-  { name: 'Placeholder name', role: 'Placeholder for title', email: '#', image: img2 },
-  { name: 'Placeholder name', role: 'Placeholder for title', email: '#', image: img3 },
-  { name: 'Placeholder name', role: 'Placeholder for title', email: '#', image: img1 },
-  { name: 'Placeholder name', role: 'Placeholder for title', email: '#', image: img2 },
-  { name: 'Placeholder name', role: 'Placeholder for title', email: '#', image: img3 },
-  { name: 'Placeholder name', role: 'Placeholder for title', email: '#', image: img2 },
-  { name: 'Placeholder name', role: 'Placeholder for title', email: '#', image: img1 },
-  { name: 'Placeholder name', role: 'Placeholder for title', email: '#', image: img3 },
-]
+const management = [img1, img2, img3, img2, img1].map(makeMember)
+
+const board = [img1, img2, img3, img1, img2, img3, img1, img2, img3, img2, img1, img3].map(makeMember)
+
+const advisory = [img3, img2, img1, img3, img2, img1].map(makeMember)
 </script>
 
 <style scoped>
@@ -109,4 +118,3 @@ const board = [
   .people { grid-template-columns: 1fr; }
 }
 </style>
-
