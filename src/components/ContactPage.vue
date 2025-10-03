@@ -91,7 +91,13 @@ const img3 = 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=8
 
 const makeMember = (image) => ({ name: 'Placeholder name', role: 'Placeholder for title', email: '#', image })
 
-const management = [img1, img2, img3, img2, img1].map(makeMember)
+const management = [
+  { name: 'Anders Logg', role: 'Director', email: 'mailto:logg@chalmers.se', image: img1 },
+  { name: 'Minna Karstunen', role: 'Vice-Director', email: 'mailto:minna.karstunen@chalmers.se', image: img2 },
+  { name: 'Bernd Ketzler', role: 'Scientific Coordinator', email: 'mailto:ketzler@chalmers.se', image: img3 },
+  { name: 'Vasilis Naserentin', role: 'Head of Development', email: 'mailto:vasilis.naserentin@chalmers.se', image: img1 },
+  { name: 'Nadia Tahir', role: 'Communications Officer', email: 'mailto:nadia.tahir@chalmers.se', image: img2 },
+]
 
 const board = [img1, img2, img3, img1, img2, img3, img1, img2, img3, img2, img1, img3].map(makeMember)
 
