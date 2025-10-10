@@ -41,7 +41,7 @@ News — Quick Start (Runtime — recommended)
        "date": "2025-06-12",
        "eyebrow": "News"
      }
-   - To regenerate the manifest automatically, run `python3 scripts/update_news_manifest.py` (CI runs this step during deploys).
+   - To regenerate the manifest automatically, run `python3 scripts/update_news_projects_manifest.py` (CI runs this step during deploys for news & projects).
 
 3) Provide an image for each item.
    - Preferred: Set `image` in the manifest or in the item JSON (absolute path like `/content/news/<base>.jpeg` or external URL).
@@ -74,6 +74,7 @@ Projects — Quick Start (Runtime — recommended)
        "url": "/projects/urban-comfort",
        "date": "2025-03-02"
      }
+   - The same manifest helper `python3 scripts/update_news_projects_manifest.py` keeps this list in sync with the JSON files.
 
 3) Provide an image for each project.
    - Preferred: Set `image` in the manifest or item JSON.
@@ -114,7 +115,7 @@ Deployment — GitHub Pages
 - After the workflow runs, your site is available at:
   - Project page: `https://<user>.github.io/<repo>/`
   - User/Org page (if using `<user>.github.io` repo): `https://<user>.github.io/`
-- The workflow auto-regenerates `public/content/news/index.json`; if the manifest changes the GitHub Actions bot commits the update back to the repo before deploying.
+- The workflow auto-regenerates `public/content/news/index.json` and `public/content/projects/index.json`; if either manifest changes the GitHub Actions bot commits the update back to the repo before deploying.
 
 Serverless Publisher (AWS Lambda)
 - `infra/aws/publish_post_lambda.py` implements a Lambda handler that commits wizard output straight to GitHub through the REST API.

@@ -22,7 +22,10 @@
       <div class="container">
         <div class="cards">
           <article v-for="p in visibleItems" :key="p.id" class="card project">
-            <div class="img" :style="{ backgroundImage: p.image ? `url(${p.image})` : undefined }"></div>
+            <div
+              :class="['img', { 'no-image': !p.hasImage }]"
+              :style="{ backgroundImage: p.hasImage ? `url(${p.image})` : undefined }"
+            ></div>
             <div class="body">
               <h4 class="h3-30" v-text="p.title" />
               <p class="brodtext-20 muted" v-text="p.description || p.summary || p.excerpt" />
@@ -100,8 +103,7 @@ onMounted(async () => {
           } catch (_) {}
         }
       }
-      if (!image) continue
-      resolved.push({ id: base || title, title, description, url, image, date, order })
+      resolved.push({ id: base || title, title, description, url, image, hasImage: Boolean(image), date, order })
     }
     // Respect explicit order if provided; otherwise keep manifest order
     if (resolved.some(x => Number.isFinite(x.order))) {
@@ -120,14 +122,13 @@ const items = computed(() => {
       imageModules[`../projects/${name}.jpeg`] ||
       imageModules[`../projects/${name}.jpg`] ||
       imageModules[`../projects/${name}.png`]
-    const image = sanitizeSrc(resolveUrl(img))
-    if (!image) continue
+    const image = img ? sanitizeSrc(resolveUrl(img)) : null
     const title = data.title || data.name || name
     const description = data.description || data.summary || data.excerpt || ''
     const url = normalizeLink(data.url || data.link || '')
     const date = data.date || data.published || data.updated || null
     const order = Number.isFinite(Number(data.order)) ? Number(data.order) : undefined
-    result.push({ id: name, title, description, url, image, date, order })
+    result.push({ id: name, title, description, url, image, hasImage: Boolean(image), date, order })
   }
   if (result.some(x => Number.isFinite(x.order))) {
     result.sort((a, b) => (a.order ?? 1e9) - (b.order ?? 1e9))
@@ -150,6 +151,20 @@ const visibleItems = computed(() => items.value.slice(0, visibleCount.value))
 
 .list .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .project .img { height: 200px; background: #ddd center/cover no-repeat; border-radius: 14px; }
+.project .img.no-image {
+  background: #f3f3f3;
+  color: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.project .img.no-image::after {
+  content: 'No image';
+}
 .project .body { padding: 14px 16px 18px; }
 
 .more-wrap { text-align: center; margin-top: 12px; }

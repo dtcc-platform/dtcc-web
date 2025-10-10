@@ -5,7 +5,10 @@
       <div class="cards">
         <template v-if="items.length">
           <article v-for="p in items" :key="p.id" class="card project">
-            <div class="img" :style="{ backgroundImage: p.image ? `url(${p.image})` : undefined }"></div>
+            <div
+              :class="['img', { 'no-image': !p.hasImage }]"
+              :style="{ backgroundImage: p.hasImage ? `url(${p.image})` : undefined }"
+            ></div>
             <div class="body">
               <h4 class="h3-30" v-text="p.title" />
               <p class="brodtext-20 muted" v-text="p.summary || p.excerpt || p.description" />
@@ -100,8 +103,7 @@ onMounted(async () => {
           try { const head = await fetch(u, { method: 'HEAD' }); if (head.ok) { image = sanitizeSrc(u); break } } catch (_) {}
         }
       }
-      if (!image) continue
-      resolved.push({ id: base || title, title, summary, url, image, date })
+      resolved.push({ id: base || title, title, summary, url, image, hasImage: Boolean(image), date })
     }
     resolved.sort((a, b) => (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0))
     runtimeItems.value = resolved
@@ -117,14 +119,12 @@ const items = computed(() => {
       imageModules[`../projects/${name}.jpeg`] ||
       imageModules[`../projects/${name}.jpg`] ||
       imageModules[`../projects/${name}.png`]
-    if (!img) continue
     const title = data.title || data.name || name
     const summary = data.summary || data.excerpt || data.description || ''
     const url = normalizeLink(data.url || data.link || '')
     const date = data.date || data.published || data.updated || null
-    const image = sanitizeSrc(resolveUrl(img))
-    if (!image) continue
-    result.push({ id: name, title, summary, url, image, date })
+    const image = img ? sanitizeSrc(resolveUrl(img)) : null
+    result.push({ id: name, title, summary, url, image, hasImage: Boolean(image), date })
   }
   result.sort((a, b) => (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0))
   return result
@@ -134,6 +134,20 @@ const items = computed(() => {
 <style scoped>
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .project .img { height: 180px; background: #ddd center/cover no-repeat; }
+.project .img.no-image {
+  background: #f3f3f3;
+  color: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.project .img.no-image::after {
+  content: 'No image';
+}
 .project .body { padding: 14px 16px 18px; }
 .project a { color: var(--cta-f26a2e); font-weight: 600; }
 @media (max-width: 1100px) { .cards { grid-template-columns: 1fr 1fr; } }
