@@ -74,8 +74,9 @@ def parse_date(data: Dict[str, Any]) -> date | None:
         return None
 
 
-def build_manifest_items(existing: Dict[str, Dict[str, Any]]) -> List[Dict[str, Any]]:
+def build_manifest_items(existing: Dict[str, Dict[str, Any]]) -> Tuple[List[Dict[str, Any]], List[Tuple[str, str]]]:
     records: List[Tuple[date | None, str, Dict[str, Any]]] = []
+    added: List[Tuple[str, str]] = []
     for slug, payload in load_news_items():
         entry: Dict[str, Any] = {"base": slug}
         image = payload.get("image")
@@ -91,6 +92,9 @@ def build_manifest_items(existing: Dict[str, Dict[str, Any]]) -> List[Dict[str, 
                 entry[key] = value
         record_date = parse_date(payload)
         records.append((record_date, slug, entry))
+        if slug not in existing:
+            title = str(payload.get("title") or slug).strip() or slug
+            added.append((slug, title))
 
     def sort_key(item: Tuple[date | None, str, Dict[str, Any]]) -> Tuple[int, int, str]:
         record_date, slug, _ = item
@@ -99,7 +103,7 @@ def build_manifest_items(existing: Dict[str, Dict[str, Any]]) -> List[Dict[str, 
         return (1, 0, slug)
 
     records.sort(key=sort_key)
-    return [entry for _, _, entry in records]
+    return [entry for _, _, entry in records], added
 
 
 def main() -> None:
@@ -107,7 +111,8 @@ def main() -> None:
         raise SystemExit(f"Missing directory: {NEWS_DIR}")
 
     existing_manifest = load_existing_manifest()
-    manifest = {"items": build_manifest_items(existing_manifest)}
+    items, added = build_manifest_items(existing_manifest)
+    manifest = {"items": items}
     rendered = json.dumps(manifest, ensure_ascii=False, indent=2) + "\n"
 
     existing = MANIFEST_PATH.read_text(encoding="utf-8") if MANIFEST_PATH.exists() else ""
@@ -117,6 +122,10 @@ def main() -> None:
 
     MANIFEST_PATH.write_text(rendered, encoding="utf-8")
     print(f"Updated {MANIFEST_PATH}")
+    if added:
+        print("New items added to manifest:")
+        for slug, title in added:
+            print(f"  - {slug}: {title}")
 
 
 if __name__ == "__main__":
