@@ -1,0 +1,4 @@
+{
+  "isBase64Encoded": false,
+  "body": "{\n    \"section\": \"news\",\n    \"slug\": \"lambda-2025\",\n    \"force\": false,\n    \"payload\": {\n      \"title\": \"New from API\",\n      \"summary\": \"Lambda success\",\n      \"url\": \"/news/lambda-2025\",\n      \"date\": \"2025-01-22\",\n      \"eyebrow\": \"News\"\n    }\n  }"
+}

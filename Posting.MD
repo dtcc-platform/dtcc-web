@@ -41,6 +41,7 @@ News — Quick Start (Runtime — recommended)
        "date": "2025-06-12",
        "eyebrow": "News"
      }
+   - To regenerate the manifest automatically, run `python3 scripts/update_news_manifest.py` (CI runs this step during deploys).
 
 3) Provide an image for each item.
    - Preferred: Set `image` in the manifest or in the item JSON (absolute path like `/content/news/<base>.jpeg` or external URL).
@@ -113,3 +114,28 @@ Deployment — GitHub Pages
 - After the workflow runs, your site is available at:
   - Project page: `https://<user>.github.io/<repo>/`
   - User/Org page (if using `<user>.github.io` repo): `https://<user>.github.io/`
+
+Serverless Publisher (AWS Lambda)
+- `infra/aws/publish_post_lambda.py` implements a Lambda handler that commits wizard output straight to GitHub through the REST API.
+- Required environment variables:
+  - `GITHUB_REPO` → `owner/repo`
+  - `GITHUB_BRANCH` (optional, defaults to `main`)
+  - Either `GITHUB_TOKEN` (fine-grained PAT with `contents:write`) or `GITHUB_TOKEN_SECRET_NAME` (Secrets Manager ID returning `{ "token": "..." }`).
+- Deploy behind API Gateway (REST or HTTP) with CORS locked to the GitHub Pages origin. Grant the Lambda role permission to read the secret.
+- Request payload (JSON body):
+  ```
+  {
+    "section": "news",
+    "slug": "example-post",
+    "payload": { ...post JSON... },
+    "force": false,
+    "commitMessage": "Add News entry example-post",
+    "imageUpload": {
+      "filename": "example-post.jpg",
+      "contentType": "image/jpeg",
+      "data": "<base64 bytes>"
+    }
+  }
+  ```
+  `imageUpload` is optional; remote-image URLs should already be present in `payload.image`.
+- On success the handler writes `public/content/<section>/<slug>.json`, uploads the image (if provided), updates `public/content/<section>/index.json`, and returns `{ "ok": true, "manifestUpdated": true }`.
