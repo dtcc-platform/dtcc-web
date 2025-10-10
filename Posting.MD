@@ -114,6 +114,7 @@ Deployment — GitHub Pages
 - After the workflow runs, your site is available at:
   - Project page: `https://<user>.github.io/<repo>/`
   - User/Org page (if using `<user>.github.io` repo): `https://<user>.github.io/`
+- The workflow auto-regenerates `public/content/news/index.json`; if the manifest changes the GitHub Actions bot commits the update back to the repo before deploying.
 
 Serverless Publisher (AWS Lambda)
 - `infra/aws/publish_post_lambda.py` implements a Lambda handler that commits wizard output straight to GitHub through the REST API.
