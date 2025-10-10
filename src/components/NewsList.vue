@@ -18,7 +18,10 @@
       <div class="container">
         <div class="cards">
           <article v-for="n in visibleItems" :key="n.id" class="card project">
-            <div class="img" :style="{ backgroundImage: n.image ? `url(${n.image})` : undefined }"></div>
+            <div
+              :class="['img', { 'no-image': !n.hasImage }]"
+              :style="{ backgroundImage: n.hasImage ? `url(${n.image})` : undefined }"
+            ></div>
             <div class="body">
               <h4 class="h3-30" v-text="n.title" />
               <p class="brodtext-20 muted" v-text="n.summary || n.excerpt || n.description" />
@@ -76,10 +79,9 @@ onMounted(async () => {
           try { const head = await fetch(u, { method: 'HEAD' }); if (head.ok) { image = sanitizeSrc(u); break } } catch (_) {}
         }
       }
-      if (!image) continue
       const date = data.date || data.published || data.publishedAt || null
       const order = Number.isFinite(Number(it.order)) ? Number(it.order) : Number.isFinite(Number(data.order)) ? Number(data.order) : undefined
-      resolved.push({ id: base, title, summary, image, date, order })
+      resolved.push({ id: base, title, summary, image, hasImage: Boolean(image), date, order })
     }
     // Sort newest first unless explicit order is provided
     if (resolved.some(x => Number.isFinite(x.order))) {
@@ -101,6 +103,20 @@ const visibleItems = computed(() => items.value.slice(0, visibleCount.value))
 .grid2 { display: grid; grid-template-columns: .8fr 1.2fr; gap: 28px; align-items: start; }
 .list .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .project .img { height: 200px; background: #ddd center/cover no-repeat; border-radius: 14px; }
+.project .img.no-image {
+  background: #f3f3f3;
+  color: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.project .img.no-image::after {
+  content: 'No image';
+}
 .project .body { padding: 14px 16px 18px; }
 .more-wrap { text-align: center; margin-top: 12px; }
 .btn-more { background: var(--cta-f26a2e); color: #fff; border: 0; border-radius: 8px; padding: 10px 16px; font-weight: 600; cursor: pointer; }
