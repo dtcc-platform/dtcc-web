@@ -7,7 +7,9 @@
     {
       "base": "extension-2025",
       "image": "https://images.unsplash.com/photo-1496302662116-85c70d4b2eea?q=80&w=1200&auto=format&fit=crop"
+    },
+    {
+      "base": "lambda-test"
     }
   ]
 }
-
