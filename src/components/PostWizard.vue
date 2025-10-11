@@ -6,10 +6,7 @@
         <h1>Post Wizard</h1>
         <p class="muted">
           Draft runtime content directly in the browser. Pick a post type, fill in the fields, review the
-          JSON, and save it into <code>public/content/&lt;type&gt;</code> when you are ready.
-        </p>
-        <p class="muted small-print">
-          Everything runs client-side. Double-check every output before sharing or committing the changes.
+          output, and save it into <code>public/content/&lt;type&gt;</code> when you are ready.
         </p>
       </header>
 
@@ -58,7 +55,7 @@
             placeholder="Write the post body. Use blank lines to separate paragraphs."
             required
           ></textarea>
-          <p class="muted helper">Summary is generated from the first paragraph; adjust it in the JSON if needed.</p>
+          <p class="muted helper">Use blank lines to separate paragraphs.</p>
         </div>
 
         <fieldset class="field image-fieldset">
