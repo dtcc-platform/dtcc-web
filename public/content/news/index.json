@@ -23,6 +23,9 @@
     },
     {
       "base": "lambda-test"
+    },
+    {
+      "base": "testing-speed"
     }
   ]
 }
