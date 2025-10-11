@@ -821,7 +821,8 @@ async function publishViaApi({ parsed, slugValue, section, uploadState, config, 
   }
 
   const manifestUpdated = Boolean(payload?.manifestUpdated)
-  successMessage.value = `Published ${config.contentDir}/${slugValue}.json via API${manifestUpdated ? ' (manifest updated).' : '.'}`
+  const manifestNote = manifestUpdated ? ' (manifest updated).' : '.'
+  successMessage.value = `Published ${config.contentDir}/${slugValue}.json via API${manifestNote} Updates will be live within ~30 seconds.`
   draftSection.value = section
   preparedImage.value = {
     ...preparedImage.value,
