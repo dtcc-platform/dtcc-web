@@ -26,6 +26,9 @@
     },
     {
       "base": "lambda-test"
+    },
+    {
+      "base": "testing-new-wizard"
     }
   ]
 }
