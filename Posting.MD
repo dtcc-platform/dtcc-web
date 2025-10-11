@@ -6,18 +6,11 @@ Overview
   - Runtime from `public/<type>`: a manifest at `public/<type>/index.json` (+ item JSONs). Runtime items override build-time ones.
   - `<type>` is `news` or `projects`.
 
-Automated News Drafting
-- Run `python3 news_item_wizard.py` to interactively draft runtime news items with Gemini Pro.
-- Requirements:
-  - `pip install google-generativeai`
-  - `export GEMINI_API_KEY="<your token>"`
-- The wizard collects headline + bullet points, calls Gemini for a JSON draft, lets you approve/adjust the URL/image, writes `public/content/news/<slug>.json`, and updates the manifest (`public/content/news/index.json`).
-- If the generated file exists, the script asks before overwriting.
-- This LLM-assisted workflow is experimental. Always review the draft carefully and make any edits needed before approving.
-- Browser UI (`/chat/`): set `VITE_CHAT_AUTH_URL` and `VITE_CHAT_PUBLISH_URL` in `.env.local`, run `npm run dev`, visit `/chat/`, sign in, paste your Gemini API key, provide headline + bullets, and optionally connect the repo folder via the File System Access prompt to write files automatically (local mode still works when the publish URL is omitted). The session token expires (default 1 hour); when it does, the UI returns to the login screen.
+Content Editing Workflow
+- Use the `/chat/` wizard for new runtime entries: set `VITE_CHAT_AUTH_URL` and `VITE_CHAT_PUBLISH_URL` in `.env.local`, run `npm run dev`, visit `/chat/`, sign in, provide the content details, and optionally connect the repo folder via the File System Access prompt to write files automatically (local mode still works when the publish URL is omitted). Sessions expire automatically (default 1 hour) and you can trigger a manual logout from the site header once signed in.
 - Without the auth URL the login gate refuses access (helpful if you want to disable the editor temporarily).
 - The `/chat/` page keeps the site chrome but is hidden from navigation and marked `noindex`; share its URL only with trusted editors.
-- If File System Access isn't available, download the JSON from the wizard and copy it into `public/content/news`, then update `index.json` manually.
+- If File System Access isn't available, download the JSON from the wizard and copy it into `public/content/<type>`, then update the section manifest manually.
 
 News — Quick Start (Runtime — recommended)
 1) Add/Update the manifest at `public/content/news/index.json`.

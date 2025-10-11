@@ -97,6 +97,8 @@ const authToken = computed(() => (isSessionActive(session.value, now.value) ? se
 
 provide('chatAuthSession', session)
 provide('chatAuthToken', authToken)
+provide('chatIsAuthenticated', isAuthenticated)
+provide('chatLogout', clearSession)
 </script>
 
 <style scoped>
