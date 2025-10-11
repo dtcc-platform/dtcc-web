@@ -195,6 +195,7 @@ const SECTION_CONFIG = {
 
 const publishEndpoint = import.meta.env.VITE_CHAT_PUBLISH_URL?.trim() || ''
 const remotePublishEnabled = computed(() => Boolean(publishEndpoint))
+const authSession = inject('chatAuthSession', ref({ token: '', expiresAt: 0 }))
 const authToken = inject('chatAuthToken', ref(''))
 
 const typeOptions = TYPE_OPTIONS
@@ -802,6 +803,9 @@ async function publishViaApi({ parsed, slugValue, section, uploadState, config, 
   }
 
   if (!response.ok) {
+    if (response.status === 401) {
+      throw new Error(payload?.error || 'Session expired. Please sign in again.')
+    }
     const message = typeof payload?.error === 'string'
       ? payload.error
       : `Publish failed (status ${response.status})`
@@ -830,6 +834,18 @@ async function fileToBase64(file) {
 }
 
 function getSessionToken() {
+  if (authSession) {
+    const sessionData = typeof authSession === 'object' && 'value' in authSession
+      ? authSession.value
+      : authSession
+    if (sessionData && sessionData.token) {
+      const expiresAt = Number(sessionData.expiresAt) || 0
+      if (!expiresAt || expiresAt * 1000 > Date.now()) {
+        return sessionData.token
+      }
+      return ''
+    }
+  }
   if (!authToken) return ''
   if (typeof authToken === 'string') return authToken
   return authToken.value || ''

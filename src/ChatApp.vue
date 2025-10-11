@@ -10,34 +10,92 @@
 </template>
 
 <script setup>
-import { onMounted, provide, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
 import HeaderNav from './components/HeaderNav.vue'
 import FooterSection from './components/FooterSection.vue'
 import PostWizard from './components/PostWizard.vue'
 import LoginGate from './components/LoginGate.vue'
 
-const AUTH_TOKEN_KEY = 'dtcc-chat-token'
+const AUTH_SESSION_KEY = 'dtcc-chat-session'
 
-const isAuthenticated = ref(false)
-const authToken = ref('')
+const session = ref({ token: '', expiresAt: 0 })
+const now = ref(Date.now())
+const isAuthenticated = computed(() => isSessionActive(session.value, now.value))
 
-function handleAuthenticated(token) {
-  isAuthenticated.value = true
-  authToken.value = token
+function handleAuthenticated(token, expiresAt = 0) {
+  now.value = Date.now()
+  updateSession({ token, expiresAt })
+}
+
+function updateSession({ token, expiresAt }) {
+  now.value = Date.now()
+  const normalized = {
+    token: token || '',
+    expiresAt: Number(expiresAt) || 0,
+  }
+  session.value = normalized
   if (typeof window !== 'undefined') {
-    window.sessionStorage.setItem(AUTH_TOKEN_KEY, token)
+    if (normalized.token && isSessionActive(normalized)) {
+      window.sessionStorage.setItem(AUTH_SESSION_KEY, JSON.stringify(normalized))
+    } else {
+      window.sessionStorage.removeItem(AUTH_SESSION_KEY)
+    }
   }
 }
 
+function isSessionActive(data, timestamp = Date.now()) {
+  if (!data || !data.token) return false
+  const expiresAt = Number(data.expiresAt) || 0
+  if (!expiresAt) return true
+  return expiresAt * 1000 > timestamp
+}
+
+function clearSession() {
+  now.value = Date.now()
+  updateSession({ token: '', expiresAt: 0 })
+}
+
+let heartbeat = null
+
 onMounted(() => {
   if (typeof window === 'undefined') return
-  const stored = window.sessionStorage.getItem(AUTH_TOKEN_KEY)
-  if (stored) {
-    isAuthenticated.value = true
-    authToken.value = stored
+  try {
+    const raw = window.sessionStorage.getItem(AUTH_SESSION_KEY)
+    if (!raw) return
+    const parsed = JSON.parse(raw)
+    if (isSessionActive(parsed, Date.now())) {
+      session.value = {
+        token: parsed.token,
+        expiresAt: Number(parsed.expiresAt) || 0,
+      }
+      now.value = Date.now()
+    } else {
+      window.sessionStorage.removeItem(AUTH_SESSION_KEY)
+    }
+  } catch {
+    window.sessionStorage.removeItem(AUTH_SESSION_KEY)
+  }
+  heartbeat = window.setInterval(() => {
+    now.value = Date.now()
+  }, 15000)
+})
+
+watch(isAuthenticated, (active) => {
+  if (!active && session.value.token) {
+    clearSession()
   }
 })
 
+onBeforeUnmount(() => {
+  if (heartbeat) {
+    window.clearInterval(heartbeat)
+    heartbeat = null
+  }
+})
+
+const authToken = computed(() => (isSessionActive(session.value, now.value) ? session.value.token : ''))
+
+provide('chatAuthSession', session)
 provide('chatAuthToken', authToken)
 </script>
 

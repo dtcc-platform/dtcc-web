@@ -80,6 +80,9 @@ async function handleSubmit() {
     const payload = await response.json().catch(() => ({}))
 
     if (!response.ok) {
+      if (response.status === 401) {
+        throw new Error(payload?.error || 'Invalid username or password.')
+      }
       const message = typeof payload?.error === 'string' && payload.error
         ? payload.error
         : `Login failed (status ${response.status})`
@@ -90,7 +93,8 @@ async function handleSubmit() {
       throw new Error('Login response missing token.')
     }
 
-    emits('authenticated', payload.token)
+    const expiresAt = Number(payload?.expiresAt) || 0
+    emits('authenticated', payload.token, expiresAt)
   } catch (err) {
     errorMessage.value = err instanceof Error ? err.message : String(err)
     password.value = ''
