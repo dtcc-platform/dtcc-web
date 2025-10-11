@@ -136,7 +136,11 @@
             </label>
           </div>
 
-          <div v-if="fsSupported" class="connection">
+          <div v-if="remotePublishEnabled" class="alert info">
+            Publishing uses the configured API endpoint. The JSON (and optional image) will be committed
+            via the serverless workflow after you sign in.
+          </div>
+          <div v-else-if="fsSupported" class="connection">
             <p class="muted">
               Repository folder: <strong>{{ repoLabel || 'not connected' }}</strong>
             </p>
@@ -175,7 +179,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, inject, ref, watch } from 'vue'
 
 const TYPE_OPTIONS = [
   { value: 'news', label: 'News' },
@@ -188,6 +192,10 @@ const SECTION_CONFIG = {
   events: { label: 'Events', contentDir: 'events', urlPrefix: '/events/' },
   projects: { label: 'Projects', contentDir: 'projects', urlPrefix: '/projects/' },
 }
+
+const publishEndpoint = import.meta.env.VITE_CHAT_PUBLISH_URL?.trim() || ''
+const remotePublishEnabled = computed(() => Boolean(publishEndpoint))
+const authToken = inject('chatAuthToken', ref(''))
 
 const typeOptions = TYPE_OPTIONS
 
@@ -693,36 +701,138 @@ async function publishDraft() {
     parsed.image = imagePath
   }
 
+  const manifestImage = section === 'events' ? '' : (typeof parsed.image === 'string' ? parsed.image.trim() : '')
+  const commitMessage = buildCommitMessage(section, slugValue)
+
   isSaving.value = true
   try {
-    const root = await ensureRepoHandle()
-    const sectionDir = await getContentDirectory(root, config.contentDir)
-
-    await writeJsonFile(sectionDir, `${slugValue}.json`, parsed, { force: forceOverwrite.value })
-
-    if (uploadState) {
-      const expectedPrefix = `content/${config.contentDir}/`
-      const imagePath = parsed.image
-      const targetName = imagePath.startsWith(expectedPrefix)
-        ? imagePath.slice(expectedPrefix.length)
-        : `${slugValue}${uploadState.ext || '.jpg'}`
-      await writeBinaryFile(sectionDir, targetName, uploadState.file, { force: forceOverwrite.value })
-    }
-
-    const manifestImage = section === 'events' ? '' : (typeof parsed.image === 'string' ? parsed.image.trim() : '')
-    const added = await updateManifest(sectionDir, section, slugValue, parsed, manifestImage, { force: forceOverwrite.value })
-
-    successMessage.value = `Saved public/content/${config.contentDir}/${slugValue}.json${added ? ' and updated index.json.' : '.'}`
-    draftSection.value = section
-    preparedImage.value = {
-      ...preparedImage.value,
-      section,
+    if (remotePublishEnabled.value) {
+      await publishViaApi({ parsed, slugValue, section, uploadState, config, commitMessage })
+    } else {
+      await publishToFileSystem({ parsed, slugValue, section, uploadState, config, manifestImage })
     }
   } catch (err) {
     errorMessage.value = err instanceof Error ? err.message : String(err)
   } finally {
     isSaving.value = false
   }
+}
+
+function buildCommitMessage(section, slugValue) {
+  const label = SECTION_CONFIG[section]?.label || section.charAt(0).toUpperCase() + section.slice(1)
+  return `Add ${label} entry ${slugValue}`
+}
+
+async function publishToFileSystem({ parsed, slugValue, section, uploadState, config, manifestImage }) {
+  const root = await ensureRepoHandle()
+  const sectionDir = await getContentDirectory(root, config.contentDir)
+
+  await writeJsonFile(sectionDir, `${slugValue}.json`, parsed, { force: forceOverwrite.value })
+
+  if (uploadState) {
+    const expectedPrefix = `content/${config.contentDir}/`
+    const imagePath = parsed.image
+    const targetName = imagePath.startsWith(expectedPrefix)
+      ? imagePath.slice(expectedPrefix.length)
+      : `${slugValue}${uploadState.ext || '.jpg'}`
+    await writeBinaryFile(sectionDir, targetName, uploadState.file, { force: forceOverwrite.value })
+  }
+
+  const added = await updateManifest(sectionDir, section, slugValue, parsed, manifestImage, { force: forceOverwrite.value })
+
+  successMessage.value = `Saved public/content/${config.contentDir}/${slugValue}.json${added ? ' and updated index.json.' : '.'}`
+  draftSection.value = section
+  preparedImage.value = {
+    ...preparedImage.value,
+    section,
+  }
+}
+
+async function publishViaApi({ parsed, slugValue, section, uploadState, config, commitMessage }) {
+  if (!publishEndpoint) {
+    throw new Error('Publish endpoint is not configured.')
+  }
+  const token = getSessionToken()
+  if (!token) {
+    throw new Error('Your login session has expired. Please sign in again.')
+  }
+
+  const body = {
+    section,
+    slug: slugValue,
+    payload: parsed,
+    force: forceOverwrite.value,
+  }
+  if (commitMessage) {
+    body.commitMessage = commitMessage
+  }
+
+  if (uploadState) {
+    const expectedPrefix = `content/${config.contentDir}/`
+    const imagePath = typeof parsed.image === 'string' ? parsed.image.trim() : ''
+    const filename = imagePath.startsWith(expectedPrefix)
+      ? imagePath.slice(expectedPrefix.length)
+      : `${slugValue}${uploadState.ext || '.jpg'}`
+    body.imageUpload = {
+      filename,
+      contentType: uploadState.file.type || 'application/octet-stream',
+      data: await fileToBase64(uploadState.file),
+    }
+  }
+
+  let response
+  try {
+    response = await fetch(publishEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    })
+  } catch (err) {
+    throw new Error(err instanceof Error ? err.message : 'Network error while publishing.')
+  }
+
+  let payload = {}
+  try {
+    payload = await response.json()
+  } catch (_) {
+    payload = {}
+  }
+
+  if (!response.ok) {
+    const message = typeof payload?.error === 'string'
+      ? payload.error
+      : `Publish failed (status ${response.status})`
+    throw new Error(message)
+  }
+
+  const manifestUpdated = Boolean(payload?.manifestUpdated)
+  successMessage.value = `Published ${config.contentDir}/${slugValue}.json via API${manifestUpdated ? ' (manifest updated).' : '.'}`
+  draftSection.value = section
+  preparedImage.value = {
+    ...preparedImage.value,
+    section,
+  }
+}
+
+async function fileToBase64(file) {
+  const buffer = await file.arrayBuffer()
+  const bytes = new Uint8Array(buffer)
+  const chunkSize = 0x8000
+  let binary = ''
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    const chunk = bytes.subarray(i, i + chunkSize)
+    binary += String.fromCharCode(...chunk)
+  }
+  return btoa(binary)
+}
+
+function getSessionToken() {
+  if (!authToken) return ''
+  if (typeof authToken === 'string') return authToken
+  return authToken.value || ''
 }
 
 function downloadDraft() {

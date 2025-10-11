@@ -1,6 +1,9 @@
 import base64
+import hashlib
+import hmac
 import json
 import os
+import time
 from dataclasses import dataclass
 from typing import Any, Dict, Optional, Tuple
 import urllib.error
@@ -24,6 +27,74 @@ class LambdaError(Exception):
         self.status_code = status_code
 
 
+def _assert_authorized(event: Dict[str, Any]) -> None:
+    headers = _normalize_headers(event.get("headers") or {})
+
+    session_secret = os.getenv("SESSION_SECRET", "").strip()
+    bearer = headers.get("authorization")
+    token = _extract_bearer(bearer)
+    if session_secret and token and _verify_session_token(token, session_secret):
+        return
+
+    static_secret = os.getenv("PUBLISHER_SHARED_SECRET", "").strip()
+    if static_secret:
+        api_token = headers.get("x-api-token")
+        if api_token and hmac.compare_digest(api_token, static_secret):
+            return
+
+    raise LambdaError("Unauthorized", 401)
+
+
+def _normalize_headers(headers: Dict[str, Any]) -> Dict[str, str]:
+    normalized: Dict[str, str] = {}
+    for key, value in headers.items():
+        if not isinstance(key, str):
+            continue
+        if not isinstance(value, str):
+            continue
+        normalized[key.lower()] = value
+    return normalized
+
+
+def _extract_bearer(value: Optional[str]) -> Optional[str]:
+    if not value or not isinstance(value, str):
+        return None
+    parts = value.strip().split(" ", 1)
+    if len(parts) != 2:
+        return None
+    scheme, token = parts
+    if scheme.lower() != "bearer":
+        return None
+    return token.strip() or None
+
+
+def _verify_session_token(token: str, secret: str) -> bool:
+    try:
+        payload_segment, signature = token.split(".", 1)
+    except ValueError:
+        return False
+
+    expected_sig = hmac.new(secret.encode("utf-8"), payload_segment.encode("utf-8"), hashlib.sha256).hexdigest()
+    if not hmac.compare_digest(signature, expected_sig):
+        return False
+
+    try:
+        payload_bytes = _urlsafe_b64decode(payload_segment)
+        data = json.loads(payload_bytes.decode("utf-8"))
+    except (ValueError, json.JSONDecodeError):
+        return False
+
+    exp = int(data.get("exp") or 0)
+    if exp < int(time.time()):
+        return False
+    return True
+
+
+def _urlsafe_b64decode(segment: str) -> bytes:
+    padding = "=" * (-len(segment) % 4)
+    return base64.urlsafe_b64decode(segment + padding)
+
+
 def handler(event: Dict[str, Any], _context: Any) -> Dict[str, Any]:
     """
     AWS Lambda entry point for committing wizard output to GitHub.
@@ -44,6 +115,7 @@ def handler(event: Dict[str, Any], _context: Any) -> Dict[str, Any]:
     entry untouched. For remote images just set payload.image to the remote URL on the client.
     """
     try:
+        _assert_authorized(event)
         data = _parse_event(event)
         config = _resolve_section(data["section"])
         token = _resolve_github_token()
@@ -379,4 +451,3 @@ class _GitHubClient:
             return {"status": err.code, "body": err.read().decode("utf-8")}
         except urllib.error.URLError as err:
             raise LambdaError(f"GitHub API request failed: {err}", 502)
-

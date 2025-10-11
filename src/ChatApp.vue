@@ -10,30 +10,35 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, provide, ref } from 'vue'
 import HeaderNav from './components/HeaderNav.vue'
 import FooterSection from './components/FooterSection.vue'
 import PostWizard from './components/PostWizard.vue'
 import LoginGate from './components/LoginGate.vue'
 
-const AUTH_KEY = 'dtcc-chat-auth'
+const AUTH_TOKEN_KEY = 'dtcc-chat-token'
 
 const isAuthenticated = ref(false)
+const authToken = ref('')
 
-function handleAuthenticated() {
+function handleAuthenticated(token) {
   isAuthenticated.value = true
+  authToken.value = token
   if (typeof window !== 'undefined') {
-    window.sessionStorage.setItem(AUTH_KEY, 'granted')
+    window.sessionStorage.setItem(AUTH_TOKEN_KEY, token)
   }
 }
 
 onMounted(() => {
   if (typeof window === 'undefined') return
-  const stored = window.sessionStorage.getItem(AUTH_KEY)
-  if (stored === 'granted') {
+  const stored = window.sessionStorage.getItem(AUTH_TOKEN_KEY)
+  if (stored) {
     isAuthenticated.value = true
+    authToken.value = stored
   }
 })
+
+provide('chatAuthToken', authToken)
 </script>
 
 <style scoped>

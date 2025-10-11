@@ -58,38 +58,52 @@ const errorMessage = ref('')
 const isProcessing = ref(false)
 const usernameInput = ref(null)
 
-const expectedUsername = computed(() => import.meta.env.VITE_CHAT_USERNAME?.trim() || '')
-const expectedPassword = computed(() => import.meta.env.VITE_CHAT_PASSWORD || '')
-
-const authConfigured = computed(() => Boolean(expectedUsername.value && expectedPassword.value))
+const authEndpoint = computed(() => import.meta.env.VITE_CHAT_AUTH_URL?.trim() || '')
 
 async function handleSubmit() {
   errorMessage.value = ''
-  if (!authConfigured.value) {
-    errorMessage.value = 'Login is not configured. Set VITE_CHAT_USERNAME / VITE_CHAT_PASSWORD.'
+  if (!authEndpoint.value) {
+    errorMessage.value = 'Login endpoint is not configured. Set VITE_CHAT_AUTH_URL.'
     return
   }
   isProcessing.value = true
   try {
-    const matches =
-      username.value.trim() === expectedUsername.value &&
-      password.value === expectedPassword.value
-    if (!matches) {
-      errorMessage.value = 'Incorrect username or password.'
-      password.value = ''
-      await nextTick()
-      usernameInput.value?.focus()
-      return
+    const response = await fetch(authEndpoint.value, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: username.value.trim(),
+        password: password.value,
+      }),
+    })
+
+    const payload = await response.json().catch(() => ({}))
+
+    if (!response.ok) {
+      const message = typeof payload?.error === 'string' && payload.error
+        ? payload.error
+        : `Login failed (status ${response.status})`
+      throw new Error(message)
     }
-    emits('authenticated')
+
+    if (!payload?.token || typeof payload.token !== 'string') {
+      throw new Error('Login response missing token.')
+    }
+
+    emits('authenticated', payload.token)
+  } catch (err) {
+    errorMessage.value = err instanceof Error ? err.message : String(err)
+    password.value = ''
+    await nextTick()
+    usernameInput.value?.focus()
   } finally {
     isProcessing.value = false
   }
 }
 
 onMounted(() => {
-  if (!authConfigured.value) {
-    errorMessage.value = 'Login is not configured. Set VITE_CHAT_USERNAME / VITE_CHAT_PASSWORD.'
+  if (!authEndpoint.value) {
+    errorMessage.value = 'Login endpoint is not configured. Set VITE_CHAT_AUTH_URL.'
   } else {
     nextTick(() => {
       usernameInput.value?.focus()
