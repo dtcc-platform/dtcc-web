@@ -92,17 +92,7 @@ onMounted(async () => {
       const url = normalizeLink(it.url || data.url || data.link || '')
       const date = it.date || data.date || data.published || data.updated || null
       const order = Number.isFinite(Number(it.order)) ? Number(it.order) : (Number.isFinite(Number(data.order)) ? Number(data.order) : undefined)
-      let image = normalizeImage(it.image || data.image || null)
-      if (!image && base) {
-        const tryUrls = ['jpeg', 'jpg', 'png']
-          .map(ext => resolveUrl(`content/projects/${base}.${ext}`))
-        for (const u of tryUrls) {
-          try {
-            const head = await fetch(u, { method: 'HEAD' })
-            if (head.ok) { image = sanitizeSrc(u); break }
-          } catch (_) {}
-        }
-      }
+      const image = normalizeImage(it.image || data.image || null)
       resolved.push({ id: base || title, title, description, url, image, hasImage: Boolean(image), date, order })
     }
     // Respect explicit order if provided; otherwise keep manifest order

@@ -95,14 +95,7 @@ onMounted(async () => {
       const summary = it.summary || data.summary || data.excerpt || data.description || ''
       const url = normalizeLink(it.url || data.url || data.link || '')
       const date = it.date || data.date || data.published || data.updated || null
-      let image = normalizeImage(it.image || data.image || null)
-      if (!image && base) {
-        const tryUrls = ['jpeg', 'jpg', 'png']
-          .map(ext => resolveUrl(`content/projects/${base}.${ext}`))
-        for (const u of tryUrls) {
-          try { const head = await fetch(u, { method: 'HEAD' }); if (head.ok) { image = sanitizeSrc(u); break } } catch (_) {}
-        }
-      }
+      const image = normalizeImage(it.image || data.image || null)
       resolved.push({ id: base || title, title, summary, url, image, hasImage: Boolean(image), date })
     }
     resolved.sort((a, b) => (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0))

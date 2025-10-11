@@ -71,14 +71,7 @@ onMounted(async () => {
       }
       const title = data.title || base
       const summary = data.summary || data.excerpt || data.description || ''
-      let image = normalizeImage(it.image || data.image || null)
-      if (!image && base) {
-        const tryUrls = ['jpeg', 'jpg', 'png']
-          .map(ext => resolveUrl(`content/news/${base}.${ext}`))
-        for (const u of tryUrls) {
-          try { const head = await fetch(u, { method: 'HEAD' }); if (head.ok) { image = sanitizeSrc(u); break } } catch (_) {}
-        }
-      }
+      const image = normalizeImage(it.image || data.image || null)
       const date = data.date || data.published || data.publishedAt || null
       const order = Number.isFinite(Number(it.order)) ? Number(it.order) : Number.isFinite(Number(data.order)) ? Number(data.order) : undefined
       resolved.push({ id: base, title, summary, image, hasImage: Boolean(image), date, order })
