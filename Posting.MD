@@ -14,7 +14,8 @@ Automated News Drafting
 - The wizard collects headline + bullet points, calls Gemini for a JSON draft, lets you approve/adjust the URL/image, writes `public/content/news/<slug>.json`, and updates the manifest (`public/content/news/index.json`).
 - If the generated file exists, the script asks before overwriting.
 - This LLM-assisted workflow is experimental. Always review the draft carefully and make any edits needed before approving.
-- Browser UI (`/chat/`): run `npm run dev`, visit `/chat/`, paste your Gemini API key, provide headline + bullets, and optionally connect the repo folder via the File System Access prompt to write files automatically.
+- Browser UI (`/chat/`): set `VITE_CHAT_USERNAME`/`VITE_CHAT_PASSWORD` in `.env.local`, run `npm run dev`, visit `/chat/`, sign in, paste your Gemini API key, provide headline + bullets, and optionally connect the repo folder via the File System Access prompt to write files automatically.
+- Without the env vars the login gate refuses access (helpful if you want to disable the editor temporarily).
 - The `/chat/` page keeps the site chrome but is hidden from navigation and marked `noindex`; share its URL only with trusted editors.
 - If File System Access isn't available, download the JSON from the wizard and copy it into `public/content/news`, then update `index.json` manually.
 
