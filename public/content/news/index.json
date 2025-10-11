@@ -16,6 +16,9 @@
     },
     {
       "base": "lambda-test"
+    },
+    {
+      "base": "from-the-login"
     }
   ]
 }
