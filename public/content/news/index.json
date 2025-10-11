@@ -29,6 +29,9 @@
     },
     {
       "base": "lambda-test"
+    },
+    {
+      "base": "testing-news-sorting"
     }
   ]
 }
