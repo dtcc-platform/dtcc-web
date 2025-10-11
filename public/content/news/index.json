@@ -19,6 +19,10 @@
     },
     {
       "base": "lambda-test"
+    },
+    {
+      "base": "from-the-login-2",
+      "image": "content/news/from-the-login-2.jpeg"
     }
   ]
 }
