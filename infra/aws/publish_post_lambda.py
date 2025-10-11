@@ -374,9 +374,14 @@ def _default_commit_message(section: str, slug: str) -> str:
 
 
 def _response(status: int, payload: Dict[str, Any]) -> Dict[str, Any]:
+    origin = os.getenv("ALLOWED_ORIGIN", "*")
     return {
         "statusCode": status,
-        "headers": {"Content-Type": "application/json"},
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": origin,
+            "Access-Control-Allow-Credentials": "true",
+        },
         "body": json.dumps(payload),
     }
 

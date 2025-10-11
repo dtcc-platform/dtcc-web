@@ -124,6 +124,8 @@ Serverless Publisher (AWS Lambda)
   - `GITHUB_REPO` → `owner/repo`
   - `GITHUB_BRANCH` (optional, defaults to `main`)
   - Either `GITHUB_TOKEN` (fine-grained PAT with `contents:write`) or `GITHUB_TOKEN_SECRET_NAME` (Secrets Manager ID returning `{ "token": "..." }`).
+  - `SESSION_SECRET` (matches the login Lambda)
+  - `ALLOWED_ORIGIN` (e.g. `https://dtcc-platform.github.io` for GitHub Pages)
 - Optional auth:
   - `SESSION_SECRET` (shared with the login Lambda) enables Bearer token verification.
   - `PUBLISHER_SHARED_SECRET` remains as a fallback `x-api-token` if you need static access.
@@ -152,6 +154,7 @@ Login API (AWS Lambda)
   - `LOGIN_USERNAME` / `LOGIN_PASSWORD`
   - `SESSION_SECRET` (must match the publisher Lambda)
   - `SESSION_TTL_SECONDS` (optional, default 3600)
+  - `ALLOWED_ORIGIN` (same origin you allow in API Gateway CORS, e.g. `https://dtcc-platform.github.io`)
 - Deploy behind API Gateway (REST). Require an API key if you want an extra gateway guard.
 - Response shape:
   ```
