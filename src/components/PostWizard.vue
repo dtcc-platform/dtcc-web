@@ -55,7 +55,17 @@
             placeholder="Write the post body. Use blank lines to separate paragraphs."
             required
           ></textarea>
-          <p class="muted helper">Use blank lines to separate paragraphs.</p>
+        </div>
+
+        <div class="field">
+          <label for="post-date">Date<span aria-hidden="true">*</span></label>
+          <input
+            id="post-date"
+            v-model="selectedDate"
+            type="date"
+            required
+          >
+          <p class="muted helper">Used for sorting and display. Defaults to today's date.</p>
         </div>
 
         <fieldset class="field image-fieldset">
@@ -202,6 +212,7 @@ const title = ref('')
 const bodyInput = ref('')
 const slug = ref('')
 const slugWasEdited = ref(false)
+const selectedDate = ref(new Date().toISOString().slice(0, 10))
 
 const imageSource = ref('none')
 const imageUrl = ref('')
@@ -371,7 +382,7 @@ function prepareDraft() {
       .join('\n')
       .trim()
     const summary = createSummary(normalizedBody)
-    const isoDate = new Date().toISOString().slice(0, 10)
+  const isoDate = selectedDate.value || new Date().toISOString().slice(0, 10)
     const section = postType.value
     const config = SECTION_CONFIG[section] || SECTION_CONFIG.news
     const contentDir = config.contentDir
@@ -883,6 +894,7 @@ function resetWizard() {
   bodyInput.value = ''
   slug.value = ''
   slugWasEdited.value = false
+  selectedDate.value = new Date().toISOString().slice(0, 10)
   imageSource.value = 'none'
   imageUrl.value = ''
   imageFile.value = null
