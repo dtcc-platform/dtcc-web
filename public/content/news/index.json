@@ -8,6 +8,9 @@
       "image": "content/news/from-the-login-2.jpeg"
     },
     {
+      "base": "testing-new-wizard"
+    },
+    {
       "base": "testing-speed"
     },
     {
@@ -26,9 +29,6 @@
     },
     {
       "base": "lambda-test"
-    },
-    {
-      "base": "testing-new-wizard"
     }
   ]
 }
