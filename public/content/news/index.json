@@ -35,6 +35,9 @@
     },
     {
       "base": "lambda-test"
+    },
+    {
+      "base": "still-checking-relation"
     }
   ]
 }
