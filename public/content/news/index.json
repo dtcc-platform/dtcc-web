@@ -1,6 +1,9 @@
 {
   "items": [
     {
+      "base": "i-am-trying-to-check-related-news"
+    },
+    {
       "base": "from-the-login"
     },
     {
@@ -32,9 +35,6 @@
     },
     {
       "base": "lambda-test"
-    },
-    {
-      "base": "i-am-trying-to-check-related-news"
     }
   ]
 }
