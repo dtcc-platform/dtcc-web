@@ -1,6 +1,12 @@
 {
   "items": [
     {
+      "base": "i-am-trying-to-check-related-news"
+    },
+    {
+      "base": "still-checking-relation"
+    },
+    {
       "base": "from-the-login"
     },
     {

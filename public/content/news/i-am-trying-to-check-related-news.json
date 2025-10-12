@@ -1,0 +1,13 @@
+{
+  "title": "I am trying to check related news",
+  "summary": "Is there relation?",
+  "url": "/news/i-am-trying-to-check-related-news",
+  "body": "Is there relation?",
+  "eyebrow": "News",
+  "date": "2025-10-12",
+  "related": [
+    "from-the-login",
+    "testing-speed",
+    "testing-new-wizard"
+  ]
+}
