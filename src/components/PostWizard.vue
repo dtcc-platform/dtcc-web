@@ -68,22 +68,44 @@
           <p class="muted helper">Used for sorting and display. Defaults to today's date.</p>
         </div>
 
-        <div v-if="postType !== 'events'" class="field related-field">
+        <div v-if="postType !== 'events'" class="field selection-field">
           <label>Related {{ postType === 'projects' ? 'projects' : 'news items' }}</label>
           <p class="muted helper">Select up to {{ MAX_RELATED }} related entries to feature alongside this post.</p>
           <div v-if="relatedLoading" class="muted helper">Loading related options…</div>
           <div v-else-if="relatedError" class="alert error">{{ relatedError }}</div>
-          <div v-else class="related-options">
-            <label v-for="option in relatedOptions" :key="option.slug" class="related-option">
+          <div v-else class="selection-list">
+            <label v-for="option in relatedOptions" :key="option.slug" class="selection-option">
               <input
                 type="checkbox"
                 :checked="isRelatedSelected(option.slug)"
                 :disabled="!isRelatedSelected(option.slug) && relatedSelectionFull"
                 @change="toggleRelated(option.slug, $event.target.checked)"
               >
-              <span>{{ option.title }}</span>
+              <span class="option-text">{{ option.title }}</span>
             </label>
             <p v-if="!relatedOptions.length" class="muted helper">No existing entries available yet.</p>
+          </div>
+        </div>
+
+        <div v-if="postType !== 'events'" class="field selection-field">
+          <label>Contacts</label>
+          <p class="muted helper">Pick up to {{ MAX_CONTACTS }} contacts for this {{ postType === 'projects' ? 'project' : 'news item' }}.</p>
+          <div v-if="contactLoading" class="muted helper">Loading contacts…</div>
+          <div v-else-if="contactError" class="alert error">{{ contactError }}</div>
+          <div v-else class="selection-list">
+            <label v-for="option in contactOptions" :key="option.slug" class="selection-option">
+              <input
+                type="checkbox"
+                :checked="isContactSelected(option.slug)"
+                :disabled="!isContactSelected(option.slug) && contactSelectionFull"
+                @change="toggleContact(option.slug, $event.target.checked)"
+              >
+              <span class="option-text">
+                <strong>{{ option.name }}</strong>
+                <span v-if="option.email" class="muted small">{{ option.email }}</span>
+              </span>
+            </label>
+            <p v-if="!contactOptions.length" class="muted helper">No contacts available yet.</p>
           </div>
         </div>
 
@@ -234,11 +256,17 @@ const slug = ref('')
 const slugWasEdited = ref(false)
 const selectedDate = ref(new Date().toISOString().slice(0, 10))
 const MAX_RELATED = 4
+const MAX_CONTACTS = 2
 const relatedOptions = ref([])
 const relatedLoading = ref(false)
 const relatedError = ref('')
 const selectedRelated = ref([])
 const relatedSelectionFull = computed(() => selectedRelated.value.length >= MAX_RELATED)
+const contactOptions = ref([])
+const contactLoading = ref(false)
+const contactError = ref('')
+const selectedContacts = ref([])
+const contactSelectionFull = computed(() => selectedContacts.value.length >= MAX_CONTACTS)
 
 const imageSource = ref('none')
 const imageUrl = ref('')
@@ -335,10 +363,17 @@ watch(imageSource, (mode) => {
 watch(postType, (section) => {
   selectedRelated.value = []
   refreshRelatedOptions(section)
+  selectedContacts.value = []
+  if (section !== 'events') {
+    ensureContactsLoaded()
+  }
 })
 
 onMounted(() => {
   refreshRelatedOptions(postType.value)
+  if (postType.value !== 'events') {
+    ensureContactsLoaded()
+  }
 })
 
 function slugify(value = '') {
@@ -440,6 +475,66 @@ function toggleRelated(slugValue, checked) {
     selectedRelated.value = [...selectedRelated.value, slugValue]
   } else {
     selectedRelated.value = selectedRelated.value.filter((item) => item !== slugValue)
+  }
+}
+
+let contactsLoaded = false
+async function ensureContactsLoaded() {
+  if (contactsLoaded) return
+  await refreshContactOptions()
+  contactsLoaded = true
+}
+
+async function refreshContactOptions() {
+  contactLoading.value = true
+  contactError.value = ''
+  try {
+    const res = await fetch(`${basePath}/content/users.json`, { cache: 'no-store' })
+    if (!res.ok) {
+      throw new Error(`Contacts request failed (${res.status})`)
+    }
+    const payload = await res.json()
+    const items = Array.isArray(payload?.users)
+      ? payload.users
+      : Array.isArray(payload) ? payload : []
+
+    const options = []
+    for (const entry of items) {
+      if (!entry) continue
+      const slugValue = entry.slug || entry.id || entry.username || entry.email
+      if (!slugValue) continue
+      options.push({
+        slug: slugValue,
+        name: entry.name || entry.displayName || slugValue,
+        email: entry.email || '',
+        title: entry.title || entry.role || '',
+      })
+    }
+    contactOptions.value = options
+    selectedContacts.value = selectedContacts.value.filter((slug) =>
+      options.some((option) => option.slug === slug)
+    )
+    contactsLoaded = true
+  } catch (err) {
+    contactError.value = err instanceof Error ? err.message : String(err)
+    contactOptions.value = []
+    selectedContacts.value = []
+    contactsLoaded = false
+  } finally {
+    contactLoading.value = false
+  }
+}
+
+function isContactSelected(slugValue) {
+  return selectedContacts.value.includes(slugValue)
+}
+
+function toggleContact(slugValue, checked) {
+  if (checked) {
+    if (isContactSelected(slugValue) || selectedContacts.value.length >= MAX_CONTACTS) return
+    selectedContacts.value = [...selectedContacts.value, slugValue]
+  } else {
+    selectedContacts.value = selectedContacts.value.filter((item) => item !== slugValue)
   }
 }
 
@@ -563,13 +658,18 @@ function prepareDraft() {
       if (imageEntry) payload.image = imageEntry
     }
 
-    if (postType.value !== 'events') {
-      if (selectedRelated.value.length) {
-        payload.related = [...selectedRelated.value]
-      } else {
-        delete payload.related
-      }
+  if (postType.value !== 'events') {
+    if (selectedRelated.value.length) {
+      payload.related = [...selectedRelated.value]
+    } else {
+      delete payload.related
     }
+    if (selectedContacts.value.length) {
+      payload.contacts = [...selectedContacts.value]
+    } else {
+      delete payload.contacts
+    }
+  }
 
     draftSection.value = section
     draftJson.value = JSON.stringify(payload, null, 2)
@@ -806,8 +906,14 @@ async function publishDraft() {
     } else {
       delete parsed.related
     }
+    if (selectedContacts.value.length) {
+      parsed.contacts = [...selectedContacts.value]
+    } else {
+      delete parsed.contacts
+    }
   } else {
     delete parsed.related
+    delete parsed.contacts
   }
 
   const slugValue = slug.value.trim() || slugify(parsed.title)
@@ -1196,11 +1302,11 @@ function resetWizard() {
   color: #0f4a6a;
 }
 
-.related-field {
+.selection-field {
   gap: 12px;
 }
 
-.related-options {
+.selection-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -1212,11 +1318,25 @@ function resetWizard() {
   background: #fafafa;
 }
 
-.related-option {
+.selection-option {
   display: flex;
   align-items: center;
   gap: 10px;
   font-size: 0.95rem;
+}
+
+.option-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.selection-option input {
+  flex-shrink: 0;
+}
+
+.selection-option .small {
+  font-size: 0.85rem;
 }
 
 .connection {

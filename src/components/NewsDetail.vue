@@ -29,27 +29,15 @@
     </section>
 
     <!-- Contacts -->
-    <section class="section contacts">
+    <section v-if="contacts.length" class="section contacts">
       <div class="container">
-        <h3 class="h3-30">For more information<br>please contact:</h3>
+        <h3 class="h3-30">Contacts</h3>
         <div class="people">
-          <div class="person">
-            <div class="avatar" style="background-image:url('https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=800&auto=format&fit=crop')"></div>
-            <div class="name">Placeholder name</div>
-            <div class="role muted">Placeholder for title</div>
-            <a href="#" class="more">Mail to »</a>
-          </div>
-          <div class="person">
-            <div class="avatar" style="background-image:url('https://images.unsplash.com/photo-1531123414780-f74287bb2a3b?q=80&w=800&auto=format&fit=crop')"></div>
-            <div class="name">Placeholder name</div>
-            <div class="role muted">Placeholder for title</div>
-            <a href="#" class="more">Mail to »</a>
-          </div>
-          <div class="person">
-            <div class="avatar" style="background-image:url('https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=800&auto=format&fit=crop')"></div>
-            <div class="name">Placeholder name</div>
-            <div class="role muted">Placeholder for title</div>
-            <a href="#" class="more">Mail to »</a>
+          <div class="person" v-for="c in contacts" :key="c.id">
+            <div class="avatar" :style="{ backgroundImage: c.image ? `url(${c.image})` : undefined }"></div>
+            <div class="name" v-text="c.name" />
+            <div v-if="c.title" class="role muted" v-text="c.title" />
+            <a v-if="c.email" :href="`mailto:${c.email}`" class="more">Email »</a>
           </div>
         </div>
       </div>
@@ -83,6 +71,8 @@ const params = new URLSearchParams(location.search)
 const slug = params.get('slug')
 const item = ref(null)
 const related = ref([])
+const contacts = ref([])
+const MAX_CONTACTS = 2
 const heroImageStyle = computed(() => item.value?.image ? `url(${item.value.image})` : undefined)
 
 const bodyParas = computed(() => {
@@ -134,8 +124,53 @@ onMounted(async () => {
     } else {
       related.value = []
     }
+
+    const contactSlugs = Array.isArray(data.contacts) ? data.contacts.slice(0, MAX_CONTACTS) : []
+    if (contactSlugs.length) {
+      const userMap = await loadUsersMap()
+      const entries = contactSlugs.map((refSlug) => {
+        const user = userMap[refSlug]
+        if (!user) return null
+        return {
+          id: refSlug,
+          name: user.name || user.displayName || refSlug,
+          email: user.email || '',
+          title: user.title || user.role || '',
+          image: normalizeImage(user.photo || user.image || null),
+        }
+      }).filter(Boolean)
+      contacts.value = entries
+    } else {
+      contacts.value = []
+    }
   } catch (_) {}
 })
+
+let usersCache = null
+async function loadUsersMap() {
+  if (usersCache) return usersCache
+  try {
+    const res = await fetch(resolveUrl('content/users.json'), { cache: 'no-store' })
+    if (!res.ok) {
+      usersCache = {}
+      return usersCache
+    }
+    const payload = await res.json()
+    const items = Array.isArray(payload?.users) ? payload.users : Array.isArray(payload) ? payload : []
+    const map = {}
+    for (const entry of items) {
+      if (!entry) continue
+      const key = entry.slug || entry.id || entry.username || entry.email
+      if (!key) continue
+      map[key] = entry
+    }
+    usersCache = map
+    return usersCache
+  } catch (_) {
+    usersCache = {}
+    return usersCache
+  }
+}
 </script>
 
 <style scoped>
@@ -145,10 +180,10 @@ onMounted(async () => {
 
 .body { padding-top: 24px; padding-bottom: 24px; }
 
-.contacts .people { margin-top: 16px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.person { text-align: left; }
-.avatar { height: 160px; border-radius: 12px; background-size: cover; background-position: center; filter: grayscale(20%); }
-.name { margin-top: 6px; font-weight: 600; }
+.contacts .people { margin-top: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.person { text-align: left; display: flex; flex-direction: column; gap: 6px; }
+.avatar { height: 160px; border-radius: 12px; background-size: cover; background-position: center; filter: grayscale(20%); background-color: #e9e9ee; }
+.name { font-weight: 600; }
 .role { font-size: 14px; }
 
 .related .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
