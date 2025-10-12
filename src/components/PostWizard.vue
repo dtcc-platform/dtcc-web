@@ -68,6 +68,25 @@
           <p class="muted helper">Used for sorting and display. Defaults to today's date.</p>
         </div>
 
+        <div v-if="postType !== 'events'" class="field related-field">
+          <label>Related {{ postType === 'projects' ? 'projects' : 'news items' }}</label>
+          <p class="muted helper">Select up to {{ MAX_RELATED }} related entries to feature alongside this post.</p>
+          <div v-if="relatedLoading" class="muted helper">Loading related options…</div>
+          <div v-else-if="relatedError" class="alert error">{{ relatedError }}</div>
+          <div v-else class="related-options">
+            <label v-for="option in relatedOptions" :key="option.slug" class="related-option">
+              <input
+                type="checkbox"
+                :checked="isRelatedSelected(option.slug)"
+                :disabled="!isRelatedSelected(option.slug) && relatedSelectionFull"
+                @change="toggleRelated(option.slug, $event.target.checked)"
+              >
+              <span>{{ option.title }}</span>
+            </label>
+            <p v-if="!relatedOptions.length" class="muted helper">No existing entries available yet.</p>
+          </div>
+        </div>
+
         <fieldset class="field image-fieldset">
           <legend>Image</legend>
           <div class="image-options">
@@ -186,7 +205,7 @@
 </template>
 
 <script setup>
-import { computed, inject, ref, watch } from 'vue'
+import { computed, inject, onMounted, ref, watch } from 'vue'
 
 const TYPE_OPTIONS = [
   { value: 'news', label: 'News' },
@@ -204,6 +223,7 @@ const publishEndpoint = import.meta.env.VITE_CHAT_PUBLISH_URL?.trim() || ''
 const remotePublishEnabled = computed(() => Boolean(publishEndpoint))
 const authSession = inject('chatAuthSession', ref({ token: '', expiresAt: 0 }))
 const authToken = inject('chatAuthToken', ref(''))
+const basePath = (import.meta.env.BASE_URL || '/').replace(/\/$/, '')
 
 const typeOptions = TYPE_OPTIONS
 
@@ -213,6 +233,12 @@ const bodyInput = ref('')
 const slug = ref('')
 const slugWasEdited = ref(false)
 const selectedDate = ref(new Date().toISOString().slice(0, 10))
+const MAX_RELATED = 3
+const relatedOptions = ref([])
+const relatedLoading = ref(false)
+const relatedError = ref('')
+const selectedRelated = ref([])
+const relatedSelectionFull = computed(() => selectedRelated.value.length >= MAX_RELATED)
 
 const imageSource = ref('none')
 const imageUrl = ref('')
@@ -306,6 +332,15 @@ watch(imageSource, (mode) => {
   }
 })
 
+watch(postType, (section) => {
+  selectedRelated.value = []
+  refreshRelatedOptions(section)
+})
+
+onMounted(() => {
+  refreshRelatedOptions(postType.value)
+})
+
 function slugify(value = '') {
   return value
     .toLowerCase()
@@ -334,6 +369,80 @@ function deriveExtension(file) {
     'image/avif': '.avif',
   }
   return map[file.type] || ''
+}
+
+async function refreshRelatedOptions(section) {
+  if (section === 'events') {
+    relatedOptions.value = []
+    relatedError.value = ''
+    relatedLoading.value = false
+    selectedRelated.value = []
+    return
+  }
+
+  const config = SECTION_CONFIG[section]
+  if (!config) {
+    relatedOptions.value = []
+    relatedError.value = ''
+    relatedLoading.value = false
+    return
+  }
+
+  relatedLoading.value = true
+  relatedError.value = ''
+  try {
+    const manifestUrl = `${basePath}/content/${config.contentDir}/index.json`
+    const res = await fetch(manifestUrl, { cache: 'no-store' })
+    if (!res.ok) {
+      throw new Error(`Manifest request failed (${res.status})`)
+    }
+    const manifest = await res.json()
+    const items = Array.isArray(manifest?.items)
+      ? manifest.items
+      : Array.isArray(manifest) ? manifest : []
+
+    const options = []
+    for (const entry of items) {
+      const slugValue = typeof entry === 'string'
+        ? entry
+        : entry?.base || entry?.id || entry?.slug || entry?.name
+      if (!slugValue) continue
+
+      try {
+        const detailUrl = `${basePath}/content/${config.contentDir}/${slugValue}.json`
+        const detailRes = await fetch(detailUrl, { cache: 'no-store' })
+        if (!detailRes.ok) continue
+        const detail = await detailRes.json()
+        const titleValue = detail?.title || detail?.name || slugValue
+        options.push({ slug: slugValue, title: titleValue })
+      } catch (_) {
+        // ignore individual fetch failures
+      }
+    }
+
+    relatedOptions.value = options
+    selectedRelated.value = selectedRelated.value.filter((slug) =>
+      options.some((option) => option.slug === slug)
+    )
+  } catch (err) {
+    relatedError.value = err instanceof Error ? err.message : String(err)
+    relatedOptions.value = []
+  } finally {
+    relatedLoading.value = false
+  }
+}
+
+function isRelatedSelected(slugValue) {
+  return selectedRelated.value.includes(slugValue)
+}
+
+function toggleRelated(slugValue, checked) {
+  if (checked) {
+    if (isRelatedSelected(slugValue) || selectedRelated.value.length >= MAX_RELATED) return
+    selectedRelated.value = [...selectedRelated.value, slugValue]
+  } else {
+    selectedRelated.value = selectedRelated.value.filter((item) => item !== slugValue)
+  }
 }
 
 function createSummary(body) {
@@ -454,6 +563,14 @@ function prepareDraft() {
         date: isoDate,
       }
       if (imageEntry) payload.image = imageEntry
+    }
+
+    if (postType.value !== 'events') {
+      if (selectedRelated.value.length) {
+        payload.related = [...selectedRelated.value]
+      } else {
+        delete payload.related
+      }
     }
 
     draftSection.value = section
@@ -685,6 +802,16 @@ async function publishDraft() {
     return
   }
 
+  if (postType.value !== 'events') {
+    if (selectedRelated.value.length) {
+      parsed.related = [...selectedRelated.value]
+    } else {
+      delete parsed.related
+    }
+  } else {
+    delete parsed.related
+  }
+
   const slugValue = slug.value.trim() || slugify(parsed.title)
   slug.value = slugValue
   slugWasEdited.value = true
@@ -907,6 +1034,7 @@ function resetWizard() {
   successMessage.value = ''
   errorMessage.value = ''
   forceOverwrite.value = false
+  selectedRelated.value = []
 }
 </script>
 
@@ -1068,6 +1196,29 @@ function resetWizard() {
 .alert.info {
   background: rgba(52, 152, 219, 0.14);
   color: #0f4a6a;
+}
+
+.related-field {
+  gap: 12px;
+}
+
+.related-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #e0e0e6;
+  border-radius: 8px;
+  padding: 12px;
+  background: #fafafa;
+}
+
+.related-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
 }
 
 .connection {
