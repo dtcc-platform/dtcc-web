@@ -90,50 +90,35 @@ onMounted(async () => {
     const r = await fetch(resolveUrl(`content/projects/${slug}.json`), { cache: 'no-store' })
     if (!r.ok) return
     const data = await r.json()
-    let image = normalizeImage(data.image || null)
-    if (!image) {
-      for (const u of ['jpeg', 'jpg', 'png'].map(ext => resolveUrl(`content/projects/${slug}.${ext}`))) {
-        try { const h = await fetch(u, { method: 'HEAD' }); if (h.ok) { image = sanitizeSrc(u); break } } catch(_) {}
-      }
-    }
     item.value = {
       id: slug,
       title: data.title || data.name || slug,
       intro: data.intro || data.summary || data.description || '',
       subheading: data.subheading || data.headline || 'Details',
       body: data.body || data.details || '',
-      image,
+      image: normalizeImage(data.image || null),
       url: normalizeLink(data.url || data.link || ''),
       date: data.date || data.updated || null,
     }
-    // Load related projects (up to 2)
-    const idx = await fetch(withBase('content/projects/index.json'), { cache: 'no-store' })
-    if (idx.ok) {
-      const payload = await idx.json()
-      const arr = Array.isArray(payload.items) ? payload.items : Array.isArray(payload) ? payload : []
-      const bases = arr
-        .map((it) => (typeof it === 'string' ? { base: it } : it))
-        .filter(it => (it.base || it.name || it.id) !== slug)
-      const resolved = []
-      for (const it of bases) {
-        const baseSlug = it.base || it.name || it.id
-        let data2 = {}
-        try { const r2 = await fetch(resolveUrl(`content/projects/${baseSlug}.json`), { cache: 'no-store' }); if (r2.ok) data2 = await r2.json() } catch(_) {}
-        let img = normalizeImage(it.image || data2.image || null)
-        if (!img) {
-          for (const u of ['jpeg', 'jpg', 'png'].map(ext => resolveUrl(`content/projects/${baseSlug}.${ext}`))) {
-            try { const h = await fetch(u, { method: 'HEAD' }); if (h.ok) { img = sanitizeSrc(u); break } } catch(_) {}
-          }
-        }
-        if (!img) continue
-        resolved.push({ id: baseSlug, title: data2.title || data2.name || baseSlug, summary: data2.summary || data2.excerpt || data2.description || '', image: img, date: data2.date || null, order: Number(data2.order) })
+    const relatedSlugs = Array.isArray(data.related) ? data.related.slice(0, 3) : []
+    if (relatedSlugs.length) {
+      const entries = []
+      for (const refSlug of relatedSlugs) {
+        try {
+          const refRes = await fetch(resolveUrl(`content/projects/${refSlug}.json`), { cache: 'no-store' })
+          if (!refRes.ok) continue
+          const refData = await refRes.json()
+          entries.push({
+            id: refSlug,
+            title: refData.title || refSlug,
+            summary: refData.summary || refData.excerpt || refData.description || '',
+            image: normalizeImage(refData.image || null),
+          })
+        } catch (_) {}
       }
-      if (resolved.some(x => Number.isFinite(x.order))) {
-        resolved.sort((a, b) => (a.order ?? 1e9) - (b.order ?? 1e9))
-      } else {
-        resolved.sort((a, b) => (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0))
-      }
-      related.value = resolved.slice(0, 2)
+      related.value = entries
+    } else {
+      related.value = []
     }
   } catch (_) {}
 })

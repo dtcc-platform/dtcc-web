@@ -393,10 +393,7 @@ async function refreshRelatedOptions(section) {
   try {
     const manifestUrl = `${basePath}/content/${config.contentDir}/index.json`
     const res = await fetch(manifestUrl, { cache: 'no-store' })
-    if (!res.ok) {
-      throw new Error(`Manifest request failed (${res.status})`)
-    }
-    const manifest = await res.json()
+    const manifest = res.ok ? await res.json() : null
     const items = Array.isArray(manifest?.items)
       ? manifest.items
       : Array.isArray(manifest) ? manifest : []
@@ -427,6 +424,7 @@ async function refreshRelatedOptions(section) {
   } catch (err) {
     relatedError.value = err instanceof Error ? err.message : String(err)
     relatedOptions.value = []
+    relatedRecord.value = {}
   } finally {
     relatedLoading.value = false
   }
