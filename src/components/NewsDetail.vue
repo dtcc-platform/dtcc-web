@@ -34,7 +34,7 @@
         <h3 class="h3-30">Contacts</h3>
         <div class="people">
           <div class="person" v-for="c in contacts" :key="c.id">
-            <div class="avatar" :style="{ backgroundImage: c.image ? `url(${c.image})` : undefined }"></div>
+            <div v-if="c.image" class="avatar" :style="{ backgroundImage: c.image ? `url(${c.image})` : undefined }"></div>
             <div class="name" v-text="c.name" />
             <div v-if="c.title" class="role muted" v-text="c.title" />
             <a v-if="c.email" :href="`mailto:${c.email}`" class="more">Email »</a>
