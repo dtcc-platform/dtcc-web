@@ -44,7 +44,7 @@ jobs:
           cache: npm
 
           
-      - name: Inject chat endpoints
+      - name: Inject post endpoints
         run: |
             cat <<'EOF' > .env
             VITE_CHAT_AUTH_URL=${{ secrets.VITE_CHAT_AUTH_URL }}
