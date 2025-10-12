@@ -41,6 +41,9 @@
     },
     {
       "base": "lambda-test"
+    },
+    {
+      "base": "testing-3"
     }
   ]
 }
