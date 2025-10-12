@@ -58,12 +58,12 @@ const errorMessage = ref('')
 const isProcessing = ref(false)
 const usernameInput = ref(null)
 
-const authEndpoint = computed(() => import.meta.env.VITE_CHAT_AUTH_URL?.trim() || '')
+const authEndpoint = computed(() => import.meta.env.VITE_POST_AUTH_URL?.trim() || '')
 
 async function handleSubmit() {
   errorMessage.value = ''
   if (!authEndpoint.value) {
-    errorMessage.value = 'Login endpoint is not configured. Set VITE_CHAT_AUTH_URL.'
+    errorMessage.value = 'Login endpoint is not configured. Set VITE_POST_AUTH_URL.'
     return
   }
   isProcessing.value = true
@@ -107,7 +107,7 @@ async function handleSubmit() {
 
 onMounted(() => {
   if (!authEndpoint.value) {
-    errorMessage.value = 'Login endpoint is not configured. Set VITE_CHAT_AUTH_URL.'
+    errorMessage.value = 'Login endpoint is not configured. Set VITE_POST_AUTH_URL.'
   } else {
     nextTick(() => {
       usernameInput.value?.focus()

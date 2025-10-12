@@ -7,9 +7,9 @@ Overview
   - `<type>` is `news` or `projects`.
 
 Content Editing Workflow
-- Use the `/chat/` wizard for new runtime entries: set `VITE_CHAT_AUTH_URL` and `VITE_CHAT_PUBLISH_URL` in `.env.local`, run `npm run dev`, visit `/chat/`, sign in, provide the content details, and optionally connect the repo folder via the File System Access prompt to write files automatically (local mode still works when the publish URL is omitted). Sessions expire automatically (default 1 hour) and you can trigger a manual logout from the site header once signed in.
+- Use the `/post/` wizard for new runtime entries: set `VITE_POST_AUTH_URL` and `VITE_POST_PUBLISH_URL` in `.env.local`, run `npm run dev`, visit `/post/`, sign in, provide the content details, and optionally connect the repo folder via the File System Access prompt to write files automatically (local mode still works when the publish URL is omitted). Sessions expire automatically (default 1 hour) and you can trigger a manual logout from the site header once signed in.
 - Without the auth URL the login gate refuses access (helpful if you want to disable the editor temporarily).
-- The `/chat/` page keeps the site chrome but is hidden from navigation and marked `noindex`; share its URL only with trusted editors.
+- The `/post/` page keeps the site chrome but is hidden from navigation and marked `noindex`; share its URL only with trusted editors.
 - If File System Access isn't available, download the JSON from the wizard and copy it into `public/content/<type>`, then update the section manifest manually.
 
 News — Quick Start (Runtime — recommended)
@@ -153,4 +153,4 @@ Login API (AWS Lambda)
   ```
   { "token": "<bearer token>", "expiresAt": 1735689600 }
   ```
-- Point `VITE_CHAT_AUTH_URL` to this endpoint and `VITE_CHAT_PUBLISH_URL` to the publish API; the `/chat/` login form exchanges the credentials for the token and stores it in `sessionStorage` for later API calls.
+- Point `VITE_POST_AUTH_URL` to this endpoint and `VITE_POST_PUBLISH_URL` to the publish API; the `/post/` login form exchanges the credentials for the token and stores it in `sessionStorage` for later API calls.

@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
           contact: 'contact/index.html',
           gallery: 'gallery/index.html',
           about: 'about/index.html',
-          chat: 'chat/index.html',
+          post: 'post/index.html',
         }
       }
     }

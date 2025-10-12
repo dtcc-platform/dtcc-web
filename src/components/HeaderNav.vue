@@ -38,8 +38,8 @@ const navLinks = [
   { label: 'Contact', href: `${base}contact/` },
 ].filter((link) => !link.disabled)
 
-const injectedAuth = inject('chatIsAuthenticated', null)
-const logoutFn = inject('chatLogout', null)
+const injectedAuth = inject('postIsAuthenticated', null)
+const logoutFn = inject('postLogout', null)
 
 const isAuthenticated = computed(() => {
   if (injectedAuth && typeof injectedAuth === 'object' && 'value' in injectedAuth) {

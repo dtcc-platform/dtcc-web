@@ -1,7 +1,7 @@
 <template>
   <div class="page-shell">
     <HeaderNav />
-    <main class="chat-main">
+    <main class="post-main">
       <PostWizard v-if="isAuthenticated" />
       <LoginGate v-else @authenticated="handleAuthenticated" />
     </main>
@@ -16,7 +16,7 @@ import FooterSection from './components/FooterSection.vue'
 import PostWizard from './components/PostWizard.vue'
 import LoginGate from './components/LoginGate.vue'
 
-const AUTH_SESSION_KEY = 'dtcc-chat-session'
+const AUTH_SESSION_KEY = 'dtcc-post-session'
 
 const session = ref({ token: '', expiresAt: 0 })
 const now = ref(Date.now())
@@ -95,10 +95,10 @@ onBeforeUnmount(() => {
 
 const authToken = computed(() => (isSessionActive(session.value, now.value) ? session.value.token : ''))
 
-provide('chatAuthSession', session)
-provide('chatAuthToken', authToken)
-provide('chatIsAuthenticated', isAuthenticated)
-provide('chatLogout', clearSession)
+provide('postAuthSession', session)
+provide('postAuthToken', authToken)
+provide('postIsAuthenticated', isAuthenticated)
+provide('postLogout', clearSession)
 </script>
 
 <style scoped>
@@ -109,7 +109,7 @@ provide('chatLogout', clearSession)
   background: var(--unnamed-color-fafafa);
 }
 
-.chat-main {
+.post-main {
   flex: 1 0 auto;
   display: flex;
   align-items: stretch;
@@ -117,7 +117,7 @@ provide('chatLogout', clearSession)
 }
 
 @media (max-width: 768px) {
-  .chat-main {
+  .post-main {
     padding: 32px 0 64px;
   }
 }

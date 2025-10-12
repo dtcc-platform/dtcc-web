@@ -241,10 +241,10 @@ const SECTION_CONFIG = {
   projects: { label: 'Projects', contentDir: 'projects', urlPrefix: '/projects/' },
 }
 
-const publishEndpoint = import.meta.env.VITE_CHAT_PUBLISH_URL?.trim() || ''
+const publishEndpoint = import.meta.env.VITE_POST_PUBLISH_URL?.trim() || ''
 const remotePublishEnabled = computed(() => Boolean(publishEndpoint))
-const authSession = inject('chatAuthSession', ref({ token: '', expiresAt: 0 }))
-const authToken = inject('chatAuthToken', ref(''))
+const authSession = inject('postAuthSession', ref({ token: '', expiresAt: 0 }))
+const authToken = inject('postAuthToken', ref(''))
 const basePath = (import.meta.env.BASE_URL || '/').replace(/\/$/, '')
 
 const typeOptions = TYPE_OPTIONS
@@ -364,7 +364,11 @@ watch(postType, (section) => {
   selectedRelated.value = []
   refreshRelatedOptions(section)
   selectedContacts.value = []
-  if (section !== 'events') {
+  if (section === 'events') {
+    contactOptions.value = []
+    contactError.value = ''
+    contactLoading.value = false
+  } else {
     ensureContactsLoaded()
   }
 })
@@ -1139,6 +1143,7 @@ function resetWizard() {
   errorMessage.value = ''
   forceOverwrite.value = false
   selectedRelated.value = []
+  selectedContacts.value = []
 }
 </script>
 
