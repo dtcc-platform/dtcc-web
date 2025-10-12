@@ -47,8 +47,8 @@ jobs:
       - name: Inject post endpoints
         run: |
             cat <<'EOF' > .env
-            VITE_CHAT_AUTH_URL=${{ secrets.VITE_CHAT_AUTH_URL }}
-            VITE_CHAT_PUBLISH_URL=${{ secrets.VITE_CHAT_PUBLISH_URL }}
+            VITE_CHAT_AUTH_URL=${{ secrets.VITE_POST_AUTH_URL }}
+            VITE_CHAT_PUBLISH_URL=${{ secrets.VITE_POST_PUBLISH_URL }}
             EOF
         shell: bash
 
