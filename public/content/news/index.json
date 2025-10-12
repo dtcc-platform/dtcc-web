@@ -32,6 +32,9 @@
     },
     {
       "base": "lambda-test"
+    },
+    {
+      "base": "i-am-trying-to-check-related-news"
     }
   ]
 }
