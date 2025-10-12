@@ -38,6 +38,9 @@
     },
     {
       "base": "lambda-test"
+    },
+    {
+      "base": "testing-users"
     }
   ]
 }
