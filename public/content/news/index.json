@@ -7,6 +7,9 @@
       "base": "still-checking-relation"
     },
     {
+      "base": "testing-users"
+    },
+    {
       "base": "from-the-login"
     },
     {
