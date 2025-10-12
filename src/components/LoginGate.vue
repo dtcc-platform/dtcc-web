@@ -49,6 +49,7 @@
 
 <script setup>
 import { computed, nextTick, onMounted, ref } from 'vue'
+import { resolvePostEndpoints } from '../utils/postEndpoints'
 
 const emits = defineEmits(['authenticated'])
 
@@ -58,12 +59,13 @@ const errorMessage = ref('')
 const isProcessing = ref(false)
 const usernameInput = ref(null)
 
-const authEndpoint = computed(() => import.meta.env.VITE_POST_AUTH_URL?.trim() || '')
+const { authEndpoint: resolvedAuthEndpoint } = resolvePostEndpoints()
+const authEndpoint = computed(() => resolvedAuthEndpoint)
 
 async function handleSubmit() {
   errorMessage.value = ''
   if (!authEndpoint.value) {
-    errorMessage.value = 'Login endpoint is not configured. Set VITE_POST_AUTH_URL.'
+    errorMessage.value = 'Login endpoint is not configured. Set VITE_POST_AUTH_URL or VITE_CHAT_AUTH_URL.'
     return
   }
   isProcessing.value = true
@@ -107,7 +109,7 @@ async function handleSubmit() {
 
 onMounted(() => {
   if (!authEndpoint.value) {
-    errorMessage.value = 'Login endpoint is not configured. Set VITE_POST_AUTH_URL.'
+    errorMessage.value = 'Login endpoint is not configured. Set VITE_POST_AUTH_URL or VITE_CHAT_AUTH_URL.'
   } else {
     nextTick(() => {
       usernameInput.value?.focus()

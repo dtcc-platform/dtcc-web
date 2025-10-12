@@ -184,9 +184,17 @@
             </label>
           </div>
 
-          <div v-if="remotePublishEnabled" class="alert info">
+          <div v-if="publishEndpointMisconfigured" class="alert error">
+            Remote publishing is misconfigured. Ensure <code>VITE_POST_PUBLISH_URL</code> (or
+            <code>VITE_CHAT_PUBLISH_URL</code>) points at the publish API endpoint instead of the login URL.
+          </div>
+          <div v-else-if="remotePublishEnabled" class="alert info">
             Publishing uses the configured API endpoint. The JSON (and optional image) will be committed
             via the serverless workflow after you sign in.
+            <p v-if="publishEndpointDerived" class="muted helper">
+              Using the publish URL inferred from the login endpoint. Set <code>VITE_POST_PUBLISH_URL</code>
+              (or <code>VITE_CHAT_PUBLISH_URL</code>) to override.
+            </p>
           </div>
           <div v-else-if="fsSupported" class="connection">
             <p class="muted">
@@ -228,6 +236,7 @@
 
 <script setup>
 import { computed, inject, onMounted, ref, watch } from 'vue'
+import { resolvePostEndpoints } from '../utils/postEndpoints'
 
 const TYPE_OPTIONS = [
   { value: 'news', label: 'News' },
@@ -241,7 +250,14 @@ const SECTION_CONFIG = {
   projects: { label: 'Projects', contentDir: 'projects', urlPrefix: '/projects/' },
 }
 
-const publishEndpoint = import.meta.env.VITE_POST_PUBLISH_URL?.trim() || ''
+const {
+  publishEndpoint: resolvedPublishEndpoint,
+  publishDerivedFromAuth,
+  publishMisconfigured,
+} = resolvePostEndpoints()
+const publishEndpoint = resolvedPublishEndpoint
+const publishEndpointDerived = publishDerivedFromAuth
+const publishEndpointMisconfigured = publishMisconfigured
 const remotePublishEnabled = computed(() => Boolean(publishEndpoint))
 const authSession = inject('postAuthSession', ref({ token: '', expiresAt: 0 }))
 const authToken = inject('postAuthToken', ref(''))
