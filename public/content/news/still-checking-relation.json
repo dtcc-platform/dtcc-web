@@ -1,0 +1,12 @@
+{
+  "title": "Still checking relation",
+  "summary": "Verify the related items, should be login and login 2",
+  "url": "/news/still-checking-relation",
+  "body": "Verify the related items, should be login and login 2",
+  "eyebrow": "News",
+  "date": "2025-10-12",
+  "related": [
+    "from-the-login",
+    "from-the-login-2"
+  ]
+}
