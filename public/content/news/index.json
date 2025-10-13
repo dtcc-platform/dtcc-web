@@ -1,6 +1,9 @@
 {
   "items": [
     {
+      "base": "test-for-nadia"
+    },
+    {
       "base": "i-am-trying-to-check-related-news"
     },
     {
@@ -44,9 +47,6 @@
     },
     {
       "base": "lambda-test"
-    },
-    {
-      "base": "test-for-nadia"
     }
   ]
 }
