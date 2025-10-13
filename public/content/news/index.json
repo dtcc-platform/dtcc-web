@@ -44,6 +44,9 @@
     },
     {
       "base": "lambda-test"
+    },
+    {
+      "base": "test-for-nadia"
     }
   ]
 }
