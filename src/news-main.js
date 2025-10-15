@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import NewsApp from './NewsApp.vue'
 import './assets/tokens.css'
 import './assets/global.css'
+import { installPostSession } from './utils/postSession'
 
-createApp(NewsApp).mount('#app')
-
+const app = createApp(NewsApp)
+installPostSession(app)
+app.mount('#app')
