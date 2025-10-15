@@ -1,0 +1,15 @@
+{
+  "title": "testing youtube",
+  "summary": "testing youtube",
+  "url": "/news/testing-youtube",
+  "body": "testing youtube",
+  "eyebrow": "News",
+  "date": "2025-10-15",
+  "video": "https://www.youtube.com/embed/2cQVWLcNq8Q",
+  "related": [
+    "testing-speed"
+  ],
+  "contacts": [
+    "nadia-tahir"
+  ]
+}
