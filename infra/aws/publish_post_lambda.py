@@ -17,6 +17,7 @@ GITHUB_API_BASE = "https://api.github.com"
 SECTION_CONFIG: Dict[str, Dict[str, str]] = {
     "news": {"content_dir": "news", "manifest_label": "News"},
     "events": {"content_dir": "events", "manifest_label": "Events"},
+    "events-archive": {"content_dir": "dtcc-1", "manifest_label": "Projects Archive"},
     "projects": {"content_dir": "projects", "manifest_label": "Projects"},
 }
 
