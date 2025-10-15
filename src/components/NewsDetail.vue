@@ -32,6 +32,14 @@
               :style="{ backgroundImage: `url(${img})` }"
             ></div>
           </div>
+          <div v-if="videoEmbed" class="video-wrap">
+            <iframe
+              :src="videoEmbed"
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
       </div>
     </section>
@@ -74,6 +82,7 @@
 import { ref, onMounted, computed } from 'vue'
 import { sanitizeSrc } from '../utils/sanitize'
 import { withBase, resolveUrl } from '../utils/paths.js'
+import { ensureYouTubeEmbed } from '../utils/video'
 
 const params = new URLSearchParams(location.search)
 const slug = params.get('slug')
@@ -82,6 +91,7 @@ const related = ref([])
 const contacts = ref([])
 const MAX_CONTACTS = 2
 const heroImageStyle = computed(() => item.value?.image ? `url(${item.value.image})` : undefined)
+const videoEmbed = computed(() => item.value?.video || null)
 const gallery = computed(() => (item.value?.images || []).slice(1))
 
 const bodyParas = computed(() => {
@@ -96,6 +106,13 @@ const detailHref = (slug) => withBase(`news/detail.html?slug=${encodeURIComponen
 const normalizeImage = (value) => {
   if (!value) return null
   return sanitizeSrc(resolveUrl(value))
+}
+
+const normalizeVideo = (value) => {
+  if (!value) return null
+  const embed = ensureYouTubeEmbed(value)
+  if (!embed) return null
+  return sanitizeSrc(embed)
 }
 
 onMounted(async () => {
@@ -132,6 +149,7 @@ onMounted(async () => {
       body: data.body || '',
       image: headlineImage,
       images: orderedImages,
+      video: normalizeVideo(data.video || null),
       date: data.date || data.published || data.publishedAt || null,
     }
     const relatedSlugs = Array.isArray(data.related) ? data.related.slice(0, 3) : []
@@ -211,6 +229,8 @@ async function loadUsersMap() {
 .body { padding-top: 24px; padding-bottom: 24px; }
 .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
 .gallery-card { height: 260px; border-radius: 12px; background: #000 center/cover no-repeat; }
+.video-wrap { position: relative; padding-top: 56.25%; margin-top: 20px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2); }
+.video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
 .contacts .people { margin-top: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
 .person { text-align: left; display: flex; flex-direction: column; gap: 6px; }
@@ -228,6 +248,7 @@ async function loadUsersMap() {
   .grid2 { grid-template-columns: 1fr; }
   .gallery { grid-template-columns: 1fr; }
   .gallery-card { height: 220px; }
+  .video-wrap { padding-top: 56.25%; }
   .contacts .people { grid-template-columns: 1fr; }
   .hero-img { height: 240px; }
   .related .cards { grid-template-columns: 1fr; }

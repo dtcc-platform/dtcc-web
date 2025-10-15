@@ -195,6 +195,18 @@
           </button>
         </fieldset>
 
+        <div class="field">
+          <label for="video-url">YouTube video (optional)</label>
+          <input
+            id="video-url"
+            v-model="videoUrl"
+            type="url"
+            placeholder="https://www.youtube.com/watch?v=..."
+            autocomplete="off"
+          >
+          <p class="muted helper">Paste a YouTube link to embed it after the images. Leave blank to skip.</p>
+        </div>
+
         <div class="actions">
           <button type="submit" class="btn-primary" :disabled="isDrafting">
             <span v-if="isDrafting">Preparing draft…</span>
@@ -222,6 +234,7 @@
           </div>
 
           <p v-if="imageReviewNote" class="muted helper">{{ imageReviewNote }}</p>
+          <p v-if="videoReviewNote" class="muted helper">{{ videoReviewNote }}</p>
           <p class="muted helper">{{ saveTargetNote }}</p>
 
           <div class="field checkbox">
@@ -284,6 +297,7 @@
 <script setup>
 import { computed, inject, onMounted, ref, watch } from 'vue'
 import { resolvePostEndpoints } from '../utils/postEndpoints'
+import { ensureYouTubeEmbed, toYouTubeEmbed } from '../utils/video'
 
 const TYPE_OPTIONS = [
   { value: 'news', label: 'News' },
@@ -335,6 +349,8 @@ const MAX_IMAGES = 6
 const imageEntries = ref([])
 const preparedImages = ref([])
 initializeImageEntries()
+const videoUrl = ref('')
+const preparedVideo = ref('')
 
 const draftSection = ref(null)
 const draftJson = ref('')
@@ -385,6 +401,21 @@ const imageReviewNote = computed(() => {
     parts.push(`Additional images include ${detailSegments.join(' and ')}.`)
   }
   return parts.join(' ')
+})
+
+const videoReviewNote = computed(() => {
+  if (!hasDraft.value) return ''
+  if (preparedVideo.value) {
+    return `Embedding YouTube video ${preparedVideo.value}.`
+  }
+  const parsed = tryParseDraft()
+  if (parsed?.video) {
+    return `Draft references video ${parsed.video}.`
+  }
+  if (videoUrl.value.trim()) {
+    return 'Video link could not be parsed as a YouTube URL.'
+  }
+  return ''
 })
 
 const saveTargetNote = computed(() => {
@@ -760,6 +791,18 @@ function prepareDraft() {
     })
     preparedImages.value = preparedList
 
+    let videoEntry = ''
+    if (videoUrl.value.trim()) {
+      videoEntry = toYouTubeEmbed(videoUrl.value)
+      if (!videoEntry) {
+        preparedVideo.value = ''
+        throw new Error('Provide a valid YouTube link or leave the video field blank.')
+      }
+      preparedVideo.value = videoEntry
+    } else {
+      preparedVideo.value = ''
+    }
+
     let payload
     if (section === 'events') {
       payload = {
@@ -796,6 +839,12 @@ function prepareDraft() {
     } else {
       delete payload.image
       delete payload.images
+    }
+
+    if (videoEntry) {
+      payload.video = videoEntry
+    } else {
+      delete payload.video
     }
 
   if (postType.value !== 'events') {
@@ -1063,6 +1112,21 @@ async function publishDraft() {
   const section = postType.value
   const config = SECTION_CONFIG[section] || SECTION_CONFIG.news
 
+  if (typeof parsed.video === 'string') {
+    const normalizedVideo = ensureYouTubeEmbed(parsed.video)
+    if (parsed.video.trim() && !normalizedVideo) {
+      errorMessage.value = 'Video must be a valid YouTube link or embed.'
+      return
+    }
+    if (normalizedVideo) {
+      parsed.video = normalizedVideo
+    } else {
+      delete parsed.video
+    }
+  } else if (parsed.video != null) {
+    delete parsed.video
+  }
+
   const uploadStates = preparedImages.value.filter((img) => img.type === 'upload' && img.file)
 
   if (uploadStates.length) {
@@ -1287,6 +1351,8 @@ function resetWizard() {
   selectedDate.value = new Date().toISOString().slice(0, 10)
   initializeImageEntries()
   preparedImages.value = []
+  videoUrl.value = ''
+  preparedVideo.value = ''
   draftSection.value = null
   draftJson.value = ''
   successMessage.value = ''
@@ -1294,6 +1360,15 @@ function resetWizard() {
   forceOverwrite.value = false
   selectedRelated.value = []
   selectedContacts.value = []
+}
+
+function tryParseDraft() {
+  if (!draftJson.value.trim()) return null
+  try {
+    return JSON.parse(draftJson.value)
+  } catch (_) {
+    return null
+  }
 }
 </script>
 

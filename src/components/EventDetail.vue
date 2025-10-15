@@ -36,6 +36,14 @@
               :style="{ backgroundImage: `url(${img})` }"
             ></div>
           </div>
+          <div v-if="videoEmbed" class="video-wrap">
+            <iframe
+              :src="videoEmbed"
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
       </div>
     </section>
@@ -46,6 +54,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { sanitizeSrc, sanitizeUrl } from '../utils/sanitize'
 import { resolveUrl } from '../utils/paths.js'
+import { ensureYouTubeEmbed } from '../utils/video'
 
 const normalizeLink = (value) => {
   if (!value) return ''
@@ -60,6 +69,7 @@ const params = new URLSearchParams(location.search)
 const slug = params.get('slug')
 const item = ref(null)
 const heroImageStyle = computed(() => item.value?.image ? `url(${item.value.image})` : undefined)
+const videoEmbed = computed(() => item.value?.video || null)
 const gallery = computed(() => (item.value?.images || []).slice(1))
 
 const suffixDay = (n) => {
@@ -91,6 +101,13 @@ const bodyParas = computed(() => {
 const normalizeImage = (value) => {
   if (!value) return null
   return sanitizeSrc(resolveUrl(value))
+}
+
+const normalizeVideo = (value) => {
+  if (!value) return null
+  const embed = ensureYouTubeEmbed(value)
+  if (!embed) return null
+  return sanitizeSrc(embed)
 }
 
 onMounted(async () => {
@@ -126,6 +143,7 @@ onMounted(async () => {
       body: data.body || '',
       image: headlineImage,
       images: orderedImages,
+      video: normalizeVideo(data.video || null),
       date: data.date || null,
       timeStart: data.timeStart || null,
       timeEnd: data.timeEnd || null,
@@ -146,11 +164,14 @@ onMounted(async () => {
 .body { padding-top: 24px; padding-bottom: 24px; }
 .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
 .gallery-card { height: 240px; border-radius: 12px; background: #000 center/cover no-repeat; }
+.video-wrap { position: relative; padding-top: 56.25%; margin-top: 20px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2); }
+.video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
 @media (max-width: 1000px) {
   .grid2 { grid-template-columns: 1fr; }
   .hero-img { height: 220px; }
   .gallery { grid-template-columns: 1fr; }
   .gallery-card { height: 200px; }
+  .video-wrap { padding-top: 56.25%; }
 }
 </style>
