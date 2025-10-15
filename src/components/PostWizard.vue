@@ -278,6 +278,14 @@
             <button class="btn-secondary" type="button" :disabled="isSaving" @click="downloadDraft">
               Download JSON{{ hasUploadImages ? ' & images' : '' }}
             </button>
+            <button
+              class="btn-secondary"
+              type="button"
+              :disabled="isSaving || previewLoading || !hasDraft"
+              @click="openPreview"
+            >
+              Preview
+            </button>
             <button class="btn-secondary" type="button" :disabled="isSaving" @click="resetWizard">
               Start over
             </button>
@@ -291,13 +299,117 @@
         </section>
       </transition>
     </section>
+
+    <transition name="fade">
+      <div v-if="isPreviewOpen" class="preview-overlay" @click.self="closePreview">
+        <div class="preview-dialog">
+          <header class="preview-header">
+            <div>
+              <p class="muted small">Preview</p>
+              <h2 class="preview-title">{{ previewData?.sectionLabel || currentTypeLabel }}</h2>
+            </div>
+            <button type="button" class="btn-icon close" @click="closePreview" aria-label="Close preview">×</button>
+          </header>
+          <div class="preview-scroll">
+            <div v-if="previewLoading" class="status muted">Loading preview…</div>
+            <div v-else-if="previewError" class="alert error">{{ previewError }}</div>
+            <template v-else-if="previewData">
+              <article class="preview-detail">
+                <section class="section gradient-sunrise intro">
+                  <div class="container grid2">
+                    <div>
+                      <div class="eyebrow">{{ previewData.eyebrow }}</div>
+                      <h1 class="h2-50">{{ previewData.title }}</h1>
+                    </div>
+                    <div>
+                      <p class="brodtext-20 muted">{{ previewData.intro }}</p>
+                      <div v-if="previewData.section === 'events'" class="meta brodtext-20">
+                        <strong>{{ previewData.meta }}</strong>
+                        <template v-if="previewData.registration">
+                          · <a class="more" :href="previewData.registration" target="_blank" rel="noopener">Register »</a>
+                        </template>
+                      </div>
+                      <div v-else-if="previewData.section === 'projects' && previewData.visitUrl" class="visit">
+                        <a class="more" :href="previewData.visitUrl" target="_blank" rel="noopener">Visit website »</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-if="previewData.heroImage" class="container">
+                    <div class="hero-img card" :style="{ backgroundImage: `url(${previewData.heroImage})` }"></div>
+                  </div>
+                </section>
+
+                <section class="section gradient-sunrise body">
+                  <div class="container grid2">
+                    <div>
+                      <h2 class="h3-30">{{ previewData.subheading }}</h2>
+                    </div>
+                    <div>
+                      <p class="brodtext-20 muted" v-for="(paragraph, i) in previewData.bodyParagraphs" :key="i">{{ paragraph }}</p>
+                      <div v-if="previewData.gallery.length" class="gallery">
+                        <div
+                          v-for="(img, i) in previewData.gallery"
+                          :key="`${i}-${img}`"
+                          class="gallery-card"
+                          :style="{ backgroundImage: `url(${img})` }"
+                        ></div>
+                      </div>
+                      <div v-if="previewData.video" class="video-wrap">
+                        <iframe
+                          :src="previewData.video"
+                          title="YouTube video player"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowfullscreen
+                        ></iframe>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section v-if="previewData.contacts.length" class="section contacts">
+                  <div class="container">
+                    <h3 class="h3-30">Contacts</h3>
+                    <div class="people">
+                      <div class="person" v-for="contact in previewData.contacts" :key="contact.id">
+                        <div v-if="contact.image" class="avatar" :style="{ backgroundImage: `url(${contact.image})` }"></div>
+                        <div class="name">{{ contact.name }}</div>
+                        <div v-if="contact.title" class="role muted">{{ contact.title }}</div>
+                        <a v-if="contact.email" class="more" :href="`mailto:${contact.email}`">Email »</a>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section v-if="previewData.related.length" class="section gradient-sunrise related">
+                  <div class="container">
+                    <h3 class="h3-30 section-title">Related {{ previewData.section === 'projects' ? 'projects' : 'posts' }}</h3>
+                    <div class="cards">
+                      <article v-for="related in previewData.related" :key="related.id" class="card project">
+                        <div class="img" :style="{ backgroundImage: related.image ? `url(${related.image})` : undefined }"></div>
+                        <div class="body">
+                          <h4 class="h3-30">{{ related.title }}</h4>
+                          <p class="brodtext-20 muted">{{ related.summary }}</p>
+                          <span class="more">{{ previewData.section === 'projects' ? 'Read more »' : 'Read more »' }}</span>
+                        </div>
+                      </article>
+                    </div>
+                  </div>
+                </section>
+              </article>
+            </template>
+          </div>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script setup>
-import { computed, inject, onMounted, ref, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { resolvePostEndpoints } from '../utils/postEndpoints'
 import { ensureYouTubeEmbed, toYouTubeEmbed } from '../utils/video'
+import { sanitizeSrc, sanitizeUrl } from '../utils/sanitize'
+import { resolveUrl, withBase } from '../utils/paths.js'
 
 const TYPE_OPTIONS = [
   { value: 'news', label: 'News' },
@@ -361,6 +473,11 @@ const isDrafting = ref(false)
 const isSaving = ref(false)
 const repoLabel = ref('')
 const rootHandle = ref(null)
+const isPreviewOpen = ref(false)
+const previewLoading = ref(false)
+const previewError = ref('')
+const previewData = ref(null)
+const previewObjectUrls = ref([])
 
 const fsSupported = typeof window !== 'undefined' && 'showDirectoryPicker' in window
 
@@ -1370,6 +1487,271 @@ function tryParseDraft() {
     return null
   }
 }
+
+async function openPreview() {
+  if (!hasDraft.value) {
+    errorMessage.value = 'Create a draft before opening the preview.'
+    return
+  }
+
+  previewError.value = ''
+  previewLoading.value = true
+  isPreviewOpen.value = true
+  cleanupPreviewResources()
+
+  let parsed
+  try {
+    parsed = JSON.parse(draftJson.value)
+  } catch (_) {
+    previewLoading.value = false
+    previewError.value = 'Fix the JSON before previewing.'
+    previewData.value = null
+    return
+  }
+
+  const section = (draftSection.value || postType.value || 'news')
+  try {
+    const images = collectPreviewImages(parsed)
+    const heroImage = images[0] || ''
+    const galleryImages = images.slice(1)
+    const video = preparedVideo.value || ensureYouTubeEmbed(parsed.video || '') || ''
+    const bodyParagraphs = splitBodyParagraphs(parsed.body)
+    const sectionLabel = SECTION_CONFIG[section]?.label || section
+    const eyebrow = section === 'news' ? 'News:' : section === 'projects' ? 'Project:' : 'Event:'
+
+    let meta = ''
+    let registration = ''
+    let visitUrl = ''
+    if (section === 'events') {
+      meta = parsed.meta || formatEventMeta(parsed)
+      registration = normalizePreviewLink(parsed.registration || '')
+    } else if (section === 'projects') {
+      visitUrl = normalizePreviewLink(parsed.url || '')
+    }
+
+    const related = section === 'events'
+      ? []
+      : await loadPreviewRelated(section, Array.isArray(parsed.related) ? parsed.related : [])
+
+    const contacts = section === 'events'
+      ? []
+      : await loadPreviewContacts(Array.isArray(parsed.contacts) ? parsed.contacts : [])
+
+    previewData.value = {
+      section,
+      sectionLabel,
+      eyebrow,
+      title: parsed.title || 'Untitled entry',
+      intro: parsed.intro || parsed.summary || '',
+      subheading: parsed.subheading || parsed.headline || 'Details',
+      bodyParagraphs,
+      heroImage,
+      gallery: galleryImages,
+      video,
+      meta,
+      registration,
+      visitUrl,
+      related,
+      contacts,
+    }
+    previewError.value = ''
+  } catch (err) {
+    previewError.value = err instanceof Error ? err.message : String(err)
+    previewData.value = null
+  } finally {
+    previewLoading.value = false
+  }
+}
+
+function closePreview() {
+  cleanupPreviewResources()
+  isPreviewOpen.value = false
+  previewLoading.value = false
+  previewError.value = ''
+  previewData.value = null
+}
+
+function cleanupPreviewResources() {
+  previewObjectUrls.value.forEach((url) => {
+    try {
+      URL.revokeObjectURL(url)
+    } catch (_) {
+      /* ignore */
+    }
+  })
+  previewObjectUrls.value = []
+}
+
+function createPreviewObjectUrl(file) {
+  const url = URL.createObjectURL(file)
+  previewObjectUrls.value.push(url)
+  return url
+}
+
+function collectPreviewImages(parsed) {
+  const urls = []
+  const add = (value) => {
+    if (!value) return
+    if (!urls.includes(value)) urls.push(value)
+  }
+
+  if (preparedImages.value.length) {
+    preparedImages.value.forEach((entry) => {
+      if (entry.type === 'upload' && entry.file) {
+        add(createPreviewObjectUrl(entry.file))
+      } else {
+        add(sanitizePreviewImage(entry.jsonValue))
+      }
+    })
+  }
+
+  if (!urls.length) {
+    const candidates = []
+    if (typeof parsed.image === 'string') candidates.push(parsed.image)
+    if (Array.isArray(parsed.images)) candidates.push(...parsed.images)
+    candidates.forEach((candidate) => add(sanitizePreviewImage(candidate)))
+  }
+
+  return urls
+}
+
+function sanitizePreviewImage(value) {
+  if (!value || typeof value !== 'string') return ''
+  if (value.startsWith('blob:') || value.startsWith('data:')) return value
+  try {
+    const resolved = resolveUrl(value)
+    if (!resolved || typeof resolved !== 'string') return ''
+    return sanitizeSrc(resolved)
+  } catch (_) {
+    return ''
+  }
+}
+
+function splitBodyParagraphs(value) {
+  if (!value) return []
+  if (Array.isArray(value)) return value
+  return String(value).split(/\n\n+/).map((s) => s.trim()).filter(Boolean)
+}
+
+function normalizePreviewLink(value) {
+  if (!value) return ''
+  const trimmed = String(value).trim()
+  if (!trimmed) return ''
+  if (trimmed.startsWith('/')) {
+    return withBase(trimmed.replace(/^\/+/, ''))
+  }
+  if (/^[a-z][a-z\d+\-.]*:/.test(trimmed)) {
+    return sanitizeUrl(trimmed)
+  }
+  try {
+    const resolved = resolveUrl(trimmed)
+    if (!resolved || typeof resolved !== 'string') return ''
+    if (/^[a-z][a-z\d+\-.]*:/.test(resolved)) {
+      return sanitizeUrl(resolved)
+    }
+    if (resolved.startsWith('/')) {
+      return withBase(resolved.replace(/^\/+/, ''))
+    }
+    return sanitizeUrl(resolved)
+  } catch (_) {
+    return ''
+  }
+}
+
+function formatEventMeta(detail) {
+  const fallback = [detail.location || ''].filter(Boolean).join(', ')
+  if (!detail?.date) return fallback
+  const dateObj = new Date(detail.date)
+  if (Number.isNaN(dateObj.getTime())) return fallback
+  const month = dateObj.toLocaleString(undefined, { month: 'long' })
+  const day = dateObj.getDate()
+  const suffix = ['th', 'st', 'nd', 'rd']
+  const mod = day % 100
+  const daySuffix = suffix[(mod - 20) % 10] || suffix[mod] || suffix[0]
+  const start = detail.timeStart || ''
+  const end = detail.timeEnd || ''
+  const time = start && end ? `${start}–${end}` : start || end || ''
+  return [ `${month} ${day}${daySuffix}`, time, detail.location || '' ].filter(Boolean).join(', ')
+}
+
+async function loadPreviewRelated(section, slugs) {
+  const targetSection = section === 'projects' ? 'projects' : 'news'
+  const result = []
+  if (!Array.isArray(slugs) || !slugs.length) return result
+  const limited = slugs.slice(0, 3)
+  for (const slug of limited) {
+    const data = await fetchContentEntry(targetSection, slug)
+    if (!data) continue
+    result.push({
+      id: slug,
+      title: data.title || data.name || slug,
+      summary: data.summary || data.excerpt || data.description || '',
+      image: sanitizePreviewImage(data.image || (Array.isArray(data.images) ? data.images[0] : null)),
+    })
+  }
+  return result
+}
+
+async function fetchContentEntry(section, slug) {
+  if (!slug) return null
+  try {
+    const url = resolveUrl(`content/${section}/${slug}.json`)
+    const res = await fetch(url, { cache: 'no-store' })
+    if (!res.ok) return null
+    return await res.json()
+  } catch (_) {
+    return null
+  }
+}
+
+let previewUsersMap = null
+async function getPreviewUsersMap() {
+  if (previewUsersMap) return previewUsersMap
+  try {
+    const url = resolveUrl('content/users.json')
+    const res = await fetch(url, { cache: 'no-store' })
+    if (!res.ok) {
+      previewUsersMap = {}
+      return previewUsersMap
+    }
+    const payload = await res.json()
+    const items = Array.isArray(payload?.users) ? payload.users : Array.isArray(payload) ? payload : []
+    const map = {}
+    for (const entry of items) {
+      if (!entry) continue
+      const key = entry.slug || entry.id || entry.username || entry.email
+      if (!key) continue
+      map[key] = entry
+    }
+    previewUsersMap = map
+    return previewUsersMap
+  } catch (_) {
+    previewUsersMap = {}
+    return previewUsersMap
+  }
+}
+
+async function loadPreviewContacts(slugs) {
+  if (!Array.isArray(slugs) || !slugs.length) return []
+  const userMap = await getPreviewUsersMap()
+  const entries = []
+  for (const slug of slugs.slice(0, MAX_CONTACTS)) {
+    const user = userMap[slug]
+    if (!user) continue
+    entries.push({
+      id: slug,
+      name: user.name || user.displayName || slug,
+      email: user.email || '',
+      title: user.title || user.role || '',
+      image: sanitizePreviewImage(user.photo || user.image || ''),
+    })
+  }
+  return entries
+}
+
+onBeforeUnmount(() => {
+  cleanupPreviewResources()
+})
 </script>
 
 <style scoped>
@@ -1515,6 +1897,188 @@ function tryParseDraft() {
   margin-top: 10px;
   align-self: flex-start;
   padding: 8px 16px;
+}
+
+.preview-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 10, 18, 0.62);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 16px;
+  z-index: 1100;
+  overflow-y: auto;
+}
+
+.preview-dialog {
+  background: #ffffff;
+  border-radius: 18px;
+  width: min(960px, 100%);
+  max-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 18px 46px rgba(12, 18, 38, 0.28);
+  overflow: hidden;
+}
+
+.preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.preview-header .muted.small {
+  margin: 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.preview-title {
+  margin: 4px 0 0;
+  font-size: 1.35rem;
+}
+
+.btn-icon.close {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 22px;
+  line-height: 1;
+  background: rgba(0, 0, 0, 0.06);
+  color: #1a1a1f;
+}
+
+.btn-icon.close:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.preview-scroll {
+  padding-bottom: 32px;
+  overflow-y: auto;
+}
+
+.preview-scroll .section {
+  padding-inline: 24px;
+}
+
+.preview-detail .container {
+  max-width: 860px;
+  margin-inline: auto;
+}
+
+.preview-scroll .status {
+  padding: 36px;
+  text-align: center;
+}
+
+.preview-detail .gallery {
+  margin-top: 18px;
+}
+
+.preview-detail .video-wrap {
+  position: relative;
+  padding-top: 56.25%;
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+}
+
+.preview-detail .video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.preview-detail .meta {
+  margin-top: 12px;
+}
+
+.preview-detail .meta strong {
+  font-weight: 600;
+}
+
+.preview-detail .visit {
+  margin-top: 16px;
+}
+
+.preview-detail .people {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.preview-detail .person {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.preview-detail .avatar {
+  height: 160px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  background-color: #e9e9ee;
+}
+
+.preview-detail .related .cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.preview-detail .card.project {
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.preview-detail .card.project .img {
+  height: 180px;
+  background: #ddd center/cover no-repeat;
+}
+
+.preview-detail .card.project .body {
+  padding: 14px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.preview-detail .card.project .more {
+  color: var(--cta-f26a2e);
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .preview-overlay {
+    padding: 20px 12px;
+  }
+  .preview-dialog {
+    max-height: calc(100vh - 40px);
+  }
+  .preview-scroll .section {
+    padding-inline: 16px;
+  }
+  .preview-detail .related .cards {
+    grid-template-columns: 1fr;
+  }
 }
 
 .file-pill {
