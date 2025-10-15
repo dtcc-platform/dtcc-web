@@ -47,6 +47,10 @@
     },
     {
       "base": "lambda-test"
+    },
+    {
+      "base": "live-demo-with-nadia",
+      "image": "https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
     }
   ]
 }
