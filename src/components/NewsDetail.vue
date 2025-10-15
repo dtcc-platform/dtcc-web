@@ -76,6 +76,17 @@
         </div>
       </div>
     </section>
+
+    <section v-if="papers.length" class="section papers">
+      <div class="container">
+        <h3 class="h3-30 section-title">Associated papers</h3>
+        <ol class="papers-list">
+          <li v-for="(paper, index) in papers" :key="`${index}-${paper}`">
+            <a :href="paper" target="_blank" rel="noopener">Paper {{ index + 1 }}</a>
+          </li>
+        </ol>
+      </div>
+    </section>
   </main>
 </template>
 
@@ -94,6 +105,7 @@ const MAX_CONTACTS = 2
 const heroImageStyle = computed(() => item.value?.image ? `url(${item.value.image})` : undefined)
 const videoEmbed = computed(() => item.value?.video || null)
 const gallery = computed(() => (item.value?.images || []).slice(1))
+const papers = computed(() => Array.isArray(item.value?.papers) ? item.value.papers : [])
 
 const bodyParas = computed(() => {
   const body = item.value?.body || ''
@@ -109,11 +121,27 @@ const normalizeImage = (value) => {
   return sanitizeSrc(resolveUrl(value))
 }
 
+const normalizeLink = (value) => {
+  if (!value) return ''
+  const trimmed = value.trim()
+  if (!trimmed || trimmed === '#') return ''
+  if (/^https?:\/\//i.test(trimmed)) {
+    const sanitized = sanitizeSrc(trimmed)
+    return sanitized || ''
+  }
+  return ''
+}
+
 const normalizeVideo = (value) => {
   if (!value) return null
   const embed = ensureYouTubeEmbed(value)
   if (!embed) return null
   return sanitizeSrc(embed)
+}
+
+const normalizePapers = (value) => {
+  if (!Array.isArray(value)) return []
+  return value.map((entry) => normalizeLink(entry)).filter(Boolean)
 }
 
 onMounted(async () => {
@@ -151,6 +179,7 @@ onMounted(async () => {
       image: headlineImage,
       images: orderedImages,
       video: normalizeVideo(data.video || null),
+      papers: normalizePapers(data.papers),
       date: data.date || data.published || data.publishedAt || null,
     }
     const relatedSlugs = Array.isArray(data.related) ? data.related.slice(0, 3) : []
@@ -244,6 +273,10 @@ async function loadUsersMap() {
 .project .body { padding: 14px 16px 18px; }
 .project a.more { color: var(--cta-f26a2e); font-weight: 600; }
 .section-title { text-align: center; margin-bottom: 20px; }
+.papers { padding-top: 24px; padding-bottom: 24px; }
+.papers-list { margin-top: 12px; padding-left: 22px; list-style: decimal; }
+.papers-list li { margin-bottom: 6px; }
+.papers-list a { color: var(--cta-f26a2e); font-weight: 600; word-break: break-word; }
 
 @media (max-width: 1000px) {
   .grid2 { grid-template-columns: 1fr; }

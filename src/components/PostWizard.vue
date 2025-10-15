@@ -207,6 +207,37 @@
           <p class="muted helper">Paste a YouTube link to embed it after the images. Leave blank to skip.</p>
         </div>
 
+        <fieldset class="field papers-fieldset">
+          <legend>Associated papers (optional)</legend>
+          <p class="muted helper">Add links to related papers. They will show up as numbered links at the end of the page.</p>
+          <div class="papers-list">
+            <div v-for="(paper, index) in paperLinks" :key="paper.id" class="paper-entry">
+              <label :for="`paper-${paper.id}`">Paper {{ index + 1 }}</label>
+              <div class="paper-input-wrap">
+                <input
+                  :id="`paper-${paper.id}`"
+                  v-model="paper.url"
+                  type="url"
+                  placeholder="https://example.com/paper.pdf"
+                  autocomplete="off"
+                >
+                <button
+                  v-if="paperLinks.length > 1"
+                  type="button"
+                  class="btn-icon"
+                  aria-label="Remove paper"
+                  @click="removePaperLink(index)"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+            <button type="button" class="btn-secondary add-paper-btn" @click="addPaperLink" :disabled="paperLinks.length >= MAX_PAPERS">
+              + Add paper
+            </button>
+          </div>
+        </fieldset>
+
         <div class="actions">
           <button type="submit" class="btn-primary" :disabled="isDrafting">
             <span v-if="isDrafting">Preparing draft…</span>
@@ -393,6 +424,17 @@
                     </div>
                   </div>
                 </section>
+
+                <section v-if="previewData.papers.length" class="section papers-section">
+                  <div class="container papers-container">
+                    <h3 class="h3-30">Associated papers</h3>
+                    <ol class="papers-list">
+                      <li v-for="(paper, idx) in previewData.papers" :key="`${idx}-${paper}`">
+                        <a :href="paper" target="_blank" rel="noopener">Paper {{ idx + 1 }}</a>
+                      </li>
+                    </ol>
+                  </div>
+                </section>
               </article>
             </template>
           </div>
@@ -461,6 +503,8 @@ const preparedImages = ref([])
 initializeImageEntries()
 const videoUrl = ref('')
 const preparedVideo = ref('')
+const MAX_PAPERS = 10
+const paperLinks = ref([createPaperLink()])
 
 const draftSection = ref(null)
 const draftJson = ref('')
@@ -678,6 +722,28 @@ function createImageEntry({ isHero = false } = {}) {
     fileName: '',
     fileExtension: '',
   }
+}
+
+function createPaperLink(initial = '') {
+  return {
+    id: Math.random().toString(36).slice(2, 10),
+    url: initial,
+  }
+}
+
+function addPaperLink() {
+  if (paperLinks.value.length >= MAX_PAPERS) return
+  paperLinks.value = [...paperLinks.value, createPaperLink()]
+}
+
+function removePaperLink(index) {
+  if (paperLinks.value.length <= 1) {
+    paperLinks.value = [createPaperLink()]
+    return
+  }
+  const next = [...paperLinks.value]
+  next.splice(index, 1)
+  paperLinks.value = next.length ? next : [createPaperLink()]
 }
 
 function resolveImageEntry(entry, { displayIndex, slugValue, contentDir }) {
@@ -962,6 +1028,15 @@ function prepareDraft() {
       delete payload.video
     }
 
+    const papers = paperLinks.value
+      .map((entry) => sanitizePaperLink(entry.url))
+      .filter(Boolean)
+    if (papers.length) {
+      payload.papers = papers
+    } else {
+      delete payload.papers
+    }
+
   if (postType.value !== 'events') {
     if (selectedRelated.value.length) {
       payload.related = [...selectedRelated.value]
@@ -1242,6 +1317,19 @@ async function publishDraft() {
     delete parsed.video
   }
 
+  if (Array.isArray(parsed.papers)) {
+    const sanitizedPapers = parsed.papers
+      .map((value) => sanitizePaperLink(value))
+      .filter(Boolean)
+    if (sanitizedPapers.length) {
+      parsed.papers = sanitizedPapers
+    } else {
+      delete parsed.papers
+    }
+  } else {
+    delete parsed.papers
+  }
+
   const uploadStates = preparedImages.value.filter((img) => img.type === 'upload' && img.file)
 
   if (uploadStates.length) {
@@ -1468,6 +1556,7 @@ function resetWizard() {
   preparedImages.value = []
   videoUrl.value = ''
   preparedVideo.value = ''
+  paperLinks.value = [createPaperLink()]
   draftSection.value = null
   draftJson.value = ''
   successMessage.value = ''
@@ -1535,6 +1624,8 @@ async function openPreview() {
       ? []
       : await loadPreviewContacts(Array.isArray(parsed.contacts) ? parsed.contacts : [])
 
+    const papers = collectPreviewPapers(parsed)
+
     previewData.value = {
       section,
       sectionLabel,
@@ -1551,6 +1642,7 @@ async function openPreview() {
       visitUrl,
       related,
       contacts,
+      papers,
     }
     previewError.value = ''
   } catch (err) {
@@ -1656,6 +1748,17 @@ function normalizePreviewLink(value) {
   }
 }
 
+function sanitizePaperLink(value) {
+  if (!value) return ''
+  const trimmed = String(value).trim()
+  if (!trimmed) return ''
+  if (!/^https?:\/\//i.test(trimmed)) {
+    return ''
+  }
+  const sanitized = sanitizeUrl(trimmed)
+  return sanitized && sanitized !== '#' ? sanitized : ''
+}
+
 function formatEventMeta(detail) {
   const fallback = [detail.location || ''].filter(Boolean).join(', ')
   if (!detail?.date) return fallback
@@ -1750,6 +1853,19 @@ async function loadPreviewContacts(slugs) {
 onBeforeUnmount(() => {
   cleanupPreviewResources()
 })
+
+function collectPreviewPapers(parsed) {
+  const fromInputs = paperLinks.value
+    .map((entry) => normalizePreviewLink(entry.url))
+    .filter(Boolean)
+  if (fromInputs.length) return fromInputs
+  if (Array.isArray(parsed.papers)) {
+    return parsed.papers
+      .map((value) => normalizePreviewLink(value))
+      .filter(Boolean)
+  }
+  return []
+}
 </script>
 
 <style scoped>
@@ -1893,6 +2009,51 @@ onBeforeUnmount(() => {
 
 .add-image-btn {
   margin-top: 10px;
+  align-self: flex-start;
+  padding: 8px 16px;
+}
+
+.papers-fieldset {
+  border: 1px solid #d0d0d8;
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.papers-fieldset legend {
+  padding: 0 8px;
+  font-weight: 600;
+}
+
+.papers-fieldset .papers-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.papers-list .paper-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.paper-input-wrap {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.paper-input-wrap input {
+  flex: 1 1 auto;
+}
+
+.add-paper-btn {
   align-self: flex-start;
   padding: 8px 16px;
 }
@@ -2062,6 +2223,26 @@ onBeforeUnmount(() => {
 .preview-detail .card.project .more {
   color: var(--cta-f26a2e);
   font-weight: 600;
+}
+
+.preview-detail .papers-section {
+  padding-bottom: 40px;
+}
+
+.preview-detail .papers-list {
+  margin-top: 12px;
+  padding-left: 22px;
+  list-style: decimal;
+}
+
+.preview-detail .papers-list li {
+  margin-bottom: 6px;
+}
+
+.preview-detail .papers-list li a {
+  color: var(--cta-f26a2e);
+  font-weight: 600;
+  word-break: break-word;
 }
 
 @media (max-width: 900px) {

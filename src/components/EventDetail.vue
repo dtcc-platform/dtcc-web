@@ -48,6 +48,17 @@
         </div>
       </div>
     </section>
+
+    <section v-if="papers.length" class="section papers">
+      <div class="container">
+        <h3 class="h3-30">Associated papers</h3>
+        <ol class="papers-list">
+          <li v-for="(paper, index) in papers" :key="`${index}-${paper}`">
+            <a :href="paper" target="_blank" rel="noopener">Paper {{ index + 1 }}</a>
+          </li>
+        </ol>
+      </div>
+    </section>
   </main>
 </template>
 
@@ -72,6 +83,7 @@ const item = ref(null)
 const heroImageStyle = computed(() => item.value?.image ? `url(${item.value.image})` : undefined)
 const videoEmbed = computed(() => item.value?.video || null)
 const gallery = computed(() => (item.value?.images || []).slice(1))
+const papers = computed(() => Array.isArray(item.value?.papers) ? item.value.papers : [])
 
 const suffixDay = (n) => {
   const s = ['th', 'st', 'nd', 'rd']
@@ -151,6 +163,7 @@ onMounted(async () => {
       location: data.location || null,
       meta: data.meta || null,
       registration: normalizeLink(data.registration || ''),
+      papers: Array.isArray(data.papers) ? data.papers.map((entry) => normalizeLink(entry)).filter(Boolean) : [],
     }
   } catch (_) {}
 })
@@ -167,6 +180,10 @@ onMounted(async () => {
 .gallery-card { height: 240px; border-radius: 12px; background: #000 center/cover no-repeat; }
 .video-wrap { position: relative; padding-top: 56.25%; margin-top: 20px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2); }
 .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.papers { padding-top: 24px; padding-bottom: 24px; }
+.papers-list { margin-top: 12px; padding-left: 22px; list-style: decimal; }
+.papers-list li { margin-bottom: 6px; }
+.papers-list a { color: var(--cta-f26a2e); font-weight: 600; word-break: break-word; }
 
 @media (max-width: 1000px) {
   .grid2 { grid-template-columns: 1fr; }
@@ -174,5 +191,6 @@ onMounted(async () => {
   .gallery { grid-template-columns: 1fr; }
   .gallery-card { height: 200px; }
   .video-wrap { padding-top: 56.25%; }
+  .papers-list { padding-left: 20px; }
 }
 </style>
