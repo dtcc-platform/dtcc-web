@@ -6,7 +6,6 @@
         <div>
           <h1 class="h2-50">Projects landing:<br>Our latest projects</h1>
           <div class="links">
-            <a class="more" href="#">DTCC2 Projects »</a>
             <a class="more" href="#">DTCC1 Projects »</a>
           </div>
         </div>
