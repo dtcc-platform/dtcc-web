@@ -450,15 +450,15 @@ import { resolveUrl, withBase } from '../utils/paths.js'
 
 const TYPE_OPTIONS = [
   { value: 'news', label: 'News' },
-  { value: 'events', label: 'Events' },
-  { value: 'events-archive', label: 'Events archive' },
+  { value: 'events-archive', label: 'Projects Archive' },
   { value: 'projects', label: 'Projects' },
+  { value: 'events', label: 'Events' },
 ]
 
 const SECTION_CONFIG = {
   news: { label: 'News', contentDir: 'news', urlPrefix: '/news/' },
   events: { label: 'Events', contentDir: 'events', urlPrefix: '/events/' },
-  'events-archive': { label: 'Events archive', contentDir: 'dtcc-1', urlPrefix: '/dtcc-1/' },
+  'events-archive': { label: 'Projects Archive', contentDir: 'dtcc-1', urlPrefix: '/dtcc-1/' },
   projects: { label: 'Projects', contentDir: 'projects', urlPrefix: '/projects/' },
 }
 
