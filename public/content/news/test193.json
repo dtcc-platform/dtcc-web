@@ -1,0 +1,13 @@
+{
+  "title": "test2",
+  "summary": "test3",
+  "url": "/news/test193",
+  "body": "test3",
+  "eyebrow": "News",
+  "date": "2025-10-17",
+  "image": "content/news/test193.png",
+  "images": [
+    "content/news/test193.png",
+    "content/news/test193-1.jpeg"
+  ]
+}
