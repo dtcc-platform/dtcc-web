@@ -1,0 +1,19 @@
+{
+  "title": "Live demo with Nadia",
+  "summary": "I am showing Nadia how to use the post wizard",
+  "url": "/news/live-demo-with-nadia",
+  "body": "I am showing Nadia how to use the post wizard",
+  "eyebrow": "News",
+  "date": "2025-10-16",
+  "image": "https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg",
+  "related": [
+    "from-the-login",
+    "from-the-login-2",
+    "testing-new-wizard",
+    "testing-speed"
+  ],
+  "contacts": [
+    "nadia-tahir",
+    "bernt-ketzler"
+  ]
+}
