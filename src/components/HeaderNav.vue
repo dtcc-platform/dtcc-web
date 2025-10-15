@@ -10,6 +10,7 @@
       </a>
       <nav class="menu">
         <a v-for="link in navLinks" :key="link.label" :href="link.href">{{ link.label }}</a>
+        <a v-if="isAuthenticated" :href="postHref">Post</a>
         <button
           v-if="isAuthenticated"
           class="logout-btn"
@@ -40,6 +41,7 @@ const navLinks = [
 
 const injectedAuth = inject('postIsAuthenticated', null)
 const logoutFn = inject('postLogout', null)
+const postHref = `${base}post/`
 
 const isAuthenticated = computed(() => {
   if (injectedAuth && typeof injectedAuth === 'object' && 'value' in injectedAuth) {
