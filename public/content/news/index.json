@@ -1,6 +1,10 @@
 {
   "items": [
     {
+      "base": "multi-images-news-item",
+      "image": "content/news/multi-images-news-item.png"
+    },
+    {
       "base": "live-demo-with-nadia",
       "image": "https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
     },
