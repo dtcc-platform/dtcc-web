@@ -7,6 +7,7 @@ import os
 # Configuration
 ACCESS_TOKEN = os.getenv("LINKEDIN_ACCESS_TOKEN")
 ORGANIZATION_ID = "100491988"
+POSTS_API_BASE = "https://api.linkedin.com/rest/posts"
 
 def get_post_url(post_id):
     """Convert post ID/URN to a shareable LinkedIn URL"""
@@ -38,7 +39,8 @@ def extract_media_info(post, access_token):
         "media_type": None,
         "media_urn": None,
         "image_url": None,
-        "thumbnail_urn": None
+        "thumbnail_urn": None,
+        "source": "self",
     }
     
     content = post.get('content', {})
@@ -77,6 +79,32 @@ def extract_media_info(post, access_token):
     
     return media_info
 
+
+def fetch_post_details(post_urn, access_token, cache):
+    """Fetch and cache post details (used for reshare parents)"""
+    if not post_urn:
+        return None
+    if post_urn in cache:
+        return cache[post_urn]
+
+    encoded_urn = quote(post_urn, safe='')
+    url = f"{POSTS_API_BASE}/{encoded_urn}"
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "X-Restli-Protocol-Version": "2.0.0",
+        "LinkedIn-Version": "202509"
+    }
+
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        data = response.json()
+        cache[post_urn] = data
+        return data
+    except Exception as e:
+        print(f"Error fetching parent post {post_urn}: {e}")
+        return None
+
 # Fetch posts
 url = "https://api.linkedin.com/rest/posts"
 params = {
@@ -102,6 +130,7 @@ try:
     
     # Enhanced posts data with image URLs and shareable links
     enhanced_posts = []
+    post_cache = {}
     
     for i, post in enumerate(data.get('elements', []), 1):
         post_id = post.get('id')
@@ -113,6 +142,16 @@ try:
         
         # Extract media info
         media_info = extract_media_info(post, ACCESS_TOKEN)
+
+        reshare_context = post.get('reshareContext')
+        if (not media_info["has_media"]) and reshare_context:
+            parent_urn = reshare_context.get('parent') or reshare_context.get('root')
+            parent_post = fetch_post_details(parent_urn, ACCESS_TOKEN, post_cache)
+            if parent_post:
+                parent_media = extract_media_info(parent_post, ACCESS_TOKEN)
+                if parent_media["has_media"]:
+                    parent_media["source"] = "reshare_parent"
+                    media_info = parent_media
         
         # Create enhanced post object
         enhanced_post = {
@@ -125,6 +164,12 @@ try:
             "media": media_info,
             "original_data": post  # Keep original post data
         }
+
+        if reshare_context:
+            enhanced_post["reshare_parent_id"] = reshare_context.get('parent')
+            enhanced_post["reshare_root_id"] = reshare_context.get('root')
+            if media_info.get("source") == "reshare_parent":
+                enhanced_post["resolved_media_parent_id"] = parent_urn
         
         enhanced_posts.append(enhanced_post)
         
@@ -135,6 +180,8 @@ try:
             print(f"  ✓ Media Type: {media_info['media_type']}")
             if media_info["image_url"]:
                 print(f"  ✓ Image URL: {media_info['image_url'][:60]}...")
+            if media_info.get("source") == "reshare_parent":
+                print("  ✓ Media sourced from parent reshare")
         print()
     
     # Save enhanced data to JSON

@@ -1,0 +1,423 @@
+{
+  "organization_id": "100491988",
+  "total_posts": 10,
+  "posts_with_media": 10,
+  "posts_with_images": 10,
+  "posts": [
+    {
+      "post_id": "urn:li:share:7383773548672266240",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7383773548672266240/",
+      "published_at": 1760428798185,
+      "commentary": "A couple of days ago, we had the pleasure of welcoming a Brazilian innovation delegation to Chalmers. Our coordinator @[Bernd Ketzler](urn:li:person:qCF20l2VxW) presented the work being done in DTCC together with @[Eric Jeansson](urn:li:person:WnP1lt0iLN) from @[Göteborgs Stad](urn:li:organization:164101). The presentation was part of a wider program organised by @[Innovair™](urn:li:organization:10163266) and @[CISB](urn:li:organization:2310412) – the Swedish-Brazilian Research and Innovation Centre, bringing together representatives from government, academia, and industry in both countries.\n\nIt was a great day of exchanging ideas on how digital technologies can drive the transition towards smarter and more liveable cities.",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "image",
+        "media_urn": "urn:li:image:D4D22AQFokP2DGqmp6g",
+        "image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFokP2DGqmp6g/feedshare-shrink_2048_1536/B4DZnhu6NOGkAw-/0/1760428796975?e=1763596800&v=beta&t=n76zamlbAcAIt2mhConr8plq965aKclnEA_JNLVCON8",
+        "thumbnail_urn": null,
+        "source": "self"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1760428798185,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1760428821827,
+        "visibility": "PUBLIC",
+        "publishedAt": 1760428798185,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7383773548672266240",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "media": {
+            "altText": "",
+            "id": "urn:li:image:D4D22AQFokP2DGqmp6g"
+          }
+        },
+        "commentary": "A couple of days ago, we had the pleasure of welcoming a Brazilian innovation delegation to Chalmers. Our coordinator @[Bernd Ketzler](urn:li:person:qCF20l2VxW) presented the work being done in DTCC together with @[Eric Jeansson](urn:li:person:WnP1lt0iLN) from @[Göteborgs Stad](urn:li:organization:164101). The presentation was part of a wider program organised by @[Innovair™](urn:li:organization:10163266) and @[CISB](urn:li:organization:2310412) – the Swedish-Brazilian Research and Innovation Centre, bringing together representatives from government, academia, and industry in both countries.\n\nIt was a great day of exchanging ideas on how digital technologies can drive the transition towards smarter and more liveable cities.",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7328718785031331840",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7328718785031331840/",
+      "published_at": 1747302719597,
+      "commentary": "Did you miss the kick-off of DTCC2 a couple of weeks ago? Now you can view all the presentations again! Listen to our partners @[Dessislava Petrova-Antonova](urn:li:person:qfjiOFvUw5) from @[GATE Institute](urn:li:organization:29283368), @[Helen Eriksson](urn:li:person:\\_6-JjN2dBg) and Thomas Lithén from @[Lantmäteriet](urn:li:organization:164681) give their insights on why digital twins is important to their organizations. You'll also hear from research leads @[Malgorzata Zboinska, PhD](urn:li:person:tkUKE5aPw8), @[Alexander Hollberg](urn:li:person:Vf3wqQAlwB), @[Franziska Hunger](urn:li:person:RqCpkr5\\_SS), @[Mattias Roupé](urn:li:person:gpg-vzsrfh), @[Dag Wästberg](urn:li:person:cx\\_7GyIzPN) and @[Anders Logg](urn:li:person:kh7K8aieoy) about what projects will be the focus for the upcoming period.\n\nhttps://lnkd.in/d\\_ASVwRk",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQEbdkWX0fusCg/articleshare-shrink_1280_800/B4DZbTV8WhGwAQ-/0/1747302467632?e=1761120000&v=beta&t=KDWEdJLoeSGbbWpKId-sMzGWOISI2cuzGF3cd0MjnMA",
+        "thumbnail_urn": "urn:li:image:D4D27AQEbdkWX0fusCg",
+        "source": "self"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1747302719597,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1747302724519,
+        "visibility": "PUBLIC",
+        "publishedAt": 1747302719597,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7328718785031331840",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "Welcome to phase 2 of DTCC! On April 22nd 2025 we had a kick-off for our next five year period. Here, you get to hear from partners GATE and Lantmäteriet on why digital twins matter to them, from the research leads that will be diving deep into the...",
+            "thumbnail": "urn:li:image:D4D27AQEbdkWX0fusCg",
+            "source": "https://www.youtube.com/watch?v=ij0kaWh7uWY",
+            "title": "DTCC2: Kick-off"
+          }
+        },
+        "commentary": "Did you miss the kick-off of DTCC2 a couple of weeks ago? Now you can view all the presentations again! Listen to our partners @[Dessislava Petrova-Antonova](urn:li:person:qfjiOFvUw5) from @[GATE Institute](urn:li:organization:29283368), @[Helen Eriksson](urn:li:person:\\_6-JjN2dBg) and Thomas Lithén from @[Lantmäteriet](urn:li:organization:164681) give their insights on why digital twins is important to their organizations. You'll also hear from research leads @[Malgorzata Zboinska, PhD](urn:li:person:tkUKE5aPw8), @[Alexander Hollberg](urn:li:person:Vf3wqQAlwB), @[Franziska Hunger](urn:li:person:RqCpkr5\\_SS), @[Mattias Roupé](urn:li:person:gpg-vzsrfh), @[Dag Wästberg](urn:li:person:cx\\_7GyIzPN) and @[Anders Logg](urn:li:person:kh7K8aieoy) about what projects will be the focus for the upcoming period.\n\nhttps://lnkd.in/d\\_ASVwRk",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7328319471155146752",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7328319471155146752/",
+      "published_at": 1747207515859,
+      "commentary": "After three years of EU-funded research and co-creation with cities across Europe, the CREATE project is concluding with the launch of its final outcome: the CREATE Tool. This interactive tool supports circular urban planning by mapping and visualizing buildings’ material stocks and flows. It has been piloted in Gothenburg, Rennes, and Vienna, and is designed for use by city planners, policy makers, and sustainability professionals.\n\nThe CREATE team will present the tool and key project outcomes in a public webinar on June 12th, 11:30–12:30 CET - don't miss out!\n\nCREATE is a project within the @[Driving Urban Transitions Partnership](urn:li:organization:86886063) \\(DUT\\), involving @[Chalmers tekniska högskola](urn:li:organization:5074), @[Wageningen University & Research](urn:li:organization:166859), @[AIT Austrian Institute of Technology](urn:li:organization:526248), @[CitéSource](urn:li:organization:44677580), @[BRGM](urn:li:organization:37165), the Municipality of Nijmegen, and @[Göteborgs Stad](urn:li:organization:164101).\n\nRegister here: https://lnkd.in/dKFDCdxE",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFf5KLhqm3ptQ/feedshare-shrink_2048_1536/B4DZbNrtKKGwAo-/0/1747207509426?e=1763596800&v=beta&t=B9g7AYb81nJ6eyGKZO__NVGFX1ZfWsBHe6L49z5lBeU",
+        "thumbnail_urn": "urn:li:image:D4D22AQFf5KLhqm3ptQ",
+        "source": "self"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1747207515859,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1747207519072,
+        "visibility": "PUBLIC",
+        "publishedAt": 1747207515859,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7328319471155146752",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "Welcome to the CREATE Tool webinar! Please register for the online event by entering your name, organization and email below. A Microsoft Teams link will be sent to all registered participants the day before the event. For questions regarding the...",
+            "thumbnail": "urn:li:image:D4D22AQFf5KLhqm3ptQ",
+            "source": "https://forms.cloud.microsoft/e/sKr1YuwdFy",
+            "title": "Fill | CREATE Tool Demonstration Webinar - Registration"
+          }
+        },
+        "commentary": "After three years of EU-funded research and co-creation with cities across Europe, the CREATE project is concluding with the launch of its final outcome: the CREATE Tool. This interactive tool supports circular urban planning by mapping and visualizing buildings’ material stocks and flows. It has been piloted in Gothenburg, Rennes, and Vienna, and is designed for use by city planners, policy makers, and sustainability professionals.\n\nThe CREATE team will present the tool and key project outcomes in a public webinar on June 12th, 11:30–12:30 CET - don't miss out!\n\nCREATE is a project within the @[Driving Urban Transitions Partnership](urn:li:organization:86886063) \\(DUT\\), involving @[Chalmers tekniska högskola](urn:li:organization:5074), @[Wageningen University & Research](urn:li:organization:166859), @[AIT Austrian Institute of Technology](urn:li:organization:526248), @[CitéSource](urn:li:organization:44677580), @[BRGM](urn:li:organization:37165), the Municipality of Nijmegen, and @[Göteborgs Stad](urn:li:organization:164101).\n\nRegister here: https://lnkd.in/dKFDCdxE",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7320418022609829889",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7320418022609829889/",
+      "published_at": 1745323663787,
+      "commentary": "DTCC 2 is live! Earlier today, the kick-off for the next five years of the @[Digital Twin Cities Centre](urn:li:organization:100491988) took place, and gathered many of our amazing partners and colleagues at @[Visual Arena](urn:li:organization:38088874) in Gothenburg and online. We got to listen to great presentations from our partners @[Dessislava Petrova-Antonova](urn:li:person:qfjiOFvUw5), Research Lead at @[GATE Institute](urn:li:organization:29283368), and @[Helen Eriksson](urn:li:person:\\_6-JjN2dBg) and Thomas Lithén from @[Lantmäteriet](urn:li:organization:164681). We also got an insight to what the new projects within the centre will focus on going forward, given by research leads @[Malgorzata Zboinska, PhD](urn:li:person:tkUKE5aPw8), @[Alexander Hollberg](urn:li:person:Vf3wqQAlwB), @[Mattias Roupé](urn:li:person:gpg-vzsrfh), @[Franziska Hunger](urn:li:person:RqCpkr5\\_SS), @[Dag Wästberg](urn:li:person:cx\\_7GyIzPN) and @[Anders Logg](urn:li:person:kh7K8aieoy). \n\nThanks to everyone participating today! @[Ale kommun](urn:li:organization:3730042) @[Chalmers tekniska högskola](urn:li:organization:5074) @[Chalmers Industriteknik](urn:li:organization:331364) @[Democritus University of Thrace - \\(D.U.Th.\\)](urn:li:organization:15092734) @[Doing Good](urn:li:organization:18756617) @[Fraunhofer-Chalmers Centre for Industrial Mathematics](urn:li:organization:872286) @[GATE Institute](urn:li:organization:29283368) @[Gdańsk University of Technology](urn:li:organization:15096515) @[Halmstads kommun](urn:li:organization:55419) @[Helsingborgs stad](urn:li:organization:44290) @[Höganäs kommun I Entreprenörskap, kompetensförsörjning & näringsliv](urn:li:organization:447727) @[Kungsbacka kommun](urn:li:organization:68946) @[Lantmäteriet](urn:li:organization:164681) @[Liljewall](urn:li:organization:3768270) @[Lindholmen Science Park](urn:li:organization:2395819) @[Lunds universitet](urn:li:organization:5077) @[NCC](urn:li:organization:5276) @[Norges teknisk-naturvitenskapelige universitet \\(NTNU\\)](urn:li:organization:15097165) @[Ramboll](urn:li:organization:165649) @[Skanska](urn:li:organization:4335) @[Sveriges Kommuner och Regioner](urn:li:organization:38028) @[Sweco](urn:li:organization:13939) @[Twinfinity AB](urn:li:organization:93112136) @[University of Patras](urn:li:organization:19843) University of Salento @[University of the Aegean](urn:li:organization:166682) @[Högskolan Väst](urn:li:organization:809370) @[WINNIIO AB](urn:li:organization:26197477)",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "image",
+        "media_urn": "urn:li:image:D4D22AQHt9eWuLgyunQ",
+        "image_url": "https://media.licdn.com/dms/image/v2/D4D22AQHt9eWuLgyunQ/feedshare-shrink_2048_1536/B4DZZdZZfHG0B4-/0/1745323662050?e=1763596800&v=beta&t=LqEPc0VJLVhdjEwBMwRqrgWEOV66LGTEEqd1epk4lKM",
+        "thumbnail_urn": null,
+        "source": "self"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1745323663787,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1745323688704,
+        "visibility": "PUBLIC",
+        "publishedAt": 1745323663787,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7320418022609829889",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "media": {
+            "altText": "",
+            "id": "urn:li:image:D4D22AQHt9eWuLgyunQ"
+          }
+        },
+        "commentary": "DTCC 2 is live! Earlier today, the kick-off for the next five years of the @[Digital Twin Cities Centre](urn:li:organization:100491988) took place, and gathered many of our amazing partners and colleagues at @[Visual Arena](urn:li:organization:38088874) in Gothenburg and online. We got to listen to great presentations from our partners @[Dessislava Petrova-Antonova](urn:li:person:qfjiOFvUw5), Research Lead at @[GATE Institute](urn:li:organization:29283368), and @[Helen Eriksson](urn:li:person:\\_6-JjN2dBg) and Thomas Lithén from @[Lantmäteriet](urn:li:organization:164681). We also got an insight to what the new projects within the centre will focus on going forward, given by research leads @[Malgorzata Zboinska, PhD](urn:li:person:tkUKE5aPw8), @[Alexander Hollberg](urn:li:person:Vf3wqQAlwB), @[Mattias Roupé](urn:li:person:gpg-vzsrfh), @[Franziska Hunger](urn:li:person:RqCpkr5\\_SS), @[Dag Wästberg](urn:li:person:cx\\_7GyIzPN) and @[Anders Logg](urn:li:person:kh7K8aieoy). \n\nThanks to everyone participating today! @[Ale kommun](urn:li:organization:3730042) @[Chalmers tekniska högskola](urn:li:organization:5074) @[Chalmers Industriteknik](urn:li:organization:331364) @[Democritus University of Thrace - \\(D.U.Th.\\)](urn:li:organization:15092734) @[Doing Good](urn:li:organization:18756617) @[Fraunhofer-Chalmers Centre for Industrial Mathematics](urn:li:organization:872286) @[GATE Institute](urn:li:organization:29283368) @[Gdańsk University of Technology](urn:li:organization:15096515) @[Halmstads kommun](urn:li:organization:55419) @[Helsingborgs stad](urn:li:organization:44290) @[Höganäs kommun I Entreprenörskap, kompetensförsörjning & näringsliv](urn:li:organization:447727) @[Kungsbacka kommun](urn:li:organization:68946) @[Lantmäteriet](urn:li:organization:164681) @[Liljewall](urn:li:organization:3768270) @[Lindholmen Science Park](urn:li:organization:2395819) @[Lunds universitet](urn:li:organization:5077) @[NCC](urn:li:organization:5276) @[Norges teknisk-naturvitenskapelige universitet \\(NTNU\\)](urn:li:organization:15097165) @[Ramboll](urn:li:organization:165649) @[Skanska](urn:li:organization:4335) @[Sveriges Kommuner och Regioner](urn:li:organization:38028) @[Sweco](urn:li:organization:13939) @[Twinfinity AB](urn:li:organization:93112136) @[University of Patras](urn:li:organization:19843) University of Salento @[University of the Aegean](urn:li:organization:166682) @[Högskolan Väst](urn:li:organization:809370) @[WINNIIO AB](urn:li:organization:26197477)",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7275419630871990272",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7275419630871990272/",
+      "published_at": 1734595210897,
+      "commentary": "Ending the year with some great news! We're excited to announce that our five-year extension will begin in 2025, with approval from @[Vinnova](urn:li:organization:20735). This next phase will focus on advancing sustainable urban development through cutting-edge research, industry collaboration, and practical tools that transform how cities are planned and built. Together with our partners, we’re committed to shaping smarter, greener, and more inclusive cities for the future.\n\n{hashtag|\\#|dtcc2} {hashtag|\\#|vinnovacompetencecentre} {hashtag|\\#|digitaltwins} {hashtag|\\#|cityplanning} {hashtag|\\#|urbaninnovation} {hashtag|\\#|sustainability} {hashtag|\\#|collaboration}",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGOaJH5sfpV3g/articleshare-shrink_800/B4DZlicWnEGkAM-/0/1758293224884?e=1761120000&v=beta&t=lN00ILXZB6WkmBPuSdLORc0UkWkbdBv1yNePneRN5fM",
+        "thumbnail_urn": "urn:li:image:D4D27AQGOaJH5sfpV3g",
+        "source": "self"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1734595210897,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1734595233714,
+        "visibility": "PUBLIC",
+        "publishedAt": 1734595210897,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7275419630871990272",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "The Digital Twin Cities Centre (DTCC) is set to embark on its next phase, with a five-year extension approved by Vinnova. Beginning in 2025, DTCC 2 will focus on driving sustainable urban development, bridging research and industry, and delivering...",
+            "thumbnail": "urn:li:image:D4D27AQGOaJH5sfpV3g",
+            "source": "https://dtcc.chalmers.se/dtcc-kicks-off-5-year-extension-in-2025/",
+            "title": "DTCC kicks off 5-year extension in 2025"
+          }
+        },
+        "commentary": "Ending the year with some great news! We're excited to announce that our five-year extension will begin in 2025, with approval from @[Vinnova](urn:li:organization:20735). This next phase will focus on advancing sustainable urban development through cutting-edge research, industry collaboration, and practical tools that transform how cities are planned and built. Together with our partners, we’re committed to shaping smarter, greener, and more inclusive cities for the future.\n\n{hashtag|\\#|dtcc2} {hashtag|\\#|vinnovacompetencecentre} {hashtag|\\#|digitaltwins} {hashtag|\\#|cityplanning} {hashtag|\\#|urbaninnovation} {hashtag|\\#|sustainability} {hashtag|\\#|collaboration}",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7267528220139249664",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7267528220139249664/",
+      "published_at": 1732713751976,
+      "commentary": "Did you miss @[Jorge Gil](urn:li:person:sTuxaNPo7O)s presentation of the Milestone Project Data Models for Digital Twin Cities? Make sure to watch it on our Youtube channel.",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "https://media.licdn.com/dms/image/sync/v2/D5627AQGtRoFGVXuVOQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1732713690878?e=1761120000&v=beta&t=S5kiCu41pjDzrA0ZSIEeO9NWEdS9Y8uTaWtpHN4wv10",
+        "thumbnail_urn": "urn:li:image:D5627AQGtRoFGVXuVOQ",
+        "source": "self"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1732713751976,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1732713768782,
+        "visibility": "PUBLIC",
+        "publishedAt": 1732713751976,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7267528220139249664",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "The DTCC Milestone Project Data Models for Digital Twin Cities aims to enhance Digital Twins for urban design and planning by developing extensible, semantic, and linked data models. Presented by Jorge Gil in this lunch seminar. Read more: https://dtcc.",
+            "thumbnail": "urn:li:image:D5627AQGtRoFGVXuVOQ",
+            "source": "https://www.youtube.com/watch?v=sN265v0A7lc",
+            "title": "DTCC Milestone Project Lunch Seminars: Data Models for Digital Twin Cities"
+          }
+        },
+        "commentary": "Did you miss @[Jorge Gil](urn:li:person:sTuxaNPo7O)s presentation of the Milestone Project Data Models for Digital Twin Cities? Make sure to watch it on our Youtube channel.",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7265290029218889728",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7265290029218889728/",
+      "published_at": 1732180125704,
+      "commentary": "This year's final Milestone Project Lunch Seminar happens tomorrow, Friday on Zoom! @[Alexander Hollberg](urn:li:person:Vf3wqQAlwB) and @[Liane Thuvander](urn:li:person:dP0fAkQuO3) will present Twinable, a project that combines physical and virtual environments to enable a better understanding of visible and invisible aspects of the built environment. Join tomorrow at 12.15 on Zoom.",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGMki-RixNzYg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1732180092266?e=1761120000&v=beta&t=iIA7BC76A327Ud6iAg-SgHUOVX5kehnndmVa_SDOHVs",
+        "thumbnail_urn": "urn:li:image:D4D27AQGMki-RixNzYg",
+        "source": "self"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1732180125704,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1732180148271,
+        "visibility": "PUBLIC",
+        "publishedAt": 1732180125704,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7265290029218889728",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "This year we will present our Milestone Projects within DTCC in the form of digital lunch seminars via Zoom. Join us and learn more about the research being done in the Digital Twin area! This lunch talk summarises the results from the project Twinable.",
+            "thumbnail": "urn:li:image:D4D27AQGMki-RixNzYg",
+            "source": "https://ui.ungpd.com/Events/4740f87a-ee35-461c-bca6-18294a442a45",
+            "title": "DTCC Milestone Projects Lunch Seminars 2024: Twinable"
+          }
+        },
+        "commentary": "This year's final Milestone Project Lunch Seminar happens tomorrow, Friday on Zoom! @[Alexander Hollberg](urn:li:person:Vf3wqQAlwB) and @[Liane Thuvander](urn:li:person:dP0fAkQuO3) will present Twinable, a project that combines physical and virtual environments to enable a better understanding of visible and invisible aspects of the built environment. Join tomorrow at 12.15 on Zoom.",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7260270710332215296",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7260270710332215296/",
+      "published_at": 1730983426800,
+      "commentary": "Tomorrow, at 12.15 on Zoom, it's time for another Milestone Project Lunch Seminar. This time on the project Twin re-fab presented by @[Malgorzata Zboinska, PhD](urn:li:person:tkUKE5aPw8). Sign up through the link.",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQE27OWKRncEiQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1730983383961?e=1761120000&v=beta&t=ge_hTgA-rxufuC4gbk7uGQOewvkMvPRFLenTUx85aIY",
+        "thumbnail_urn": "urn:li:image:D4D27AQE27OWKRncEiQ",
+        "source": "self"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1730983426800,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1730983447410,
+        "visibility": "PUBLIC",
+        "publishedAt": 1730983426800,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7260270710332215296",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "This year we will present our Milestone Projects within DTCC in the form of digital lunch seminars via Zoom. Join us and learn more about the research being done in the Digital Twin area! More info about this event coming soon. Don't miss our other...",
+            "thumbnail": "urn:li:image:D4D27AQE27OWKRncEiQ",
+            "source": "https://ui.ungpd.com/Events/27539e5e-a465-4086-b1ff-0a6f27595104",
+            "title": "DTCC Milestone Projects Lunch Seminars 2024: Twin re-fab"
+          }
+        },
+        "commentary": "Tomorrow, at 12.15 on Zoom, it's time for another Milestone Project Lunch Seminar. This time on the project Twin re-fab presented by @[Malgorzata Zboinska, PhD](urn:li:person:tkUKE5aPw8). Sign up through the link.",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7251910330224676864",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7251910330224676864/",
+      "published_at": 1728990156858,
+      "commentary": "This Friday the 18th of October it's time for @[Jorge Gil](urn:li:person:sTuxaNPo7O)s lunch seminar on the DTCC Milestone Project Data models for digital twin cities. Don't miss out - sign up below.",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1761120000&v=beta&t=hhin4l357ADwIRPdXRv2Cb4MviSqbo4IkUGqqHvBzTg",
+        "thumbnail_urn": "urn:li:image:D4D27AQFyIHpeckUhMg",
+        "source": "self"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1728990156858,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1728990162789,
+        "visibility": "PUBLIC",
+        "publishedAt": 1728990156858,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7251910330224676864",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "This year we will present our Milestone Projects within DTCC in the form of digital lunch seminars via Zoom. Join us and learn more about the research being done in the Digital Twin area! Join the seminar via link:...",
+            "thumbnail": "urn:li:image:D4D27AQFyIHpeckUhMg",
+            "source": "https://ui.ungpd.com/Events/0ee57923-5123-4de8-800d-f763d09f5265",
+            "title": "DTCC Milestone Projects Lunch Seminars 2024: Data models for digital twin cities"
+          }
+        },
+        "commentary": "This Friday the 18th of October it's time for @[Jorge Gil](urn:li:person:sTuxaNPo7O)s lunch seminar on the DTCC Milestone Project Data models for digital twin cities. Don't miss out - sign up below.",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7247520764751405056",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7247520764751405056/",
+      "published_at": 1727947837706,
+      "commentary": "Don't forget to sign up for our Milestone Project Lunch Seminar on Data models for digital twin cities. The seminar will be held by @[Jorge Gil](urn:li:person:sTuxaNPo7O) on October 18th at 12.15 on Zoom.",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1761120000&v=beta&t=hhin4l357ADwIRPdXRv2Cb4MviSqbo4IkUGqqHvBzTg",
+        "thumbnail_urn": "urn:li:image:D4D27AQFyIHpeckUhMg",
+        "source": "reshare_parent"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1727943602926,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1727947837755,
+        "visibility": "PUBLIC",
+        "publishedAt": 1727947837706,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7247520764751405056",
+        "reshareContext": {
+          "parent": "urn:li:share:7234843484459827201",
+          "root": "urn:li:share:7234843484459827201"
+        },
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "commentary": "Don't forget to sign up for our Milestone Project Lunch Seminar on Data models for digital twin cities. The seminar will be held by @[Jorge Gil](urn:li:person:sTuxaNPo7O) on October 18th at 12.15 on Zoom.",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      },
+      "reshare_parent_id": "urn:li:share:7234843484459827201",
+      "reshare_root_id": "urn:li:share:7234843484459827201",
+      "resolved_media_parent_id": "urn:li:share:7234843484459827201"
+    }
+  ]
+}
