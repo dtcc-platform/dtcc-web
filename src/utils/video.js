@@ -4,6 +4,8 @@ const YOUTUBE_HOSTS = new Set([
   'm.youtube.com',
   'youtu.be',
   'www.youtu.be',
+  'youtube-nocookie.com',
+  'www.youtube-nocookie.com',
 ])
 
 export function toYouTubeEmbed(rawUrl = '') {
@@ -19,7 +21,7 @@ export function ensureYouTubeEmbed(value) {
   if (!trimmed) return ''
 
   // Already an embed URL
-  if (/^https?:\/\/(www\.)?youtube\.com\/embed\//i.test(trimmed)) {
+  if (/^https?:\/\/(www\.)?(youtube|youtube-nocookie)\.com\/embed\//i.test(trimmed)) {
     return trimmed
   }
 
@@ -55,7 +57,7 @@ function extractEmbed(input) {
   if (!videoId) return ''
 
   const query = startSeconds > 0 ? `?start=${startSeconds}` : ''
-  return `https://www.youtube.com/embed/${videoId}${query}`
+  return `https://www.youtube-nocookie.com/embed/${videoId}${query}`
 }
 
 function normalizeScheme(value) {
