@@ -20,6 +20,9 @@
       "base": "testing-youtube"
     },
     {
+      "base": "testing-youtube-2"
+    },
+    {
       "base": "test-for-nadia"
     },
     {
@@ -66,9 +69,6 @@
     },
     {
       "base": "lambda-test"
-    },
-    {
-      "base": "testing-youtube-2"
     }
   ]
 }
