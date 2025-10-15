@@ -2,12 +2,14 @@ import requests
 import json
 from urllib.parse import quote
 import os
+from pathlib import Path
 
 
 # Configuration
 ACCESS_TOKEN = os.getenv("LINKEDIN_ACCESS_TOKEN")
 ORGANIZATION_ID = "100491988"
 POSTS_API_BASE = "https://api.linkedin.com/rest/posts"
+OUTPUT_FILE = Path("public/content/social/linkedin_posts_complete.json")
 
 def get_post_url(post_id):
     """Convert post ID/URN to a shareable LinkedIn URL"""
@@ -193,11 +195,12 @@ try:
         "posts": enhanced_posts
     }
     
-    with open('linkedin_posts_complete.json', 'w', encoding='utf-8') as f:
+    OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with OUTPUT_FILE.open('w', encoding='utf-8') as f:
         json.dump(output_data, f, indent=2, ensure_ascii=False)
     
     print("=" * 50)
-    print(f"✓ Saved {len(enhanced_posts)} posts to linkedin_posts_complete.json")
+    print(f"✓ Saved {len(enhanced_posts)} posts to {OUTPUT_FILE}")
     print(f"  - Posts with media: {output_data['posts_with_media']}")
     print(f"  - Posts with images: {output_data['posts_with_images']}")
         
