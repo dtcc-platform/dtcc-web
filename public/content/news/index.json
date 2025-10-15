@@ -17,6 +17,10 @@
       "image": "https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
     },
     {
+      "base": "new-tests-for-nadia",
+      "image": "content/news/new-tests-for-nadia.png"
+    },
+    {
       "base": "testing-youtube"
     },
     {
@@ -69,10 +73,6 @@
     },
     {
       "base": "lambda-test"
-    },
-    {
-      "base": "new-tests-for-nadia",
-      "image": "content/news/new-tests-for-nadia.png"
     }
   ]
 }
