@@ -1033,8 +1033,10 @@ function prepareDraft() {
       .filter(Boolean)
     if (papers.length) {
       payload.papers = papers
+      paperLinks.value = papers.map((url) => createPaperLink(url))
     } else {
       delete payload.papers
+      paperLinks.value = [createPaperLink()]
     }
 
   if (postType.value !== 'events') {
