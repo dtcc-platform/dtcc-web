@@ -5,6 +5,10 @@
       "image": "content/news/multi-images-news-item.png"
     },
     {
+      "base": "test19",
+      "image": "content/news/test19.png"
+    },
+    {
       "base": "live-demo-with-nadia",
       "image": "https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
     },
@@ -55,10 +59,6 @@
     },
     {
       "base": "lambda-test"
-    },
-    {
-      "base": "test19",
-      "image": "content/news/test19.png"
     }
   ]
 }
