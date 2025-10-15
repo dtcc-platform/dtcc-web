@@ -1,9 +1,49 @@
 {
   "organization_id": "100491988",
   "total_posts": 10,
-  "posts_with_media": 9,
-  "posts_with_images": 9,
+  "posts_with_media": 10,
+  "posts_with_images": 10,
   "posts": [
+    {
+      "post_id": "urn:li:share:7383773548672266240",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7383773548672266240/",
+      "published_at": 1760428798185,
+      "commentary": "A couple of days ago, we had the pleasure of welcoming a Brazilian innovation delegation to Chalmers. Our coordinator @[Bernd Ketzler](urn:li:person:qCF20l2VxW) presented the work being done in DTCC together with @[Eric Jeansson](urn:li:person:WnP1lt0iLN) from @[Göteborgs Stad](urn:li:organization:164101). The presentation was part of a wider program organised by @[Innovair™](urn:li:organization:10163266) and @[CISB](urn:li:organization:2310412) – the Swedish-Brazilian Research and Innovation Centre, bringing together representatives from government, academia, and industry in both countries.\n\nIt was a great day of exchanging ideas on how digital technologies can drive the transition towards smarter and more liveable cities.",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "image",
+        "media_urn": "urn:li:image:D4D22AQFokP2DGqmp6g",
+        "image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFokP2DGqmp6g/feedshare-shrink_2048_1536/B4DZnhu6NOGkAw-/0/1760428796975?e=1763596800&v=beta&t=n76zamlbAcAIt2mhConr8plq965aKclnEA_JNLVCON8",
+        "thumbnail_urn": null,
+        "source": "self"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1760428798185,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1760428821827,
+        "visibility": "PUBLIC",
+        "publishedAt": 1760428798185,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7383773548672266240",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "media": {
+            "altText": "",
+            "id": "urn:li:image:D4D22AQFokP2DGqmp6g"
+          }
+        },
+        "commentary": "A couple of days ago, we had the pleasure of welcoming a Brazilian innovation delegation to Chalmers. Our coordinator @[Bernd Ketzler](urn:li:person:qCF20l2VxW) presented the work being done in DTCC together with @[Eric Jeansson](urn:li:person:WnP1lt0iLN) from @[Göteborgs Stad](urn:li:organization:164101). The presentation was part of a wider program organised by @[Innovair™](urn:li:organization:10163266) and @[CISB](urn:li:organization:2310412) – the Swedish-Brazilian Research and Innovation Centre, bringing together representatives from government, academia, and industry in both countries.\n\nIt was a great day of exchanging ideas on how digital technologies can drive the transition towards smarter and more liveable cities.",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
     {
       "post_id": "urn:li:share:7328718785031331840",
       "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7328718785031331840/",
@@ -15,8 +55,9 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQEbdkWX0fusCg/articleshare-shrink_1280_800/B4DZbTV8WhGwAQ-/0/1747302467632?e=1760022000&v=beta&t=rGw9If3sdYCuWlxTnIbsmV8E3Tq_gLhYyWKFYM388eg",
-        "thumbnail_urn": "urn:li:image:D4D27AQEbdkWX0fusCg"
+        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQEbdkWX0fusCg/articleshare-shrink_1280_800/B4DZbTV8WhGwAQ-/0/1747302467632?e=1761123600&v=beta&t=-7GllDJ5T7dWnKJMr7vCNxZAAWf1B5KJyH7Ye72gRes",
+        "thumbnail_urn": "urn:li:image:D4D27AQEbdkWX0fusCg",
+        "source": "self"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -56,8 +97,9 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFf5KLhqm3ptQ/feedshare-shrink_2048_1536/B4DZbNrtKKGwAo-/0/1747207509426?e=1762387200&v=beta&t=FZL-ckuHPBSbSYHGlUd3Erxy0VdZxC9yZdlTKGkp6zQ",
-        "thumbnail_urn": "urn:li:image:D4D22AQFf5KLhqm3ptQ"
+        "image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFf5KLhqm3ptQ/feedshare-shrink_2048_1536/B4DZbNrtKKGwAo-/0/1747207509426?e=1763596800&v=beta&t=B9g7AYb81nJ6eyGKZO__NVGFX1ZfWsBHe6L49z5lBeU",
+        "thumbnail_urn": "urn:li:image:D4D22AQFf5KLhqm3ptQ",
+        "source": "self"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -97,8 +139,9 @@
         "has_media": true,
         "media_type": "image",
         "media_urn": "urn:li:image:D4D22AQHt9eWuLgyunQ",
-        "image_url": "https://media.licdn.com/dms/image/v2/D4D22AQHt9eWuLgyunQ/feedshare-shrink_2048_1536/B4DZZdZZfHG0B4-/0/1745323662050?e=1762387200&v=beta&t=641xdFo3hSOV-Hm8_IOpCJBw-jgekfwU6SBtpJozAag",
-        "thumbnail_urn": null
+        "image_url": "https://media.licdn.com/dms/image/v2/D4D22AQHt9eWuLgyunQ/feedshare-shrink_2048_1536/B4DZZdZZfHG0B4-/0/1745323662050?e=1763596800&v=beta&t=LqEPc0VJLVhdjEwBMwRqrgWEOV66LGTEEqd1epk4lKM",
+        "thumbnail_urn": null,
+        "source": "self"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -136,8 +179,9 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGOaJH5sfpV3g/articleshare-shrink_800/B4DZlicWnEGkAM-/0/1758293224884?e=1760022000&v=beta&t=-epZ2ScVaRGcH_wNaCJjOdNTxcOibxumbW6iMiEw7d8",
-        "thumbnail_urn": "urn:li:image:D4D27AQGOaJH5sfpV3g"
+        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGOaJH5sfpV3g/articleshare-shrink_800/B4DZlicWnEGkAM-/0/1758293224884?e=1761123600&v=beta&t=IGvGoJE5-1ovqOdzjrDPTsXNGL34G5PHitMgbpJm2NM",
+        "thumbnail_urn": "urn:li:image:D4D27AQGOaJH5sfpV3g",
+        "source": "self"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -177,8 +221,9 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "https://media.licdn.com/dms/image/sync/v2/D5627AQGtRoFGVXuVOQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1732713690878?e=1760022000&v=beta&t=cR2ncHXyhOCUvUxHmI8gwgpns_cg59r4rCCwbSum4Yw",
-        "thumbnail_urn": "urn:li:image:D5627AQGtRoFGVXuVOQ"
+        "image_url": "https://media.licdn.com/dms/image/sync/v2/D5627AQGtRoFGVXuVOQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1732713690878?e=1761123600&v=beta&t=qTgVTxPJl-_waWtf3vVHz16fucgeOopctRg3pG8b6Gc",
+        "thumbnail_urn": "urn:li:image:D5627AQGtRoFGVXuVOQ",
+        "source": "self"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -218,8 +263,9 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGMki-RixNzYg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1732180092266?e=1760022000&v=beta&t=jFNCqHnC1numzbgQGhOWJVf3bZoyFo0EMaDRuxE6qEQ",
-        "thumbnail_urn": "urn:li:image:D4D27AQGMki-RixNzYg"
+        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGMki-RixNzYg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1732180092266?e=1761123600&v=beta&t=ug3w2qbaWhLEmqqwvNUE9e3xQGn2uYJ7i4hxYUoJ59s",
+        "thumbnail_urn": "urn:li:image:D4D27AQGMki-RixNzYg",
+        "source": "self"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -259,8 +305,9 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQE27OWKRncEiQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1730983383961?e=1760022000&v=beta&t=uGGH69YizCyXQxfJsURbYFWrX6gl5ZW0z1rk_mE3gSw",
-        "thumbnail_urn": "urn:li:image:D4D27AQE27OWKRncEiQ"
+        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQE27OWKRncEiQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1730983383961?e=1761123600&v=beta&t=VY-Vdj7Y1tOWgs2Z9av97hLVMsMZdPfqqaQ-LXgyAlg",
+        "thumbnail_urn": "urn:li:image:D4D27AQE27OWKRncEiQ",
+        "source": "self"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -300,8 +347,9 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1760022000&v=beta&t=_wswX5a9JZV-OTAeE4y9ReR_Bs1X8J2nLPf2oHGYe2I",
-        "thumbnail_urn": "urn:li:image:D4D27AQFyIHpeckUhMg"
+        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1761123600&v=beta&t=U05FKdLekS4gYRZNyq-mpMuDBj7sYZ2Ji9CmHi3Mb-Y",
+        "thumbnail_urn": "urn:li:image:D4D27AQFyIHpeckUhMg",
+        "source": "self"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -338,11 +386,12 @@
       "lifecycle_state": "PUBLISHED",
       "visibility": "PUBLIC",
       "media": {
-        "has_media": false,
-        "media_type": null,
+        "has_media": true,
+        "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": null,
-        "thumbnail_urn": null
+        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1761123600&v=beta&t=U05FKdLekS4gYRZNyq-mpMuDBj7sYZ2Ji9CmHi3Mb-Y",
+        "thumbnail_urn": "urn:li:image:D4D27AQFyIHpeckUhMg",
+        "source": "reshare_parent"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -365,49 +414,10 @@
         "lifecycleStateInfo": {
           "isEditedByAuthor": false
         }
-      }
-    },
-    {
-      "post_id": "urn:li:share:7247246349539176451",
-      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7247246349539176451/",
-      "published_at": 1727878177243,
-      "commentary": "Did you know that urban densification affects wind, heat, noise, and air quality at every level, from city blocks to individual streets? How can urban planners ensure these environmental factors are accounted for in their designs? These, and many more questions were investigated by @[Franziska Hunger](urn:li:person:RqCpkr5\\_SS) and the team working in the DTCC Milestone Project called Urban Environmental Comfort Design. Read more on our website.",
-      "lifecycle_state": "PUBLISHED",
-      "visibility": "PUBLIC",
-      "media": {
-        "has_media": true,
-        "media_type": "article_thumbnail",
-        "media_urn": null,
-        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGnjpWFPiUGsQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1727877978070?e=1760022000&v=beta&t=n4fzmrkGqZwzuO_yRagbCoUwVHKgkZMtkRAD9EjC_Rs",
-        "thumbnail_urn": "urn:li:image:D4D27AQGnjpWFPiUGsQ"
       },
-      "original_data": {
-        "isReshareDisabledByAuthor": false,
-        "createdAt": 1727878177243,
-        "lifecycleState": "PUBLISHED",
-        "lastModifiedAt": 1727878182555,
-        "visibility": "PUBLIC",
-        "publishedAt": 1727878177243,
-        "author": "urn:li:organization:100491988",
-        "id": "urn:li:share:7247246349539176451",
-        "distribution": {
-          "feedDistribution": "MAIN_FEED",
-          "thirdPartyDistributionChannels": []
-        },
-        "content": {
-          "article": {
-            "description": "Urban densification influences wind, temperature, noise, daylight and air quality in both city scales and microscales like streets, neighbourhoods, parks. While software for wind simulation is available and best-practise guidelines have been...",
-            "thumbnail": "urn:li:image:D4D27AQGnjpWFPiUGsQ",
-            "source": "https://dtcc.chalmers.se/urban-environmental-comfort-design/",
-            "title": "Urban Environmental Comfort Design",
-            "thumbnailAltText": ""
-          }
-        },
-        "commentary": "Did you know that urban densification affects wind, heat, noise, and air quality at every level, from city blocks to individual streets? How can urban planners ensure these environmental factors are accounted for in their designs? These, and many more questions were investigated by @[Franziska Hunger](urn:li:person:RqCpkr5\\_SS) and the team working in the DTCC Milestone Project called Urban Environmental Comfort Design. Read more on our website.",
-        "lifecycleStateInfo": {
-          "isEditedByAuthor": false
-        }
-      }
+      "reshare_parent_id": "urn:li:share:7234843484459827201",
+      "reshare_root_id": "urn:li:share:7234843484459827201",
+      "resolved_media_parent_id": "urn:li:share:7234843484459827201"
     }
   ]
 }
