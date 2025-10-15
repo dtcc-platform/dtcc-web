@@ -63,6 +63,9 @@
     },
     {
       "base": "lambda-test"
+    },
+    {
+      "base": "testing-youtube"
     }
   ]
 }
