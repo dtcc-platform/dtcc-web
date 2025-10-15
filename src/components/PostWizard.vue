@@ -271,13 +271,6 @@
           </div>
 
           <div class="actions">
-            <button class="btn-primary" type="button" :disabled="isSaving" @click="publishDraft">
-              <span v-if="isSaving">Saving…</span>
-              <span v-else>Save to repository</span>
-            </button>
-            <button class="btn-secondary" type="button" :disabled="isSaving" @click="downloadDraft">
-              Download JSON{{ hasUploadImages ? ' & images' : '' }}
-            </button>
             <button
               class="btn-secondary"
               type="button"
@@ -286,10 +279,14 @@
             >
               Preview
             </button>
-            <button class="btn-secondary" type="button" :disabled="isSaving" @click="resetWizard">
-              Start over
+            <button class="btn-primary" type="button" :disabled="isSaving" @click="publishDraft">
+              <span v-if="isSaving">Saving…</span>
+              <span v-else>Save to repository</span>
             </button>
-          </div>
+          <button class="btn-secondary" type="button" :disabled="isSaving" @click="resetWizard">
+            Start over
+          </button>
+        </div>
 
           <transition name="fade">
             <div v-if="successMessage" class="alert success">
