@@ -68,7 +68,7 @@
           <p class="muted helper">Used for sorting and display. Defaults to today's date.</p>
         </div>
 
-        <div v-if="postType !== 'events'" class="field selection-field">
+        <div v-if="!isEventType" class="field selection-field">
           <label>Related {{ postType === 'projects' ? 'projects' : 'news items' }}</label>
           <p class="muted helper">Select up to {{ MAX_RELATED }} related entries to feature alongside this post.</p>
           <div v-if="relatedLoading" class="muted helper">Loading related options…</div>
@@ -87,7 +87,7 @@
           </div>
         </div>
 
-        <div v-if="postType !== 'events'" class="field selection-field">
+        <div v-if="!isEventType" class="field selection-field">
           <label>Contacts</label>
           <p class="muted helper">Pick up to {{ MAX_CONTACTS }} contacts for this {{ postType === 'projects' ? 'project' : 'news item' }}.</p>
           <div v-if="contactLoading" class="muted helper">Loading contacts…</div>
@@ -348,7 +348,7 @@
                     </div>
                     <div>
                       <p class="brodtext-20 muted">{{ previewData.intro }}</p>
-                      <div v-if="previewData.section === 'events'" class="meta brodtext-20">
+                      <div v-if="isEventSection(previewData.section)" class="meta brodtext-20">
                         <strong>{{ previewData.meta }}</strong>
                         <template v-if="previewData.registration">
                           · <a class="more" :href="previewData.registration" target="_blank" rel="noopener">Register »</a>
@@ -451,14 +451,18 @@ import { resolveUrl, withBase } from '../utils/paths.js'
 const TYPE_OPTIONS = [
   { value: 'news', label: 'News' },
   { value: 'events', label: 'Events' },
+  { value: 'events-archive', label: 'Events archive' },
   { value: 'projects', label: 'Projects' },
 ]
 
 const SECTION_CONFIG = {
   news: { label: 'News', contentDir: 'news', urlPrefix: '/news/' },
   events: { label: 'Events', contentDir: 'events', urlPrefix: '/events/' },
+  'events-archive': { label: 'Events archive', contentDir: 'dtcc-1', urlPrefix: '/dtcc-1/' },
   projects: { label: 'Projects', contentDir: 'projects', urlPrefix: '/projects/' },
 }
+
+const EVENT_TYPES = new Set(['events', 'events-archive'])
 
 const {
   publishEndpoint: resolvedPublishEndpoint,
@@ -476,6 +480,7 @@ const basePath = (import.meta.env.BASE_URL || '/').replace(/\/$/, '')
 const typeOptions = TYPE_OPTIONS
 
 const postType = ref('news')
+const isEventType = computed(() => EVENT_TYPES.has(postType.value))
 const title = ref('')
 const bodyInput = ref('')
 const slug = ref('')
@@ -533,6 +538,10 @@ const hasDraft = computed(() => Boolean(draftJson.value.trim()))
 const hasUploadImages = computed(() =>
   preparedImages.value.some((img) => img.type === 'upload' && img.file)
 )
+
+function isEventSection(section) {
+  return EVENT_TYPES.has(section)
+}
 
 const imageReviewNote = computed(() => {
   if (!hasDraft.value) return ''
@@ -598,7 +607,7 @@ watch(postType, (section) => {
   selectedRelated.value = []
   refreshRelatedOptions(section)
   selectedContacts.value = []
-  if (section === 'events') {
+  if (isEventSection(section)) {
     contactOptions.value = []
     contactError.value = ''
     contactLoading.value = false
@@ -609,7 +618,7 @@ watch(postType, (section) => {
 
 onMounted(() => {
   refreshRelatedOptions(postType.value)
-  if (postType.value !== 'events') {
+  if (!isEventSection(postType.value)) {
     ensureContactsLoaded()
   }
 })
@@ -777,7 +786,7 @@ function resolveImageEntry(entry, { displayIndex, slugValue, contentDir }) {
 }
 
 async function refreshRelatedOptions(section) {
-  if (section === 'events') {
+  if (isEventSection(section)) {
     relatedOptions.value = []
     relatedError.value = ''
     relatedLoading.value = false
@@ -982,7 +991,7 @@ function prepareDraft() {
     }
 
     let payload
-    if (section === 'events') {
+    if (isEventSection(section)) {
       payload = {
         title: titleValue,
         summary,
@@ -1036,7 +1045,7 @@ function prepareDraft() {
       paperLinks.value = [createPaperLink()]
     }
 
-  if (postType.value !== 'events') {
+  if (!isEventSection(section)) {
     if (selectedRelated.value.length) {
       payload.related = [...selectedRelated.value]
     } else {
@@ -1218,7 +1227,7 @@ async function updateManifest(sectionDir, section, slugValue, data, image, { for
         manifest.items[index] = entry
       }
     }
-  } else if (section === 'events') {
+  } else if (isEventSection(section)) {
     const entry = {
       id: slugValue,
       title: data.title || slugValue,
@@ -1278,7 +1287,7 @@ async function publishDraft() {
     return
   }
 
-  if (postType.value !== 'events') {
+  if (!isEventSection(postType.value)) {
     if (selectedRelated.value.length) {
       parsed.related = [...selectedRelated.value]
     } else {
@@ -1354,7 +1363,7 @@ async function publishDraft() {
     parsed.image = parsed.images[0]
   }
 
-  const manifestImage = section === 'events' ? '' : (typeof parsed.image === 'string' ? parsed.image.trim() : '')
+  const manifestImage = isEventSection(section) ? '' : (typeof parsed.image === 'string' ? parsed.image.trim() : '')
   const commitMessage = buildCommitMessage(section, slugValue)
 
   isSaving.value = true
@@ -1608,18 +1617,18 @@ async function openPreview() {
     let meta = ''
     let registration = ''
     let visitUrl = ''
-    if (section === 'events') {
+    if (isEventSection(section)) {
       meta = parsed.meta || formatEventMeta(parsed)
       registration = normalizePreviewLink(parsed.registration || '')
     } else if (section === 'projects') {
       visitUrl = normalizePreviewLink(parsed.url || '')
     }
 
-    const related = section === 'events'
+    const related = isEventSection(section)
       ? []
       : await loadPreviewRelated(section, Array.isArray(parsed.related) ? parsed.related : [])
 
-    const contacts = section === 'events'
+    const contacts = isEventSection(section)
       ? []
       : await loadPreviewContacts(Array.isArray(parsed.contacts) ? parsed.contacts : [])
 
