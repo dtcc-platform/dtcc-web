@@ -1,0 +1,16 @@
+{
+  "title": "testing 3",
+  "summary": "testing 3",
+  "url": "/news/testing-3",
+  "body": "testing 3",
+  "eyebrow": "News",
+  "date": "2025-10-12",
+  "related": [
+    "i-am-trying-to-check-related-news",
+    "still-checking-relation"
+  ],
+  "contacts": [
+    "nadia-tahir",
+    "bernt-ketzler"
+  ]
+}

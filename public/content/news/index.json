@@ -1,10 +1,16 @@
 {
   "items": [
     {
+      "base": "test-for-nadia"
+    },
+    {
       "base": "i-am-trying-to-check-related-news"
     },
     {
       "base": "still-checking-relation"
+    },
+    {
+      "base": "testing-3"
     },
     {
       "base": "testing-users"
