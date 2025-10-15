@@ -59,6 +59,10 @@
     },
     {
       "base": "lambda-test"
+    },
+    {
+      "base": "test193",
+      "image": "content/news/test193.png"
     }
   ]
 }
