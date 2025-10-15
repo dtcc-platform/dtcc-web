@@ -256,14 +256,11 @@
       <transition name="fade">
         <section v-if="hasDraft" class="review">
           <header>
-            <h2>Review &amp; refine</h2>
-            <p class="muted helper">Tweak the JSON as needed before saving.</p>
+            <h2>Draft ready</h2>
+            <p class="muted helper">
+              Preview and save when you are ready. Update the form and create a new draft to make changes.
+            </p>
           </header>
-          <div class="field">
-            <label for="draft-json">Draft JSON</label>
-            <textarea id="draft-json" v-model="draftJson" rows="12" spellcheck="false"></textarea>
-          </div>
-
           <p v-if="imageReviewNote" class="muted helper">{{ imageReviewNote }}</p>
           <p v-if="videoReviewNote" class="muted helper">{{ videoReviewNote }}</p>
           <p class="muted helper">{{ saveTargetNote }}</p>
@@ -314,10 +311,10 @@
               <span v-if="isSaving">Saving…</span>
               <span v-else>Save to repository</span>
             </button>
-          <button class="btn-secondary" type="button" :disabled="isSaving" @click="resetWizard">
-            Start over
-          </button>
-        </div>
+            <button class="btn-secondary" type="button" :disabled="isSaving" @click="resetWizard">
+              Start over
+            </button>
+          </div>
 
           <transition name="fade">
             <div v-if="successMessage" class="alert success">
@@ -1272,12 +1269,12 @@ async function publishDraft() {
   try {
     parsed = JSON.parse(draftJson.value)
   } catch (err) {
-    errorMessage.value = 'Fix the JSON before saving.'
+    errorMessage.value = 'Regenerate the draft before saving.'
     return
   }
 
   if (!parsed.title) {
-    errorMessage.value = 'The JSON needs a "title" field before publishing.'
+    errorMessage.value = 'Add a title before publishing the draft.'
     return
   }
 
@@ -1391,7 +1388,7 @@ async function publishToFileSystem({ parsed, slugValue, section, uploadStates, c
       if (!state.file) continue
       const imagePath = typeof state.jsonValue === 'string' ? state.jsonValue : ''
       if (!imagePath.startsWith(expectedPrefix)) {
-        throw new Error(`Uploaded image path must live under ${expectedPrefix}. Update the JSON before saving.`)
+        throw new Error(`Uploaded image path must live under ${expectedPrefix}. Regenerate the draft before saving.`)
       }
       const targetName = imagePath.slice(expectedPrefix.length)
       await writeBinaryFile(sectionDir, targetName, state.file, { force: forceOverwrite.value })
@@ -1432,7 +1429,7 @@ async function publishViaApi({ parsed, slugValue, section, uploadStates, config,
         ? state.jsonValue
         : (Array.isArray(parsed.images) ? parsed.images[state.displayIndex] : '')
       if (!imagePath || !imagePath.startsWith(expectedPrefix)) {
-        throw new Error(`Uploaded image path must live under ${expectedPrefix}. Update the JSON before saving.`)
+        throw new Error(`Uploaded image path must live under ${expectedPrefix}. Regenerate the draft before saving.`)
       }
       const filename = imagePath.slice(expectedPrefix.length)
       body.imageUploads.push({
@@ -1593,7 +1590,7 @@ async function openPreview() {
     parsed = JSON.parse(draftJson.value)
   } catch (_) {
     previewLoading.value = false
-    previewError.value = 'Fix the JSON before previewing.'
+    previewError.value = 'Regenerate the draft before previewing.'
     previewData.value = null
     return
   }
