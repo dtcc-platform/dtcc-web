@@ -69,6 +69,10 @@
     },
     {
       "base": "lambda-test"
+    },
+    {
+      "base": "new-tests-for-nadia",
+      "image": "content/news/new-tests-for-nadia.png"
     }
   ]
 }
