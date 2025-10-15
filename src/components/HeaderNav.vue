@@ -9,16 +9,19 @@
         </div>
       </a>
       <nav class="menu">
-        <a v-for="link in navLinks" :key="link.label" :href="link.href">{{ link.label }}</a>
-        <a v-if="isAuthenticated" :href="postHref">Post</a>
-        <button
-          v-if="isAuthenticated"
-          class="logout-btn"
-          type="button"
-          @click="handleLogout"
-        >
-          Logout
-        </button>
+        <div class="links">
+          <a v-for="link in navLinks" :key="link.label" :href="link.href">{{ link.label }}</a>
+        </div>
+        <div v-if="isAuthenticated" class="actions">
+          <a class="post-link" :href="postHref">Post</a>
+          <button
+            class="logout-btn"
+            type="button"
+            @click="handleLogout"
+          >
+            Logout
+          </button>
+        </div>
       </nav>
     </div>
   </header>
@@ -73,8 +76,12 @@ function handleLogout() {
 .brand-text { display: grid; font-size: 12px; line-height: 1; text-transform: uppercase; letter-spacing: .06em; }
 .brand-text strong { color: white; font-weight: 700; }
 .menu { display: flex; gap: 20px; align-items: center; }
+.links { display: flex; gap: 20px; align-items: center; }
+.actions { display: flex; gap: 16px; align-items: center; }
 .menu a { color: var(--unnamed-color-fada36); font-size: 14px; text-transform: uppercase; letter-spacing: .08em; }
 .menu a:hover { color: white; text-decoration: none; }
+.post-link { color: white; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+.post-link:hover { color: var(--unnamed-color-fada36); }
 .logout-btn {
   border: 1px solid rgba(255,255,255,0.4);
   background: transparent;
@@ -92,6 +99,7 @@ function handleLogout() {
   border-color: rgba(255,255,255,0.6);
 }
 @media (max-width: 900px) {
-  .menu { display: none; }
+  .links { display: none; }
+  .menu { gap: 12px; }
 }
 </style>
