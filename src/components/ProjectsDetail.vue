@@ -14,7 +14,7 @@
           </div>
         </div>
       </div>
-      <div class="container">
+      <div v-if="item.image" class="container">
         <div class="hero-img card" :style="{ backgroundImage: heroImageStyle }"></div>
       </div>
     </section>
@@ -27,6 +27,14 @@
         </div>
         <div>
           <p class="brodtext-20 muted" v-for="(p, i) in bodyParas" :key="i" v-text="p" />
+          <div v-if="gallery.length" class="gallery">
+            <div
+              v-for="(img, i) in gallery"
+              :key="`${i}-${img}`"
+              class="gallery-card"
+              :style="{ backgroundImage: `url(${img})` }"
+            ></div>
+          </div>
         </div>
       </div>
     </section>
@@ -77,6 +85,7 @@ const related = ref([])
 const contacts = ref([])
 const MAX_CONTACTS = 2
 const heroImageStyle = computed(() => item.value?.image ? `url(${item.value.image})` : undefined)
+const gallery = computed(() => (item.value?.images || []).slice(1))
 
 const bodyParas = computed(() => {
   const body = item.value?.body || ''
@@ -107,13 +116,34 @@ onMounted(async () => {
     const r = await fetch(resolveUrl(`content/projects/${slug}.json`), { cache: 'no-store' })
     if (!r.ok) return
     const data = await r.json()
+    const orderedImages = []
+    if (Array.isArray(data.images)) {
+      for (const entry of data.images) {
+        const normalized = normalizeImage(entry)
+        if (normalized && !orderedImages.includes(normalized)) {
+          orderedImages.push(normalized)
+        }
+      }
+    }
+    let headlineImage = normalizeImage(data.image || null)
+    if (headlineImage) {
+      const existingIndex = orderedImages.indexOf(headlineImage)
+      if (existingIndex !== -1) {
+        orderedImages.splice(existingIndex, 1)
+      }
+      orderedImages.unshift(headlineImage)
+    } else if (orderedImages.length) {
+      headlineImage = orderedImages[0]
+    }
+
     item.value = {
       id: slug,
       title: data.title || data.name || slug,
       intro: data.intro || data.summary || data.description || '',
       subheading: data.subheading || data.headline || 'Details',
       body: data.body || data.details || '',
-      image: normalizeImage(data.image || null),
+      image: headlineImage,
+      images: orderedImages,
       url: normalizeLink(data.url || data.link || ''),
       date: data.date || data.updated || null,
     }
@@ -129,7 +159,7 @@ onMounted(async () => {
             id: refSlug,
             title: refData.title || refSlug,
             summary: refData.summary || refData.excerpt || refData.description || '',
-            image: normalizeImage(refData.image || null),
+            image: normalizeImage(refData.image || (Array.isArray(refData.images) ? refData.images[0] : null)),
           })
         } catch (_) {}
       }
@@ -193,6 +223,8 @@ async function loadUsersMap() {
 .visit { margin-top: 10px; }
 
 .body { padding-top: 24px; padding-bottom: 24px; }
+.gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+.gallery-card { height: 260px; border-radius: 12px; background: #000 center/cover no-repeat; }
 
 .contacts .people { margin-top: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
 .contacts .person { text-align: left; display: flex; flex-direction: column; gap: 6px; }
@@ -209,6 +241,8 @@ async function loadUsersMap() {
 @media (max-width: 1000px) {
   .grid2 { grid-template-columns: 1fr; }
   .hero-img { height: 240px; }
+  .gallery { grid-template-columns: 1fr; }
+  .gallery-card { height: 220px; }
   .contacts .people { grid-template-columns: 1fr; }
   .related .cards { grid-template-columns: 1fr; }
 }

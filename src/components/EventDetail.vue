@@ -16,6 +16,9 @@
           </div>
         </div>
       </div>
+      <div v-if="item.image" class="container">
+        <div class="hero-img card" :style="{ backgroundImage: heroImageStyle }"></div>
+      </div>
     </section>
 
     <section class="section gradient-sunrise body">
@@ -25,6 +28,14 @@
         </div>
         <div>
           <p class="brodtext-20 muted" v-for="(p, i) in bodyParas" :key="i" v-text="p" />
+          <div v-if="gallery.length" class="gallery">
+            <div
+              v-for="(img, i) in gallery"
+              :key="`${i}-${img}`"
+              class="gallery-card"
+              :style="{ backgroundImage: `url(${img})` }"
+            ></div>
+          </div>
         </div>
       </div>
     </section>
@@ -33,7 +44,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { sanitizeUrl } from '../utils/sanitize'
+import { sanitizeSrc, sanitizeUrl } from '../utils/sanitize'
 import { resolveUrl } from '../utils/paths.js'
 
 const normalizeLink = (value) => {
@@ -48,6 +59,8 @@ const normalizeLink = (value) => {
 const params = new URLSearchParams(location.search)
 const slug = params.get('slug')
 const item = ref(null)
+const heroImageStyle = computed(() => item.value?.image ? `url(${item.value.image})` : undefined)
+const gallery = computed(() => (item.value?.images || []).slice(1))
 
 const suffixDay = (n) => {
   const s = ['th', 'st', 'nd', 'rd']
@@ -75,17 +88,44 @@ const bodyParas = computed(() => {
   return String(body).split(/\n\n+/).map(s => s.trim()).filter(Boolean)
 })
 
+const normalizeImage = (value) => {
+  if (!value) return null
+  return sanitizeSrc(resolveUrl(value))
+}
+
 onMounted(async () => {
   if (!slug) return
   try {
     const r = await fetch(resolveUrl(`content/events/${slug}.json`), { cache: 'no-store' })
     if (!r.ok) return
     const data = await r.json()
+    const orderedImages = []
+    if (Array.isArray(data.images)) {
+      for (const entry of data.images) {
+        const normalized = normalizeImage(entry)
+        if (normalized && !orderedImages.includes(normalized)) {
+          orderedImages.push(normalized)
+        }
+      }
+    }
+    let headlineImage = normalizeImage(data.image || null)
+    if (headlineImage) {
+      const existingIndex = orderedImages.indexOf(headlineImage)
+      if (existingIndex !== -1) {
+        orderedImages.splice(existingIndex, 1)
+      }
+      orderedImages.unshift(headlineImage)
+    } else if (orderedImages.length) {
+      headlineImage = orderedImages[0]
+    }
+
     item.value = {
       id: slug,
       title: data.title || slug,
       summary: data.summary || data.description || '',
       body: data.body || '',
+      image: headlineImage,
+      images: orderedImages,
       date: data.date || null,
       timeStart: data.timeStart || null,
       timeEnd: data.timeEnd || null,
@@ -101,10 +141,16 @@ onMounted(async () => {
 .intro { padding-top: 36px; }
 .grid2 { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items: start; }
 .meta strong { font-weight: 600; }
+.hero-img { height: 320px; border-radius: 14px; margin-top: 16px; background: #000 center/cover no-repeat; }
 
 .body { padding-top: 24px; padding-bottom: 24px; }
+.gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+.gallery-card { height: 240px; border-radius: 12px; background: #000 center/cover no-repeat; }
 
 @media (max-width: 1000px) {
   .grid2 { grid-template-columns: 1fr; }
+  .hero-img { height: 220px; }
+  .gallery { grid-template-columns: 1fr; }
+  .gallery-card { height: 200px; }
 }
 </style>

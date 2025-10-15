@@ -110,42 +110,89 @@
         </div>
 
         <fieldset class="field image-fieldset">
-          <legend>Image</legend>
-          <div class="image-options">
-            <label>
-              <input type="radio" value="none" v-model="imageSource">
-              No image
-            </label>
-            <label>
-              <input type="radio" value="url" v-model="imageSource">
-              Link to an online image
-            </label>
-            <label>
-              <input type="radio" value="upload" v-model="imageSource">
-              Upload from your computer
-            </label>
+          <legend>Images</legend>
+
+          <div v-for="(image, index) in imageEntries" :key="image.id" class="image-entry">
+            <div class="image-entry-header">
+              <span class="image-entry-title">
+                {{ index === 0 ? 'Headline image' : `Additional image ${index}` }}
+              </span>
+              <button
+                v-if="index > 0"
+                type="button"
+                class="btn-icon"
+                aria-label="Remove image"
+                @click="removeImageEntry(index)"
+              >
+                ×
+              </button>
+            </div>
+
+            <div class="image-options">
+              <label>
+                <input
+                  type="radio"
+                  value="none"
+                  :checked="image.source === 'none'"
+                  @change="updateImageSource(image, 'none')"
+                >
+                No image
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="url"
+                  :checked="image.source === 'url'"
+                  @change="updateImageSource(image, 'url')"
+                >
+                Link to an online image
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="upload"
+                  :checked="image.source === 'upload'"
+                  @change="updateImageSource(image, 'upload')"
+                >
+                Upload from your computer
+              </label>
+            </div>
+
+            <div class="field" v-if="image.source === 'url'">
+              <label :for="`image-url-${image.id}`">Image URL</label>
+              <input
+                :id="`image-url-${image.id}`"
+                v-model="image.url"
+                type="url"
+                placeholder="https://images.unsplash.com/..."
+                autocomplete="off"
+              >
+              <p class="muted helper">Remote URLs are stored directly in the JSON and manifest.</p>
+            </div>
+
+            <div class="field" v-else-if="image.source === 'upload'">
+              <label :for="`image-file-${image.id}`">Select image</label>
+              <input
+                :id="`image-file-${image.id}`"
+                type="file"
+                accept="image/*"
+                @change="onImageFileChange($event, image)"
+              >
+              <p class="muted helper">
+                Saved next to the JSON as <code>{{ uploadPathFor(image, index) }}</code>. Recommended size ≥ 1200px wide.
+              </p>
+              <p v-if="image.fileName" class="file-pill">{{ image.fileName }}</p>
+            </div>
           </div>
 
-          <div class="field" v-if="imageSource === 'url'">
-            <label for="image-url">Image URL</label>
-            <input
-              id="image-url"
-              v-model="imageUrl"
-              type="url"
-              placeholder="https://images.unsplash.com/..."
-              autocomplete="off"
-            >
-            <p class="muted helper">Remote URLs are stored directly in the JSON and manifest.</p>
-          </div>
-
-          <div class="field" v-else-if="imageSource === 'upload'">
-            <label for="image-file">Select image</label>
-            <input id="image-file" type="file" accept="image/*" @change="onImageFileChange">
-            <p class="muted helper">
-              Saved next to the JSON as <code>{{ computedImagePath }}</code>. Recommended size ≥ 1200px wide.
-            </p>
-            <p v-if="imageFileName" class="file-pill">{{ imageFileName }}</p>
-          </div>
+          <button
+            type="button"
+            class="btn-secondary add-image-btn"
+            @click="addImageEntry"
+            :disabled="imageEntries.length >= MAX_IMAGES"
+          >
+            + Add image
+          </button>
         </fieldset>
 
         <div class="actions">
@@ -216,7 +263,7 @@
               <span v-else>Save to repository</span>
             </button>
             <button class="btn-secondary" type="button" :disabled="isSaving" @click="downloadDraft">
-              Download JSON{{ preparedImage.type === 'upload' && preparedImage.file ? ' & image' : '' }}
+              Download JSON{{ hasUploadImages ? ' & images' : '' }}
             </button>
             <button class="btn-secondary" type="button" :disabled="isSaving" @click="resetWizard">
               Start over
@@ -284,20 +331,10 @@ const contactError = ref('')
 const selectedContacts = ref([])
 const contactSelectionFull = computed(() => selectedContacts.value.length >= MAX_CONTACTS)
 
-const imageSource = ref('none')
-const imageUrl = ref('')
-const imageFile = ref(null)
-const imageFileName = ref('')
-const imageFileExtension = ref('')
-
-const preparedImage = ref({
-  type: 'none',
-  jsonValue: '',
-  manifestValue: '',
-  ext: '',
-  file: null,
-  section: postType.value,
-})
+const MAX_IMAGES = 6
+const imageEntries = ref([])
+const preparedImages = ref([])
+initializeImageEntries()
 
 const draftSection = ref(null)
 const draftJson = ref('')
@@ -319,30 +356,35 @@ const draftSectionLabel = computed(() =>
 )
 
 const computedSlug = computed(() => slug.value.trim() || slugify(title.value))
-const computedImagePath = computed(() => {
-  const baseSlug = computedSlug.value || 'post-entry'
-  const ext = imageFileExtension.value || inferExtensionFromName(imageFileName.value) || '.jpg'
-  return `content/${contentSubdir.value}/${baseSlug}${ext}`
-})
-
 const hasDraft = computed(() => Boolean(draftJson.value.trim()))
+
+const hasUploadImages = computed(() =>
+  preparedImages.value.some((img) => img.type === 'upload' && img.file)
+)
 
 const imageReviewNote = computed(() => {
   if (!hasDraft.value) return ''
-  const state = preparedImage.value
-  if (state.type === 'url' && state.manifestValue) {
-    if (state.section !== postType.value) {
-      return `Draft image points to ${state.manifestValue}. Regenerate the draft after switching to ${currentTypeLabel.value}.`
-    }
-    return `Using remote image ${state.manifestValue}.`
+  if (!preparedImages.value.length) {
+    return 'No images selected. Manifest entry will omit an image reference.'
   }
-  if (state.type === 'upload' && state.jsonValue) {
-    if (state.section !== postType.value) {
-      return `Draft image is set to ${state.jsonValue}. Regenerate the draft after switching to ${currentTypeLabel.value}.`
-    }
-    return `Image will be saved as ${state.jsonValue}.`
+  const [headline, ...extras] = preparedImages.value
+  const parts = []
+  if (headline) {
+    const detail =
+      headline.type === 'upload'
+        ? `will be saved as ${headline.jsonValue}`
+        : `uses ${headline.jsonValue}`
+    parts.push(`Headline image ${detail}.`)
   }
-  return 'No image selected. Manifest entry will omit an image reference.'
+  if (extras.length) {
+    const uploadCount = extras.filter((img) => img.type === 'upload').length
+    const remoteCount = extras.length - uploadCount
+    const detailSegments = []
+    if (uploadCount) detailSegments.push(`${uploadCount} upload${uploadCount > 1 ? 's' : ''}`)
+    if (remoteCount) detailSegments.push(`${remoteCount} remote URL${remoteCount > 1 ? 's' : ''}`)
+    parts.push(`Additional images include ${detailSegments.join(' and ')}.`)
+  }
+  return parts.join(' ')
 })
 
 const saveTargetNote = computed(() => {
@@ -362,17 +404,6 @@ watch(title, (value) => {
 watch(slug, (value) => {
   if (!value) {
     slugWasEdited.value = false
-  }
-})
-
-watch(imageSource, (mode) => {
-  if (mode !== 'upload') {
-    imageFile.value = null
-    imageFileName.value = ''
-    imageFileExtension.value = ''
-  }
-  if (mode !== 'url') {
-    imageUrl.value = ''
   }
 })
 
@@ -424,6 +455,116 @@ function deriveExtension(file) {
     'image/avif': '.avif',
   }
   return map[file.type] || ''
+}
+
+function uploadPathFor(entry, index) {
+  const baseSlug = computedSlug.value || 'post-entry'
+  const displayIndex = displayIndexFor(index)
+  const suffix = displayIndex === 0 ? '' : `-${displayIndex}`
+  const ext = entry.fileExtension || inferExtensionFromName(entry.fileName) || '.jpg'
+  return `content/${contentSubdir.value}/${baseSlug}${suffix}${ext}`
+}
+
+function displayIndexFor(index) {
+  let count = 0
+  for (let i = 0; i < index; i += 1) {
+    const entry = imageEntries.value[i]
+    if (!entry) continue
+    if (entry.source === 'upload') {
+      count += 1
+      continue
+    }
+    if (entry.source === 'url' && entry.url && entry.url.trim()) {
+      count += 1
+    }
+  }
+  return count
+}
+
+function updateImageSource(entry, mode) {
+  entry.source = mode
+  if (mode !== 'upload') {
+    entry.file = null
+    entry.fileName = ''
+    entry.fileExtension = ''
+  }
+  if (mode !== 'url') {
+    entry.url = ''
+  }
+}
+
+function onImageFileChange(event, entry) {
+  const file = event?.target?.files?.[0]
+  if (!file) {
+    entry.file = null
+    entry.fileName = ''
+    entry.fileExtension = ''
+    return
+  }
+  entry.file = file
+  entry.fileName = file.name || 'uploaded-image'
+  entry.fileExtension = deriveExtension(file)
+}
+
+function addImageEntry() {
+  if (imageEntries.value.length >= MAX_IMAGES) return
+  imageEntries.value = [...imageEntries.value, createImageEntry()]
+}
+
+function removeImageEntry(index) {
+  if (index <= 0) return
+  const next = [...imageEntries.value]
+  next.splice(index, 1)
+  imageEntries.value = next.length ? next : [createImageEntry({ isHero: true })]
+}
+
+function initializeImageEntries() {
+  imageEntries.value = [createImageEntry({ isHero: true })]
+}
+
+function createImageEntry({ isHero = false } = {}) {
+  return {
+    id: `img-${Math.random().toString(36).slice(2, 10)}`,
+    isHero,
+    source: isHero ? 'none' : 'upload',
+    url: '',
+    file: null,
+    fileName: '',
+    fileExtension: '',
+  }
+}
+
+function resolveImageEntry(entry, { displayIndex, slugValue, contentDir }) {
+  if (!entry) return null
+  if (entry.source === 'none') return null
+  if (entry.source === 'url') {
+    const remote = (entry.url || '').trim()
+    if (!remote) return null
+    return {
+      type: 'url',
+      image: remote,
+      ext: '',
+      file: null,
+    }
+  }
+  if (entry.source === 'upload') {
+    const file = entry.file
+    if (!file) {
+      const label = displayIndex === 0 ? 'headline image' : `image #${displayIndex + 1}`
+      throw new Error(`Select a file for the ${label} or remove it.`)
+    }
+    const ext = entry.fileExtension || deriveExtension(file) || '.jpg'
+    const suffix = displayIndex === 0 ? '' : `-${displayIndex}`
+    const filename = `${slugValue}${suffix}${ext}`
+    const jsonValue = `content/${contentDir}/${filename}`
+    return {
+      type: 'upload',
+      image: jsonValue,
+      ext,
+      file,
+    }
+  }
+  return null
 }
 
 async function refreshRelatedOptions(section) {
@@ -567,19 +708,6 @@ function createSummary(body) {
   return `${condensed.slice(0, 177).trimEnd()}…`
 }
 
-function onImageFileChange(event) {
-  const file = event?.target?.files?.[0]
-  if (!file) {
-    imageFile.value = null
-    imageFileName.value = ''
-    imageFileExtension.value = ''
-    return
-  }
-  imageFile.value = file
-  imageFileName.value = file.name || 'uploaded-image'
-  imageFileExtension.value = deriveExtension(file)
-}
-
 function prepareDraft() {
   errorMessage.value = ''
   successMessage.value = ''
@@ -609,41 +737,28 @@ function prepareDraft() {
     const config = SECTION_CONFIG[section] || SECTION_CONFIG.news
     const contentDir = config.contentDir
 
-    let imageEntry = ''
-    if (imageSource.value === 'url') {
-      const remote = imageUrl.value.trim()
-      if (remote) {
-        imageEntry = remote
-        preparedImage.value = {
-          type: 'url',
-          jsonValue: remote,
-          manifestValue: remote,
-          ext: '',
-          file: null,
-          section,
-        }
-      } else {
-        preparedImage.value = { type: 'none', jsonValue: '', manifestValue: '', ext: '', file: null, section }
-      }
-    } else if (imageSource.value === 'upload') {
-      const file = imageFile.value
-      if (!file) {
-        throw new Error('Select an image to upload or choose a different image option.')
-      }
-      const ext = imageFileExtension.value || deriveExtension(file) || '.jpg'
-      const filename = `${slugValue}${ext}`
-      imageEntry = `content/${contentDir}/${filename}`
-      preparedImage.value = {
-        type: 'upload',
-        jsonValue: imageEntry,
-        manifestValue: imageEntry,
-        ext,
-        file,
+    const collectedImages = []
+    const preparedList = []
+    imageEntries.value.forEach((entry, index) => {
+      if (!entry) return
+      const resolved = resolveImageEntry(entry, {
+        displayIndex: collectedImages.length,
+        slugValue,
+        contentDir,
+      })
+      if (!resolved) return
+      collectedImages.push(resolved.image)
+      preparedList.push({
+        type: resolved.type,
+        jsonValue: resolved.image,
+        ext: resolved.ext || '',
+        file: resolved.file || null,
         section,
-      }
-    } else {
-      preparedImage.value = { type: 'none', jsonValue: '', manifestValue: '', ext: '', file: null, section }
-    }
+        entryIndex: index,
+        displayIndex: collectedImages.length - 1,
+      })
+    })
+    preparedImages.value = preparedList
 
     let payload
     if (section === 'events') {
@@ -653,7 +768,6 @@ function prepareDraft() {
         body: normalizedBody,
         date: isoDate,
       }
-      if (imageEntry) payload.image = imageEntry
     } else if (section === 'projects') {
       payload = {
         title: titleValue,
@@ -665,7 +779,6 @@ function prepareDraft() {
         url: `${config.urlPrefix}${slugValue}`,
         date: isoDate,
       }
-      if (imageEntry) payload.image = imageEntry
     } else {
       payload = {
         title: titleValue,
@@ -675,7 +788,14 @@ function prepareDraft() {
         eyebrow: 'News',
         date: isoDate,
       }
-      if (imageEntry) payload.image = imageEntry
+    }
+
+    if (collectedImages.length) {
+      payload.image = collectedImages[0]
+      payload.images = collectedImages
+    } else {
+      delete payload.image
+      delete payload.images
     }
 
   if (postType.value !== 'events') {
@@ -943,22 +1063,29 @@ async function publishDraft() {
   const section = postType.value
   const config = SECTION_CONFIG[section] || SECTION_CONFIG.news
 
-  const uploadState = preparedImage.value.type === 'upload' && preparedImage.value.file
-    ? preparedImage.value
-    : null
+  const uploadStates = preparedImages.value.filter((img) => img.type === 'upload' && img.file)
 
-  if (uploadState) {
-    const ext = uploadState.ext || deriveExtension(uploadState.file) || '.jpg'
+  if (uploadStates.length) {
     const expectedPrefix = `content/${config.contentDir}/`
-    let imagePath = typeof parsed.image === 'string' ? parsed.image.trim() : ''
-    if (!imagePath || uploadState.section !== section || !imagePath.startsWith(expectedPrefix)) {
-      imagePath = `${expectedPrefix}${slugValue}${ext}`
-    }
-    if (!imagePath.startsWith(expectedPrefix)) {
-      errorMessage.value = `Uploaded image path must live under ${expectedPrefix}. Update the JSON before saving.`
-      return
-    }
-    parsed.image = imagePath
+    const imagesArray = Array.isArray(parsed.images) ? [...parsed.images] : []
+    uploadStates.forEach((state) => {
+      const ext = state.ext || (state.file ? deriveExtension(state.file) : '') || '.jpg'
+      const suffix = state.displayIndex === 0 ? '' : `-${state.displayIndex}`
+      const filename = `${slugValue}${suffix}${ext}`
+      const imagePath = `${expectedPrefix}${filename}`
+      imagesArray[state.displayIndex] = imagePath
+      if (state.displayIndex === 0) {
+        parsed.image = imagePath
+      }
+      state.jsonValue = imagePath
+      state.section = section
+      state.ext = ext
+    })
+    parsed.images = imagesArray
+  }
+
+  if (Array.isArray(parsed.images) && parsed.images.length && !parsed.image) {
+    parsed.image = parsed.images[0]
   }
 
   const manifestImage = section === 'events' ? '' : (typeof parsed.image === 'string' ? parsed.image.trim() : '')
@@ -967,9 +1094,9 @@ async function publishDraft() {
   isSaving.value = true
   try {
     if (remotePublishEnabled.value) {
-      await publishViaApi({ parsed, slugValue, section, uploadState, config, commitMessage })
+      await publishViaApi({ parsed, slugValue, section, uploadStates, config, commitMessage })
     } else {
-      await publishToFileSystem({ parsed, slugValue, section, uploadState, config, manifestImage })
+      await publishToFileSystem({ parsed, slugValue, section, uploadStates, config, manifestImage })
     }
   } catch (err) {
     errorMessage.value = err instanceof Error ? err.message : String(err)
@@ -983,32 +1110,32 @@ function buildCommitMessage(section, slugValue) {
   return `Add ${label} entry ${slugValue}`
 }
 
-async function publishToFileSystem({ parsed, slugValue, section, uploadState, config, manifestImage }) {
+async function publishToFileSystem({ parsed, slugValue, section, uploadStates, config, manifestImage }) {
   const root = await ensureRepoHandle()
   const sectionDir = await getContentDirectory(root, config.contentDir)
 
   await writeJsonFile(sectionDir, `${slugValue}.json`, parsed, { force: forceOverwrite.value })
 
-  if (uploadState) {
+  if (uploadStates && uploadStates.length) {
     const expectedPrefix = `content/${config.contentDir}/`
-    const imagePath = parsed.image
-    const targetName = imagePath.startsWith(expectedPrefix)
-      ? imagePath.slice(expectedPrefix.length)
-      : `${slugValue}${uploadState.ext || '.jpg'}`
-    await writeBinaryFile(sectionDir, targetName, uploadState.file, { force: forceOverwrite.value })
+    for (const state of uploadStates) {
+      if (!state.file) continue
+      const imagePath = typeof state.jsonValue === 'string' ? state.jsonValue : ''
+      if (!imagePath.startsWith(expectedPrefix)) {
+        throw new Error(`Uploaded image path must live under ${expectedPrefix}. Update the JSON before saving.`)
+      }
+      const targetName = imagePath.slice(expectedPrefix.length)
+      await writeBinaryFile(sectionDir, targetName, state.file, { force: forceOverwrite.value })
+    }
   }
 
   const added = await updateManifest(sectionDir, section, slugValue, parsed, manifestImage, { force: forceOverwrite.value })
 
   successMessage.value = `Saved public/content/${config.contentDir}/${slugValue}.json${added ? ' and updated index.json.' : '.'}`
   draftSection.value = section
-  preparedImage.value = {
-    ...preparedImage.value,
-    section,
-  }
 }
 
-async function publishViaApi({ parsed, slugValue, section, uploadState, config, commitMessage }) {
+async function publishViaApi({ parsed, slugValue, section, uploadStates, config, commitMessage }) {
   if (!publishEndpoint) {
     throw new Error('Publish endpoint is not configured.')
   }
@@ -1027,16 +1154,27 @@ async function publishViaApi({ parsed, slugValue, section, uploadState, config, 
     body.commitMessage = commitMessage
   }
 
-  if (uploadState) {
+  if (uploadStates && uploadStates.length) {
     const expectedPrefix = `content/${config.contentDir}/`
-    const imagePath = typeof parsed.image === 'string' ? parsed.image.trim() : ''
-    const filename = imagePath.startsWith(expectedPrefix)
-      ? imagePath.slice(expectedPrefix.length)
-      : `${slugValue}${uploadState.ext || '.jpg'}`
-    body.imageUpload = {
-      filename,
-      contentType: uploadState.file.type || 'application/octet-stream',
-      data: await fileToBase64(uploadState.file),
+    body.imageUploads = []
+    for (const state of uploadStates) {
+      if (!state.file) continue
+      const imagePath = typeof state.jsonValue === 'string'
+        ? state.jsonValue
+        : (Array.isArray(parsed.images) ? parsed.images[state.displayIndex] : '')
+      if (!imagePath || !imagePath.startsWith(expectedPrefix)) {
+        throw new Error(`Uploaded image path must live under ${expectedPrefix}. Update the JSON before saving.`)
+      }
+      const filename = imagePath.slice(expectedPrefix.length)
+      body.imageUploads.push({
+        filename,
+        index: state.displayIndex,
+        contentType: state.file.type || 'application/octet-stream',
+        data: await fileToBase64(state.file),
+      })
+    }
+    if (!body.imageUploads.length) {
+      delete body.imageUploads
     }
   }
 
@@ -1075,10 +1213,6 @@ async function publishViaApi({ parsed, slugValue, section, uploadState, config, 
   const manifestNote = manifestUpdated ? ' (manifest updated).' : '.'
   successMessage.value = `Published ${config.contentDir}/${slugValue}.json via API${manifestNote} Updates will be live within ~30 seconds.`
   draftSection.value = section
-  preparedImage.value = {
-    ...preparedImage.value,
-    section,
-  }
 }
 
 async function fileToBase64(file) {
@@ -1123,22 +1257,26 @@ function downloadDraft() {
   anchor.click()
   URL.revokeObjectURL(url)
 
-  if (preparedImage.value.type === 'upload' && preparedImage.value.file) {
-    const config = sectionConfig.value
-    const expectedPrefix = `content/${config.contentDir}/`
-    let filename = preparedImage.value.jsonValue
-    if (filename?.startsWith(expectedPrefix)) {
+  const uploads = preparedImages.value.filter((img) => img.type === 'upload' && img.file)
+  if (!uploads.length) return
+  const expectedPrefix = `content/${contentSubdir.value}/`
+  uploads.forEach((state) => {
+    if (!state.file) return
+    let filename = typeof state.jsonValue === 'string' ? state.jsonValue : ''
+    if (filename && filename.startsWith(expectedPrefix)) {
       filename = filename.slice(expectedPrefix.length)
     } else {
-      filename = `${slugValue}${preparedImage.value.ext || '.jpg'}`
+      const suffix = state.displayIndex === 0 ? '' : `-${state.displayIndex}`
+      const ext = state.ext || deriveExtension(state.file) || '.jpg'
+      filename = `${slugValue}${suffix}${ext}`
     }
-    const imageUrl = URL.createObjectURL(preparedImage.value.file)
+    const imageUrl = URL.createObjectURL(state.file)
     const imageAnchor = document.createElement('a')
     imageAnchor.href = imageUrl
     imageAnchor.download = filename
     imageAnchor.click()
     URL.revokeObjectURL(imageUrl)
-  }
+  })
 }
 
 function resetWizard() {
@@ -1147,12 +1285,8 @@ function resetWizard() {
   slug.value = ''
   slugWasEdited.value = false
   selectedDate.value = new Date().toISOString().slice(0, 10)
-  imageSource.value = 'none'
-  imageUrl.value = ''
-  imageFile.value = null
-  imageFileName.value = ''
-  imageFileExtension.value = ''
-  preparedImage.value = { type: 'none', jsonValue: '', manifestValue: '', ext: '', file: null, section: postType.value }
+  initializeImageEntries()
+  preparedImages.value = []
   draftSection.value = null
   draftJson.value = ''
   successMessage.value = ''
@@ -1257,6 +1391,55 @@ function resetWizard() {
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+.image-entry {
+  border: 1px dashed rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.image-entry-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.image-entry-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.btn-icon {
+  border: none;
+  background: rgba(0, 0, 0, 0.06);
+  color: #333;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.btn-icon:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.add-image-btn {
+  margin-top: 10px;
+  align-self: flex-start;
+  padding: 8px 16px;
 }
 
 .file-pill {

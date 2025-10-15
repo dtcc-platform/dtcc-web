@@ -91,7 +91,11 @@ onMounted(async () => {
       const url = normalizeLink(it.url || data.url || data.link || '')
       const date = it.date || data.date || data.published || data.updated || null
       const order = Number.isFinite(Number(it.order)) ? Number(it.order) : (Number.isFinite(Number(data.order)) ? Number(data.order) : undefined)
-      const image = normalizeImage(it.image || data.image || null)
+      const image = normalizeImage(
+        it.image ||
+        data.image ||
+        (Array.isArray(data.images) ? data.images[0] : null)
+      )
       resolved.push({ id: base || title, title, description, url, image, hasImage: Boolean(image), date, order })
     }
     // Respect explicit order if provided; otherwise keep manifest order
@@ -111,7 +115,8 @@ const items = computed(() => {
       imageModules[`../projects/${name}.jpeg`] ||
       imageModules[`../projects/${name}.jpg`] ||
       imageModules[`../projects/${name}.png`]
-    const image = img ? sanitizeSrc(resolveUrl(img)) : null
+    const remoteImage = normalizeImage(data.image || (Array.isArray(data.images) ? data.images[0] : null))
+    const image = img ? sanitizeSrc(resolveUrl(img)) : remoteImage
     const title = data.title || data.name || name
     const description = data.description || data.summary || data.excerpt || ''
     const url = normalizeLink(data.url || data.link || '')

@@ -5,7 +5,7 @@ import json
 import os
 import time
 from dataclasses import dataclass
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 import urllib.error
 import urllib.request
 
@@ -105,14 +105,19 @@ def handler(event: Dict[str, Any], _context: Any) -> Dict[str, Any]:
         "slug": "kebab-case-slug",
         "payload": { ... JSON document ... },
         "force": false,
-        "imageUpload": {
-          "filename": "slug.jpg",
-          "contentType": "image/jpeg",
-          "data": "base64-encoded-bytes"
-        }
+        "imageUploads": [
+          {
+            "filename": "slug.jpg",
+            "contentType": "image/jpeg",
+            "data": "base64-encoded-bytes",
+            "index": 0
+          }
+        ]
       }
-    The `imageUpload` block is optional. When omitted, the handler leaves the manifest
-    entry untouched. For remote images just set payload.image to the remote URL on the client.
+    The `imageUploads` array is optional. When omitted, the handler leaves the manifest
+    entry untouched. For remote images just set payload.image (and payload.images[0])
+    to the remote URL on the client. The legacy single-object field `imageUpload` is
+    still accepted for backwards compatibility.
     """
     try:
         _assert_authorized(event)
@@ -122,7 +127,7 @@ def handler(event: Dict[str, Any], _context: Any) -> Dict[str, Any]:
         client = _GitHubClient(token=token)
 
         content_path = f"public/content/{config.content_dir}/{data['slug']}.json"
-        image_upload = data.get("imageUpload")
+        image_uploads = data.get("imageUploads") or []
 
         commit_message = data.get("commitMessage") or _default_commit_message(
             section=data["section"], slug=data["slug"]
@@ -136,9 +141,12 @@ def handler(event: Dict[str, Any], _context: Any) -> Dict[str, Any]:
             force=data.get("force", False),
         )
 
-        if image_upload:
+        manifest_image_ref = _extract_manifest_image(data["payload"])
+        primary_uploaded_ref: Optional[str] = None
+
+        for upload in image_uploads:
             image_path, image_bytes = _prepare_image_upload(
-                image_upload, config.content_dir, data["slug"]
+                upload, config.content_dir, data["slug"]
             )
             client.put_file(
                 path=image_path,
@@ -146,9 +154,13 @@ def handler(event: Dict[str, Any], _context: Any) -> Dict[str, Any]:
                 message=commit_message,
                 force=data.get("force", False),
             )
-            manifest_image_ref = f"content/{config.content_dir}/{os.path.basename(image_path)}"
-        else:
-            manifest_image_ref = _extract_manifest_image(data["payload"])
+            if primary_uploaded_ref is None:
+                idx = upload.get("index")
+                if idx in (None, 0):
+                    primary_uploaded_ref = f"content/{config.content_dir}/{os.path.basename(image_path)}"
+
+        if not manifest_image_ref and primary_uploaded_ref:
+            manifest_image_ref = primary_uploaded_ref
 
         manifest_path = f"public/content/{config.content_dir}/index.json"
         manifest = client.get_json_file(manifest_path) or {"items": []}
@@ -208,16 +220,28 @@ def _parse_event(event: Dict[str, Any]) -> Dict[str, Any]:
     if not isinstance(draft, dict):
         raise LambdaError("Missing 'payload' JSON object", 400)
 
+    uploads: List[Dict[str, Any]] = []
+    image_uploads = payload.get("imageUploads")
+    if image_uploads is not None:
+        if isinstance(image_uploads, dict):
+            image_uploads = [image_uploads]
+        if not isinstance(image_uploads, list):
+            raise LambdaError("'imageUploads' must be an array", 400)
+        for item in image_uploads:
+            _validate_image_upload(item)
+            uploads.append(item)
+
     image_upload = payload.get("imageUpload")
     if image_upload is not None:
         _validate_image_upload(image_upload)
+        uploads.append(image_upload)
 
     return {
         "section": section,
         "slug": slug,
         "payload": draft,
         "force": bool(payload.get("force")),
-        "imageUpload": image_upload,
+        "imageUploads": uploads,
         "commitMessage": payload.get("commitMessage"),
     }
 
@@ -274,7 +298,13 @@ def _dump_json_bytes(payload: Dict[str, Any]) -> bytes:
 def _prepare_image_upload(
     image_upload: Dict[str, Any], section_dir: str, slug: str
 ) -> Tuple[str, bytes]:
-    filename = image_upload.get("filename") or f"{slug}.jpg"
+    index = image_upload.get("index")
+    filename = image_upload.get("filename")
+    if not filename:
+        suffix = ""
+        if isinstance(index, int) and index > 0:
+            suffix = f"-{index}"
+        filename = f"{slug}{suffix}.jpg"
     content_type = image_upload.get("contentType") or "application/octet-stream"
 
     raw_bytes = base64.b64decode(image_upload["data"])
@@ -295,6 +325,11 @@ def _extract_manifest_image(payload: Dict[str, Any]) -> str:
     image = payload.get("image")
     if isinstance(image, str) and image.strip():
         return image.strip()
+    images = payload.get("images")
+    if isinstance(images, list):
+        for entry in images:
+            if isinstance(entry, str) and entry.strip():
+                return entry.strip()
     return ""
 
 
