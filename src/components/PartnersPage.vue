@@ -3,7 +3,6 @@
     <section class="section gradient-sunrise intro">
       <div class="container grid2">
         <div class="intro-copy">
-          <p class="eyebrow">Collaborative network</p>
           <h1 class="h2-50">Partners powering the Digital Twin Platform</h1>
           <p class="brodtext-20 muted">
             DTCC brings academia, the public sector, and private industry together to co-develop a national
@@ -220,7 +219,7 @@ const pillars = computed(() => [
 }
 .partner-link:hover .name,
 .partner-link:focus-visible .name {
-  color: var(--unnamed-color-fada36);
+  color: #e35a1d;
 }
 
 .contact-cta { padding: 40px 0; background: rgba(0, 0, 0, 0.5); }
