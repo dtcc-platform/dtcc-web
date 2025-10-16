@@ -140,7 +140,16 @@ const pillars = computed(() => [
 .roster { padding: 36px 0; }
 .roster-header { max-width: 720px; margin: 0 auto 32px; text-align: center; display: flex; flex-direction: column; gap: 12px; }
 .roster-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
-.roster-item { padding: 20px; display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; min-height: 200px; }
+.roster-item {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 220px;
+}
 .logo-wrap { width: 140px; height: 80px; display: flex; align-items: center; justify-content: center; }
 .logo-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
 .name { font-weight: 600; color: white; font-size: 16px; }
