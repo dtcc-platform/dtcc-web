@@ -115,16 +115,12 @@ const board = boardEntries.map((entry) => ({
 }))
 
 const advisoryEntries = [
-  { name: 'Alexandra Bolton', role: 'National Centre for Earth Observation, UK' },
-  { name: 'Thomas Kolbe', role: 'Technical University of Munich, DE' },
-  { name: 'Jantien Stoter', role: 'Delft University of Technology, NL' },
+  { name: 'Alexandra Bolton', role: 'National Centre for Earth Observation, UK', image: '' },
+  { name: 'Thomas Kolbe', role: 'Technical University of Munich, DE', image: img3 },
+  { name: 'Jantien Stoter', role: 'Delft University of Technology, NL', image: '' },
 ]
 
-const advisoryImages = [img3, img2, img1]
-const advisory = advisoryEntries.map((entry, index) => ({
-  ...entry,
-  image: advisoryImages[index % advisoryImages.length],
-}))
+const advisory = advisoryEntries
 </script>
 
 <style scoped>
