@@ -44,10 +44,24 @@
         </header>
         <div class="roster-grid">
           <article v-for="partner in partners" :key="partner.name" class="roster-item card">
-            <div class="logo-wrap">
-              <img :src="partner.logo" :alt="`${partner.name} logo`">
+            <a
+              v-if="partner.url"
+              class="partner-link"
+              :href="partner.url"
+              target="_blank"
+              rel="noopener"
+            >
+              <div class="logo-wrap">
+                <img :src="partner.logo" :alt="`${partner.name} logo`">
+              </div>
+              <div class="name">{{ partner.name }}</div>
+            </a>
+            <div v-else class="partner-link">
+              <div class="logo-wrap">
+                <img :src="partner.logo" :alt="`${partner.name} logo`">
+              </div>
+              <div class="name">{{ partner.name }}</div>
             </div>
-            <div class="name">{{ partner.name }}</div>
           </article>
         </div>
       </div>
@@ -86,14 +100,54 @@ const logoModules = import.meta.glob('../../public/content/partners/*.{png,jpg,j
   eager: true,
 })
 
+const PARTNER_LINKS = {
+  'Ale kommun': 'https://www.ale.se/',
+  'Aristotle University': 'https://www.auth.gr/en/',
+  Byggstyrning: 'https://www.byggstyrning.se/',
+  'Chalmers Industriteknik': 'https://www.chalmersindustriteknik.se/',
+  Chalmers: 'https://www.chalmers.se/',
+  'Democritus University of Thrace': 'https://www.duth.gr/en',
+  'Doing Good': 'https://www.doinggood.se/',
+  'Fraunhofer Chalmers': 'https://www.fcc.chalmers.se/',
+  'Gdańsk University of Technology': 'https://pg.edu.pl/en',
+  'Göteborgs stad': 'https://goteborg.se/',
+  'Halmstads kommun': 'https://www.halmstad.se/',
+  'Helsingborgs kommun': 'https://helsingborg.se/',
+  'Höganäs kommun': 'https://www.hoganas.se/',
+  'Högskolan Väst': 'https://www.hv.se/',
+  'Kungsbacka kommun': 'https://www.kungsbacka.se/',
+  Lantmäteriet: 'https://www.lantmateriet.se/',
+  Liljewall: 'https://liljewall.se/',
+  'Lindholmen Science Park': 'https://www.lindholmen.se/',
+  'Lunds University': 'https://www.lunduniversity.lu.se/',
+  'Lunds kommun': 'https://www.lund.se/',
+  NCC: 'https://www.ncc.se/',
+  NTNU: 'https://www.ntnu.edu/',
+  PEAB: 'https://www.peab.se/',
+  RISE: 'https://www.ri.se/',
+  Ramboll: 'https://ramboll.com/',
+  SKR: 'https://skr.se/',
+  Skanska: 'https://www.skanska.se/',
+  'Sofia University': 'https://www.uni-sofia.bg/eng/',
+  Sweco: 'https://www.sweco.se/',
+  Twinfinity: 'https://twinfinity.io/',
+  'University of Patras': 'https://www.upatras.gr/en/',
+  'University of Salento': 'https://international.unisalento.it/',
+  'University of Twente': 'https://www.utwente.nl/en/',
+  'University of the Aegan': 'https://www.aegean.gr/en/',
+  Winniio: 'https://winniio.com/',
+}
+
 const partners = computed(() => {
   const entries = Object.entries(logoModules).map(([path, asset]) => {
     const filename = path.split('/').pop() || ''
     const normalized = filename.replace(/\.[^.]+$/, '')
     const displayName = normalized.replace(/[-_]+/g, ' ').replace(/\s+/g, ' ').trim()
+    const url = PARTNER_LINKS[displayName] || PARTNER_LINKS[filename] || ''
     return {
       name: displayName,
       logo: asset,
+      url,
     }
   })
   entries.sort((a, b) => a.name.localeCompare(b.name, 'sv'))
@@ -153,6 +207,21 @@ const pillars = computed(() => [
 .logo-wrap { width: 180px; height: 100px; display: flex; align-items: center; justify-content: center; }
 .logo-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
 .name { font-weight: 600; color: white; font-size: 16px; }
+.partner-link {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+.partner-link:hover .name,
+.partner-link:focus-visible .name {
+  color: var(--unnamed-color-fada36);
+}
 
 .contact-cta { padding: 40px 0; background: rgba(0, 0, 0, 0.5); }
 .cta-box { padding: 28px; display: flex; flex-direction: column; gap: 16px; }
