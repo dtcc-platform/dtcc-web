@@ -102,8 +102,8 @@ const management = [
 const boardEntries = [
   { name: 'Bo Baudin', role: 'SKR' },
   { name: 'Johanna Fredhsdotter Lager', role: 'NCC' },
-  { name: 'Tecumseh Hollis', role: 'Höganäs kommun' },
-  { name: 'Eric Jeansson', role: 'Göteborgs kommun' },
+  { name: 'Tecumseh Hollis', role: 'Höganäs Kommun' },
+  { name: 'Eric Jeansson', role: 'Göteborgs Kommun' },
   { name: 'Mila Koeva', role: 'University of Twente' },
   { name: 'Oskar Modin', role: 'Chalmers' },
   { name: 'Peter Samuelsson', role: 'Skanska' },
