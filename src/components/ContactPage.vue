@@ -95,7 +95,7 @@ const contentImage = (filename) => `${base}content/${filename}`
 
 const management = [
   { name: 'Anders Logg', role: 'Director', email: 'mailto:logg@chalmers.se', image: contentImage('Anders-Logg-BW.jpg') },
-  { name: 'Minna Karstunen', role: 'Vice-Director', email: 'mailto:minna.karstunen@chalmers.se', image: contentImage('Minna-Karstunen-BW.jpg') },
+  { name: 'Minna Karstunen', role: 'Co-Director', email: 'mailto:minna.karstunen@chalmers.se', image: contentImage('Minna-Karstunen-BW.jpg') },
   { name: 'Bernd Ketzler', role: 'Scientific Coordinator', email: 'mailto:ketzler@chalmers.se', image: contentImage('Bernd-Ketzler-BW.jpg') },
   { name: 'Vasilis Naserentin', role: 'Head of Development', email: 'mailto:vasilis.naserentin@chalmers.se', image: contentImage('Vasilis-Naserentin-BW.jpg') },
   { name: 'Nadia Tahir', role: 'Communications Officer', email: 'mailto:nadia.tahir@chalmers.se', image: contentImage('Nadia-Tahir-BW.jpg') },
@@ -114,7 +114,7 @@ const advisory = [img3, img2, img1, img3, img2, img1].map(makeMember)
 
 .people { margin-top: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .person { text-align: left; }
-.avatar { height: 160px; border-radius: 12px; background-size: cover; background-position: center; filter: grayscale(20%); }
+.avatar { height: 220px; border-radius: 12px; background-size: cover; background-position: center; filter: grayscale(20%); }
 .name { margin-top: 6px; font-weight: 600; }
 .role { font-size: 14px; }
 
