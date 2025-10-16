@@ -117,7 +117,17 @@ const board = boardEntries.map((entry, index) => ({
   image: boardImages[index % boardImages.length],
 }))
 
-const advisory = [img3, img2, img1, img3, img2, img1].map(makeMember)
+const advisoryEntries = [
+  { name: 'Alexandra Bolton', role: 'National Centre for Earth Observation UK' },
+  { name: 'Thomas Kolbe', role: 'Technical University of Munich DE' },
+  { name: 'Jantien Stoter', role: 'Delft University of Technology NL' },
+]
+
+const advisoryImages = [img3, img2, img1]
+const advisory = advisoryEntries.map((entry, index) => ({
+  ...entry,
+  image: advisoryImages[index % advisoryImages.length],
+}))
 </script>
 
 <style scoped>
