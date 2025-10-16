@@ -34,7 +34,7 @@ const base = import.meta.env.BASE_URL || '/'
 
 const navLinks = [
   { label: 'Projects', href: `${base}projects/` },
-  { label: 'Partners', href: '#partners' },
+  { label: 'Partners', href: `${base}partners/` },
   { label: 'About us', href: `${base}about/` },
   { label: 'News', href: `${base}news/` },
   { label: 'Events', href: `${base}events/`, disabled: true },
