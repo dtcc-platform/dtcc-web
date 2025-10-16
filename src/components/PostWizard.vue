@@ -2194,7 +2194,7 @@ function collectPreviewPapers(parsed) {
 }
 
 .preview-detail .avatar {
-  height: 160px;
+  height: 300px;
   border-radius: 12px;
   background-size: cover;
   background-position: center;
