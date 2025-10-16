@@ -26,6 +26,29 @@
           </div>
         </div>
       </div>
+  </section>
+
+    <!-- Technical Board -->
+    <section class="section gradient-sunrise technical">
+      <div class="container grid2">
+        <div>
+          <h2 class="h3-30">Technical Board</h2>
+        </div>
+        <div>
+          <p class="brodtext-20 muted">
+            The Technical Board governs the centre’s research agenda and oversees collaboration between partners.
+          </p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="people">
+          <div class="person" v-for="(p, i) in technicalBoard" :key="i">
+            <div class="avatar" :style="p.image ? { backgroundImage: `url(${p.image})` } : undefined"></div>
+            <div class="name" v-text="p.name" />
+            <div class="role muted" v-text="p.role" />
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Board of directors -->
@@ -118,6 +141,20 @@ const advisoryEntries = [
 ]
 
 const advisory = advisoryEntries
+
+const technicalBoard = [
+  { name: 'Alexander Hollberg', role: 'Chalmers', image: '' },
+  { name: 'Franziska Hunger', role: 'FCC', image: '' },
+  { name: 'Minna Karstunen', role: 'Chalmers', image: contentImage('Minna-Karstunen-BW.jpg') },
+  { name: 'Anders Logg', role: 'Chalmers', image: contentImage('Anders-Logg-BW.jpg') },
+  { name: 'Vasilis Naserentin', role: 'Chalmers', image: contentImage('Vasilis-Naserentin-BW.jpg') },
+  { name: 'Leonardo Rosado', role: 'Chalmers', image: '' },
+  { name: 'Mattias Roupé', role: 'Chalmers', image: '' },
+  { name: 'Liane Thuvander', role: 'Chalmers', image: '' },
+  { name: 'Tara Wood', role: 'Ramboll', image: '' },
+  { name: 'Dag Wästberg', role: 'CIT', image: '' },
+  { name: 'Malgorzata Zboinska', role: 'Chalmers', image: '' },
+]
 </script>
 
 <style scoped>
