@@ -114,7 +114,7 @@ const advisory = [img3, img2, img1, img3, img2, img1].map(makeMember)
 
 .people { margin-top: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .person { text-align: left; }
-.avatar { height: 220px; border-radius: 12px; background-size: cover; background-position: center; filter: grayscale(20%); }
+.avatar { height: 260px; border-radius: 12px; background-size: cover; background-position: center; filter: grayscale(20%); }
 .name { margin-top: 6px; font-weight: 600; }
 .role { font-size: 14px; }
 

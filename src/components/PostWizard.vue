@@ -450,8 +450,8 @@ import { resolveUrl, withBase } from '../utils/paths.js'
 
 const TYPE_OPTIONS = [
   { value: 'news', label: 'News' },
-  { value: 'events-archive', label: 'Projects Archive' },
   { value: 'projects', label: 'Projects' },
+  { value: 'events-archive', label: 'Projects Archive' },
   { value: 'events', label: 'Events' },
 ]
 
