@@ -118,9 +118,9 @@ const board = boardEntries.map((entry, index) => ({
 }))
 
 const advisoryEntries = [
-  { name: 'Alexandra Bolton', role: 'National Centre for Earth Observation UK' },
-  { name: 'Thomas Kolbe', role: 'Technical University of Munich DE' },
-  { name: 'Jantien Stoter', role: 'Delft University of Technology NL' },
+  { name: 'Alexandra Bolton', role: 'National Centre for Earth Observation, UK' },
+  { name: 'Thomas Kolbe', role: 'Technical University of Munich, DE' },
+  { name: 'Jantien Stoter', role: 'Delft University of Technology, NL' },
 ]
 
 const advisoryImages = [img3, img2, img1]
