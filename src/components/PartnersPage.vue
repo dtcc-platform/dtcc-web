@@ -33,6 +33,26 @@
       </div>
     </section>
 
+    <section class="section gradient-sunrise roster">
+      <div class="container">
+        <header class="roster-header">
+          <h2 class="h3-30">Partner organisations</h2>
+          <p class="brodtext-20 muted">
+            An alphabetical overview of the universities, municipalities, agencies and companies that contribute
+            to the Digital Twin Cities Centre. The list updates automatically from <code>public/content/partners</code>.
+          </p>
+        </header>
+        <div class="roster-grid">
+          <article v-for="partner in partners" :key="partner.name" class="roster-item card">
+            <div class="logo-wrap">
+              <img :src="partner.logo" :alt="`${partner.name} logo`">
+            </div>
+            <div class="name">{{ partner.name }}</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section contact-cta">
       <div class="container grid2">
         <div>
@@ -60,6 +80,25 @@ import { withBase } from '../utils/paths.js'
 
 const graphicSrc = withBase('content/TC-illustration med ringar.png')
 const contactHref = withBase('contact/')
+
+const logoModules = import.meta.glob('../../public/content/partners/*.{png,jpg,jpeg,svg}', {
+  as: 'url',
+  eager: true,
+})
+
+const partners = computed(() => {
+  const entries = Object.entries(logoModules).map(([path, asset]) => {
+    const filename = path.split('/').pop() || ''
+    const normalized = filename.replace(/\.[^.]+$/, '')
+    const displayName = normalized.replace(/[-_]+/g, ' ').replace(/\s+/g, ' ').trim()
+    return {
+      name: displayName,
+      logo: asset,
+    }
+  })
+  entries.sort((a, b) => a.name.localeCompare(b.name, 'sv'))
+  return entries
+})
 
 const pillars = computed(() => [
   {
@@ -98,6 +137,14 @@ const pillars = computed(() => [
 .partners-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .partners-list li { font-weight: 600; color: white; }
 
+.roster { padding: 36px 0; }
+.roster-header { max-width: 720px; margin: 0 auto 32px; text-align: center; display: flex; flex-direction: column; gap: 12px; }
+.roster-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
+.roster-item { padding: 20px; display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; min-height: 200px; }
+.logo-wrap { width: 140px; height: 80px; display: flex; align-items: center; justify-content: center; }
+.logo-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.name { font-weight: 600; color: white; font-size: 16px; }
+
 .contact-cta { padding: 40px 0; background: rgba(0, 0, 0, 0.5); }
 .cta-box { padding: 28px; display: flex; flex-direction: column; gap: 16px; }
 .btn-secondary {
@@ -132,5 +179,6 @@ const pillars = computed(() => [
   .pillars-grid { grid-template-columns: 1fr; }
   .pillar { padding: 22px; }
   .cta-box { padding: 22px; }
+  .roster-item { min-height: 180px; }
 }
 </style>
