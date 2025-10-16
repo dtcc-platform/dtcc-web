@@ -143,17 +143,17 @@ const advisoryEntries = [
 const advisory = advisoryEntries
 
 const technicalBoard = [
-  { name: 'Alexander Hollberg', role: 'Chalmers', image: '' },
-  { name: 'Franziska Hunger', role: 'FCC', image: '' },
+  { name: 'Alexander Hollberg', role: 'Chalmers', image: contentImage('Alexander-Hollberg-BW.jpg') },
+  { name: 'Franziska Hunger', role: 'FCC', image: contentImage('Franziska-Hunger-BW.jpg') },
   { name: 'Minna Karstunen', role: 'Chalmers', image: contentImage('Minna-Karstunen-BW.jpg') },
   { name: 'Anders Logg', role: 'Chalmers', image: contentImage('Anders-Logg-BW.jpg') },
   { name: 'Vasilis Naserentin', role: 'Chalmers', image: contentImage('Vasilis-Naserentin-BW.jpg') },
   { name: 'Leonardo Rosado', role: 'Chalmers', image: '' },
-  { name: 'Mattias Roupé', role: 'Chalmers', image: '' },
-  { name: 'Liane Thuvander', role: 'Chalmers', image: '' },
+  { name: 'Mattias Roupé', role: 'Chalmers', image: contentImage('Mattias-Roupe-BW.jpg') },
+  { name: 'Liane Thuvander', role: 'Chalmers', image: contentImage('Liane-Thuvander-BW.jpg') },
   { name: 'Tara Wood', role: 'Ramboll', image: '' },
   { name: 'Dag Wästberg', role: 'CIT', image: '' },
-  { name: 'Malgorzata Zboinska', role: 'Chalmers', image: '' },
+  { name: 'Malgorzata Zboinska', role: 'Chalmers', image: contentImage('Malgorzata-Zboinska-BW.jpg') },
 ]
 </script>
 
