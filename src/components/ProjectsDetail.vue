@@ -267,7 +267,7 @@ async function loadUsersMap() {
 
 .contacts .people { margin-top: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
 .contacts .person { text-align: left; display: flex; flex-direction: column; gap: 6px; }
-.contacts .avatar { height: 100px; border-radius: 12px; background-size: cover; background-position: center; background-color: #e9e9ee; }
+.contacts .avatar { height: 300px; border-radius: 12px; background-size: cover; background-position: center; background-color: #e9e9ee; }
 .contacts .name { font-weight: 600; }
 .contacts .role { font-size: 14px; }
 
