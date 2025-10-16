@@ -23,7 +23,6 @@
             <div class="avatar" :style="{ backgroundImage: `url(${p.image})` }"></div>
             <div class="name" v-text="p.name" />
             <div class="role muted" v-text="p.role" />
-            <a class="more" :href="p.email">Mail to »</a>
           </div>
         </div>
       </div>
@@ -49,7 +48,6 @@
             <div class="avatar" :style="{ backgroundImage: `url(${p.image})` }"></div>
             <div class="name" v-text="p.name" />
             <div class="role muted" v-text="p.role" />
-            <a class="more" :href="p.email">Mail to »</a>
           </div>
         </div>
       </div>
@@ -74,7 +72,6 @@
             <div class="avatar" :style="{ backgroundImage: `url(${p.image})` }"></div>
             <div class="name" v-text="p.name" />
             <div class="role muted" v-text="p.role" />
-            <a class="more" :href="p.email">Mail to »</a>
           </div>
         </div>
       </div>
@@ -102,7 +99,23 @@ const management = [
   { name: 'Erika Andolf', role: 'Financial Officer', email: 'mailto:erika.andolf@chalmers.se', image: contentImage('Erika-Andolf-BW.jpg') },
 ]
 
-const board = [img1, img2, img3, img1, img2, img3, img1, img2, img3, img2, img1, img3].map(makeMember)
+const boardEntries = [
+  { name: 'Bo Baudin', role: 'SKR' },
+  { name: 'Johanna Fredhsdotter Lager', role: 'NCC' },
+  { name: 'Tecumseh Hollis', role: 'Höganäs kommun' },
+  { name: 'Eric Jeansson', role: 'Göteborgs kommun' },
+  { name: 'Mila Koeva', role: 'University of Twente' },
+  { name: 'Oskar Modin', role: 'Chalmers' },
+  { name: 'Peter Samuelsson', role: 'Skanska' },
+  { name: 'Lina Vicsai', role: 'Ramboll' },
+  { name: 'Cecilia Windh', role: 'LILJEWALL' },
+]
+
+const boardImages = [img1, img2, img3]
+const board = boardEntries.map((entry, index) => ({
+  ...entry,
+  image: boardImages[index % boardImages.length],
+}))
 
 const advisory = [img3, img2, img1, img3, img2, img1].map(makeMember)
 </script>
