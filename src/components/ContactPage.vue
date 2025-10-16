@@ -20,7 +20,7 @@
       <div class="container">
         <div class="people">
           <div class="person" v-for="(p, i) in management" :key="i">
-            <div class="avatar" :style="{ backgroundImage: `url(${p.image})` }"></div>
+            <div class="avatar" :style="p.image ? { backgroundImage: `url(${p.image})` } : undefined"></div>
             <div class="name" v-text="p.name" />
             <div class="role muted" v-text="p.role" />
           </div>
@@ -45,7 +45,7 @@
       <div class="container">
         <div class="people">
           <div class="person" v-for="(p, i) in board" :key="i">
-            <div class="avatar" :style="{ backgroundImage: `url(${p.image})` }"></div>
+            <div class="avatar" :style="p.image ? { backgroundImage: `url(${p.image})` } : undefined"></div>
             <div class="name" v-text="p.name" />
             <div class="role muted" v-text="p.role" />
           </div>
@@ -69,7 +69,7 @@
       <div class="container">
         <div class="people">
           <div class="person" v-for="(p, i) in advisory" :key="i">
-            <div class="avatar" :style="{ backgroundImage: `url(${p.image})` }"></div>
+            <div class="avatar" :style="p.image ? { backgroundImage: `url(${p.image})` } : undefined"></div>
             <div class="name" v-text="p.name" />
             <div class="role muted" v-text="p.role" />
           </div>
@@ -85,8 +85,6 @@ const base = import.meta.env.BASE_URL || '/'
 const img1 = 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=800&auto=format&fit=crop'
 const img2 = 'https://images.unsplash.com/photo-1531123414780-f74287bb2a3b?q=80&w=800&auto=format&fit=crop'
 const img3 = 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=800&auto=format&fit=crop'
-
-const makeMember = (image) => ({ name: 'Placeholder name', role: 'Placeholder for title', email: '#', image })
 
 const contentImage = (filename) => `${base}content/${filename}`
 
@@ -111,10 +109,9 @@ const boardEntries = [
   { name: 'Cecilia Windh', role: 'LILJEWALL' },
 ]
 
-const boardImages = [img1, img2, img3]
-const board = boardEntries.map((entry, index) => ({
+const board = boardEntries.map((entry) => ({
   ...entry,
-  image: boardImages[index % boardImages.length],
+  image: '',
 }))
 
 const advisoryEntries = [
