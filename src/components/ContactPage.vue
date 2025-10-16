@@ -99,6 +99,7 @@ const management = [
   { name: 'Bernd Ketzler', role: 'Scientific Coordinator', email: 'mailto:ketzler@chalmers.se', image: contentImage('Bernd-Ketzler-BW.jpg') },
   { name: 'Vasilis Naserentin', role: 'Head of Development', email: 'mailto:vasilis.naserentin@chalmers.se', image: contentImage('Vasilis-Naserentin-BW.jpg') },
   { name: 'Nadia Tahir', role: 'Communications Officer', email: 'mailto:nadia.tahir@chalmers.se', image: contentImage('Nadia-Tahir-BW.jpg') },
+  { name: 'Erika Andolf', role: 'Financial Officer', email: 'mailto:erika.andolf@chalmers.se', image: contentImage('Erika-Andolf-BW.jpg') },
 ]
 
 const board = [img1, img2, img3, img1, img2, img3, img1, img2, img3, img2, img1, img3].map(makeMember)
