@@ -150,7 +150,7 @@ const pillars = computed(() => [
   text-align: center;
   min-height: 220px;
 }
-.logo-wrap { width: 140px; height: 80px; display: flex; align-items: center; justify-content: center; }
+.logo-wrap { width: 180px; height: 100px; display: flex; align-items: center; justify-content: center; }
 .logo-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
 .name { font-weight: 600; color: white; font-size: 16px; }
 
