@@ -26,6 +26,7 @@
             ></div>
             <div class="name" v-text="p.name" />
             <div class="role muted" v-text="p.role" />
+            <a v-if="p.email" class="more" :href="p.email">Email »</a>
           </div>
         </div>
       </div>
