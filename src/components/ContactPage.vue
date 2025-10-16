@@ -151,7 +151,7 @@ const management = [
     role: 'Head of Development',
     email: 'mailto:vasilis.naserentin@chalmers.se',
     image: contentImage('Vasilis-Naserentin-BW.jpg'),
-    imagePosition: 'center 45%',
+    imagePosition: 'center 20%',
   },
   {
     name: 'Nadia Tahir',
@@ -196,7 +196,7 @@ const technicalBoard = [
   { name: 'Franziska Hunger', role: 'Fraunhoffer Chalmers Centre', image: contentImage('Franziska-Hunger-BW.jpg'), imagePosition: 'center top' },
   { name: 'Minna Karstunen', role: 'Chalmers', image: contentImage('Minna-Karstunen-BW.jpg'), imagePosition: 'center 25%' },
   { name: 'Anders Logg', role: 'Chalmers', image: contentImage('Anders-Logg-BW.jpg'), imagePosition: 'center top' },
-  { name: 'Vasilis Naserentin', role: 'Chalmers', image: contentImage('Vasilis-Naserentin-BW.jpg'), imagePosition: 'center 45%' },
+  { name: 'Vasilis Naserentin', role: 'Chalmers', image: contentImage('Vasilis-Naserentin-BW.jpg'), imagePosition: 'center 20%' },
   { name: 'Leonardo Rosado', role: 'Chalmers', image: '' },
   { name: 'Mattias Roupé', role: 'Chalmers', image: contentImage('Mattias-Roupe-BW.jpg'), imagePosition: 'center top' },
   { name: 'Liane Thuvander', role: 'Chalmers', image: contentImage('Liane-Thuvander-BW.jpg'), imagePosition: 'center top' },
