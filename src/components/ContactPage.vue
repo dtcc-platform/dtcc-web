@@ -98,25 +98,22 @@ const management = [
 ]
 
 const boardEntries = [
-  { name: 'Bo Baudin', role: 'SKR' },
-  { name: 'Johanna Fredhsdotter Lager', role: 'NCC' },
-  { name: 'Tecumseh Hollis', role: 'Höganäs Kommun' },
-  { name: 'Eric Jeansson', role: 'Göteborgs Kommun' },
-  { name: 'Mila Koeva', role: 'University of Twente' },
-  { name: 'Oskar Modin', role: 'Chalmers' },
-  { name: 'Peter Samuelsson', role: 'Skanska' },
-  { name: 'Lina Vicsai', role: 'Ramboll' },
-  { name: 'Cecilia Windh', role: 'LILJEWALL' },
+  { name: 'Bo Baudin', role: 'SKR', image: contentImage('Bo-Baudin-BW.jpg') },
+  { name: 'Johanna Fredhsdotter Lager', role: 'NCC', image: '' },
+  { name: 'Tecumseh Hollis', role: 'Höganäs Kommun', image: '' },
+  { name: 'Eric Jeansson', role: 'Göteborgs Kommun', image: contentImage('Eric-Jeansson-BW.jpg') },
+  { name: 'Mila Koeva', role: 'University of Twente', image: '' },
+  { name: 'Oskar Modin', role: 'Chalmers', image: '' },
+  { name: 'Peter Samuelsson', role: 'Skanska', image: contentImage('Peter-Samuelsson-BW.jpg') },
+  { name: 'Lina Vicsai', role: 'Ramboll', image: contentImage('Lina-Viscai-BW.jpg') },
+  { name: 'Cecilia Windh', role: 'LILJEWALL', image: contentImage('Cecilia-Windh-BW.jpg') },
 ]
 
-const board = boardEntries.map((entry) => ({
-  ...entry,
-  image: '',
-}))
+const board = boardEntries
 
 const advisoryEntries = [
-  { name: 'Alexandra Bolton', role: 'National Centre for Earth Observation, UK', image: '' },
-  { name: 'Thomas Kolbe', role: 'Technical University of Munich, DE', image: img3 },
+  { name: 'Alexandra Bolton', role: 'National Centre for Earth Observation, UK', image: contentImage('Alexandra-Bolton-BW.jpg') },
+  { name: 'Thomas Kolbe', role: 'Technical University of Munich, DE', image: contentImage('Thomas-H-Kolbe-BW.jpg') },
   { name: 'Jantien Stoter', role: 'Delft University of Technology, NL', image: '' },
 ]
 
