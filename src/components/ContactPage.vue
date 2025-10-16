@@ -91,12 +91,14 @@ const img3 = 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=8
 
 const makeMember = (image) => ({ name: 'Placeholder name', role: 'Placeholder for title', email: '#', image })
 
+const contentImage = (filename) => `${base}content/${filename}`
+
 const management = [
-  { name: 'Anders Logg', role: 'Director', email: 'mailto:logg@chalmers.se', image: img1 },
-  { name: 'Minna Karstunen', role: 'Vice-Director', email: 'mailto:minna.karstunen@chalmers.se', image: img2 },
-  { name: 'Bernd Ketzler', role: 'Scientific Coordinator', email: 'mailto:ketzler@chalmers.se', image: img3 },
-  { name: 'Vasilis Naserentin', role: 'Head of Development', email: 'mailto:vasilis.naserentin@chalmers.se', image: img1 },
-  { name: 'Nadia Tahir', role: 'Communications Officer', email: 'mailto:nadia.tahir@chalmers.se', image: img2 },
+  { name: 'Anders Logg', role: 'Director', email: 'mailto:logg@chalmers.se', image: contentImage('Anders-Logg-BW.jpg') },
+  { name: 'Minna Karstunen', role: 'Vice-Director', email: 'mailto:minna.karstunen@chalmers.se', image: contentImage('Minna-Karstunen-BW.jpg') },
+  { name: 'Bernd Ketzler', role: 'Scientific Coordinator', email: 'mailto:ketzler@chalmers.se', image: contentImage('Bernd-Ketzler-BW.jpg') },
+  { name: 'Vasilis Naserentin', role: 'Head of Development', email: 'mailto:vasilis.naserentin@chalmers.se', image: contentImage('Vasilis-Naserentin-BW.jpg') },
+  { name: 'Nadia Tahir', role: 'Communications Officer', email: 'mailto:nadia.tahir@chalmers.se', image: contentImage('Nadia-Tahir-BW.jpg') },
 ]
 
 const board = [img1, img2, img3, img1, img2, img3, img1, img2, img3, img2, img1, img3].map(makeMember)
