@@ -20,7 +20,10 @@
       <div class="container">
         <div class="people">
           <div class="person" v-for="(p, i) in management" :key="i">
-            <div class="avatar" :style="p.image ? { backgroundImage: `url(${p.image})` } : undefined"></div>
+            <div
+              class="avatar"
+              :style="p.image ? { backgroundImage: `url(${p.image})`, backgroundPosition: p.imagePosition || 'center top' } : undefined"
+            ></div>
             <div class="name" v-text="p.name" />
             <div class="role muted" v-text="p.role" />
           </div>
@@ -43,7 +46,10 @@
       <div class="container">
         <div class="people">
           <div class="person" v-for="(p, i) in technicalBoard" :key="i">
-            <div class="avatar" :style="p.image ? { backgroundImage: `url(${p.image})` } : undefined"></div>
+            <div
+              class="avatar"
+              :style="p.image ? { backgroundImage: `url(${p.image})`, backgroundPosition: p.imagePosition || 'center top' } : undefined"
+            ></div>
             <div class="name" v-text="p.name" />
             <div class="role muted" v-text="p.role" />
           </div>
@@ -68,7 +74,10 @@
       <div class="container">
         <div class="people">
           <div class="person" v-for="(p, i) in board" :key="i">
-            <div class="avatar" :style="p.image ? { backgroundImage: `url(${p.image})` } : undefined"></div>
+            <div
+              class="avatar"
+              :style="p.image ? { backgroundImage: `url(${p.image})`, backgroundPosition: p.imagePosition || 'center top' } : undefined"
+            ></div>
             <div class="name" v-text="p.name" />
             <div class="role muted" v-text="p.role" />
           </div>
@@ -91,8 +100,11 @@
       </div>
       <div class="container">
         <div class="people">
-          <div class="person" v-for="(p, i) in advisory" :key="i">
-            <div class="avatar" :style="p.image ? { backgroundImage: `url(${p.image})` } : undefined"></div>
+         <div class="person" v-for="(p, i) in advisory" :key="i">
+            <div
+              class="avatar"
+              :style="p.image ? { backgroundImage: `url(${p.image})`, backgroundPosition: p.imagePosition || 'center top' } : undefined"
+            ></div>
             <div class="name" v-text="p.name" />
             <div class="role muted" v-text="p.role" />
           </div>
@@ -112,19 +124,55 @@ const img3 = 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=8
 const contentImage = (filename) => `${base}content/${filename}`
 
 const management = [
-  { name: 'Anders Logg', role: 'Director', email: 'mailto:logg@chalmers.se', image: contentImage('Anders-Logg-BW.jpg') },
-  { name: 'Minna Karstunen', role: 'Co-Director', email: 'mailto:minna.karstunen@chalmers.se', image: contentImage('Minna-Karstunen-BW.jpg') },
-  { name: 'Bernd Ketzler', role: 'Scientific Coordinator', email: 'mailto:ketzler@chalmers.se', image: contentImage('Bernd-Ketzler-BW.jpg') },
-  { name: 'Vasilis Naserentin', role: 'Head of Development', email: 'mailto:vasilis.naserentin@chalmers.se', image: contentImage('Vasilis-Naserentin-BW.jpg') },
-  { name: 'Nadia Tahir', role: 'Communications Officer', email: 'mailto:nadia.tahir@chalmers.se', image: contentImage('Nadia-Tahir-BW.jpg') },
-  { name: 'Erika Andolf', role: 'Financial Officer', email: 'mailto:erika.andolf@chalmers.se', image: contentImage('Erika-Andolf-BW.jpg') },
+  {
+    name: 'Anders Logg',
+    role: 'Director',
+    email: 'mailto:logg@chalmers.se',
+    image: contentImage('Anders-Logg-BW.jpg'),
+    imagePosition: 'center top',
+  },
+  {
+    name: 'Minna Karstunen',
+    role: 'Co-Director',
+    email: 'mailto:minna.karstunen@chalmers.se',
+    image: contentImage('Minna-Karstunen-BW.jpg'),
+    imagePosition: 'center 25%',
+  },
+  {
+    name: 'Bernd Ketzler',
+    role: 'Scientific Coordinator',
+    email: 'mailto:ketzler@chalmers.se',
+    image: contentImage('Bernd-Ketzler-BW.jpg'),
+    imagePosition: 'center top',
+  },
+  {
+    name: 'Vasilis Naserentin',
+    role: 'Head of Development',
+    email: 'mailto:vasilis.naserentin@chalmers.se',
+    image: contentImage('Vasilis-Naserentin-BW.jpg'),
+    imagePosition: 'center 30%',
+  },
+  {
+    name: 'Nadia Tahir',
+    role: 'Communications Officer',
+    email: 'mailto:nadia.tahir@chalmers.se',
+    image: contentImage('Nadia-Tahir-BW.jpg'),
+    imagePosition: 'center top',
+  },
+  {
+    name: 'Erika Andolf',
+    role: 'Financial Officer',
+    email: 'mailto:erika.andolf@chalmers.se',
+    image: contentImage('Erika-Andolf-BW.jpg'),
+    imagePosition: 'center top',
+  },
 ]
 
 const boardEntries = [
   { name: 'Bo Baudin', role: 'SKR', image: contentImage('Bo-Baudin-BW.jpg') },
   { name: 'Johanna Fredhsdotter Lager', role: 'NCC', image: '' },
   { name: 'Tecumseh Hollis', role: 'Höganäs Kommun', image: '' },
-  { name: 'Eric Jeansson', role: 'Göteborgs Kommun', image: contentImage('Eric-Jeansson-BW.jpg') },
+  { name: 'Eric Jeansson', role: 'Göteborgs Kommun', image: contentImage('Eric-Jeansson-BW.jpg'), imagePosition: 'center 35%' },
   { name: 'Mila Koeva', role: 'University of Twente', image: '' },
   { name: 'Oskar Modin', role: 'Chalmers', image: '' },
   { name: 'Peter Samuelsson', role: 'Skanska', image: contentImage('Peter-Samuelsson-BW.jpg') },
@@ -143,17 +191,17 @@ const advisoryEntries = [
 const advisory = advisoryEntries
 
 const technicalBoard = [
-  { name: 'Alexander Hollberg', role: 'Chalmers', image: contentImage('Alexander-Hollberg-BW.jpg') },
-  { name: 'Franziska Hunger', role: 'Fraunhoffer Chalmers Centre', image: contentImage('Franziska-Hunger-BW.jpg') },
-  { name: 'Minna Karstunen', role: 'Chalmers', image: contentImage('Minna-Karstunen-BW.jpg') },
-  { name: 'Anders Logg', role: 'Chalmers', image: contentImage('Anders-Logg-BW.jpg') },
-  { name: 'Vasilis Naserentin', role: 'Chalmers', image: contentImage('Vasilis-Naserentin-BW.jpg') },
+  { name: 'Alexander Hollberg', role: 'Chalmers', image: contentImage('Alexander-Hollberg-BW.jpg'), imagePosition: 'center top' },
+  { name: 'Franziska Hunger', role: 'Fraunhoffer Chalmers Centre', image: contentImage('Franziska-Hunger-BW.jpg'), imagePosition: 'center top' },
+  { name: 'Minna Karstunen', role: 'Chalmers', image: contentImage('Minna-Karstunen-BW.jpg'), imagePosition: 'center 25%' },
+  { name: 'Anders Logg', role: 'Chalmers', image: contentImage('Anders-Logg-BW.jpg'), imagePosition: 'center top' },
+  { name: 'Vasilis Naserentin', role: 'Chalmers', image: contentImage('Vasilis-Naserentin-BW.jpg'), imagePosition: 'center 30%' },
   { name: 'Leonardo Rosado', role: 'Chalmers', image: '' },
-  { name: 'Mattias Roupé', role: 'Chalmers', image: contentImage('Mattias-Roupe-BW.jpg') },
-  { name: 'Liane Thuvander', role: 'Chalmers', image: contentImage('Liane-Thuvander-BW.jpg') },
+  { name: 'Mattias Roupé', role: 'Chalmers', image: contentImage('Mattias-Roupe-BW.jpg'), imagePosition: 'center top' },
+  { name: 'Liane Thuvander', role: 'Chalmers', image: contentImage('Liane-Thuvander-BW.jpg'), imagePosition: 'center top' },
   { name: 'Tara Wood', role: 'Ramboll', image: '' },
   { name: 'Dag Wästberg', role: 'Chalmers Industriteknik', image: '' },
-  { name: 'Malgorzata Zboinska', role: 'Chalmers', image: contentImage('Malgorzata-Zboinska-BW.jpg') },
+  { name: 'Malgorzata Zboinska', role: 'Chalmers', image: contentImage('Malgorzata-Zboinska-BW.jpg'), imagePosition: 'center 38%' },
 ]
 </script>
 
