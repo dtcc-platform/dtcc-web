@@ -165,7 +165,13 @@ const technicalBoard = [
 
 .people { margin-top: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .person { text-align: left; }
-.avatar { height: 300px; border-radius: 12px; background-size: cover; background-position: center; filter: grayscale(20%); }
+.avatar {
+  height: 340px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center top;
+  filter: grayscale(20%);
+}
 .name { margin-top: 6px; font-weight: 600; }
 .role { font-size: 14px; }
 
