@@ -37,6 +37,23 @@ export default defineConfig(({ mode }) => {
     ],
     base,
     build: {
+      // Target modern browsers for better optimization
+      target: 'es2020',
+      // Enable CSS code splitting
+      cssCodeSplit: true,
+      // More aggressive minification
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true, // Remove console.logs in production
+          drop_debugger: true,
+          pure_funcs: ['console.log', 'console.debug'], // Remove specific console methods
+          passes: 2, // More aggressive compression
+        },
+        mangle: {
+          safari10: true, // Better Safari compatibility
+        },
+      },
       rollupOptions: {
         input: {
           main: 'index.html',
@@ -51,7 +68,20 @@ export default defineConfig(({ mode }) => {
           gallery: 'gallery/index.html',
           about: 'about/index.html',
           post: 'post/index.html',
-        }
+        },
+        output: {
+          // Better chunk splitting strategy
+          manualChunks(id) {
+            // Put Vue in its own chunk
+            if (id.includes('node_modules/vue')) {
+              return 'vendor-vue'
+            }
+            // Put utilities in a shared chunk
+            if (id.includes('/utils/')) {
+              return 'utils'
+            }
+          },
+        },
       }
     }
   }
