@@ -14,10 +14,16 @@
     <link rel="manifest" href="/site.webmanifest">
     <!-- Fallback to the main logo if others are unavailable -->
     <link rel="icon" type="image/png" href="/dtcc-logo.png">
+    <!-- Preconnect to external domains for faster resource loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    <link rel="dns-prefetch" href="https://www.youtube-nocookie.com">
     <!-- Added font-display=swap to prevent FOIT (Flash of Invisible Text) -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600;700&display=swap" rel="stylesheet">
+    <!-- Prefetch common content for faster navigation -->
+    <link rel="prefetch" href="/content/projects/index.json" as="fetch" crossorigin>
+    <link rel="prefetch" href="/content/news/index.json" as="fetch" crossorigin>
   </head>
   <body>
     <div id="app"></div>
