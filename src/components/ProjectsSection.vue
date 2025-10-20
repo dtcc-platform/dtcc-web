@@ -5,10 +5,15 @@
       <div class="cards">
         <template v-if="items.length">
           <article v-for="p in items" :key="p.id" class="card project">
-            <div
-              :class="['img', { 'no-image': !p.hasImage }]"
-              :style="{ backgroundImage: p.hasImage ? `url(${p.image})` : undefined }"
-            ></div>
+            <img
+              v-if="p.hasImage"
+              :src="p.image"
+              :alt="p.title"
+              class="img"
+              loading="lazy"
+              decoding="async"
+            />
+            <div v-else class="img no-image"></div>
             <div class="body">
               <h4 class="h3-30" v-text="p.title" />
               <p class="brodtext-20 muted" v-text="p.summary || p.excerpt || p.description" />
@@ -129,7 +134,7 @@ const items = computed(() => {
 
 <style scoped>
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.project .img { height: 180px; background: #ddd center/cover no-repeat; }
+.project .img { width: 100%; height: 180px; object-fit: cover; display: block; background: #ddd; }
 .project .img.no-image {
   background: #f3f3f3;
   color: rgba(0, 0, 0, 0.45);

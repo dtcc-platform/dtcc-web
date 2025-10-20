@@ -8,7 +8,7 @@
 
       <template v-if="items.length">
         <article v-for="(n, idx) in items" :key="n.id" class="card note" :class="idx % 2 ? 'yellow' : 'green'">
-          <div v-if="n.image" class="thumb" :style="{ backgroundImage: `url(${n.image})` }" />
+          <img v-if="n.image" :src="n.image" :alt="n.title" class="thumb" loading="lazy" decoding="async" />
           <span class="eyebrow">{{ n.eyebrow || 'News' }}</span>
           <h3 class="h3-30" v-text="n.title" />
           <p class="brodtext-20 muted" v-text="n.summary || n.excerpt" />
@@ -144,7 +144,7 @@ const items = computed(() => {
 .media-img { height: 280px; background: url('https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat; filter: saturate(110%); }
 .play { position: absolute; inset: auto auto 16px 16px; border: none; border-radius: 50%; width: 48px; height: 48px; background: rgba(255,255,255,0.9); font-size: 18px; cursor: pointer; }
 .note { padding: 18px 18px 16px; border-radius: 14px; }
-.note .thumb { width: 100%; height: 90px; background-size: cover; background-position: center; border-radius: 10px; margin: 8px 0 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+.note .thumb { width: 100%; height: 90px; object-fit: cover; border-radius: 10px; margin: 8px 0 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.12); display: block; }
 .note.green { background: #D6F1EB; }
 .note.yellow { background: #FFE487; }
 .more { color: var(--cta-f26a2e); font-weight: 600; }

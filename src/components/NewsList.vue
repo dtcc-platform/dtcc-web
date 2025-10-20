@@ -18,10 +18,15 @@
       <div class="container">
         <div class="cards">
           <article v-for="n in visibleItems" :key="n.id" class="card project">
-            <div
-              :class="['img', { 'no-image': !n.hasImage }]"
-              :style="{ backgroundImage: n.hasImage ? `url(${n.image})` : undefined }"
-            ></div>
+            <img
+              v-if="n.hasImage"
+              :src="n.image"
+              :alt="n.title"
+              class="img"
+              loading="lazy"
+              decoding="async"
+            />
+            <div v-else class="img no-image"></div>
             <div class="body">
               <h4 class="h3-30" v-text="n.title" />
               <p class="brodtext-20 muted" v-text="n.summary || n.excerpt || n.description" />
@@ -100,7 +105,7 @@ const visibleItems = computed(() => items.value.slice(0, visibleCount.value))
 .intro { padding-top: 36px; }
 .grid2 { display: grid; grid-template-columns: .8fr 1.2fr; gap: 28px; align-items: start; }
 .list .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.project .img { height: 200px; background: #ddd center/cover no-repeat; border-radius: 14px; }
+.project .img { width: 100%; height: 200px; object-fit: cover; display: block; background: #ddd; border-radius: 14px; }
 .project .img.no-image {
   background: #f3f3f3;
   color: rgba(0, 0, 0, 0.45);
