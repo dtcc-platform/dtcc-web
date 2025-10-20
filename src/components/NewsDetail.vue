@@ -160,7 +160,8 @@ const normalizePapers = (value) => {
 onMounted(async () => {
   if (!slug || !isValidSlug(slug)) return
   try {
-    const r = await fetch(resolveUrl(`content/news/${slug}.json`), { cache: 'no-store' })
+    // Use default caching for static content - respects HTTP cache headers
+    const r = await fetch(resolveUrl(`content/news/${slug}.json`), { cache: 'default' })
     if (!r.ok) return
     const data = await r.json()
     const orderedImages = []
@@ -201,7 +202,7 @@ onMounted(async () => {
       const results = await Promise.all(
         relatedSlugs.map(async (refSlug) => {
           try {
-            const refRes = await fetch(resolveUrl(`content/news/${refSlug}.json`), { cache: 'no-store' })
+            const refRes = await fetch(resolveUrl(`content/news/${refSlug}.json`), { cache: 'default' })
             if (!refRes.ok) return null
             const refData = await refRes.json()
             return {
@@ -245,7 +246,7 @@ let usersCache = null
 async function loadUsersMap() {
   if (usersCache) return usersCache
   try {
-    const res = await fetch(resolveUrl('content/users.json'), { cache: 'no-store' })
+    const res = await fetch(resolveUrl('content/users.json'), { cache: 'default' })
     if (!res.ok) {
       usersCache = {}
       return usersCache

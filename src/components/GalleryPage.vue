@@ -97,7 +97,7 @@ const handleKeydown = (event) => {
 onMounted(async () => {
   window.addEventListener('keydown', handleKeydown)
   try {
-    const response = await fetch(withBase('content/gallery/index.json'), { cache: 'no-store' })
+    const response = await fetch(withBase('content/gallery/index.json'), { cache: 'default' })
     if (!response.ok) return
     const manifest = await response.json()
     const entries = Array.isArray(manifest?.items)
@@ -116,7 +116,7 @@ onMounted(async () => {
         const jsonPath = data.json || (base ? `content/gallery/${base}.json` : null)
         if (jsonPath) {
           try {
-            const r = await fetch(resolveUrl(jsonPath), { cache: 'no-store' })
+            const r = await fetch(resolveUrl(jsonPath), { cache: 'default' })
             if (r.ok) {
               const extra = await r.json()
               data = { ...extra, ...data }

@@ -76,7 +76,7 @@ const normalizeLink = (value) => {
 
 onMounted(async () => {
   try {
-    const idx = await fetch(withBase('content/projects/index.json'), { cache: 'no-store' })
+    const idx = await fetch(withBase('content/projects/index.json'), { cache: 'default' })
     if (!idx.ok) return
     const payload = await idx.json()
     const arr = Array.isArray(payload.items) ? payload.items : Array.isArray(payload) ? payload : []
@@ -88,7 +88,7 @@ onMounted(async () => {
       let data = {}
       if (jsonPath) {
         try {
-          const r = await fetch(resolveUrl(jsonPath), { cache: 'no-store' })
+          const r = await fetch(resolveUrl(jsonPath), { cache: 'default' })
           if (r.ok) data = await r.json()
         } catch (_) {}
       }

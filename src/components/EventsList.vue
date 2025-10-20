@@ -62,7 +62,7 @@ function detailHref(slug) {
 
 onMounted(async () => {
   try {
-    const r = await fetch(withBase('content/events/index.json'), { cache: 'no-store' })
+    const r = await fetch(withBase('content/events/index.json'), { cache: 'default' })
     if (!r.ok) return
     const payload = await r.json()
     const arr = Array.isArray(payload.items) ? payload.items : Array.isArray(payload) ? payload : []

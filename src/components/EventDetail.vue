@@ -138,7 +138,7 @@ const normalizeVideo = (value) => {
 onMounted(async () => {
   if (!slug || !isValidSlug(slug)) return
   try {
-    const r = await fetch(resolveUrl(`content/events/${slug}.json`), { cache: 'no-store' })
+    const r = await fetch(resolveUrl(`content/events/${slug}.json`), { cache: 'default' })
     if (!r.ok) return
     const data = await r.json()
     const orderedImages = []

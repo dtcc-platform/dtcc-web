@@ -59,11 +59,23 @@ const errorMessage = ref('')
 const isProcessing = ref(false)
 const usernameInput = ref(null)
 
+// Rate limiting state
+const failedAttempts = ref(0)
+const lockoutUntil = ref(0)
+
 const { authEndpoint: resolvedAuthEndpoint } = resolvePostEndpoints()
 const authEndpoint = computed(() => resolvedAuthEndpoint)
 
 async function handleSubmit() {
   errorMessage.value = ''
+
+  // Check if currently locked out
+  if (Date.now() < lockoutUntil.value) {
+    const remaining = Math.ceil((lockoutUntil.value - Date.now()) / 1000)
+    errorMessage.value = `Too many failed attempts. Please wait ${remaining} second${remaining > 1 ? 's' : ''}.`
+    return
+  }
+
   if (!authEndpoint.value) {
     errorMessage.value = 'Login endpoint is not configured. Set VITE_POST_AUTH_URL or VITE_CHAT_AUTH_URL.'
     return
@@ -94,9 +106,19 @@ async function handleSubmit() {
       throw new Error('Login response missing token.')
     }
 
+    // Reset rate limiting on successful login
+    failedAttempts.value = 0
+    lockoutUntil.value = 0
+
     const expiresAt = Number(payload?.expiresAt) || 0
     emits('authenticated', payload.token, expiresAt)
   } catch (err) {
+    // Increment failed attempts and apply exponential backoff
+    failedAttempts.value++
+    // Exponential backoff: 2^attempts seconds (2s, 4s, 8s, 16s, 32s, 64s max)
+    const lockoutSeconds = Math.pow(2, Math.min(failedAttempts.value, 6))
+    lockoutUntil.value = Date.now() + (lockoutSeconds * 1000)
+
     errorMessage.value = err instanceof Error ? err.message : String(err)
     password.value = ''
     await nextTick()
