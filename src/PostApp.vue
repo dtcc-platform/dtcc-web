@@ -14,10 +14,16 @@ import { defineAsyncComponent } from 'vue'
 import HeaderNav from './components/HeaderNav.vue'
 import FooterSection from './components/FooterSection.vue'
 import LoginGate from './components/LoginGate.vue'
+import LoadingSpinner from './components/LoadingSpinner.vue'
 import { usePostSession } from './utils/postSession'
 
-// Lazy load PostWizard (75 KB) - only loads after successful authentication
-const PostWizard = defineAsyncComponent(() => import('./components/PostWizard.vue'))
+// Lazy load PostWizard (36 KB) - only loads after successful authentication
+const PostWizard = defineAsyncComponent({
+  loader: () => import('./components/PostWizard.vue'),
+  loadingComponent: LoadingSpinner,
+  delay: 200,
+  timeout: 10000
+})
 
 const { isAuthenticated, setSession } = usePostSession()
 

@@ -23,10 +23,22 @@ import GradientFeature from './components/GradientFeature.vue'
 import WhatAreTwins from './components/WhatAreTwins.vue'
 import ProjectsSection from './components/ProjectsSection.vue'
 import FooterSection from './components/FooterSection.vue'
+import LoadingSpinner from './components/LoadingSpinner.vue'
 
 // Lazy load below-the-fold components - loads when user scrolls
-const SocialFeed = defineAsyncComponent(() => import('./components/SocialFeed.vue'))
-const CTAStudents = defineAsyncComponent(() => import('./components/CTAStudents.vue'))
+const SocialFeed = defineAsyncComponent({
+  loader: () => import('./components/SocialFeed.vue'),
+  loadingComponent: LoadingSpinner,
+  delay: 200,
+  timeout: 10000
+})
+
+const CTAStudents = defineAsyncComponent({
+  loader: () => import('./components/CTAStudents.vue'),
+  loadingComponent: LoadingSpinner,
+  delay: 200,
+  timeout: 10000
+})
 </script>
 
 <style>

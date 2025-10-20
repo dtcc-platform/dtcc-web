@@ -91,13 +91,14 @@
 import { computed } from 'vue'
 import { withBase } from '../utils/paths.js'
 
-const graphicSrc = withBase('content/TC-illustration med ringar.png')
+const graphicSrc = withBase('content/TC-illustration med ringar.webp')
 const contactHref = withBase('contact/')
 
 // Load partner logos - using optimized WebP format for better performance
 // All 35 partner logos have been converted to WebP (68.6% size reduction: 3.56 MB → 1.12 MB)
 const logoModules = import.meta.glob('../../public/content/partners/*.webp', {
-  as: 'url',
+  query: '?url',
+  import: 'default',
   eager: true,
 })
 
