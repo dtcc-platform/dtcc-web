@@ -43,11 +43,11 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue'
 import { sanitizeUrl, sanitizeSrc } from '../utils/sanitize'
-import { withBase, resolveUrl } from '../utils/paths.js'
+import { withBase, resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
 
 // Build-time fallback from src/projects
 const jsonModules = import.meta.glob('../projects/*.json', { eager: true, import: 'default' })
-const imageModules = import.meta.glob('../projects/*.{jpg,jpeg,png}', { eager: true, import: 'default' })
+const imageModules = import.meta.glob('../projects/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' })
 
 // Runtime source from public/content/projects
 const runtimeItems = ref([])
@@ -56,7 +56,8 @@ const showMore = () => { visibleCount.value = Math.min(visibleCount.value + 4, i
 
 const normalizeImage = (value) => {
   if (!value) return null
-  return sanitizeSrc(resolveUrl(value))
+  const optimized = getOptimizedImageUrl(value)
+  return sanitizeSrc(resolveUrl(optimized))
 }
 
 const normalizeLink = (value) => {

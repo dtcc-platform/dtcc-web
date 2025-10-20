@@ -17,7 +17,12 @@
         </div>
       </div>
       <div v-if="item.image" class="container">
-        <div class="hero-img card" :style="{ backgroundImage: heroImageStyle }"></div>
+        <OptimizedImage
+          :src="item.image"
+          :alt="item.title"
+          img-class="hero-img card"
+          loading="eager"
+        />
       </div>
     </section>
 
@@ -65,8 +70,9 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { sanitizeSrc, sanitizeUrl } from '../utils/sanitize'
-import { resolveUrl } from '../utils/paths.js'
+import { resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
 import { ensureYouTubeEmbed } from '../utils/video'
+import OptimizedImage from './OptimizedImage.vue'
 
 const normalizeLink = (value) => {
   if (!value) return ''
@@ -80,7 +86,6 @@ const normalizeLink = (value) => {
 const params = new URLSearchParams(location.search)
 const slug = params.get('slug')
 const item = ref(null)
-const heroImageStyle = computed(() => item.value?.image ? `url(${item.value.image})` : undefined)
 const videoEmbed = computed(() => item.value?.video || null)
 const gallery = computed(() => (item.value?.images || []).slice(1))
 const papers = computed(() => Array.isArray(item.value?.papers) ? item.value.papers : [])
@@ -113,7 +118,8 @@ const bodyParas = computed(() => {
 
 const normalizeImage = (value) => {
   if (!value) return null
-  return sanitizeSrc(resolveUrl(value))
+  const optimized = getOptimizedImageUrl(value)
+  return sanitizeSrc(resolveUrl(optimized))
 }
 
 const normalizeVideo = (value) => {
@@ -173,7 +179,7 @@ onMounted(async () => {
 .intro { padding-top: 36px; }
 .grid2 { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items: start; }
 .meta strong { font-weight: 600; }
-.hero-img { height: 320px; border-radius: 14px; margin-top: 16px; background: #000 center/cover no-repeat; }
+.hero-img { width: 100%; height: 320px; border-radius: 14px; margin-top: 16px; object-fit: cover; background: #000; }
 
 .body { padding-top: 24px; padding-bottom: 24px; }
 .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }

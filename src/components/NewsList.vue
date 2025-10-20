@@ -40,7 +40,7 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue'
 import { sanitizeSrc } from '../utils/sanitize'
-import { withBase, resolveUrl } from '../utils/paths.js'
+import { withBase, resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
 
 const runtimeItems = ref([])
 const visibleCount = ref(4)
@@ -48,7 +48,8 @@ const showMore = () => { visibleCount.value = Math.min(visibleCount.value + 4, i
 
 const normalizeImage = (value) => {
   if (!value) return null
-  return sanitizeSrc(resolveUrl(value))
+  const optimized = getOptimizedImageUrl(value)
+  return sanitizeSrc(resolveUrl(optimized))
 }
 
 onMounted(async () => {

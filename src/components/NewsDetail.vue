@@ -12,7 +12,12 @@
         </div>
       </div>
       <div v-if="item.image" class="container">
-        <div class="hero-img card" :style="{ backgroundImage: heroImageStyle }"></div>
+        <OptimizedImage
+          :src="item.image"
+          :alt="item.title"
+          img-class="hero-img card"
+          loading="eager"
+        />
       </div>
     </section>
 
@@ -93,8 +98,9 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { sanitizeSrc } from '../utils/sanitize'
-import { withBase, resolveUrl } from '../utils/paths.js'
+import { withBase, resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
 import { ensureYouTubeEmbed } from '../utils/video'
+import OptimizedImage from './OptimizedImage.vue'
 
 const params = new URLSearchParams(location.search)
 const slug = params.get('slug')
@@ -102,7 +108,6 @@ const item = ref(null)
 const related = ref([])
 const contacts = ref([])
 const MAX_CONTACTS = 2
-const heroImageStyle = computed(() => item.value?.image ? `url(${item.value.image})` : undefined)
 const videoEmbed = computed(() => item.value?.video || null)
 const gallery = computed(() => (item.value?.images || []).slice(1))
 const papers = computed(() => Array.isArray(item.value?.papers) ? item.value.papers : [])
@@ -118,7 +123,8 @@ const detailHref = (slug) => withBase(`news/detail.html?slug=${encodeURIComponen
 
 const normalizeImage = (value) => {
   if (!value) return null
-  return sanitizeSrc(resolveUrl(value))
+  const optimized = getOptimizedImageUrl(value)
+  return sanitizeSrc(resolveUrl(optimized))
 }
 
 const normalizeLink = (value) => {
@@ -254,7 +260,7 @@ async function loadUsersMap() {
 <style scoped>
 .intro { padding-top: 36px; }
 .grid2 { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items: center; }
-.hero-img { height: 380px; border-radius: 14px; margin-top: 16px; background: #000 center/cover no-repeat; }
+.hero-img { width: 100%; height: 380px; border-radius: 14px; margin-top: 16px; object-fit: cover; background: #000; }
 
 .body { padding-top: 24px; padding-bottom: 24px; }
 .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
@@ -286,5 +292,6 @@ async function loadUsersMap() {
   .contacts .people { grid-template-columns: 1fr; }
   .hero-img { height: 240px; }
   .related .cards { grid-template-columns: 1fr; }
+  .avatar { height: 200px; width: 200px; }
 }
 </style>
