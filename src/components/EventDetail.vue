@@ -69,7 +69,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { sanitizeSrc, sanitizeUrl } from '../utils/sanitize'
+import { sanitizeSrc, sanitizeUrl, isValidSlug } from '../utils/sanitize'
 import { resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
 import { ensureYouTubeEmbed } from '../utils/video'
 import OptimizedImage from './OptimizedImage.vue'
@@ -85,6 +85,12 @@ const normalizeLink = (value) => {
 
 const params = new URLSearchParams(location.search)
 const slug = params.get('slug')
+
+// Validate slug to prevent path traversal attacks
+if (slug && !isValidSlug(slug)) {
+  console.error('Invalid slug parameter')
+}
+
 const item = ref(null)
 const videoEmbed = computed(() => item.value?.video || null)
 const gallery = computed(() => (item.value?.images || []).slice(1))
@@ -130,7 +136,7 @@ const normalizeVideo = (value) => {
 }
 
 onMounted(async () => {
-  if (!slug) return
+  if (!slug || !isValidSlug(slug)) return
   try {
     const r = await fetch(resolveUrl(`content/events/${slug}.json`), { cache: 'no-store' })
     if (!r.ok) return

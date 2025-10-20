@@ -40,3 +40,17 @@ export function allowBrText(input) {
   return escaped
     .replace(/&lt;br\s*\/?&gt;/gi, '<br>')
 }
+
+/**
+ * Validates a URL slug parameter to prevent path traversal attacks.
+ * Only allows alphanumeric characters, hyphens, and underscores.
+ *
+ * @param {string} slug - The slug to validate
+ * @returns {boolean} - True if valid, false otherwise
+ */
+export function isValidSlug(slug) {
+  if (!slug || typeof slug !== 'string') return false
+  // Only allow alphanumeric, hyphens, and underscores (no slashes, dots, etc.)
+  // Max length of 200 to prevent excessively long inputs
+  return /^[a-zA-Z0-9_-]{1,200}$/.test(slug)
+}

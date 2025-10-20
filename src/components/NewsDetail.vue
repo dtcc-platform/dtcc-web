@@ -97,13 +97,20 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { sanitizeSrc } from '../utils/sanitize'
+import { sanitizeSrc, isValidSlug } from '../utils/sanitize'
 import { withBase, resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
 import { ensureYouTubeEmbed } from '../utils/video'
 import OptimizedImage from './OptimizedImage.vue'
 
 const params = new URLSearchParams(location.search)
 const slug = params.get('slug')
+
+// Validate slug to prevent path traversal attacks
+if (slug && !isValidSlug(slug)) {
+  console.error('Invalid slug parameter')
+  // Optionally redirect or show error
+}
+
 const item = ref(null)
 const related = ref([])
 const contacts = ref([])
@@ -151,7 +158,7 @@ const normalizePapers = (value) => {
 }
 
 onMounted(async () => {
-  if (!slug) return
+  if (!slug || !isValidSlug(slug)) return
   try {
     const r = await fetch(resolveUrl(`content/news/${slug}.json`), { cache: 'no-store' })
     if (!r.ok) return
@@ -190,21 +197,25 @@ onMounted(async () => {
     }
     const relatedSlugs = Array.isArray(data.related) ? data.related.slice(0, 3) : []
     if (relatedSlugs.length) {
-      const entries = []
-      for (const refSlug of relatedSlugs) {
-        try {
-          const refRes = await fetch(resolveUrl(`content/news/${refSlug}.json`), { cache: 'no-store' })
-          if (!refRes.ok) continue
-          const refData = await refRes.json()
-          entries.push({
-            id: refSlug,
-            title: refData.title || refSlug,
-            summary: refData.summary || refData.excerpt || '',
-            image: normalizeImage(refData.image || (Array.isArray(refData.images) ? refData.images[0] : null)),
-          })
-        } catch (_) {}
-      }
-      related.value = entries
+      // Fetch all related items in parallel for better performance
+      const results = await Promise.all(
+        relatedSlugs.map(async (refSlug) => {
+          try {
+            const refRes = await fetch(resolveUrl(`content/news/${refSlug}.json`), { cache: 'no-store' })
+            if (!refRes.ok) return null
+            const refData = await refRes.json()
+            return {
+              id: refSlug,
+              title: refData.title || refSlug,
+              summary: refData.summary || refData.excerpt || '',
+              image: normalizeImage(refData.image || (Array.isArray(refData.images) ? refData.images[0] : null)),
+            }
+          } catch (_) {
+            return null
+          }
+        })
+      )
+      related.value = results.filter(Boolean)
     } else {
       related.value = []
     }

@@ -83,12 +83,11 @@ async function handleSubmit() {
 
     if (!response.ok) {
       if (response.status === 401) {
-        throw new Error(payload?.error || 'Invalid username or password.')
+        // Use generic error message to prevent username enumeration
+        throw new Error('Invalid credentials. Please try again.')
       }
-      const message = typeof payload?.error === 'string' && payload.error
-        ? payload.error
-        : `Login failed (status ${response.status})`
-      throw new Error(message)
+      // For other errors, show generic message without leaking details
+      throw new Error('Login failed. Please try again later.')
     }
 
     if (!payload?.token || typeof payload.token !== 'string') {
