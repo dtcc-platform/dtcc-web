@@ -171,11 +171,11 @@ const management = [
 
 const boardEntries = [
   { name: 'Bo Baudin', role: 'SKR', image: contentImage('Bo-Baudin-BW.jpg') },
-  { name: 'Johanna Fredhsdotter Lager', role: 'NCC', image: '' },
+  { name: 'Johanna Fredhsdotter Lager', role: 'NCC', image: contentImage('Johanna-Fredsdotter-Lager-BW.jpg') },
   { name: 'Tecumseh Hollis', role: 'Höganäs Kommun', image: '' },
   { name: 'Eric Jeansson', role: 'Göteborgs Kommun', image: contentImage('Eric-Jeansson-BW.jpg'), imagePosition: 'center 35%' },
-  { name: 'Mila Koeva', role: 'University of Twente', image: '' },
-  { name: 'Oskar Modin', role: 'Chalmers', image: '' },
+  { name: 'Mila Koeva', role: 'University of Twente', image: contentImage('Mila-Koeva-BW.jpg') },
+  { name: 'Oskar Modin', role: 'Chalmers', image: contentImage('Oskar-Modin-BW.jpg') },
   { name: 'Peter Samuelsson', role: 'Skanska', image: contentImage('Peter-Samuelsson-BW.jpg') },
   { name: 'Lina Vicsai', role: 'Ramboll', image: contentImage('Lina-Viscai-BW.jpg') },
   { name: 'Cecilia Windh', role: 'LILJEWALL', image: contentImage('Cecilia-Windh-BW.jpg') },
@@ -201,7 +201,7 @@ const technicalBoard = [
   { name: 'Mattias Roupé', role: 'Chalmers', image: contentImage('Mattias-Roupe-BW.jpg'), imagePosition: 'center top' },
   { name: 'Liane Thuvander', role: 'Chalmers', image: contentImage('Liane-Thuvander-BW.jpg'), imagePosition: 'center top' },
   { name: 'Tara Wood', role: 'Ramboll', image: '' },
-  { name: 'Dag Wästberg', role: 'Chalmers Industriteknik', image: '' },
+  { name: 'Dag Wästberg', role: 'Chalmers Industriteknik', image: contentImage('Dag-Wästberg-BW.jpg'), imagePosition: 'center top' },
   { name: 'Malgorzata Zboinska', role: 'Chalmers', image: contentImage('Malgorzata-Zboinska-BW.jpg'), imagePosition: 'center 38%' },
 ]
 </script>
