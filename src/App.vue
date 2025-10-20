@@ -14,6 +14,7 @@
 </template>
 
 <script setup>
+import { defineAsyncComponent } from 'vue'
 import HeaderNav from './components/HeaderNav.vue'
 import HeroSection from './components/HeroSection.vue'
 import IntroSection from './components/IntroSection.vue'
@@ -21,9 +22,11 @@ import NewsSection from './components/NewsSection.vue'
 import GradientFeature from './components/GradientFeature.vue'
 import WhatAreTwins from './components/WhatAreTwins.vue'
 import ProjectsSection from './components/ProjectsSection.vue'
-import SocialFeed from './components/SocialFeed.vue'
-import CTAStudents from './components/CTAStudents.vue'
 import FooterSection from './components/FooterSection.vue'
+
+// Lazy load below-the-fold components - loads when user scrolls
+const SocialFeed = defineAsyncComponent(() => import('./components/SocialFeed.vue'))
+const CTAStudents = defineAsyncComponent(() => import('./components/CTAStudents.vue'))
 </script>
 
 <style>

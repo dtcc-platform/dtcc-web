@@ -10,11 +10,14 @@
 </template>
 
 <script setup>
+import { defineAsyncComponent } from 'vue'
 import HeaderNav from './components/HeaderNav.vue'
 import FooterSection from './components/FooterSection.vue'
-import PostWizard from './components/PostWizard.vue'
 import LoginGate from './components/LoginGate.vue'
 import { usePostSession } from './utils/postSession'
+
+// Lazy load PostWizard (75 KB) - only loads after successful authentication
+const PostWizard = defineAsyncComponent(() => import('./components/PostWizard.vue'))
 
 const { isAuthenticated, setSession } = usePostSession()
 
