@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { visualizer } from 'rollup-plugin-visualizer'
+import viteCompression from 'vite-plugin-compression'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -8,7 +10,31 @@ export default defineConfig(({ mode }) => {
   const repo = process.env.GITHUB_REPOSITORY?.split('/')?.pop() || ''
   const base = isGhActions && repo ? `/${repo}/` : '/'
   return {
-    plugins: [vue()],
+    plugins: [
+      vue(),
+      visualizer({
+        filename: './dist/stats.html',
+        open: false, // Set to true to auto-open after build
+        gzipSize: true,
+        brotliSize: true,
+      }),
+      // Gzip compression
+      viteCompression({
+        verbose: true,
+        disable: false,
+        threshold: 1024, // Only compress files larger than 1KB
+        algorithm: 'gzip',
+        ext: '.gz',
+      }),
+      // Brotli compression
+      viteCompression({
+        verbose: true,
+        disable: false,
+        threshold: 1024,
+        algorithm: 'brotliCompress',
+        ext: '.br',
+      }),
+    ],
     base,
     build: {
       rollupOptions: {
