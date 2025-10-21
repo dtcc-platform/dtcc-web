@@ -129,80 +129,80 @@ const management = [
     name: 'Anders Logg',
     role: 'Director',
     email: 'mailto:logg@chalmers.se',
-    image: contentImage('Anders-Logg-BW.jpg'),
+    image: contentImage('Anders-Logg-BW.webp'),
     imagePosition: 'center top',
   },
   {
     name: 'Minna Karstunen',
     role: 'Co-Director',
     email: 'mailto:minna.karstunen@chalmers.se',
-    image: contentImage('Minna-Karstunen-BW.jpg'),
+    image: contentImage('Minna-Karstunen-BW.webp'),
     imagePosition: 'center 25%',
   },
   {
     name: 'Bernd Ketzler',
     role: 'Scientific Coordinator',
     email: 'mailto:ketzler@chalmers.se',
-    image: contentImage('Bernd-Ketzler-BW.jpg'),
+    image: contentImage('Bernd-Ketzler-BW.webp'),
     imagePosition: 'center top',
   },
   {
     name: 'Vasilis Naserentin',
     role: 'Head of Development',
     email: 'mailto:vasilis.naserentin@chalmers.se',
-    image: contentImage('Vasilis-Naserentin-BW.jpg'),
+    image: contentImage('Vasilis-Naserentin-BW.webp'),
     imagePosition: 'center 20%',
   },
   {
     name: 'Nadia Tahir',
     role: 'Communications Officer',
     email: 'mailto:nadia.tahir@chalmers.se',
-    image: contentImage('Nadia-Tahir-BW.jpg'),
+    image: contentImage('Nadia-Tahir-BW.webp'),
     imagePosition: 'center top',
   },
   {
     name: 'Erika Andolf',
     role: 'Financial Officer',
     email: 'mailto:erika.andolf@chalmers.se',
-    image: contentImage('Erika-Andolf-BW.jpg'),
+    image: contentImage('Erika-Andolf-BW.webp'),
     imagePosition: 'center top',
   },
 ]
 
 const boardEntries = [
-  { name: 'Bo Baudin', role: 'SKR', image: contentImage('Bo-Baudin-BW.jpg') },
-  { name: 'Johanna Fredhsdotter Lager', role: 'NCC', image: contentImage('Johanna-Fredsdotter-Lager-BW.jpg') },
-  { name: 'Tecumseh Hollis', role: 'Höganäs Kommun', image: '' },
-  { name: 'Eric Jeansson', role: 'Göteborgs Kommun', image: contentImage('Eric-Jeansson-BW.jpg'), imagePosition: 'center 35%' },
-  { name: 'Mila Koeva', role: 'University of Twente', image: contentImage('Mila-Koeva-BW.jpg') },
-  { name: 'Oskar Modin', role: 'Chalmers', image: contentImage('Oskar-Modin-BW.jpg') },
-  { name: 'Peter Samuelsson', role: 'Skanska', image: contentImage('Peter-Samuelsson-BW.jpg') },
-  { name: 'Lina Vicsai', role: 'Ramboll', image: contentImage('Lina-Viscai-BW.jpg') },
-  { name: 'Cecilia Windh', role: 'LILJEWALL', image: contentImage('Cecilia-Windh-BW.jpg') },
+  { name: 'Bo Baudin', role: 'SKR', image: contentImage('Bo-Baudin-BW.webp') },
+  { name: 'Johanna Fredhsdotter Lager', role: 'NCC', image: contentImage('Johanna-Fredsdotter-Lager-BW.webp') },
+  { name: 'Tecumseh Hollis', role: 'Höganäs Kommun', image: contentImage('Tecumseh-Hollis-BW.webp') },
+  { name: 'Eric Jeansson', role: 'Göteborgs Kommun', image: contentImage('Eric-Jeansson-BW.webp'), imagePosition: 'center 35%' },
+  { name: 'Mila Koeva', role: 'University of Twente', image: contentImage('Mila-Koeva-BW.webp') },
+  { name: 'Oskar Modin', role: 'Chalmers', image: contentImage('Oskar-Modin-BW.webp') },
+  { name: 'Peter Samuelsson', role: 'Skanska', image: contentImage('Peter-Samuelsson-BW.webp') },
+  { name: 'Lina Vicsai', role: 'Ramboll', image: contentImage('Lina-Viscai-BW.webp') },
+  { name: 'Cecilia Windh', role: 'LILJEWALL', image: contentImage('Cecilia-Windh-BW.webp') },
 ]
 
 const board = boardEntries
 
 const advisoryEntries = [
-  { name: 'Alexandra Bolton', role: 'National Centre for Earth Observation, UK', image: contentImage('Alexandra-Bolton-BW.jpg') },
-  { name: 'Thomas Kolbe', role: 'Technical University of Munich, DE', image: contentImage('Thomas-H-Kolbe-BW.jpg') },
-  { name: 'Jantien Stoter', role: 'Delft University of Technology, NL', image: '' },
+  { name: 'Alexandra Bolton', role: 'National Centre for Earth Observation, UK', image: contentImage('Alexandra-Bolton-BW.webp') },
+  { name: 'Thomas Kolbe', role: 'Technical University of Munich, DE', image: contentImage('Thomas-H-Kolbe-BW.webp') },
+  { name: 'Jantien Stoter', role: 'Delft University of Technology, NL', image: contentImage('Jantien-Stoter-BW.webp') },
 ]
 
 const advisory = advisoryEntries
 
 const technicalBoard = [
-  { name: 'Alexander Hollberg', role: 'Chalmers', image: contentImage('Alexander-Hollberg-BW.jpg'), imagePosition: 'center top' },
-  { name: 'Franziska Hunger', role: 'Fraunhoffer Chalmers Centre', image: contentImage('Franziska-Hunger-BW.jpg'), imagePosition: 'center top' },
-  { name: 'Minna Karstunen', role: 'Chalmers', image: contentImage('Minna-Karstunen-BW.jpg'), imagePosition: 'center 25%' },
-  { name: 'Anders Logg', role: 'Chalmers', image: contentImage('Anders-Logg-BW.jpg'), imagePosition: 'center top' },
-  { name: 'Vasilis Naserentin', role: 'Chalmers', image: contentImage('Vasilis-Naserentin-BW.jpg'), imagePosition: 'center 20%' },
-  { name: 'Leonardo Rosado', role: 'Chalmers', image: '' },
-  { name: 'Mattias Roupé', role: 'Chalmers', image: contentImage('Mattias-Roupe-BW.jpg'), imagePosition: 'center top' },
-  { name: 'Liane Thuvander', role: 'Chalmers', image: contentImage('Liane-Thuvander-BW.jpg'), imagePosition: 'center top' },
+  { name: 'Alexander Hollberg', role: 'Chalmers', image: contentImage('Alexander-Hollberg-BW.webp'), imagePosition: 'center top' },
+  { name: 'Franziska Hunger', role: 'Fraunhoffer Chalmers Centre', image: contentImage('Franziska-Hunger-BW.webp'), imagePosition: 'center top' },
+  { name: 'Minna Karstunen', role: 'Chalmers', image: contentImage('Minna-Karstunen-BW.webp'), imagePosition: 'center 25%' },
+  { name: 'Anders Logg', role: 'Chalmers', image: contentImage('Anders-Logg-BW.webp'), imagePosition: 'center top' },
+  { name: 'Vasilis Naserentin', role: 'Chalmers', image: contentImage('Vasilis-Naserentin-BW.webp'), imagePosition: 'center 20%' },
+  { name: 'Leonardo Rosado', role: 'Chalmers', image: contentImage('Leonardo-Rosado-BW.webp') },
+  { name: 'Mattias Roupé', role: 'Chalmers', image: contentImage('Mattias-Roupe-BW.webp'), imagePosition: 'center top' },
+  { name: 'Liane Thuvander', role: 'Chalmers', image: contentImage('Liane-Thuvander-BW.webp'), imagePosition: 'center top' },
   { name: 'Tara Wood', role: 'Ramboll', image: '' },
-  { name: 'Dag Wästberg', role: 'Chalmers Industriteknik', image: contentImage('Dag-Wästberg-BW.jpg'), imagePosition: 'center top' },
-  { name: 'Malgorzata Zboinska', role: 'Chalmers', image: contentImage('Malgorzata-Zboinska-BW.jpg'), imagePosition: 'center 38%' },
+  { name: 'Dag Wästberg', role: 'Chalmers Industriteknik', image: contentImage('Dag-Wastberg-BW.webp'), imagePosition: 'center top' },
+  { name: 'Malgorzata Zboinska', role: 'Chalmers', image: contentImage('Malgorzata-Zboinska-BW.webp'), imagePosition: 'center 38%' },
 ]
 </script>
 
