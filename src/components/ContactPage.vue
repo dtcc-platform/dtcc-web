@@ -20,10 +20,18 @@
       <div class="container">
         <div class="people">
           <div class="person" v-for="(p, i) in management" :key="i">
-            <div
-              class="avatar"
-              :style="p.image ? { backgroundImage: `url(${p.image})`, backgroundPosition: p.imagePosition || 'center top' } : undefined"
-            ></div>
+            <div :class="['avatar', { placeholder: !(p.image || p.imageFallback) }]">
+              <picture v-if="p.image || p.imageFallback">
+                <source v-if="p.image" :srcset="p.image" type="image/webp">
+                <img
+                  :src="p.imageFallback || p.image"
+                  :alt="p.name"
+                  loading="lazy"
+                  decoding="async"
+                  :style="{ objectPosition: p.imagePosition || 'center top' }"
+                >
+              </picture>
+            </div>
             <div class="name" v-text="p.name" />
             <div class="role muted" v-text="p.role" />
             <a v-if="p.email" class="more" :href="p.email">Email »</a>
@@ -47,10 +55,18 @@
       <div class="container">
         <div class="people">
           <div class="person" v-for="(p, i) in technicalBoard" :key="i">
-            <div
-              class="avatar"
-              :style="p.image ? { backgroundImage: `url(${p.image})`, backgroundPosition: p.imagePosition || 'center top' } : undefined"
-            ></div>
+            <div :class="['avatar', { placeholder: !(p.image || p.imageFallback) }]">
+              <picture v-if="p.image || p.imageFallback">
+                <source v-if="p.image" :srcset="p.image" type="image/webp">
+                <img
+                  :src="p.imageFallback || p.image"
+                  :alt="p.name"
+                  loading="lazy"
+                  decoding="async"
+                  :style="{ objectPosition: p.imagePosition || 'center top' }"
+                >
+              </picture>
+            </div>
             <div class="name" v-text="p.name" />
             <div class="role muted" v-text="p.role" />
           </div>
@@ -75,10 +91,18 @@
       <div class="container">
         <div class="people">
           <div class="person" v-for="(p, i) in board" :key="i">
-            <div
-              class="avatar"
-              :style="p.image ? { backgroundImage: `url(${p.image})`, backgroundPosition: p.imagePosition || 'center top' } : undefined"
-            ></div>
+            <div :class="['avatar', { placeholder: !(p.image || p.imageFallback) }]">
+              <picture v-if="p.image || p.imageFallback">
+                <source v-if="p.image" :srcset="p.image" type="image/webp">
+                <img
+                  :src="p.imageFallback || p.image"
+                  :alt="p.name"
+                  loading="lazy"
+                  decoding="async"
+                  :style="{ objectPosition: p.imagePosition || 'center top' }"
+                >
+              </picture>
+            </div>
             <div class="name" v-text="p.name" />
             <div class="role muted" v-text="p.role" />
           </div>
@@ -102,10 +126,18 @@
       <div class="container">
         <div class="people">
          <div class="person" v-for="(p, i) in advisory" :key="i">
-            <div
-              class="avatar"
-              :style="p.image ? { backgroundImage: `url(${p.image})`, backgroundPosition: p.imagePosition || 'center top' } : undefined"
-            ></div>
+            <div :class="['avatar', { placeholder: !(p.image || p.imageFallback) }]">
+              <picture v-if="p.image || p.imageFallback">
+                <source v-if="p.image" :srcset="p.image" type="image/webp">
+                <img
+                  :src="p.imageFallback || p.image"
+                  :alt="p.name"
+                  loading="lazy"
+                  decoding="async"
+                  :style="{ objectPosition: p.imagePosition || 'center top' }"
+                >
+              </picture>
+            </div>
             <div class="name" v-text="p.name" />
             <div class="role muted" v-text="p.role" />
           </div>
@@ -130,6 +162,7 @@ const management = [
     role: 'Director',
     email: 'mailto:logg@chalmers.se',
     image: contentImage('Anders-Logg-BW.webp'),
+    imageFallback: contentImage('Anders-Logg-BW.jpg'),
     imagePosition: 'center top',
   },
   {
@@ -137,6 +170,7 @@ const management = [
     role: 'Co-Director',
     email: 'mailto:minna.karstunen@chalmers.se',
     image: contentImage('Minna-Karstunen-BW.webp'),
+    imageFallback: contentImage('Minna-Karstunen-BW.jpg'),
     imagePosition: 'center 25%',
   },
   {
@@ -144,6 +178,7 @@ const management = [
     role: 'Scientific Coordinator',
     email: 'mailto:ketzler@chalmers.se',
     image: contentImage('Bernd-Ketzler-BW.webp'),
+    imageFallback: contentImage('Bernd-Ketzler-BW.jpg'),
     imagePosition: 'center top',
   },
   {
@@ -151,6 +186,7 @@ const management = [
     role: 'Head of Development',
     email: 'mailto:vasilis.naserentin@chalmers.se',
     image: contentImage('Vasilis-Naserentin-BW.webp'),
+    imageFallback: contentImage('Vasilis-Naserentin-BW.jpg'),
     imagePosition: 'center 20%',
   },
   {
@@ -158,6 +194,7 @@ const management = [
     role: 'Communications Officer',
     email: 'mailto:nadia.tahir@chalmers.se',
     image: contentImage('Nadia-Tahir-BW.webp'),
+    imageFallback: contentImage('Nadia-Tahir-BW.jpg'),
     imagePosition: 'center top',
   },
   {
@@ -165,44 +202,165 @@ const management = [
     role: 'Financial Officer',
     email: 'mailto:erika.andolf@chalmers.se',
     image: contentImage('Erika-Andolf-BW.webp'),
+    imageFallback: contentImage('Erika-Andolf-BW.jpg'),
     imagePosition: 'center top',
   },
 ]
 
 const boardEntries = [
-  { name: 'Bo Baudin', role: 'SKR', image: contentImage('Bo-Baudin-BW.webp') },
-  { name: 'Johanna Fredhsdotter Lager', role: 'NCC', image: contentImage('Johanna-Fredsdotter-Lager-BW.webp') },
-  { name: 'Tecumseh Hollis', role: 'Höganäs Kommun', image: contentImage('Tecumseh-Hollis-BW.webp') },
-  { name: 'Eric Jeansson', role: 'Göteborgs Kommun', image: contentImage('Eric-Jeansson-BW.webp'), imagePosition: 'center 35%' },
-  { name: 'Mila Koeva', role: 'University of Twente', image: contentImage('Mila-Koeva-BW.webp') },
-  { name: 'Oskar Modin', role: 'Chalmers', image: contentImage('Oskar-Modin-BW.webp') },
-  { name: 'Peter Samuelsson', role: 'Skanska', image: contentImage('Peter-Samuelsson-BW.webp') },
-  { name: 'Lina Vicsai', role: 'Ramboll', image: contentImage('Lina-Viscai-BW.webp') },
-  { name: 'Cecilia Windh', role: 'LILJEWALL', image: contentImage('Cecilia-Windh-BW.webp') },
+  {
+    name: 'Bo Baudin',
+    role: 'SKR',
+    image: contentImage('Bo-Baudin-BW.webp'),
+    imageFallback: contentImage('Bo-Baudin-BW.jpg'),
+  },
+  {
+    name: 'Johanna Fredhsdotter Lager',
+    role: 'NCC',
+    image: contentImage('Johanna-Fredsdotter-Lager-BW.webp'),
+    imageFallback: contentImage('Johanna-Fredsdotter-Lager-BW.jpg'),
+  },
+  {
+    name: 'Tecumseh Hollis',
+    role: 'Höganäs Kommun',
+    image: contentImage('Tecumseh-Hollis-BW.webp'),
+    imageFallback: contentImage('Tecumseh-Hollis-BW.jpg'),
+  },
+  {
+    name: 'Eric Jeansson',
+    role: 'Göteborgs Kommun',
+    image: contentImage('Eric-Jeansson-BW.webp'),
+    imageFallback: contentImage('Eric-Jeansson-BW.jpg'),
+    imagePosition: 'center 35%',
+  },
+  {
+    name: 'Mila Koeva',
+    role: 'University of Twente',
+    image: contentImage('Mila-Koeva-BW.webp'),
+    imageFallback: contentImage('Mila-Koeva-BW.jpg'),
+  },
+  {
+    name: 'Oskar Modin',
+    role: 'Chalmers',
+    image: contentImage('Oskar-Modin-BW.webp'),
+    imageFallback: contentImage('Oskar-Modin-BW.jpg'),
+  },
+  {
+    name: 'Peter Samuelsson',
+    role: 'Skanska',
+    image: contentImage('Peter-Samuelsson-BW.webp'),
+    imageFallback: contentImage('Peter-Samuelsson-BW.jpg'),
+  },
+  {
+    name: 'Lina Vicsai',
+    role: 'Ramboll',
+    image: contentImage('Lina-Viscai-BW.webp'),
+    imageFallback: contentImage('Lina-Viscai-BW.jpg'),
+  },
+  {
+    name: 'Cecilia Windh',
+    role: 'LILJEWALL',
+    image: contentImage('Cecilia-Windh-BW.webp'),
+    imageFallback: contentImage('Cecilia-Windh-BW.jpg'),
+  },
 ]
 
 const board = boardEntries
 
 const advisoryEntries = [
-  { name: 'Alexandra Bolton', role: 'National Centre for Earth Observation, UK', image: contentImage('Alexandra-Bolton-BW.webp') },
-  { name: 'Thomas Kolbe', role: 'Technical University of Munich, DE', image: contentImage('Thomas-H-Kolbe-BW.webp') },
-  { name: 'Jantien Stoter', role: 'Delft University of Technology, NL', image: contentImage('Jantien-Stoter-BW.webp') },
+  {
+    name: 'Alexandra Bolton',
+    role: 'National Centre for Earth Observation, UK',
+    image: contentImage('Alexandra-Bolton-BW.webp'),
+    imageFallback: contentImage('Alexandra-Bolton-BW.jpg'),
+  },
+  {
+    name: 'Thomas Kolbe',
+    role: 'Technical University of Munich, DE',
+    image: contentImage('Thomas-H-Kolbe-BW.webp'),
+    imageFallback: contentImage('Thomas-H-Kolbe-BW.jpg'),
+  },
+  {
+    name: 'Jantien Stoter',
+    role: 'Delft University of Technology, NL',
+    image: contentImage('Jantien-Stoter-BW.webp'),
+    imageFallback: contentImage('Jantien-Stoter-BW.jpg'),
+  },
 ]
 
 const advisory = advisoryEntries
 
 const technicalBoard = [
-  { name: 'Alexander Hollberg', role: 'Chalmers', image: contentImage('Alexander-Hollberg-BW.webp'), imagePosition: 'center top' },
-  { name: 'Franziska Hunger', role: 'Fraunhoffer Chalmers Centre', image: contentImage('Franziska-Hunger-BW.webp'), imagePosition: 'center top' },
-  { name: 'Minna Karstunen', role: 'Chalmers', image: contentImage('Minna-Karstunen-BW.webp'), imagePosition: 'center 25%' },
-  { name: 'Anders Logg', role: 'Chalmers', image: contentImage('Anders-Logg-BW.webp'), imagePosition: 'center top' },
-  { name: 'Vasilis Naserentin', role: 'Chalmers', image: contentImage('Vasilis-Naserentin-BW.webp'), imagePosition: 'center 20%' },
-  { name: 'Leonardo Rosado', role: 'Chalmers', image: contentImage('Leonardo-Rosado-BW.webp') },
-  { name: 'Mattias Roupé', role: 'Chalmers', image: contentImage('Mattias-Roupe-BW.webp'), imagePosition: 'center top' },
-  { name: 'Liane Thuvander', role: 'Chalmers', image: contentImage('Liane-Thuvander-BW.webp'), imagePosition: 'center top' },
-  { name: 'Tara Wood', role: 'Ramboll', image: '' },
-  { name: 'Dag Wästberg', role: 'Chalmers Industriteknik', image: contentImage('Dag-Wastberg-BW.webp'), imagePosition: 'center top' },
-  { name: 'Malgorzata Zboinska', role: 'Chalmers', image: contentImage('Malgorzata-Zboinska-BW.webp'), imagePosition: 'center 38%' },
+  {
+    name: 'Alexander Hollberg',
+    role: 'Chalmers',
+    image: contentImage('Alexander-Hollberg-BW.webp'),
+    imageFallback: contentImage('Alexander-Hollberg-BW.jpg'),
+    imagePosition: 'center top',
+  },
+  {
+    name: 'Franziska Hunger',
+    role: 'Fraunhoffer Chalmers Centre',
+    image: contentImage('Franziska-Hunger-BW.webp'),
+    imageFallback: contentImage('Franziska-Hunger-BW.jpg'),
+    imagePosition: 'center top',
+  },
+  {
+    name: 'Minna Karstunen',
+    role: 'Chalmers',
+    image: contentImage('Minna-Karstunen-BW.webp'),
+    imageFallback: contentImage('Minna-Karstunen-BW.jpg'),
+    imagePosition: 'center 25%',
+  },
+  {
+    name: 'Anders Logg',
+    role: 'Chalmers',
+    image: contentImage('Anders-Logg-BW.webp'),
+    imageFallback: contentImage('Anders-Logg-BW.jpg'),
+    imagePosition: 'center top',
+  },
+  {
+    name: 'Vasilis Naserentin',
+    role: 'Chalmers',
+    image: contentImage('Vasilis-Naserentin-BW.webp'),
+    imageFallback: contentImage('Vasilis-Naserentin-BW.jpg'),
+    imagePosition: 'center 20%',
+  },
+  {
+    name: 'Leonardo Rosado',
+    role: 'Chalmers',
+    image: contentImage('Leonardo-Rosado-BW.webp'),
+    imageFallback: contentImage('Leonardo-Rosado-BW.jpg'),
+  },
+  {
+    name: 'Mattias Roupé',
+    role: 'Chalmers',
+    image: contentImage('Mattias-Roupe-BW.webp'),
+    imageFallback: contentImage('Mattias-Roupe-BW.jpg'),
+    imagePosition: 'center top',
+  },
+  {
+    name: 'Liane Thuvander',
+    role: 'Chalmers',
+    image: contentImage('Liane-Thuvander-BW.webp'),
+    imageFallback: contentImage('Liane-Thuvander-BW.jpg'),
+    imagePosition: 'center top',
+  },
+  { name: 'Tara Wood', role: 'Ramboll', image: '', imageFallback: '' },
+  {
+    name: 'Dag Wästberg',
+    role: 'Chalmers Industriteknik',
+    image: contentImage('Dag-Wästberg-BW.webp'),
+    imageFallback: contentImage('Dag-Wästberg-BW.jpg'),
+    imagePosition: 'center top',
+  },
+  {
+    name: 'Malgorzata Zboinska',
+    role: 'Chalmers',
+    image: contentImage('Malgorzata-Zboinska-BW.webp'),
+    imageFallback: contentImage('Malgorzata-Zboinska-BW.jpg'),
+    imagePosition: 'center 38%',
+  },
 ]
 </script>
 
@@ -217,9 +375,25 @@ const technicalBoard = [
 .avatar {
   height: 340px;
   border-radius: 12px;
-  background-size: cover;
-  background-position: center top;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.avatar picture,
+.avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.avatar img {
+  object-fit: cover;
+  object-position: center top;
   filter: grayscale(20%);
+}
+
+.avatar.placeholder {
+  background: rgba(255, 255, 255, 0.03);
 }
 .name { margin-top: 6px; font-weight: 600; }
 .role { font-size: 14px; }
