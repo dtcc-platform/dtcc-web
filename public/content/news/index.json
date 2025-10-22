@@ -1,78 +1,8 @@
 {
   "items": [
     {
-      "base": "multi-images-news-item",
-      "image": "content/news/multi-images-news-item.png"
-    },
-    {
-      "base": "test19",
-      "image": "content/news/test19.png"
-    },
-    {
-      "base": "test193",
-      "image": "content/news/test193.png"
-    },
-    {
-      "base": "live-demo-with-nadia",
-      "image": "https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
-    },
-    {
-      "base": "new-tests-for-nadia",
-      "image": "content/news/new-tests-for-nadia.png"
-    },
-    {
-      "base": "testing-youtube"
-    },
-    {
-      "base": "testing-youtube-2"
-    },
-    {
-      "base": "test-for-nadia"
-    },
-    {
-      "base": "i-am-trying-to-check-related-news"
-    },
-    {
-      "base": "still-checking-relation"
-    },
-    {
-      "base": "testing-3"
-    },
-    {
-      "base": "testing-users"
-    },
-    {
-      "base": "from-the-login"
-    },
-    {
-      "base": "from-the-login-2",
-      "image": "content/news/from-the-login-2.jpeg"
-    },
-    {
-      "base": "testing-new-wizard"
-    },
-    {
-      "base": "testing-speed"
-    },
-    {
-      "base": "testing-news-sorting"
-    },
-    {
-      "base": "webinar-june12",
-      "image": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1200&auto=format&fit=crop"
-    },
-    {
       "base": "extension-2025",
       "image": "https://images.unsplash.com/photo-1496302662116-85c70d4b2eea?q=80&w=1200&auto=format&fit=crop"
-    },
-    {
-      "base": "extension-2026"
-    },
-    {
-      "base": "lambda-2025"
-    },
-    {
-      "base": "lambda-test"
     }
   ]
 }
