@@ -225,6 +225,7 @@ const boardEntries = [
     role: 'Höganäs Kommun',
     image: contentImage('Tecumseh-Hollis-BW.webp'),
     imageFallback: contentImage('Tecumseh-Hollis-BW.jpg'),
+    imagePosition: 'center 75%',
   },
   {
     name: 'Eric Jeansson',
@@ -238,6 +239,7 @@ const boardEntries = [
     role: 'University of Twente',
     image: contentImage('Mila-Koeva-BW.webp'),
     imageFallback: contentImage('Mila-Koeva-BW.jpg'),
+    imagePosition: 'center 32%',
   },
   {
     name: 'Oskar Modin',
@@ -350,8 +352,8 @@ const technicalBoard = [
   {
     name: 'Dag Wästberg',
     role: 'Chalmers Industriteknik',
-    image: contentImage('Dag-Wästberg-BW.webp'),
-    imageFallback: contentImage('Dag-Wästberg-BW.jpg'),
+    image: contentImage('Dag-Wastberg-BW.webp'),
+    imageFallback: contentImage('Dag-Wastberg-BW.jpg'),
     imagePosition: 'center top',
   },
   {
