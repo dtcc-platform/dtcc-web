@@ -348,7 +348,12 @@ const technicalBoard = [
     imageFallback: contentImage('Liane-Thuvander-BW.jpg'),
     imagePosition: 'center top',
   },
-  { name: 'Tara Wood', role: 'Ramboll', image: '', imageFallback: '' },
+  {
+    name: 'Tara Wood',
+    role: 'Ramboll',
+    image: contentImage('Tara-Wood-BW.webp'),
+    imageFallback: contentImage('Tara-Wood-BW.jpg'),
+  },
   {
     name: 'Dag Wästberg',
     role: 'Chalmers Industriteknik',
