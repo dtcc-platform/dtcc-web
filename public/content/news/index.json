@@ -1,10 +1,10 @@
 {
   "items": [
     {
-      "base": "extension-2025"
+      "base": "new-test-news-item"
     },
     {
-      "base": "new-test-news-item"
+      "base": "extension-2025"
     }
   ]
 }
