@@ -5,13 +5,10 @@
       <div class="container grid2">
         <div>
           <h1 class="h2-50">Projects landing:<br>Our latest projects</h1>
-          <div class="links">
-            <a class="more" href="#">DTCC1 Projects »</a>
-          </div>
         </div>
         <div>
           <p class="brodtext-20 muted">
-            Our research projects are a major part of DTCC and where a lot of the work happens. In the coming years, our focus as a centre will be on projects that push the boundaries of what digital twins can do for cities and citizens. This includes developing advanced methods for urban planning and design, exploring sustainable construction processes, using AI to transform how we manage data, and creating powerful tools for modelling, simulation, visualization, and much more.
+            Our research projects are a major part of DTCC and where a lot of the work happens. In the coming years, our focus as a centre will be on projects that push the boundaries of what digital twins can do for cities and citizens. This includes developing advanced methods for urban planning and design, exploring sustainable construction processes, using AI to transform how we manage data, and creating powerful tools for modelling, simulation, visualization, and much more. To learn about the projects from our first five years of research, <a class="more" href="#">click here »</a>
           </p>
         </div>
       </div>
