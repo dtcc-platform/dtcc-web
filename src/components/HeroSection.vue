@@ -70,11 +70,11 @@ const slides = [
   },
   {
     id: 3,
-    title: 'Lorem ipsum dolor sit amet,<br>consectetur adipiscing elit.'
+    title: 'Shaping tomorrow's cities<br>with digital twins'
   },
   {
     id: 4,
-    title: 'Lorem ipsum —<br>sed do eiusmod tempor.'
+    title: 'From cutting-edge research<br>to real-world solutions'
   }
 ]
 
