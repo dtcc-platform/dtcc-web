@@ -2,6 +2,9 @@
   "items": [
     {
       "base": "extension-2025"
+    },
+    {
+      "base": "new-test-news-item"
     }
   ]
 }
