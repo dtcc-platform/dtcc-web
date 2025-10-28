@@ -3,13 +3,7 @@
     <div class="container intro">
       <div class="copy">
         <p class="brodtext-20">
-          The Digital Twin Cities Centre develops digital twins — scientifically grounded, data-rich virtual models of real cities. These models help researchers, planners, architects and engineers test ideas, explore urban systems and make informed decisions — before anything is built or changed.
-        </p>
-        <p class="brodtext-20">
-          At DTCC, we combine advanced simulation, real-time data and 3D modelling to build digital twins: virtual environments that mirror and predict how cities behave. These models help us explore complex challenges like climate adaptation, infrastructure planning and mobility. By testing scenarios digitally, we reduce risk, reduce impact and support the development of more sustainable, resilient cities — where people can live, move and thrive.
-        </p>
-        <p class="brodtext-20">
-          Curious? <a href="#">Explore how digital twins are already shaping the future »</a>
+          The Digital Twin Cities Centre (DTCC) is a national research centre at Chalmers University of Technology. Since 2020, we've worked with municipalities, industry leaders, and international universities to explore how digital twins can make city planning and construction smarter and more sustainable. Our vision is to establish Sweden as a world leader in digital twin cities by 2030.
         </p>
       </div>
     </div>

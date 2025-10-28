@@ -6,10 +6,13 @@
       </div>
       <div>
         <p class="brodtext-20 muted">
-          Cities become digital twins of themselves. They mirror how a place functions — from infrastructure to mobility — then allow us to test and explore scenarios, understanding how choices ripple in the real world. A digital twin isn't a copy; it's a learning environment, built on data and scientific models.
+          A digital twin is a virtual model of a physical object, system, or even an entire city. It combines data, simulation, and visualization to mirror reality in real time. It allows us to understand the present and explore possible futures with a level of detail and accuracy that was previously impossible.
         </p>
         <p class="brodtext-20 muted">
-          The bigger picture? Digital twins help organisations plan for the future, reduce risk and improve outcomes for people. They make it easier to collaborate across disciplines and with citizens, breaking down silos and helping ideas travel further and faster.
+          In city planning, digital twins make it possible to test the impact of new buildings, transport systems, or green spaces before they are built. In construction, they improve coordination, reduce errors and waste, and support more sustainable ways of working.
+        </p>
+        <p class="brodtext-20 muted">
+          By turning complex data into clear insights, digital twins enable smarter decisions, more efficient resource use, and healthier, more resilient cities.
         </p>
       </div>
     </div>
