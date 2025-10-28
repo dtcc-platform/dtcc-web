@@ -6,14 +6,12 @@
         <template v-if="items.length">
           <article v-for="p in items" :key="p.id" class="card project">
             <img
-              v-if="p.hasImage"
-              :src="p.image"
+              :src="p.image || fallbackImage"
               :alt="p.title"
               class="img"
               loading="lazy"
               decoding="async"
             />
-            <div v-else class="img no-image"></div>
             <div class="body">
               <h4 class="h3-30" v-text="p.title" />
               <p class="brodtext-20 muted" v-text="p.summary || p.excerpt || p.description" />
@@ -130,25 +128,13 @@ const items = computed(() => {
   result.sort((a, b) => (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0))
   return result
 })
+
+const fallbackImage = withBase('content/Projects Placeholder.webp')
 </script>
 
 <style scoped>
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .project .img { width: 100%; height: 180px; object-fit: cover; display: block; background: #ddd; }
-.project .img.no-image {
-  background: #f3f3f3;
-  color: rgba(0, 0, 0, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-.project .img.no-image::after {
-  content: 'No image';
-}
 .project .body { padding: 14px 16px 18px; }
 .project a { color: var(--cta-f26a2e); font-weight: 600; }
 @media (max-width: 1100px) { .cards { grid-template-columns: 1fr 1fr; } }
