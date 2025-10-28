@@ -70,7 +70,7 @@ const slides = [
   },
   {
     id: 3,
-    title: 'Shaping tomorrow's cities<br>with digital twins'
+    title: 'Shaping tomorrow\'s cities<br>with digital twins'
   },
   {
     id: 4,
