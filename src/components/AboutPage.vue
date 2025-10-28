@@ -9,7 +9,10 @@
         </div>
         <div>
           <p class="brodtext-20 muted">
-            The Digital Twin Cities Centre (DTCC) at Chalmers University of Technology develops scientifically grounded digital twins — virtual models of real cities. By combining advanced simulation, real‑time data and 3D modelling, DTCC enables researchers, planners and industry to test ideas, analyze urban systems and make informed decisions. Our mission is to drive innovation, reduce risk and support the creation of sustainable, resilient cities for the future.
+            The Digital Twin Cities Centre (DTCC) is a national research centre based at Chalmers University of Technology. Together with municipalities, industry leaders and international universities, we have been exploring how digital twins can make city planning and construction smarter, more sustainable, and more people-focused since 2020.
+          </p>
+          <p class="brodtext-20 muted">
+            Our projects bring together PhD students, researchers, and practitioners who co-create practical tools for urban planning, construction, and sustainability. DTCC acts as a collaborative arena, where research meets real-world challenges to help cities become more liveable, efficient, and resilient.
           </p>
         </div>
       </div>
@@ -25,13 +28,10 @@
         </div>
         <div>
           <p class="brodtext-20 muted">
-            The centre’s vision is to establish the Digital Twin City concept as the foundation for digital planning, design, construction, and management of sustainable, intelligent, and liveable cities and regions throughout Sweden by 2030.
+            The vision of DTCC is to establish Sweden as a world leader in digital twin cities by 2030. We aim to make digital twins the main tool for developing sustainable, intelligent, and liveable cities and regions. By combining openness, collaboration, and cutting-edge research, we want to transform how society plans, builds, and manages the urban environment.
           </p>
           <p class="brodtext-20 muted">
-            This will be achieved by serving as a national and collaborative arena with an open Digital Twin platform that enables the exchange and accessibility of relevant spatial, user and qualitative data as well as the development of cutting‑edge tools and methods that support informed decision‑making based on simulations to forecast the response of design interventions. The centre explores, develops, and disseminates digital strategies, services, and business models that deliver value to Swedish society at large.
-          </p>
-          <p class="brodtext-20 muted">
-            All centre activities are motivated by improving the health and wellbeing of citizens and the circularity of materials, buildings, and infrastructure in cities and regions.
+            Digital twins will not only help cities become smarter and more efficient, but also healthier, more resilient, and more inclusive. The ultimate goal is to create urban environments that improve the well-being of citizens, reduce environmental impact, and contribute to the UN Sustainable Development Goals.
           </p>
         </div>
       </div>
@@ -44,10 +44,7 @@
         </div>
         <div>
           <p class="brodtext-20 muted">
-            Make Sweden a leading European country in the implementation and utilisation of digital twin cities. Help to enable all Swedish built environment actors to utilise digital twins as a main tool for sustainable and inclusive planning, execution and management. Become recognised as an international leader and a strong contributor to the global research and dissemination of knowledge and practices for digital twin cities.
-          </p>
-          <p class="brodtext-20 muted">
-            Make strong and lasting contributions to fulfilling the UN SDGs at different levels. Support the full integration of the digital twin concept in all parts of the planning process for the Built Environment.
+            Our mission is to unite researchers, municipalities, and industry in developing and applying digital twin technology for real societal benefit. We promote open, interoperable, and federated digital twins — an ecosystem of connected systems rather than monolithic solutions. By advancing common frameworks and principles, we enable data sharing across organisations and sectors, fostering outcome-driven approaches. Through open and interoperable platforms, we turn complex urban data into accessible insights that support better planning, design, and construction. Combining cutting-edge research with practical applications, we train the next generation of experts and help cities and businesses tackle urgent challenges. Through strong international collaborations, we strengthen Sweden's role in the global digital twin movement and ensure our solutions create impact both locally and worldwide.
           </p>
         </div>
       </div>
