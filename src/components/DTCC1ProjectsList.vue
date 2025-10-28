@@ -4,11 +4,11 @@
     <section class="section gradient-sunrise intro">
       <div class="container grid2">
         <div>
-          <h1 class="h2-50">Projects landing:<br>Our latest projects</h1>
+          <h1 class="h2-50">DTCC1 Projects:<br>Our first five years</h1>
         </div>
         <div>
           <p class="brodtext-20 muted">
-            Our research projects are a major part of DTCC and where a lot of the work happens. In the coming years, our focus as a centre will be on projects that push the boundaries of what digital twins can do for cities and citizens. This includes developing advanced methods for urban planning and design, exploring sustainable construction processes, using AI to transform how we manage data, and creating powerful tools for modelling, simulation, visualization, and much more. To learn about the projects from our first five years of research, <a class="more" :href="dtcc1Href">click here »</a>
+            These are the research projects from DTCC's first phase (2020-2025). During this period, we established the foundation for digital twin technology in Sweden, developed core platforms and tools, and built strong partnerships across academia, industry, and the public sector.
           </p>
         </div>
       </div>
@@ -47,11 +47,11 @@ import { computed, ref, onMounted } from 'vue'
 import { sanitizeUrl, sanitizeSrc } from '../utils/sanitize'
 import { withBase, resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
 
-// Build-time fallback from src/projects
-const jsonModules = import.meta.glob('../projects/*.json', { eager: true, import: 'default' })
-const imageModules = import.meta.glob('../projects/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' })
+// Build-time fallback from src/dtcc-1
+const jsonModules = import.meta.glob('../dtcc-1/*.json', { eager: true, import: 'default' })
+const imageModules = import.meta.glob('../dtcc-1/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' })
 
-// Runtime source from public/content/projects
+// Runtime source from public/content/dtcc-1
 const runtimeItems = ref([])
 const visibleCount = ref(4)
 const showMore = () => { visibleCount.value = Math.min(visibleCount.value + 4, items.value.length) }
@@ -73,7 +73,7 @@ const normalizeLink = (value) => {
 
 onMounted(async () => {
   try {
-    const idx = await fetch(withBase('content/projects/index.json'), { cache: 'default' })
+    const idx = await fetch(withBase('content/dtcc-1/index.json'), { cache: 'default' })
     if (!idx.ok) return
     const payload = await idx.json()
     const arr = Array.isArray(payload.items) ? payload.items : Array.isArray(payload) ? payload : []
@@ -81,7 +81,7 @@ onMounted(async () => {
     const resolved = []
     for (const it of bases) {
       const base = it.base || it.name || it.file || it.id
-      const jsonPath = it.json || (base ? `content/projects/${base}.json` : null)
+      const jsonPath = it.json || (base ? `content/dtcc-1/${base}.json` : null)
       let data = {}
       if (jsonPath) {
         try {
@@ -115,9 +115,9 @@ const items = computed(() => {
   for (const [path, data] of Object.entries(jsonModules)) {
     const name = path.split('/').pop().replace(/\.json$/i, '')
     const img =
-      imageModules[`../projects/${name}.jpeg`] ||
-      imageModules[`../projects/${name}.jpg`] ||
-      imageModules[`../projects/${name}.png`]
+      imageModules[`../dtcc-1/${name}.jpeg`] ||
+      imageModules[`../dtcc-1/${name}.jpg`] ||
+      imageModules[`../dtcc-1/${name}.png`]
     const remoteImage = normalizeImage(data.image || (Array.isArray(data.images) ? data.images[0] : null))
     const image = img ? sanitizeSrc(resolveUrl(img)) : remoteImage
     const title = data.title || data.name || name
@@ -137,14 +137,12 @@ const items = computed(() => {
 })
 
 const detailHref = (slug) => withBase(`projects/detail.html?slug=${encodeURIComponent(slug)}`)
-const dtcc1Href = withBase('dtcc-1/')
 const visibleItems = computed(() => items.value.slice(0, visibleCount.value))
 </script>
 
 <style scoped>
 .intro { padding-top: 36px; }
 .grid2 { display: grid; grid-template-columns: .8fr 1.2fr; gap: 28px; align-items: start; }
-.links { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
 .more { color: var(--cta-f26a2e); font-weight: 600; }
 
 .list .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }

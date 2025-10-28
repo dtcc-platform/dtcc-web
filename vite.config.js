@@ -63,6 +63,7 @@ export default defineConfig(({ mode }) => {
           eventsDetail: 'events/detail.html',
           projects: 'projects/index.html',
           projectsDetail: 'projects/detail.html',
+          dtcc1: 'dtcc-1/index.html',
           partners: 'partners/index.html',
           contact: 'contact/index.html',
           gallery: 'gallery/index.html',

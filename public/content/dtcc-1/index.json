@@ -1,3 +1,28 @@
 {
-  "items": []
+  "items": [
+    {
+      "base": "platform-development",
+      "title": "Digital Twin Platform Development",
+      "description": "Core development of the national digital twin platform infrastructure, enabling data integration and interoperability across Swedish cities.",
+      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop"
+    },
+    {
+      "base": "urban-microclimate",
+      "title": "Urban Microclimate Analysis",
+      "description": "Advanced simulation tools for analyzing urban microclimates, supporting climate adaptation strategies and outdoor comfort assessments.",
+      "image": "https://images.unsplash.com/photo-1534996858221-380b92700493?q=80&w=1200&auto=format&fit=crop"
+    },
+    {
+      "base": "energy-optimization",
+      "title": "Energy Optimization in Buildings",
+      "description": "Digital twin models for optimizing energy consumption in buildings and districts, supporting sustainable urban development.",
+      "image": "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=1200&auto=format&fit=crop"
+    },
+    {
+      "base": "infrastructure-monitoring",
+      "title": "Infrastructure Monitoring and Maintenance",
+      "description": "Real-time monitoring and predictive maintenance systems for urban infrastructure using digital twin technology.",
+      "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop"
+    }
+  ]
 }
