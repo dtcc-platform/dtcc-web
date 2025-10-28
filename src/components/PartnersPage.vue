@@ -5,9 +5,7 @@
         <div class="intro-copy">
           <h1 class="h2-50">Partners powering the Digital Twin Platform</h1>
           <p class="brodtext-20 muted">
-            DTCC brings academia, the public sector, and private industry together to co-develop a national
-            Digital Twin platform. The illustration highlights how our shared ecosystem is designed to
-            accelerate research, ensure public value, and translate breakthrough solutions into practice.
+            DTCC is built on collaboration. Our partners represent academia, industry, the public sector, and international networks, creating a broad and balanced foundation for innovation. This diversity ensures that our work is both scientifically rigorous and practically relevant. By combining different forms of expertise, DTCC can address complex urban challenges from multiple angles and turn research into solutions that will help shape tomorrow's cities.
           </p>
           <p class="brodtext-20 muted">
             Below you can explore the partner landscape and the roles each group plays in pushing the boundaries

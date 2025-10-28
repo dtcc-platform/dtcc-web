@@ -11,7 +11,7 @@
         </div>
         <div>
           <p class="brodtext-20 muted">
-            Placeholder project description text. Optatem repe sunt. Evelessi arunt eum fugiam, quodis sera preheni ut et quis nullacc ullorentiam ut exerati antis dolor assinent exeria at arum faccum et es eume esed mo to eum aut molecore ullorest, eic totas auta que volorum que prat plam quiate cumquide cum idelect emquaceabor miiat voluti id ut quiis dolalut volutpat arum ius volectar, inus et aut. Nam ilatium experum volles remposto quos voloribus ma core venias ex eum quaest, iunt omnime et enisinis cusa dolorro que esciat.
+            Our research projects are a major part of DTCC and where a lot of the work happens. In the coming years, our focus as a centre will be on projects that push the boundaries of what digital twins can do for cities and citizens. This includes developing advanced methods for urban planning and design, exploring sustainable construction processes, using AI to transform how we manage data, and creating powerful tools for modelling, simulation, visualization, and much more.
           </p>
         </div>
       </div>
