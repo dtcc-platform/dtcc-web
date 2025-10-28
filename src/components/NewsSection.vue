@@ -8,7 +8,7 @@
 
       <template v-if="items.length">
         <article v-for="(n, idx) in items" :key="n.id" class="card note" :class="idx % 2 ? 'yellow' : 'green'">
-          <img v-if="n.image" :src="n.image" :alt="n.title" class="thumb" loading="lazy" decoding="async" />
+          <img :src="n.image || fallbackImage" :alt="n.title" class="thumb" loading="lazy" decoding="async" />
           <span class="eyebrow">{{ n.eyebrow || 'News' }}</span>
           <h3 class="h3-30" v-text="n.title" />
           <p class="brodtext-20 muted" v-text="n.summary || n.excerpt" />
@@ -101,7 +101,6 @@ onMounted(async () => {
           } catch (_) { /* ignore */ }
         }
       }
-      if (!image) continue // require an image to publish
       resolved.push({ id: base || title, title, summary, url, eyebrow, image, date })
     }
     resolved.sort((a, b) => (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0))
@@ -122,20 +121,20 @@ const items = computed(() => {
       imageModules[`../news/${name}.jpeg`] ||
       imageModules[`../news/${name}.jpg`] ||
       imageModules[`../news/${name}.png`]
-    if (!img) continue
 
     const title = data.title || data.headline || name
     const summary = data.summary || data.excerpt || ''
     const url = normalizeLink(data.url || data.link || '')
     const eyebrow = data.eyebrow || 'News'
     const date = data.date || data.published || data.publishedAt || data.time || null
-    const image = sanitizeSrc(resolveUrl(img))
-    if (!image) continue
+    const image = img ? sanitizeSrc(resolveUrl(img)) : null
     result.push({ id: name, title, summary, url, eyebrow, image, date })
   }
   result.sort((a, b) => (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0))
   return result
 })
+
+const fallbackImage = withBase('content/News Placeholder.webp')
 </script>
 
 <style scoped>

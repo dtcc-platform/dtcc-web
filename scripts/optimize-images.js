@@ -33,6 +33,8 @@ const CONFIG = {
 // List of images to optimize (identified from audit)
 const IMAGES_TO_OPTIMIZE = [
   'content/Tara-Wood-BW.jpg',
+  'content/News Placeholder.png',
+  'content/Projects Placeholder.png',
 ];
 
 /**
