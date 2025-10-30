@@ -69,7 +69,7 @@
         </div>
 
         <div v-if="!isEventType" class="field selection-field">
-          <label>Related {{ postType === 'projects' ? 'projects' : 'news items' }}</label>
+          <label>Related {{ postType === 'projects' ? 'projects' : postType === 'events-archive' ? 'project archive entries' : 'news items' }}</label>
           <p class="muted helper">Select up to {{ MAX_RELATED }} related entries to feature alongside this post.</p>
           <div v-if="relatedLoading" class="muted helper">Loading related options…</div>
           <div v-else-if="relatedError" class="alert error">{{ relatedError }}</div>
@@ -89,7 +89,7 @@
 
         <div v-if="!isEventType" class="field selection-field">
           <label>Contacts</label>
-          <p class="muted helper">Pick up to {{ MAX_CONTACTS }} contacts for this {{ postType === 'projects' ? 'project' : 'news item' }}.</p>
+          <p class="muted helper">Pick up to {{ MAX_CONTACTS }} contacts for this {{ postType === 'projects' ? 'project' : postType === 'events-archive' ? 'project archive entry' : 'news item' }}.</p>
           <div v-if="contactLoading" class="muted helper">Loading contacts…</div>
           <div v-else-if="contactError" class="alert error">{{ contactError }}</div>
           <div v-else class="selection-list">
@@ -463,7 +463,7 @@ const SECTION_CONFIG = {
   projects: { label: 'Projects', contentDir: 'projects', urlPrefix: '/projects/' },
 }
 
-const EVENT_TYPES = new Set(['events', 'events-archive'])
+const EVENT_TYPES = new Set(['events'])
 
 const {
   publishEndpoint: resolvedPublishEndpoint,
