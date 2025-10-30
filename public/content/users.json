@@ -13,6 +13,20 @@
       "email": "ketzler@chalmers.se",
       "title": "Project Coordinator",
       "photo": "content/Bernd-Ketzler-BW.jpg"
+    },
+    {
+      "slug": "franziska-hunger",
+      "name": "Franziska Hunger",
+      "email": "franziska.hunger@fcc.chalmers.se",
+      "title": "Fraunhofer Chalmers Centre",
+      "photo": "content/Franziska-Hunger-BW.jpg"
+    },
+    {
+      "slug": "malgorzata-zboinska",
+      "name": "Malgorzata Zboinska",
+      "email": "malgorzata.zboinska@chalmers.se",
+      "title": "Chalmers",
+      "photo": "content/Malgorzata-Zboinska-BW.jpg"
     }
   ]
 }
