@@ -1431,6 +1431,11 @@ async function publishToFileSystem({ parsed, slugValue, section, uploadStates, c
 
   successMessage.value = `Saved public/content/${config.contentDir}/${slugValue}.json${added ? ' and updated index.json.' : '.'}`
   draftSection.value = section
+
+  // Reset form after successful save so user can create another post
+  setTimeout(() => {
+    resetWizard()
+  }, 3000)
 }
 
 async function publishViaApi({ parsed, slugValue, section, uploadStates, config, commitMessage }) {
@@ -1511,6 +1516,11 @@ async function publishViaApi({ parsed, slugValue, section, uploadStates, config,
   const manifestNote = manifestUpdated ? ' (manifest updated).' : '.'
   successMessage.value = `Published ${config.contentDir}/${slugValue}.json via API${manifestNote} Updates will be live within ~30 seconds.`
   draftSection.value = section
+
+  // Reset form after successful publish so user can create another post
+  setTimeout(() => {
+    resetWizard()
+  }, 3000)
 }
 
 async function fileToBase64(file) {
