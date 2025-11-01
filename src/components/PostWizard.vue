@@ -1029,14 +1029,14 @@ function prepareDraft() {
         summary,
         body: normalizedBody,
         subheading: 'Details',
-        url: `${config.urlPrefix}${slugValue}`,
+        url: `${config.urlPrefix}detail.html?slug=${encodeURIComponent(slugValue)}`,
         date: isoDate,
       }
     } else {
       payload = {
         title: titleValue,
         summary,
-        url: `${config.urlPrefix}${slugValue}`,
+        url: `${config.urlPrefix}detail.html?slug=${encodeURIComponent(slugValue)}`,
         body: normalizedBody,
         eyebrow: 'News',
         date: isoDate,

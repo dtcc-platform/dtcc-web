@@ -26,7 +26,7 @@
 
 <script setup>
 import { computed, onMounted, ref } from 'vue'
-import { withBase } from '../utils/paths'
+import { withBase, resolveUrl } from '../utils/paths'
 import { sanitizeSrc, sanitizeUrl } from '../utils/sanitize'
 
 const FEED_PATH = 'content/social/linkedin_posts_complete.json'
@@ -69,7 +69,7 @@ function normalizePost(raw = {}) {
     id: raw.post_id || raw.original_data?.id || cryptoRandomId(),
     url: sanitizeUrl(link || companyUrl),
     published: formatDate(publishedTs),
-    image: imageUrl ? sanitizeSrc(imageUrl) : null,
+    image: imageUrl ? sanitizeSrc(resolveUrl(imageUrl)) : null,
     summary,
   }
 }

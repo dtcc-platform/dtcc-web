@@ -1,7 +1,7 @@
 {
   "title": "New test news item",
   "summary": "Should see a placeholder image",
-  "url": "/news/new-test-news-item",
+  "url": "/news/detail.html?slug=new-test-news-item",
   "body": "Should see a placeholder image",
   "eyebrow": "News",
   "date": "2025-10-28",
