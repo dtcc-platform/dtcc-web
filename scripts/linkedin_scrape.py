@@ -1,8 +1,10 @@
 import requests
 import json
-from urllib.parse import quote
+from urllib.parse import quote, urlparse
 import os
 from pathlib import Path
+import hashlib
+import mimetypes
 
 
 # Configuration
@@ -10,10 +12,50 @@ ACCESS_TOKEN = os.getenv("LINKEDIN_ACCESS_TOKEN")
 ORGANIZATION_ID = "100491988"
 POSTS_API_BASE = "https://api.linkedin.com/rest/posts"
 OUTPUT_FILE = Path("public/content/social/linkedin_posts_complete.json")
+IMAGES_DIR = Path("public/content/social/linkedin-images")
+
+# Ensure images directory exists
+IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 
 def get_post_url(post_id):
     """Convert post ID/URN to a shareable LinkedIn URL"""
     return f"https://www.linkedin.com/feed/update/{post_id}/"
+
+def download_image(image_url, post_id):
+    """Download image from URL and save locally, return local path"""
+    if not image_url:
+        return None
+
+    try:
+        # Create a filename from post_id and URL hash
+        url_hash = hashlib.md5(image_url.encode()).hexdigest()[:8]
+        post_slug = post_id.split(':')[-1][:12] if post_id else 'unknown'
+
+        # Download image
+        response = requests.get(image_url, timeout=10)
+        response.raise_for_status()
+
+        # Detect extension from content-type
+        content_type = response.headers.get('content-type', '')
+        ext = mimetypes.guess_extension(content_type) or '.jpg'
+        if ext == '.jpe':
+            ext = '.jpg'
+
+        # Save to local file
+        filename = f"{post_slug}-{url_hash}{ext}"
+        filepath = IMAGES_DIR / filename
+
+        with filepath.open('wb') as f:
+            f.write(response.content)
+
+        # Return relative path for JSON
+        relative_path = f"content/social/linkedin-images/{filename}"
+        print(f"  ✓ Downloaded image: {filename} ({len(response.content)} bytes)")
+        return relative_path
+
+    except Exception as e:
+        print(f"  ✗ Failed to download image: {e}")
+        return None
 
 def get_image_details(image_urn, access_token):
     """Fetch image details including download URL from Images API"""
@@ -154,7 +196,16 @@ try:
                 if parent_media["has_media"]:
                     parent_media["source"] = "reshare_parent"
                     media_info = parent_media
-        
+
+        # Download image locally if available
+        if media_info["has_media"] and media_info["image_url"]:
+            local_path = download_image(media_info["image_url"], post_id)
+            if local_path:
+                media_info["local_image_path"] = local_path
+                # Keep original URL for reference but prefer local path
+                media_info["original_image_url"] = media_info["image_url"]
+                media_info["image_url"] = local_path
+
         # Create enhanced post object
         enhanced_post = {
             "post_id": post_id,
