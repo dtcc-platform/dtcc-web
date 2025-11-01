@@ -5,6 +5,9 @@
     },
     {
       "base": "extension-2025"
+    },
+    {
+      "base": "test-1"
     }
   ]
 }
