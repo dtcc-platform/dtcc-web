@@ -50,11 +50,18 @@
       "photo": null
     },
     {
-      "slug": "jonas-runeberger",
-      "name": "Jonas Runeberger",
-      "email": "jonas.runeberger@kth.se",
+      "slug": "jonas-runberger",
+      "name": "Jonas Runberger",
+      "email": "jonas.runberger@kth.se",
       "title": "KTH",
       "photo": null
+    },
+    {
+      "slug": "leonardo-rosado",
+      "name": "Leonardo Rosado",
+      "email": "leonardo.rosado@chalmers.se",
+      "title": "Chalmers",
+      "photo": "content/Leonardo-Rosado-BW.jpg"
     }
   ]
 }
