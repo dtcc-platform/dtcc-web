@@ -1,6 +1,9 @@
 {
   "items": [
     {
+      "base": "test-1"
+    },
+    {
       "base": "new-test-news-item"
     },
     {
