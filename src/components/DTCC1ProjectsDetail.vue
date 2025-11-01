@@ -4,11 +4,14 @@
     <section class="section gradient-sunrise intro">
       <div class="container grid2">
         <div>
-          <div class="eyebrow">News:</div>
+          <div class="eyebrow">DTCC1 Project:</div>
           <h1 class="h2-50" v-text="item.title"></h1>
         </div>
         <div>
           <p class="brodtext-20 muted" v-text="item.intro || item.summary || ''" />
+          <div v-if="item.url" class="visit">
+            <a class="more" :href="item.url" target="_blank" rel="noopener">Visit website »</a>
+          </div>
         </div>
       </div>
       <div v-if="item.image" class="container">
@@ -66,16 +69,16 @@
       </div>
     </section>
 
-    <!-- Related posts -->
+    <!-- Related projects -->
     <section class="section gradient-sunrise related">
       <div class="container">
-        <h3 class="h3-30 section-title">Related posts</h3>
+        <h3 class="h3-30 section-title">Related DTCC1 projects</h3>
         <div class="cards">
           <article v-for="r in related" :key="r.id" class="card project">
             <div class="img" :style="{ backgroundImage: r.image ? `url(${r.image})` : undefined }"></div>
             <div class="body">
               <h4 class="h3-30" v-text="r.title" />
-              <p class="brodtext-20 muted" v-text="r.summary || ''" />
+              <p class="brodtext-20 muted" v-text="r.summary || r.description || ''" />
               <a :href="detailHref(r.id)" class="more">Read more »</a>
             </div>
           </article>
@@ -98,7 +101,7 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { sanitizeSrc, isValidSlug } from '../utils/sanitize'
+import { sanitizeSrc, sanitizeUrl, isValidSlug } from '../utils/sanitize'
 import { withBase, resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
 import { ensureYouTubeEmbed } from '../utils/video'
 import OptimizedImage from './OptimizedImage.vue'
@@ -109,7 +112,6 @@ const slug = params.get('slug')
 // Validate slug to prevent path traversal attacks
 if (slug && !isValidSlug(slug)) {
   console.error('Invalid slug parameter')
-  // Optionally redirect or show error
 }
 
 const item = ref(null)
@@ -127,7 +129,7 @@ const bodyParas = computed(() => {
   return String(body).split(/\n\n+/).map(s => s.trim()).filter(Boolean)
 })
 
-const detailHref = (slug) => withBase(`news/detail.html?slug=${encodeURIComponent(slug)}`)
+const detailHref = (slug) => withBase(`dtcc-1/detail.html?slug=${encodeURIComponent(slug)}`)
 
 const normalizeImage = (value) => {
   if (!value) return null
@@ -136,22 +138,20 @@ const normalizeImage = (value) => {
   return sanitizeSrc(resolveUrl(value))
 }
 
-const normalizeLink = (value) => {
-  if (!value) return ''
-  const trimmed = value.trim()
-  if (!trimmed || trimmed === '#') return ''
-  if (/^https?:\/\//i.test(trimmed)) {
-    const sanitized = sanitizeSrc(trimmed)
-    return sanitized || ''
-  }
-  return ''
-}
-
 const normalizeVideo = (value) => {
   if (!value) return null
   const embed = ensureYouTubeEmbed(value)
   if (!embed) return null
   return sanitizeSrc(embed)
+}
+
+const normalizeLink = (value) => {
+  if (!value) return ''
+  const trimmed = value.trim()
+  if (!trimmed || trimmed === '#') return ''
+  const resolved = resolveUrl(trimmed)
+  if (typeof resolved !== 'string') return ''
+  return resolved.startsWith('/') ? resolved : sanitizeUrl(resolved)
 }
 
 const normalizePapers = (value) => {
@@ -162,8 +162,7 @@ const normalizePapers = (value) => {
 onMounted(async () => {
   if (!slug || !isValidSlug(slug)) return
   try {
-    // Use default caching for static content - respects HTTP cache headers
-    const r = await fetch(resolveUrl(`content/news/${slug}.json`), { cache: 'default' })
+    const r = await fetch(resolveUrl(`content/dtcc-1/${slug}.json`), { cache: 'default' })
     if (!r.ok) return
     const data = await r.json()
     const orderedImages = []
@@ -188,15 +187,16 @@ onMounted(async () => {
 
     item.value = {
       id: slug,
-      title: data.title || slug,
-      intro: data.intro || data.summary || '',
+      title: data.title || data.name || slug,
+      intro: data.intro || data.summary || data.description || '',
       subheading: data.subheading || data.headline || 'Details',
-      body: data.body || '',
+      body: data.body || data.details || '',
       image: headlineImage,
       images: orderedImages,
       video: normalizeVideo(data.video || null),
+      url: normalizeLink(data.url || data.link || ''),
+      date: data.date || data.updated || null,
       papers: normalizePapers(data.papers),
-      date: data.date || data.published || data.publishedAt || null,
     }
     const relatedSlugs = Array.isArray(data.related) ? data.related.slice(0, 3) : []
     if (relatedSlugs.length) {
@@ -204,13 +204,13 @@ onMounted(async () => {
       const results = await Promise.all(
         relatedSlugs.map(async (refSlug) => {
           try {
-            const refRes = await fetch(resolveUrl(`content/news/${refSlug}.json`), { cache: 'default' })
+            const refRes = await fetch(resolveUrl(`content/dtcc-1/${refSlug}.json`), { cache: 'default' })
             if (!refRes.ok) return null
             const refData = await refRes.json()
             return {
               id: refSlug,
               title: refData.title || refSlug,
-              summary: refData.summary || refData.excerpt || '',
+              summary: refData.summary || refData.excerpt || refData.description || '',
               image: normalizeImage(refData.image || (Array.isArray(refData.images) ? refData.images[0] : null)),
             }
           } catch (_) {
@@ -275,6 +275,7 @@ async function loadUsersMap() {
 .intro { padding-top: 36px; }
 .grid2 { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items: center; }
 .hero-img { width: 100%; height: 380px; border-radius: 14px; margin-top: 16px; object-fit: cover; background: #000; }
+.visit { margin-top: 10px; }
 
 .body { padding-top: 24px; padding-bottom: 24px; }
 .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
@@ -283,10 +284,10 @@ async function loadUsersMap() {
 .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
 .contacts .people { margin-top: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
-.person { text-align: left; display: flex; flex-direction: column; gap: 6px; }
-.avatar { height: 300px; width: 300px; border-radius: 12px; background-size: cover; background-position: center; filter: grayscale(20%); background-color: #e9e9ee; }
-.name { font-weight: 600; }
-.role { font-size: 14px; }
+.contacts .person { text-align: left; display: flex; flex-direction: column; gap: 6px; }
+.contacts .avatar { height: 300px; width: 300px; border-radius: 12px; background-size: cover; background-position: center; background-color: #e9e9ee; }
+.contacts .name { font-weight: 600; }
+.contacts .role { font-size: 14px; }
 
 .related .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .project .img { height: 180px; background: #ddd center/cover no-repeat; }
@@ -300,12 +301,13 @@ async function loadUsersMap() {
 
 @media (max-width: 1000px) {
   .grid2 { grid-template-columns: 1fr; }
+  .hero-img { height: 240px; }
   .gallery { grid-template-columns: 1fr; }
   .gallery-card { height: 220px; }
+  .avatar { height: 200px; width: 200px; }
   .video-wrap { padding-top: 56.25%; }
   .contacts .people { grid-template-columns: 1fr; }
-  .hero-img { height: 240px; }
   .related .cards { grid-template-columns: 1fr; }
-  .avatar { height: 200px; width: 200px; }
+  .papers-list { padding-left: 20px; }
 }
 </style>

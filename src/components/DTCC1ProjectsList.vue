@@ -56,8 +56,9 @@ const showMore = () => { visibleCount.value = Math.min(visibleCount.value + 4, i
 
 const normalizeImage = (value) => {
   if (!value) return null
-  const optimized = getOptimizedImageUrl(value)
-  return sanitizeSrc(resolveUrl(optimized))
+  // Don't convert to WebP here - let OptimizedImage component handle it
+  // This preserves the fallback mechanism in the <picture> element
+  return sanitizeSrc(resolveUrl(value))
 }
 
 const normalizeLink = (value) => {
@@ -134,7 +135,7 @@ const items = computed(() => {
   return result
 })
 
-const detailHref = (slug) => withBase(`projects/detail.html?slug=${encodeURIComponent(slug)}`)
+const detailHref = (slug) => withBase(`dtcc-1/detail.html?slug=${encodeURIComponent(slug)}`)
 const fallbackImage = withBase('content/Projects Placeholder.webp')
 const visibleItems = computed(() => items.value.slice(0, visibleCount.value))
 </script>

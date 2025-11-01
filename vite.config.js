@@ -64,6 +64,7 @@ export default defineConfig(({ mode }) => {
           projects: 'projects/index.html',
           projectsDetail: 'projects/detail.html',
           dtcc1: 'dtcc-1/index.html',
+          dtcc1Detail: 'dtcc-1/detail.html',
           partners: 'partners/index.html',
           contact: 'contact/index.html',
           gallery: 'gallery/index.html',

@@ -64,8 +64,8 @@ const runtimeItems = ref([])
 
 const normalizeImage = (value) => {
   if (!value) return null
-  const optimized = getOptimizedImageUrl(value)
-  return sanitizeSrc(resolveUrl(optimized))
+  // Don't convert to WebP here - preserve original path for fallback
+  return sanitizeSrc(resolveUrl(value))
 }
 
 const normalizeLink = (value) => {

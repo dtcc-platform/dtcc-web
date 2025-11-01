@@ -51,8 +51,8 @@ const showMore = () => { visibleCount.value = Math.min(visibleCount.value + 4, i
 
 const normalizeImage = (value) => {
   if (!value) return null
-  const optimized = getOptimizedImageUrl(value)
-  return sanitizeSrc(resolveUrl(optimized))
+  // Don't convert to WebP here - preserve original path for fallback
+  return sanitizeSrc(resolveUrl(value))
 }
 
 onMounted(async () => {

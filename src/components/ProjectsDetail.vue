@@ -133,8 +133,9 @@ const detailHref = (slug) => withBase(`projects/detail.html?slug=${encodeURIComp
 
 const normalizeImage = (value) => {
   if (!value) return null
-  const optimized = getOptimizedImageUrl(value)
-  return sanitizeSrc(resolveUrl(optimized))
+  // Don't convert to WebP here - let OptimizedImage component handle it
+  // This preserves the fallback mechanism in the <picture> element
+  return sanitizeSrc(resolveUrl(value))
 }
 
 const normalizeVideo = (value) => {

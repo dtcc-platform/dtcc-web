@@ -177,11 +177,13 @@
                 type="file"
                 accept="image/*"
                 @change="onImageFileChange($event, image)"
+                :disabled="image.converting"
               >
               <p class="muted helper">
                 Saved next to the JSON as <code>{{ uploadPathFor(image, index) }}</code>. Recommended size ≥ 1200px wide.
+                <span v-if="image.converting"> Converting to WebP...</span>
               </p>
-              <p v-if="image.fileName" class="file-pill">{{ image.fileName }}</p>
+              <p v-if="image.fileName && !image.converting" class="file-pill">{{ image.fileName }}</p>
             </div>
           </div>
 
@@ -447,6 +449,7 @@ import { computed, inject, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { resolvePostEndpoints } from '../utils/postEndpoints'
 import { ensureYouTubeEmbed, toYouTubeEmbed } from '../utils/video'
 import { sanitizeSrc, sanitizeUrl } from '../utils/sanitize'
+import { convertToWebP } from '../utils/imageConversion'
 import { resolveUrl, withBase } from '../utils/paths.js'
 
 const TYPE_OPTIONS = [
@@ -690,17 +693,35 @@ function updateImageSource(entry, mode) {
   }
 }
 
-function onImageFileChange(event, entry) {
+async function onImageFileChange(event, entry) {
   const file = event?.target?.files?.[0]
   if (!file) {
     entry.file = null
     entry.fileName = ''
     entry.fileExtension = ''
+    entry.converting = false
     return
   }
-  entry.file = file
-  entry.fileName = file.name || 'uploaded-image'
-  entry.fileExtension = deriveExtension(file)
+
+  // Set converting state
+  entry.converting = true
+
+  try {
+    // Convert to WebP (function preserves GIFs and already-WebP files)
+    const webpFile = await convertToWebP(file, 0.85)
+
+    entry.file = webpFile
+    entry.fileName = webpFile.name || 'uploaded-image.webp'
+    entry.fileExtension = deriveExtension(webpFile)
+  } catch (error) {
+    console.error('WebP conversion failed, using original file:', error)
+    // Fallback to original file if conversion fails
+    entry.file = file
+    entry.fileName = file.name || 'uploaded-image'
+    entry.fileExtension = deriveExtension(file)
+  } finally {
+    entry.converting = false
+  }
 }
 
 function addImageEntry() {
@@ -728,6 +749,7 @@ function createImageEntry({ isHero = false } = {}) {
     file: null,
     fileName: '',
     fileExtension: '',
+    converting: false,
   }
 }
 
