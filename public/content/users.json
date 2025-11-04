@@ -43,6 +43,20 @@
       "photo": null
     },
     {
+      "slug": "alexander-hollberg",
+      "name": "Alexander Hollberg",
+      "email": "alexander.hollberg@chalmers.se",
+      "title": "Chalmers",
+      "photo": "content/Alexander-Hollberg-BW.jpg"
+    },
+    {
+      "slug": "mattias-roupe",
+      "name": "Mattias Roupé",
+      "email": "mattias.roupe@chalmers.se",
+      "title": "Chalmers",
+      "photo": "content/Mattias-Roupe-BW.webp"
+    },
+    {
       "slug": "fredrik-edelvik",
       "name": "Fredrik Edelvik",
       "email": "fredrik.edelvik@fcc.chalmers.se",
