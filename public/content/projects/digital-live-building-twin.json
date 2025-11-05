@@ -1,0 +1,17 @@
+{
+  "title": "Digital Live Building Twin",
+  "intro": "Recent development in the Internet of Things (IoT) enables a variety of innovations supporting smart home users in energy management, improving indoor environment and more. User…",
+  "description": "Recent development in the Internet of Things (IoT) enables a variety of innovations supporting smart home users in energy management, improving indoor environment and more. User…",
+  "summary": "Recent development in the Internet of Things (IoT) enables a variety of innovations supporting smart home users in energy management, improving indoor environment and more. User…",
+  "body": "Recent development in the Internet of Things (IoT) enables a variety of innovations supporting smart home users in energy management, improving indoor environment and more. User experience in monitoring and control is hereby an important aspect.\n\nIndoor environmental quality (IEQ) comprises thermal comfort, indoor air quality, acoustic comfort among others and is an important criterion for human well-being, productivity and overall satisfaction in homes, workplaces and public buildings. Along with IEQ, another important indicator for the quality and sustainability of modern indoor environments is their environmental impact. An effective measure for minimizing the environmental footprint of urbanization is reducing the energy consumption in buildings. However, this often imposes requirements contradicting the objectives related to maintaining an adequate level of living and IEQ.\n\nTo achieve the goals of optimized control of heating, ventilation, and air conditioning (HVAC) systems for good indoor quality and efficient energy consumption, we will use an integrated approach by exploring ways of connecting real-time sensor data and simulation results to the Digital Twin Platform. Additionally, we will develop virtual reality (VR) and augmented reality (AR) strategies to enhance user experience, allowing occupants to interact with and understand their environment in new, intuitive ways.\n\nThe project continues the previous DTCC project Urban Environmental Comfort.",
+  "subheading": "Details",
+  "url": "/projects/detail.html?slug=digital-live-building-twin",
+  "date": "2025-10-31",
+  "image": "content/projects/digital-live-building-twin.webp",
+  "images": [
+    "content/projects/digital-live-building-twin.webp"
+  ],
+  "contacts": [
+    "franziska-hunger"
+  ]
+}
