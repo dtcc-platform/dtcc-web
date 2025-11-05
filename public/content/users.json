@@ -33,14 +33,14 @@
       "name": "Meta Berghauser Pont",
       "email": "meta.berghauser.pont@chalmers.se",
       "title": "Chalmers",
-      "photo": null
+      "photo": "content/Meta-Bergahuser-Pont-BW.jpg"
     },
     {
       "slug": "jorge-gil",
       "name": "Jorge Gil",
       "email": "jorge.gil@chalmers.se",
       "title": "Chalmers",
-      "photo": null
+      "photo": "content/Jorge-Gil-BW.jpg"
     },
     {
       "slug": "alexander-hollberg",
@@ -68,7 +68,7 @@
       "name": "Jonas Runberger",
       "email": "jonas.runberger@kth.se",
       "title": "KTH",
-      "photo": null
+      "photo": "content/Jonas-Runberger-BW.jpg"
     },
     {
       "slug": "leonardo-rosado",
