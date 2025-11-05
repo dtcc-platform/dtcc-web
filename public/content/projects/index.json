@@ -29,6 +29,10 @@
       "image": "content/projects/phase2-total-bim-a-prerequisite-for-digital-twinning-of-construction-projects.webp"
     },
     {
+      "base": "reclaimed-redesigned-re-twinned-digital-twins-for-architectural-reuse",
+      "image": "content/projects/reclaimed-redesigned-re-twinned-digital-twins-for-architectural-reuse.webp"
+    },
+    {
       "base": "urban-comfort",
       "image": "https://images.unsplash.com/photo-1494516192674-b82b5f1e61dc?q=80&w=1200&auto=format&fit=crop"
     },
@@ -42,10 +46,6 @@
     {
       "base": "green-roofs",
       "image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop"
-    },
-    {
-      "base": "reclaimed-redesigned-re-twinned-digital-twins-for-architectural-reuse",
-      "image": "content/projects/reclaimed-redesigned-re-twinned-digital-twins-for-architectural-reuse.webp"
     }
   ]
 }
