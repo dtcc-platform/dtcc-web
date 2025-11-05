@@ -26,6 +26,10 @@
     {
       "base": "green-roofs",
       "image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop"
+    },
+    {
+      "base": "phase2-total-bim-a-prerequisite-for-digital-twinning-of-construction-projects",
+      "image": "content/projects/phase2-total-bim-a-prerequisite-for-digital-twinning-of-construction-projects.webp"
     }
   ]
 }
