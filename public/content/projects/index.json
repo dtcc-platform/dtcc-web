@@ -9,6 +9,10 @@
       "image": "content/projects/data-platform-for-ai-first-digital-twins.webp"
     },
     {
+      "base": "digital-live-building-twin",
+      "image": "content/projects/digital-live-building-twin.webp"
+    },
+    {
       "base": "digital-twin-of-construction-site-a-control-room-for-construction-site",
       "image": "content/projects/digital-twin-of-construction-site-a-control-room-for-construction-site.webp"
     },
@@ -30,10 +34,6 @@
     {
       "base": "green-roofs",
       "image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop"
-    },
-    {
-      "base": "digital-live-building-twin",
-      "image": "content/projects/digital-live-building-twin.webp"
     }
   ]
 }
