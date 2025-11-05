@@ -6,6 +6,9 @@
         <div>
           <div class="eyebrow">Project:</div>
           <h1 class="h2-50" v-text="item.title"></h1>
+          <div v-if="isAuthenticated && wizardEditHref" class="visit">
+            <a class="more" :href="wizardEditHref">Edit project »</a>
+          </div>
         </div>
         <div>
           <p class="brodtext-20 muted" v-text="item.intro || item.summary || ''" />
@@ -104,6 +107,7 @@ import { ref, onMounted, computed } from 'vue'
 import { sanitizeSrc, sanitizeUrl, isValidSlug } from '../utils/sanitize'
 import { withBase, resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
 import { ensureYouTubeEmbed } from '../utils/video'
+import { usePostSession } from '../utils/postSession'
 import OptimizedImage from './OptimizedImage.vue'
 
 const params = new URLSearchParams(location.search)
@@ -118,6 +122,7 @@ const item = ref(null)
 const related = ref([])
 const contacts = ref([])
 const MAX_CONTACTS = 2
+const { isAuthenticated } = usePostSession()
 const videoEmbed = computed(() => item.value?.video || null)
 const gallery = computed(() => (item.value?.images || []).slice(1))
 const papers = computed(() => Array.isArray(item.value?.papers) ? item.value.papers : [])
@@ -130,6 +135,9 @@ const bodyParas = computed(() => {
 })
 
 const detailHref = (slug) => withBase(`projects/detail.html?slug=${encodeURIComponent(slug)}`)
+const wizardEditHref = computed(() =>
+  slug && isValidSlug(slug) ? withBase(`post/?section=projects&slug=${encodeURIComponent(slug)}`) : ''
+)
 
 const normalizeImage = (value) => {
   if (!value) return null

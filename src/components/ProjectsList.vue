@@ -28,7 +28,16 @@
             <div class="body">
               <h4 class="h3-30" v-text="p.title" />
               <p class="brodtext-20 muted" v-text="p.description || p.summary || p.excerpt" />
-              <a :href="detailHref(p.id)" class="more">Read more »</a>
+              <div class="links">
+                <a :href="detailHref(p.id)" class="more">Read more »</a>
+                <a
+                  v-if="isAuthenticated"
+                  :href="editHref(p.id)"
+                  class="more edit-link"
+                >
+                  Edit project »
+                </a>
+              </div>
             </div>
           </article>
         </div>
@@ -44,6 +53,7 @@
 import { computed, ref, onMounted } from 'vue'
 import { sanitizeUrl, sanitizeSrc } from '../utils/sanitize'
 import { withBase, resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
+import { usePostSession } from '../utils/postSession'
 
 // Build-time fallback from src/projects
 const jsonModules = import.meta.glob('../projects/*.json', { eager: true, import: 'default' })
@@ -53,6 +63,7 @@ const imageModules = import.meta.glob('../projects/*.{jpg,jpeg,png,webp}', { eag
 const runtimeItems = ref([])
 const visibleCount = ref(4)
 const showMore = () => { visibleCount.value = Math.min(visibleCount.value + 4, items.value.length) }
+const { isAuthenticated } = usePostSession()
 
 const normalizeImage = (value) => {
   if (!value) return null
@@ -136,6 +147,7 @@ const items = computed(() => {
 })
 
 const detailHref = (slug) => withBase(`projects/detail.html?slug=${encodeURIComponent(slug)}`)
+const editHref = (slug) => withBase(`post/?section=projects&slug=${encodeURIComponent(slug)}`)
 const dtcc1Href = withBase('dtcc-1/')
 const fallbackImage = withBase('content/Projects Placeholder.webp')
 const visibleItems = computed(() => items.value.slice(0, visibleCount.value))
@@ -150,6 +162,7 @@ const visibleItems = computed(() => items.value.slice(0, visibleCount.value))
 .list .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .project .img { width: 100%; height: 200px; object-fit: cover; display: block; background: #ddd; border-radius: 14px; }
 .project .body { padding: 14px 16px 18px; }
+.edit-link { opacity: 0.85; }
 
 .more-wrap { text-align: center; margin-top: 12px; }
 .btn-more { background: var(--cta-f26a2e); color: #fff; border: 0; border-radius: 8px; padding: 10px 16px; font-weight: 600; cursor: pointer; }

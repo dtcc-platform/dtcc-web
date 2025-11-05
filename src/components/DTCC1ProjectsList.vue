@@ -28,7 +28,16 @@
             <div class="body">
               <h4 class="h3-30" v-text="p.title" />
               <p class="brodtext-20 muted" v-text="p.description || p.summary || p.excerpt" />
-              <a :href="detailHref(p.id)" class="more">Read more »</a>
+              <div class="links">
+                <a :href="detailHref(p.id)" class="more">Read more »</a>
+                <a
+                  v-if="isAuthenticated"
+                  :href="editHref(p.id)"
+                  class="more edit-link"
+                >
+                  Edit project »
+                </a>
+              </div>
             </div>
           </article>
         </div>
@@ -44,6 +53,7 @@
 import { computed, ref, onMounted } from 'vue'
 import { sanitizeUrl, sanitizeSrc } from '../utils/sanitize'
 import { withBase, resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
+import { usePostSession } from '../utils/postSession'
 
 // Build-time fallback from src/dtcc-1
 const jsonModules = import.meta.glob('../dtcc-1/*.json', { eager: true, import: 'default' })
@@ -53,6 +63,7 @@ const imageModules = import.meta.glob('../dtcc-1/*.{jpg,jpeg,png,webp}', { eager
 const runtimeItems = ref([])
 const visibleCount = ref(4)
 const showMore = () => { visibleCount.value = Math.min(visibleCount.value + 4, items.value.length) }
+const { isAuthenticated } = usePostSession()
 
 const normalizeImage = (value) => {
   if (!value) return null
@@ -136,6 +147,7 @@ const items = computed(() => {
 })
 
 const detailHref = (slug) => withBase(`dtcc-1/detail.html?slug=${encodeURIComponent(slug)}`)
+const editHref = (slug) => withBase(`post/?section=events-archive&slug=${encodeURIComponent(slug)}`)
 const fallbackImage = withBase('content/Projects Placeholder.webp')
 const visibleItems = computed(() => items.value.slice(0, visibleCount.value))
 </script>
@@ -143,6 +155,7 @@ const visibleItems = computed(() => items.value.slice(0, visibleCount.value))
 <style scoped>
 .intro { padding-top: 36px; }
 .grid2 { display: grid; grid-template-columns: .8fr 1.2fr; gap: 28px; align-items: start; }
+.links { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
 .more { color: var(--cta-f26a2e); font-weight: 600; }
 
 .list .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }

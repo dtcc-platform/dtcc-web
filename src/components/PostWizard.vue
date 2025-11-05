@@ -448,7 +448,7 @@
 import { computed, inject, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { resolvePostEndpoints } from '../utils/postEndpoints'
 import { ensureYouTubeEmbed, toYouTubeEmbed } from '../utils/video'
-import { sanitizeSrc, sanitizeUrl } from '../utils/sanitize'
+import { sanitizeSrc, sanitizeUrl, isValidSlug } from '../utils/sanitize'
 import { convertToWebP } from '../utils/imageConversion'
 import { resolveUrl, withBase } from '../utils/paths.js'
 
@@ -483,7 +483,19 @@ const basePath = (import.meta.env.BASE_URL || '/').replace(/\/$/, '')
 
 const typeOptions = TYPE_OPTIONS
 
+const searchParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null
+const rawSectionParam = searchParams?.get('section') || ''
+const normalizedSectionParam = rawSectionParam.trim().toLowerCase()
+const prefillSection = SECTION_CONFIG[normalizedSectionParam] ? normalizedSectionParam : ''
+const rawSlugParam = searchParams?.get('slug') || ''
+const normalizedSlugParam = rawSlugParam.trim()
+const prefillSlug = normalizedSlugParam && isValidSlug(normalizedSlugParam) ? normalizedSlugParam.toLowerCase() : ''
+const shouldPrefill = Boolean(prefillSection && prefillSlug)
+
 const postType = ref('news')
+if (prefillSection) {
+  postType.value = prefillSection
+}
 const isEventType = computed(() => EVENT_TYPES.has(postType.value))
 const title = ref('')
 const bodyInput = ref('')
@@ -620,12 +632,164 @@ watch(postType, (section) => {
   }
 })
 
-onMounted(() => {
-  refreshRelatedOptions(postType.value)
+onMounted(async () => {
+  await refreshRelatedOptions(postType.value)
   if (!isEventSection(postType.value)) {
-    ensureContactsLoaded()
+    await ensureContactsLoaded()
+  }
+  if (shouldPrefill) {
+    await prefillExistingEntry(prefillSection, prefillSlug)
   }
 })
+
+async function prefillExistingEntry(section, slugValue) {
+  try {
+    const config = SECTION_CONFIG[section]
+    if (!config) return
+
+    const detailUrl = resolveUrl(`content/${config.contentDir}/${slugValue}.json`)
+    const response = await fetch(detailUrl, { cache: 'no-store' })
+    if (!response.ok) {
+      throw new Error(`Failed to load existing entry for ${slugValue}.`)
+    }
+    const data = await response.json()
+
+    postType.value = section
+    title.value = data.title || data.name || slugValue
+    slug.value = slugValue
+    slugWasEdited.value = true
+    bodyInput.value = extractBody(data)
+    selectedDate.value = pickDate(data.date || data.published || data.updated || '')
+
+    await refreshRelatedOptions(section)
+    if (!isEventSection(section)) {
+      await ensureContactsLoaded()
+    }
+
+    selectedRelated.value = cleanSlugList(data.related, MAX_RELATED)
+    selectedContacts.value = isEventSection(section)
+      ? []
+      : cleanSlugList(data.contacts, MAX_CONTACTS)
+
+    applyPrefilledImages(section, data)
+    applyPrefilledPapers(data)
+    applyPrefilledVideo(data)
+
+    draftSection.value = section
+    draftJson.value = `${JSON.stringify(data, null, 2)}\n`
+    forceOverwrite.value = true
+    successMessage.value = ''
+    errorMessage.value = ''
+  } catch (err) {
+    errorMessage.value = err instanceof Error ? err.message : String(err)
+  }
+}
+
+function extractBody(entry) {
+  const value = entry?.body ?? entry?.details ?? ''
+  if (Array.isArray(value)) {
+    return value.map((segment) => String(segment || '').trim()).filter(Boolean).join('\n\n')
+  }
+  if (!value) return ''
+  return String(value).replace(/\r\n/g, '\n')
+}
+
+function pickDate(raw) {
+  if (typeof raw === 'string') {
+    const trimmed = raw.trim()
+    if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) return trimmed
+    const parsed = new Date(trimmed)
+    if (!Number.isNaN(parsed.getTime())) {
+      return parsed.toISOString().slice(0, 10)
+    }
+  }
+  return new Date().toISOString().slice(0, 10)
+}
+
+function cleanSlugList(list, limit) {
+  if (!Array.isArray(list) || !list.length) return []
+  const result = []
+  const seen = new Set()
+  for (const entry of list) {
+    if (typeof entry !== 'string') continue
+    const trimmed = entry.trim()
+    if (!trimmed || seen.has(trimmed)) continue
+    if (!isValidSlug(trimmed)) continue
+    seen.add(trimmed)
+    result.push(trimmed)
+    if (result.length >= limit) break
+  }
+  return result
+}
+
+function applyPrefilledImages(section, data) {
+  const paths = []
+  const seen = new Set()
+  const append = (value) => {
+    if (typeof value !== 'string') return
+    const trimmed = value.trim()
+    if (!trimmed || seen.has(trimmed)) return
+    seen.add(trimmed)
+    paths.push(trimmed)
+  }
+
+  if (data?.image) append(data.image)
+  if (Array.isArray(data?.images)) {
+    data.images.forEach(append)
+  }
+
+  if (!paths.length) {
+    initializeImageEntries()
+    preparedImages.value = []
+    return
+  }
+
+  const limited = paths.slice(0, MAX_IMAGES)
+  imageEntries.value = limited.map((path, index) =>
+    createImageEntry({
+      isHero: index === 0,
+      source: 'url',
+      url: path,
+      file: null,
+      fileName: '',
+      fileExtension: inferExtensionFromName(path),
+      converting: false,
+    })
+  )
+  preparedImages.value = limited.map((path, index) => ({
+    type: 'url',
+    jsonValue: path,
+    ext: inferExtensionFromName(path),
+    file: null,
+    section,
+    entryIndex: index,
+    displayIndex: index,
+  }))
+}
+
+function applyPrefilledPapers(data) {
+  const list = Array.isArray(data?.papers)
+    ? data.papers
+        .map((entry) => (typeof entry === 'string' ? entry.trim() : ''))
+        .filter(Boolean)
+    : []
+  if (!list.length) {
+    paperLinks.value = [createPaperLink()]
+    return
+  }
+  paperLinks.value = list.slice(0, MAX_PAPERS).map((entry) => createPaperLink(String(entry)))
+}
+
+function applyPrefilledVideo(data) {
+  const embed = ensureYouTubeEmbed(data?.video || '')
+  if (embed) {
+    videoUrl.value = embed
+    preparedVideo.value = embed
+  } else {
+    videoUrl.value = ''
+    preparedVideo.value = ''
+  }
+}
 
 function slugify(value = '') {
   return value
@@ -740,16 +904,25 @@ function initializeImageEntries() {
   imageEntries.value = [createImageEntry({ isHero: true })]
 }
 
-function createImageEntry({ isHero = false } = {}) {
+function createImageEntry({
+  isHero = false,
+  source,
+  url = '',
+  file = null,
+  fileName = '',
+  fileExtension = '',
+  converting = false,
+} = {}) {
+  const resolvedSource = source || (isHero ? 'none' : 'upload')
   return {
     id: `img-${Math.random().toString(36).slice(2, 10)}`,
     isHero,
-    source: isHero ? 'none' : 'upload',
-    url: '',
-    file: null,
-    fileName: '',
-    fileExtension: '',
-    converting: false,
+    source: resolvedSource,
+    url,
+    file,
+    fileName,
+    fileExtension,
+    converting,
   }
 }
 
