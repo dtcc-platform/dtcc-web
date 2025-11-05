@@ -5,6 +5,10 @@
       "image": "content/projects/bim-based-virtual-takt-planning.webp"
     },
     {
+      "base": "data-platform-for-ai-first-digital-twins",
+      "image": "content/projects/data-platform-for-ai-first-digital-twins.webp"
+    },
+    {
       "base": "urban-comfort",
       "image": "https://images.unsplash.com/photo-1494516192674-b82b5f1e61dc?q=80&w=1200&auto=format&fit=crop"
     },
@@ -18,10 +22,6 @@
     {
       "base": "green-roofs",
       "image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop"
-    },
-    {
-      "base": "data-platform-for-ai-first-digital-twins",
-      "image": "content/projects/data-platform-for-ai-first-digital-twins.webp"
     }
   ]
 }
