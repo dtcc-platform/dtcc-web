@@ -1,0 +1,17 @@
+{
+  "title": "Mixed Realities and Simulations for Decision-Support",
+  "intro": "Digital twins can be used to inform planning decisions on different levels, from individual buildings to whole cities or regions. However, the potential to inform a wide audienc…",
+  "description": "Digital twins can be used to inform planning decisions on different levels, from individual buildings to whole cities or regions. However, the potential to inform a wide audienc…",
+  "summary": "Digital twins can be used to inform planning decisions on different levels, from individual buildings to whole cities or regions. However, the potential to inform a wide audienc…",
+  "body": "Digital twins can be used to inform planning decisions on different levels, from individual buildings to whole cities or regions. However, the potential to inform a wide audience about the impact of planning decisions using multi-domain simulations is still underexploited. This project focuses on visualising simulation results by combining virtual and physical models called mixed realities (MR). Multiple use cases are covered on building and on neighbourhood scale, such as combining wind, air pollution, noise and energy simulation results for neighbourhood densification, or daylight and embodied carbon on a building level. The technology relies on augmented reality (AR) using handheld devices or goggles by itself or in combination with touch tables, physical 3D models or 2D maps of the area in planning. The use cases will be adapted according to the partners involved in this project. The scientific research questions relate to the change and potential benefits in design and decision-making that MR will bring. Next to the scientific results, contributions to existing visualization labs, e.g. Universeum and the establishment of new labs will be expected.",
+  "subheading": "Details",
+  "url": "/projects/detail.html?slug=mixed-realities-and-simulations-for-decision-support",
+  "date": "2025-10-31",
+  "image": "content/projects/mixed-realities-and-simulations-for-decision-support.webp",
+  "images": [
+    "content/projects/mixed-realities-and-simulations-for-decision-support.webp"
+  ],
+  "contacts": [
+    "alexander-hollberg"
+  ]
+}
