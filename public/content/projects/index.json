@@ -17,6 +17,10 @@
       "image": "content/projects/digital-twin-of-construction-site-a-control-room-for-construction-site.webp"
     },
     {
+      "base": "digitizing-trees-in-the-urban-environment",
+      "image": "content/projects/digitizing-trees-in-the-urban-environment.webp"
+    },
+    {
       "base": "phase2-total-bim-a-prerequisite-for-digital-twinning-of-construction-projects",
       "image": "content/projects/phase2-total-bim-a-prerequisite-for-digital-twinning-of-construction-projects.webp"
     },
@@ -34,10 +38,6 @@
     {
       "base": "green-roofs",
       "image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop"
-    },
-    {
-      "base": "digitizing-trees-in-the-urban-environment",
-      "image": "content/projects/digitizing-trees-in-the-urban-environment.webp"
     }
   ]
 }
