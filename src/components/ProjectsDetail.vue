@@ -70,7 +70,7 @@
     </section>
 
     <!-- Related projects -->
-    <section class="section gradient-sunrise related">
+    <section v-if="related.length" class="section gradient-sunrise related">
       <div class="container">
         <h3 class="h3-30 section-title">Related projects</h3>
         <div class="cards">
