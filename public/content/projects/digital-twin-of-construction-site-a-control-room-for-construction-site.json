@@ -1,0 +1,17 @@
+{
+  "title": "Digital Twin of Construction Site: A Control Room for Construction Site",
+  "intro": "The purpose of this project is to investigate how a virtual copy of the construction site can be used to analyze, visualize, and communicate the progress of construction product…",
+  "description": "The purpose of this project is to investigate how a virtual copy of the construction site can be used to analyze, visualize, and communicate the progress of construction product…",
+  "summary": "The purpose of this project is to investigate how a virtual copy of the construction site can be used to analyze, visualize, and communicate the progress of construction product…",
+  "body": "The purpose of this project is to investigate how a virtual copy of the construction site can be used to analyze, visualize, and communicate the progress of construction production in interactive AR/VR environments. By developing and demonstrating prototypes in case studies that combine data from 360-degree camera recordings, 3D scans, openBIM, and 4D BIM models together with AI technology, the project aims to explore new opportunities to support decision-making and streamline the construction process. The goal is to contribute knowledge on how integrated and visually accessible information can create a more data-informed, proactive, and coordinated construction production.",
+  "subheading": "Details",
+  "url": "/projects/detail.html?slug=digital-twin-of-construction-site-a-control-room-for-construction-site",
+  "date": "2025-10-31",
+  "image": "content/projects/digital-twin-of-construction-site-a-control-room-for-construction-site.webp",
+  "images": [
+    "content/projects/digital-twin-of-construction-site-a-control-room-for-construction-site.webp"
+  ],
+  "contacts": [
+    "mattias-roupe"
+  ]
+}
