@@ -22,6 +22,27 @@
       "photo": "content/Franziska-Hunger-BW.jpg"
     },
     {
+      "slug": "anders-logg",
+      "name": "Anders Logg",
+      "email": "anders.logg@chalmers.se",
+      "title": "Chalmers",
+      "photo": "content/Anders-Logg-BW.webp"
+    },
+    {
+      "slug": "vasilis-naserentin",
+      "name": "Vasilis Naserentin",
+      "email": "vasilis.naserentin@chalmers.se",
+      "title": "Chalmers",
+      "photo": "content/Vasilis-Naserentin-BW.webp"
+    },
+    {
+      "slug": "dag-wastberg",
+      "name": "Dag Wästberg",
+      "email": "dag.wastberg@chalmersindustriteknik.se",
+      "title": "Chalmers Industriteknik",
+      "photo": "content/Dag-Wastberg-BW.webp"
+    },
+    {
       "slug": "malgorzata-zboinska",
       "name": "Malgorzata Zboinska",
       "email": "malgorzata.zboinska@chalmers.se",
