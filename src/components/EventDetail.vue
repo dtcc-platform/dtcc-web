@@ -216,8 +216,8 @@ onMounted(async () => {
 .meta strong { font-weight: 600; }
 .hero-img {
   width: 100%;
-  height: clamp(220px, 38vw, 380px);
-  max-height: 380px;
+  height: clamp(180px, 30vw, 300px);
+  max-height: 300px;
   border-radius: 14px;
   margin-top: 16px;
   object-fit: contain;

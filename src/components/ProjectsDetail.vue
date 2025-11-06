@@ -320,8 +320,8 @@ async function loadUsersMap() {
 .grid2 { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items: center; }
 .hero-img {
   width: 100%;
-  height: clamp(220px, 40vw, 420px);
-  max-height: 420px;
+  height: clamp(180px, 32vw, 320px);
+  max-height: 320px;
   border-radius: 14px;
   margin-top: 16px;
   object-fit: contain;
