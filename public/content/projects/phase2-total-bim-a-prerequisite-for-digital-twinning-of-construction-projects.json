@@ -1,15 +1,21 @@
 {
-  "title": "Phase2: Total BIM – A Prerequisite for Digital Twinning of Construction Projects",
-  "intro": "Total BIM is a concept where BIM replaces traditional 2D drawings as the primary source of information, leading to improved efficiency, accuracy, and collaboration between diffe…",
-  "description": "Total BIM is a concept where BIM replaces traditional 2D drawings as the primary source of information, leading to improved efficiency, accuracy, and collaboration between diffe…",
-  "summary": "Total BIM is a concept where BIM replaces traditional 2D drawings as the primary source of information, leading to improved efficiency, accuracy, and collaboration between diffe…",
+  "title": "Total BIM",
+  "abstract": "This project investigates how Total BIM can create added value by utilizing production data generated and linked to the model during the construction phase.",
+  "intro": "This project investigates how Total BIM can create added value by utilizing production data generated and linked to the model during the construction phase.",
+  "description": "This project investigates how Total BIM can create added value by utilizing production data generated and linked to the model during the construction phase.",
+  "summary": "This project investigates how Total BIM can create added value by utilizing production data generated and linked to the model during the construction phase.",
   "body": "Total BIM is a concept where BIM replaces traditional 2D drawings as the primary source of information, leading to improved efficiency, accuracy, and collaboration between different stakeholders. This concept creates a model-based and production-oriented process where production data is generated and linked to the model during the construction phase. In this project (Phase 2) we further explore how Total BIM can generate additional value – that is, can we use and create added value from the production data linked to the model during construction?",
   "subheading": "Details",
   "url": "/projects/detail.html?slug=phase2-total-bim-a-prerequisite-for-digital-twinning-of-construction-projects",
   "date": "2025-10-31",
   "image": "content/projects/phase2-total-bim-a-prerequisite-for-digital-twinning-of-construction-projects.webp",
   "images": [
-    "content/projects/phase2-total-bim-a-prerequisite-for-digital-twinning-of-construction-projects.webp"
+    "content/projects/phase2-total-bim-a-prerequisite-for-digital-twinning-of-construction-projects.webp",
+    "content/projects/phase2-total-bim-a-prerequisite-for-digital-twinning-of-construction-projects-1.webp"
+  ],
+  "related": [
+    "bim-based-virtual-takt-planning",
+    "digital-twin-of-construction-site-a-control-room-for-construction-site"
   ],
   "contacts": [
     "mattias-roupe"
