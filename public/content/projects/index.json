@@ -1,6 +1,9 @@
 {
   "items": [
     {
+      "base": "new-test-project"
+    },
+    {
       "base": "digital-twin-platform",
       "image": "content/projects/digital-twin-platform.webp"
     },
@@ -54,9 +57,6 @@
     {
       "base": "green-roofs",
       "image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop"
-    },
-    {
-      "base": "new-test-project"
     }
   ]
 }
