@@ -1,15 +1,21 @@
 {
-  "title": "BIM-Based Virtual Takt-Planning",
-  "intro": "The purpose of this research project is to create and monitor the application of working methods and digital information structure for virtual takt planning, as well as evaluate…",
-  "description": "The purpose of this research project is to create and monitor the application of working methods and digital information structure for virtual takt planning, as well as evaluate…",
-  "summary": "The purpose of this research project is to create and monitor the application of working methods and digital information structure for virtual takt planning, as well as evaluate…",
+  "title": "Virtual Takt-Planning",
+  "abstract": "This project develops and evaluates digital methods and information structures for virtual takt planning, aiming to integrate it with Total BIM and enhance efficiency in the construction industry.",
+  "intro": "This project develops and evaluates digital methods and information structures for virtual takt planning, aiming to integrate it with Total BIM and enhance efficiency in the construction industry.",
+  "description": "This project develops and evaluates digital methods and information structures for virtual takt planning, aiming to integrate it with Total BIM and enhance efficiency in the construction industry.",
+  "summary": "This project develops and evaluates digital methods and information structures for virtual takt planning, aiming to integrate it with Total BIM and enhance efficiency in the construction industry.",
   "body": "The purpose of this research project is to create and monitor the application of working methods and digital information structure for virtual takt planning, as well as evaluate the effect of these. The goal is to give the construction industry knowledge and understanding of how takt planning can be connected with Total BIM and what information structures are needed in order to realize this.",
   "subheading": "Details",
   "url": "/projects/detail.html?slug=bim-based-virtual-takt-planning",
   "date": "2025-10-31",
   "image": "content/projects/bim-based-virtual-takt-planning.webp",
   "images": [
-    "content/projects/bim-based-virtual-takt-planning.webp"
+    "content/projects/bim-based-virtual-takt-planning.webp",
+    "content/projects/bim-based-virtual-takt-planning-1.webp"
+  ],
+  "related": [
+    "phase2-total-bim-a-prerequisite-for-digital-twinning-of-construction-projects",
+    "digital-twin-of-construction-site-a-control-room-for-construction-site"
   ],
   "contacts": [
     "mattias-roupe"
