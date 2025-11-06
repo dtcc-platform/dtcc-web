@@ -62,9 +62,11 @@
           <input
             id="visit-link"
             v-model="visitLink"
-            type="url"
+            type="text"
+            inputmode="url"
             placeholder="https://example.com/project"
             autocomplete="off"
+            spellcheck="false"
           >
           <p class="muted helper">Optional. Shown as “Visit website” on the project page when provided.</p>
         </div>
@@ -186,9 +188,11 @@
               <input
                 :id="`image-url-${image.id}`"
                 v-model="image.url"
-                type="url"
+                type="text"
+                inputmode="url"
                 placeholder="https://images.unsplash.com/..."
                 autocomplete="off"
+                spellcheck="false"
               >
               <p class="muted helper">Remote URLs are stored directly in the JSON and manifest.</p>
             </div>
@@ -2076,11 +2080,23 @@ function sanitizeWebsiteLink(value) {
   if (!value) return ''
   const trimmed = String(value).trim()
   if (!trimmed) return ''
-  const sanitized = sanitizeUrl(trimmed)
-  if (!sanitized || sanitized === '#') {
-    throw new Error('Provide a valid link for “Visit website” or leave it blank.')
+  const candidates = [trimmed]
+  try {
+    const resolved = resolveUrl(trimmed)
+    if (typeof resolved === 'string' && resolved && !candidates.includes(resolved)) {
+      candidates.push(resolved)
+    }
+  } catch (_) {
+    /* ignore resolution errors */
   }
-  return sanitized
+
+  for (const candidate of candidates) {
+    const sanitized = sanitizeUrl(candidate)
+    if (sanitized && sanitized !== '#') {
+      return sanitized
+    }
+  }
+  throw new Error('Provide a valid link for “Visit website” or leave it blank.')
 }
 
 function formatEventMeta(detail) {
