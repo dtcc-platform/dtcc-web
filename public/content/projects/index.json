@@ -4,10 +4,6 @@
       "base": "new-test-project"
     },
     {
-      "base": "digital-twin-platform",
-      "image": "content/projects/digital-twin-platform.webp"
-    },
-    {
       "base": "ai-3d-city-modeling",
       "image": "content/projects/ai-3d-city-modeling.webp"
     },
@@ -26,6 +22,10 @@
     {
       "base": "digital-twin-of-construction-site-a-control-room-for-construction-site",
       "image": "content/projects/digital-twin-of-construction-site-a-control-room-for-construction-site.webp"
+    },
+    {
+      "base": "digital-twin-platform",
+      "image": "content/projects/digital-twin-platform.webp"
     },
     {
       "base": "digitizing-trees-in-the-urban-environment",
