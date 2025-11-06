@@ -29,13 +29,22 @@
         </div>
         <div>
           <p class="brodtext-20 muted" v-for="(p, i) in bodyParas" :key="i" v-text="p" />
-          <div v-if="gallery.length" class="gallery">
-            <div
-              v-for="(img, i) in gallery"
-              :key="`${i}-${img}`"
+          <div v-if="galleryItems.length" class="gallery">
+            <figure
+              v-for="(image, i) in galleryItems"
+              :key="`${i}-${image.src}`"
               class="gallery-card"
-              :style="{ backgroundImage: `url(${img})` }"
-            ></div>
+            >
+              <a :href="image.src" target="_blank" rel="noopener">
+                <img
+                  :src="image.src"
+                  :alt="image.caption || `${item.title} image ${i + 2}`"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+              <figcaption v-if="image.caption" class="caption">{{ image.caption }}</figcaption>
+            </figure>
           </div>
           <div v-if="videoEmbed" class="video-wrap">
             <iframe
@@ -117,7 +126,14 @@ const related = ref([])
 const contacts = ref([])
 const MAX_CONTACTS = 2
 const videoEmbed = computed(() => item.value?.video || null)
-const gallery = computed(() => (item.value?.images || []).slice(1))
+const galleryItems = computed(() => {
+  const images = Array.isArray(item.value?.images) ? item.value.images : []
+  const captions = Array.isArray(item.value?.imageCaptions) ? item.value.imageCaptions : []
+  return images.slice(1).map((src, index) => ({
+    src,
+    caption: captions[index + 1] || '',
+  }))
+})
 const papers = computed(() => Array.isArray(item.value?.papers) ? item.value.papers : [])
 
 const bodyParas = computed(() => {
@@ -167,24 +183,34 @@ onMounted(async () => {
     if (!r.ok) return
     const data = await r.json()
     const orderedImages = []
+    const orderedCaptions = []
+    const rawCaptions = Array.isArray(data.imageCaptions)
+      ? data.imageCaptions.map((entry) => (typeof entry === 'string' ? entry.trim() : ''))
+      : []
     if (Array.isArray(data.images)) {
-      for (const entry of data.images) {
+      data.images.forEach((entry, idx) => {
         const normalized = normalizeImage(entry)
         if (normalized && !orderedImages.includes(normalized)) {
           orderedImages.push(normalized)
+          orderedCaptions.push(rawCaptions[idx] || '')
         }
-      }
+      })
     }
     let headlineImage = normalizeImage(data.image || null)
+    let headlineCaption = ''
     if (headlineImage) {
       const existingIndex = orderedImages.indexOf(headlineImage)
       if (existingIndex !== -1) {
+        headlineCaption = orderedCaptions[existingIndex] || ''
         orderedImages.splice(existingIndex, 1)
+        orderedCaptions.splice(existingIndex, 1)
       }
       orderedImages.unshift(headlineImage)
+      orderedCaptions.unshift(headlineCaption)
     } else if (orderedImages.length) {
       headlineImage = orderedImages[0]
     }
+    const normalizedCaptions = orderedImages.map((_, idx) => orderedCaptions[idx] || '')
 
     item.value = {
       id: slug,
@@ -194,6 +220,7 @@ onMounted(async () => {
       body: data.body || '',
       image: headlineImage,
       images: orderedImages,
+      imageCaptions: normalizedCaptions,
       video: normalizeVideo(data.video || null),
       papers: normalizePapers(data.papers),
       date: data.date || data.published || data.publishedAt || null,
@@ -278,7 +305,10 @@ async function loadUsersMap() {
 
 .body { padding-top: 24px; padding-bottom: 24px; }
 .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
-.gallery-card { height: 260px; border-radius: 12px; background: #000 center/cover no-repeat; }
+.gallery-card { margin: 0; padding: 12px; border-radius: 12px; background: rgba(0, 0, 0, 0.05); display: flex; flex-direction: column; gap: 8px; }
+.gallery-card a { display: block; border-radius: 10px; overflow: hidden; }
+.gallery-card img { display: block; width: 100%; height: auto; border-radius: 10px; object-fit: contain; background: #050507; }
+.gallery-card .caption { font-size: 0.9rem; color: rgba(26, 26, 31, 0.7); line-height: 1.4; }
 .video-wrap { position: relative; padding-top: 56.25%; margin-top: 20px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2); }
 .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
@@ -301,7 +331,6 @@ async function loadUsersMap() {
 @media (max-width: 1000px) {
   .grid2 { grid-template-columns: 1fr; }
   .gallery { grid-template-columns: 1fr; }
-  .gallery-card { height: 220px; }
   .video-wrap { padding-top: 56.25%; }
   .contacts .people { grid-template-columns: 1fr; }
   .hero-img { height: 240px; }

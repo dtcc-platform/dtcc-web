@@ -214,6 +214,22 @@
               </p>
               <p v-if="image.fileName && !image.converting" class="file-pill">{{ image.fileName }}</p>
             </div>
+
+            <div
+              v-if="!image.isHero && image.source !== 'none'"
+              class="field caption-field"
+            >
+              <label :for="`image-caption-${image.id}`">Caption</label>
+              <input
+                :id="`image-caption-${image.id}`"
+                v-model="image.caption"
+                type="text"
+                maxlength="220"
+                placeholder="Optional description shown below the image."
+                autocomplete="off"
+                spellcheck="true"
+              >
+            </div>
           </div>
 
           <button
@@ -390,8 +406,9 @@
                       </div>
                     </div>
                   </div>
-                  <div v-if="previewData.heroImage" class="container">
+                  <div v-if="previewData.heroImage" class="container hero-media">
                     <div class="hero-img card" :style="{ backgroundImage: `url(${previewData.heroImage})` }"></div>
+                    <p v-if="previewData.heroCaption" class="image-caption">{{ previewData.heroCaption }}</p>
                   </div>
                 </section>
 
@@ -403,12 +420,21 @@
                     <div>
                       <p class="brodtext-20 muted" v-for="(paragraph, i) in previewData.bodyParagraphs" :key="i">{{ paragraph }}</p>
                       <div v-if="previewData.gallery.length" class="gallery">
-                        <div
-                          v-for="(img, i) in previewData.gallery"
-                          :key="`${i}-${img}`"
+                        <figure
+                          v-for="(image, i) in previewData.gallery"
+                          :key="`${i}-${image.src}`"
                           class="gallery-card"
-                          :style="{ backgroundImage: `url(${img})` }"
-                        ></div>
+                        >
+                          <a :href="image.src" target="_blank" rel="noopener">
+                            <img
+                              :src="image.src"
+                              :alt="image.caption || `Gallery image ${i + 1}`"
+                              loading="lazy"
+                              decoding="async"
+                            >
+                          </a>
+                          <figcaption v-if="image.caption" class="caption">{{ image.caption }}</figcaption>
+                        </figure>
                       </div>
                       <div v-if="previewData.video" class="video-wrap">
                         <iframe
@@ -782,6 +808,9 @@ function cleanSlugList(list, limit) {
 
 function applyPrefilledImages(section, data) {
   const paths = []
+  const captions = Array.isArray(data?.imageCaptions)
+    ? data.imageCaptions.map((value) => (typeof value === 'string' ? value.trim() : '')).map((value) => value || '')
+    : []
   const seen = new Set()
   const append = (value) => {
     if (typeof value !== 'string') return
@@ -803,8 +832,9 @@ function applyPrefilledImages(section, data) {
   }
 
   const limited = paths.slice(0, MAX_IMAGES)
-  imageEntries.value = limited.map((path, index) =>
-    createImageEntry({
+  imageEntries.value = limited.map((path, index) => {
+    const captionValue = captions[index] || ''
+    return createImageEntry({
       isHero: index === 0,
       source: 'url',
       url: path,
@@ -812,8 +842,9 @@ function applyPrefilledImages(section, data) {
       fileName: '',
       fileExtension: inferExtensionFromName(path),
       converting: false,
+      caption: captionValue,
     })
-  )
+  })
   preparedImages.value = limited.map((path, index) => ({
     type: 'url',
     jsonValue: path,
@@ -822,6 +853,7 @@ function applyPrefilledImages(section, data) {
     section,
     entryIndex: index,
     displayIndex: index,
+    caption: captions[index] || '',
   }))
 }
 
@@ -913,6 +945,9 @@ function updateImageSource(entry, mode) {
   if (mode !== 'url') {
     entry.url = ''
   }
+  if (mode === 'none' && !entry.isHero) {
+    entry.caption = ''
+  }
 }
 
 async function onImageFileChange(event, entry) {
@@ -971,6 +1006,7 @@ function createImageEntry({
   fileName = '',
   fileExtension = '',
   converting = false,
+  caption = '',
 } = {}) {
   const resolvedSource = source || (isHero ? 'none' : 'upload')
   return {
@@ -982,6 +1018,7 @@ function createImageEntry({
     fileName,
     fileExtension,
     converting,
+    caption,
   }
 }
 
@@ -1225,6 +1262,7 @@ function prepareDraft() {
 
     const collectedImages = []
     const preparedList = []
+    const imageCaptions = []
     imageEntries.value.forEach((entry, index) => {
       if (!entry) return
       const resolved = resolveImageEntry(entry, {
@@ -1234,6 +1272,8 @@ function prepareDraft() {
       })
       if (!resolved) return
       collectedImages.push(resolved.image)
+      const captionValue = entry.caption ? entry.caption.trim() : ''
+      imageCaptions.push(captionValue)
       preparedList.push({
         type: resolved.type,
         jsonValue: resolved.image,
@@ -1242,6 +1282,7 @@ function prepareDraft() {
         section,
         entryIndex: index,
         displayIndex: collectedImages.length - 1,
+        caption: captionValue,
       })
     })
     preparedImages.value = preparedList
@@ -1316,6 +1357,11 @@ function prepareDraft() {
     } else {
       delete payload.image
       delete payload.images
+    }
+    if (imageCaptions.length && imageCaptions.some(Boolean)) {
+      payload.imageCaptions = imageCaptions
+    } else {
+      delete payload.imageCaptions
     }
 
     if (videoEntry) {
@@ -1908,9 +1954,11 @@ async function openPreview() {
 
   const section = (draftSection.value || postType.value || 'news')
   try {
-    const images = collectPreviewImages(parsed)
-    const heroImage = images[0] || ''
-    const galleryImages = images.slice(1)
+    const imageItems = collectPreviewImages(parsed)
+    const heroItem = imageItems[0] || { src: '', caption: '' }
+    const galleryItems = imageItems.slice(1)
+    const heroImage = heroItem.src || ''
+    const heroCaption = heroItem.caption || ''
     const video = preparedVideo.value || ensureYouTubeEmbed(parsed.video || '') || ''
     const bodyParagraphs = splitBodyParagraphs(parsed.body)
     const sectionLabel = SECTION_CONFIG[section]?.label || section
@@ -1952,7 +2000,8 @@ async function openPreview() {
       subheading: parsed.subheading || parsed.headline || 'Details',
       bodyParagraphs,
       heroImage,
-      gallery: galleryImages,
+      heroCaption,
+      gallery: galleryItems,
       video,
       meta,
       registration,
@@ -1996,30 +2045,42 @@ function createPreviewObjectUrl(file) {
 }
 
 function collectPreviewImages(parsed) {
-  const urls = []
-  const add = (value) => {
-    if (!value) return
-    if (!urls.includes(value)) urls.push(value)
+  const items = []
+  const add = (value, caption = '') => {
+    const src = sanitizePreviewImage(value)
+    if (!src) return
+    if (items.some((item) => item.src === src)) return
+    items.push({
+      src,
+      caption: caption || '',
+    })
   }
 
   if (preparedImages.value.length) {
-    preparedImages.value.forEach((entry) => {
+    const sorted = [...preparedImages.value].sort((a, b) => a.displayIndex - b.displayIndex)
+    sorted.forEach((entry) => {
       if (entry.type === 'upload' && entry.file) {
-        add(createPreviewObjectUrl(entry.file))
+        add(createPreviewObjectUrl(entry.file), entry.caption || '')
       } else {
-        add(sanitizePreviewImage(entry.jsonValue))
+        add(entry.jsonValue, entry.caption || '')
       }
     })
   }
 
-  if (!urls.length) {
+  if (!items.length) {
     const candidates = []
     if (typeof parsed.image === 'string') candidates.push(parsed.image)
     if (Array.isArray(parsed.images)) candidates.push(...parsed.images)
-    candidates.forEach((candidate) => add(sanitizePreviewImage(candidate)))
+    const captions = Array.isArray(parsed.imageCaptions)
+      ? parsed.imageCaptions.map((value) => (typeof value === 'string' ? value : ''))
+      : []
+    candidates.forEach((candidate, index) => {
+      const caption = captions[index] || ''
+      add(candidate, caption)
+    })
   }
 
-  return urls
+  return items
 }
 
 function sanitizePreviewImage(value) {
@@ -2481,6 +2542,40 @@ function collectPreviewPapers(parsed) {
 
 .preview-detail .gallery {
   margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.preview-detail .gallery-card {
+  margin: 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(26, 26, 31, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.preview-detail .gallery-card a {
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.preview-detail .gallery-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  background: #0d0d11;
+  object-fit: contain;
+}
+
+.preview-detail .gallery-card .caption {
+  font-size: 0.9rem;
+  color: rgba(26, 26, 31, 0.7);
+  line-height: 1.4;
 }
 
 .preview-detail .video-wrap {
@@ -2512,11 +2607,23 @@ function collectPreviewPapers(parsed) {
   margin-top: 16px;
 }
 
+.preview-detail .hero-media .image-caption {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: rgba(26, 26, 31, 0.7);
+}
+
 .preview-detail .people {
   margin-top: 18px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
+}
+
+@media (max-width: 800px) {
+  .preview-detail .gallery {
+    grid-template-columns: 1fr;
+  }
 }
 
 .preview-detail .person {
