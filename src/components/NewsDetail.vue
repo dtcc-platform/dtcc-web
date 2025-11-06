@@ -301,7 +301,17 @@ async function loadUsersMap() {
 <style scoped>
 .intro { padding-top: 36px; }
 .grid2 { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items: center; }
-.hero-img { width: 100%; height: 380px; border-radius: 14px; margin-top: 16px; object-fit: cover; background: #000; }
+.hero-img {
+  width: 100%;
+  height: clamp(220px, 40vw, 420px);
+  max-height: 420px;
+  border-radius: 14px;
+  margin-top: 16px;
+  object-fit: contain;
+  background: rgba(242, 243, 249, 0.9);
+  padding: 12px;
+  box-sizing: border-box;
+}
 
 .body { padding-top: 24px; padding-bottom: 24px; }
 .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }

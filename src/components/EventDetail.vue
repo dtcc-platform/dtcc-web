@@ -214,7 +214,17 @@ onMounted(async () => {
 .intro { padding-top: 36px; }
 .grid2 { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items: start; }
 .meta strong { font-weight: 600; }
-.hero-img { width: 100%; height: 320px; border-radius: 14px; margin-top: 16px; object-fit: cover; background: #000; }
+.hero-img {
+  width: 100%;
+  height: clamp(220px, 38vw, 380px);
+  max-height: 380px;
+  border-radius: 14px;
+  margin-top: 16px;
+  object-fit: contain;
+  background: rgba(242, 243, 249, 0.9);
+  padding: 12px;
+  box-sizing: border-box;
+}
 
 .body { padding-top: 24px; padding-bottom: 24px; }
 .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
