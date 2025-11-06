@@ -1,0 +1,18 @@
+{
+  "title": "Digital Twin Platform",
+  "intro": "The DTCC Platform is an open-source initiative for exploring digital twins of cities which aims to create an open multimodal data, modeling, simulation, and visualization enviro…",
+  "description": "The DTCC Platform is an open-source initiative for exploring digital twins of cities which aims to create an open multimodal data, modeling, simulation, and visualization enviro…",
+  "summary": "The DTCC Platform is an open-source initiative for exploring digital twins of cities which aims to create an open multimodal data, modeling, simulation, and visualization enviro…",
+  "body": "The DTCC Platform is an open-source initiative for exploring digital twins of cities which aims to create an open multimodal data, modeling, simulation, and visualization environment. Main uses cases include interactive planning, design, exploration, experimentation, and optimization of urban spaces. Released under the MIT license with development spanning from 2022 onwards, the platform represents collaborative research efforts within the Centre.",
+  "subheading": "Details",
+  "url": "/projects/detail.html?slug=digital-twin-platform",
+  "date": "2025-11-05",
+  "image": "content/projects/digital-twin-platform.webp",
+  "images": [
+    "content/projects/digital-twin-platform.webp"
+  ],
+  "contacts": [
+    "anders-logg",
+    "vasilis-naserentin"
+  ]
+}

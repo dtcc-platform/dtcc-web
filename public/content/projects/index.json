@@ -1,6 +1,10 @@
 {
   "items": [
     {
+      "base": "digital-twin-platform",
+      "image": "content/projects/digital-twin-platform.webp"
+    },
+    {
       "base": "ai-3d-city-modeling",
       "image": "content/projects/ai-3d-city-modeling.webp"
     },
