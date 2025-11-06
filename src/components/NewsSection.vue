@@ -143,7 +143,18 @@ const fallbackImage = withBase('content/News Placeholder.webp')
 .media-img { height: 280px; background: url('https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat; filter: saturate(110%); }
 .play { position: absolute; inset: auto auto 16px 16px; border: none; border-radius: 50%; width: 48px; height: 48px; background: rgba(255,255,255,0.9); font-size: 18px; cursor: pointer; }
 .note { padding: 18px 18px 16px; border-radius: 14px; }
-.note .thumb { width: 100%; height: 90px; object-fit: cover; border-radius: 10px; margin: 8px 0 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.12); display: block; }
+.note .thumb {
+  width: 100%;
+  height: 110px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin: 8px 0 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  display: block;
+  background-color: rgba(255, 255, 255, 0.75);
+  padding: 6px;
+  box-sizing: border-box;
+}
 .note.green { background: #D6F1EB; }
 .note.yellow { background: #FFE487; }
 .more { color: var(--cta-f26a2e); font-weight: 600; }

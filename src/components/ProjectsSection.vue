@@ -21,7 +21,10 @@
         </template>
         <template v-else>
           <article class="card project">
-            <div class="img" style="background-image:url('https://images.unsplash.com/photo-1494516192674-b82b5f1e61dc?q=80&w=1200&auto=format&fit=crop')"></div>
+            <div
+              class="img placeholder"
+              style="background-image:url('https://images.unsplash.com/photo-1494516192674-b82b5f1e61dc?q=80&w=1200&auto=format&fit=crop')"
+            ></div>
             <div class="body">
               <h4 class="h3-30">Urban Environmental Comfort Design</h4>
               <p class="brodtext-20 muted">Urban densification influences wind, temperature, noise, daylight and air quality at both city scale and ...</p>
@@ -29,7 +32,10 @@
             </div>
           </article>
           <article class="card project">
-            <div class="img" style="background-image:url('https://images.unsplash.com/photo-1518306727298-4c17e1bf6942?q=80&w=1200&auto=format&fit=crop')"></div>
+            <div
+              class="img placeholder"
+              style="background-image:url('https://images.unsplash.com/photo-1518306727298-4c17e1bf6942?q=80&w=1200&auto=format&fit=crop')"
+            ></div>
             <div class="body">
               <h4 class="h3-30">4D digital twin for underground, and natural hazards</h4>
               <p class="brodtext-20 muted">Developing decision support systems to help making informed decisions ...</p>
@@ -37,7 +43,10 @@
             </div>
           </article>
           <article class="card project">
-            <div class="img" style="background-image:url('https://images.unsplash.com/photo-1517153295259-74eb0b401b47?q=80&w=1200&auto=format&fit=crop')"></div>
+            <div
+              class="img placeholder"
+              style="background-image:url('https://images.unsplash.com/photo-1517153295259-74eb0b401b47?q=80&w=1200&auto=format&fit=crop')"
+            ></div>
             <div class="body">
               <h4 class="h3-30">Mobility and the liveable city</h4>
               <p class="brodtext-20 muted">A city-scale twin helps us test street redesigns, public realm and network impacts ...</p>
@@ -134,7 +143,21 @@ const fallbackImage = withBase('content/Projects Placeholder.webp')
 
 <style scoped>
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.project .img { width: 100%; height: 180px; object-fit: cover; display: block; background: #ddd; }
+.project .img {
+  width: 100%;
+  height: 180px;
+  display: block;
+  object-fit: contain;
+  background-color: rgba(242, 243, 249, 0.9);
+  border-radius: 14px;
+  padding: 8px;
+  box-sizing: border-box;
+}
+.project .img.placeholder {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .project .body { padding: 14px 16px 18px; }
 .project a { color: var(--cta-f26a2e); font-weight: 600; }
 @media (max-width: 1100px) { .cards { grid-template-columns: 1fr 1fr; } }
