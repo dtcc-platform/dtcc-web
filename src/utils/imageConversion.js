@@ -1,16 +1,21 @@
 // Maximum file size: 20MB
 const MAX_FILE_SIZE = 20 * 1024 * 1024
 
-// Maximum dimension: 4096px (prevents memory exhaustion)
-const MAX_DIMENSION = 4096
+// Maximum dimension allowed after user-defined clamping (prevents memory exhaustion)
+const HARD_DIMENSION_CAP = 4096
+const DEFAULT_TARGET_DIMENSION = 2048
 
 /**
  * Converts an image File to WebP format using Canvas API
  * @param {File} file - The image file to convert
  * @param {number} quality - WebP quality (0-1), default 0.85
+ * @param {object} options - Additional conversion options
+ * @param {number} [options.maxDimension=DEFAULT_TARGET_DIMENSION] - Target max width/height in pixels
  * @returns {Promise<File>} - Promise that resolves to WebP File object
  */
-export async function convertToWebP(file, quality = 0.85) {
+export async function convertToWebP(file, quality = 0.85, options = {}) {
+  const { maxDimension = DEFAULT_TARGET_DIMENSION } = options
+
   // Feature detection: Check if browser supports canvas.toBlob
   if (!HTMLCanvasElement.prototype.toBlob) {
     console.warn('Browser does not support canvas.toBlob, skipping WebP conversion')
@@ -44,12 +49,19 @@ export async function convertToWebP(file, quality = 0.85) {
         let width = img.naturalWidth
         let height = img.naturalHeight
 
-        // Downscale if dimensions exceed MAX_DIMENSION
-        if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
-          const scale = MAX_DIMENSION / Math.max(width, height)
+        const dimensionLimit = Math.min(
+          HARD_DIMENSION_CAP,
+          Math.max(256, Math.floor(Number.isFinite(maxDimension) ? maxDimension : DEFAULT_TARGET_DIMENSION))
+        )
+
+        // Downscale if dimensions exceed the configured limit
+        if (width > dimensionLimit || height > dimensionLimit) {
+          const scale = dimensionLimit / Math.max(width, height)
           width = Math.floor(width * scale)
           height = Math.floor(height * scale)
-          console.log(`Image downscaled from ${img.naturalWidth}×${img.naturalHeight} to ${width}×${height}`)
+          console.log(
+            `Image downscaled from ${img.naturalWidth}×${img.naturalHeight} to ${width}×${height} (limit ${dimensionLimit}px)`
+          )
         }
 
         // Create canvas with appropriate dimensions

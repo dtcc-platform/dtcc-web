@@ -12,8 +12,8 @@
         </div>
         <div>
           <p class="brodtext-20 muted" v-text="item.intro || item.summary || ''" />
-          <div v-if="item.url" class="visit">
-            <a class="more" :href="item.url" target="_blank" rel="noopener">Visit website »</a>
+          <div v-if="item.website" class="visit">
+            <a class="more" :href="item.website" target="_blank" rel="noopener">Visit website »</a>
           </div>
         </div>
       </div>
@@ -162,6 +162,8 @@ const normalizeLink = (value) => {
   return resolved.startsWith('/') ? resolved : sanitizeUrl(resolved)
 }
 
+const isExternalLink = (value) => /^https?:\/\//i.test(value)
+
 const normalizePapers = (value) => {
   if (!Array.isArray(value)) return []
   return value.map((entry) => normalizeLink(entry)).filter(Boolean)
@@ -193,6 +195,12 @@ onMounted(async () => {
       headlineImage = orderedImages[0]
     }
 
+    const normalizedDetailLink = normalizeLink(data.url || data.link || '')
+    const normalizedWebsite = normalizeLink(
+      data.website || data.visitUrl || data.visitURL || ''
+    )
+    const website = normalizedWebsite || (isExternalLink(normalizedDetailLink) ? normalizedDetailLink : '')
+
     item.value = {
       id: slug,
       title: data.title || data.name || slug,
@@ -202,7 +210,8 @@ onMounted(async () => {
       image: headlineImage,
       images: orderedImages,
       video: normalizeVideo(data.video || null),
-      url: normalizeLink(data.url || data.link || ''),
+      url: normalizedDetailLink,
+      website,
       date: data.date || data.updated || null,
       papers: normalizePapers(data.papers),
     }

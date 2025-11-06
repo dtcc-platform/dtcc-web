@@ -47,6 +47,29 @@
         </div>
 
         <div class="field">
+          <label for="abstract">Abstract<span aria-hidden="true">*</span></label>
+          <textarea
+            id="abstract"
+            v-model="abstractInput"
+            rows="3"
+            placeholder="Summarize the key message. This appears at the top of the published page."
+            required
+          ></textarea>
+        </div>
+
+        <div class="field">
+          <label for="visit-link">Visit website link</label>
+          <input
+            id="visit-link"
+            v-model="visitLink"
+            type="url"
+            placeholder="https://example.com/project"
+            autocomplete="off"
+          >
+          <p class="muted helper">Optional. Shown as “Visit website” on the project page when provided.</p>
+        </div>
+
+        <div class="field">
           <label for="body">Body<span aria-hidden="true">*</span></label>
           <textarea
             id="body"
@@ -180,7 +203,9 @@
                 :disabled="image.converting"
               >
               <p class="muted helper">
-                Saved next to the JSON as <code>{{ uploadPathFor(image, index) }}</code>. Recommended size ≥ 1200px wide.
+                Saved next to the JSON as <code>{{ uploadPathFor(image, index) }}</code>. Uploads are converted to WebP and
+                resized to fit within {{ image.isHero ? HERO_IMAGE_MAX_DIMENSION : SECONDARY_IMAGE_MAX_DIMENSION }}px on the
+                longest edge.
                 <span v-if="image.converting"> Converting to WebP...</span>
               </p>
               <p v-if="image.fileName && !image.converting" class="file-pill">{{ image.fileName }}</p>
@@ -499,9 +524,11 @@ if (prefillSection) {
 const isEventType = computed(() => EVENT_TYPES.has(postType.value))
 const title = ref('')
 const bodyInput = ref('')
+const abstractInput = ref('')
 const slug = ref('')
 const slugWasEdited = ref(false)
 const selectedDate = ref(new Date().toISOString().slice(0, 10))
+const visitLink = ref('')
 const MAX_RELATED = 4
 const MAX_CONTACTS = 2
 const relatedOptions = ref([])
@@ -515,6 +542,8 @@ const contactError = ref('')
 const selectedContacts = ref([])
 const contactSelectionFull = computed(() => selectedContacts.value.length >= MAX_CONTACTS)
 
+const HERO_IMAGE_MAX_DIMENSION = 1600
+const SECONDARY_IMAGE_MAX_DIMENSION = 1400
 const MAX_IMAGES = 6
 const imageEntries = ref([])
 const preparedImages = ref([])
@@ -659,7 +688,9 @@ async function prefillExistingEntry(section, slugValue) {
     slug.value = slugValue
     slugWasEdited.value = true
     bodyInput.value = extractBody(data)
+    abstractInput.value = extractAbstract(data)
     selectedDate.value = pickDate(data.date || data.published || data.updated || '')
+    visitLink.value = extractVisitLink(data)
 
     await refreshRelatedOptions(section)
     if (!isEventSection(section)) {
@@ -692,6 +723,29 @@ function extractBody(entry) {
   }
   if (!value) return ''
   return String(value).replace(/\r\n/g, '\n')
+}
+
+function extractAbstract(entry) {
+  const value = entry?.abstract ?? entry?.intro ?? entry?.summary ?? ''
+  if (!value) return ''
+  return String(value).replace(/\r\n/g, '\n')
+}
+
+function extractVisitLink(entry) {
+  const raw =
+    entry?.website ||
+    entry?.visitUrl ||
+    entry?.visitURL ||
+    entry?.link ||
+    ''
+  if (typeof raw !== 'string') return ''
+  const trimmed = raw.trim()
+  if (trimmed) return trimmed
+  const legacy = typeof entry?.url === 'string' ? entry.url.trim() : ''
+  if (legacy && /^https?:\/\//i.test(legacy)) {
+    return legacy
+  }
+  return ''
 }
 
 function pickDate(raw) {
@@ -872,7 +926,8 @@ async function onImageFileChange(event, entry) {
 
   try {
     // Convert to WebP (function preserves GIFs and already-WebP files)
-    const webpFile = await convertToWebP(file, 0.85)
+    const targetMaxDimension = entry.isHero ? HERO_IMAGE_MAX_DIMENSION : SECONDARY_IMAGE_MAX_DIMENSION
+    const webpFile = await convertToWebP(file, 0.85, { maxDimension: targetMaxDimension })
 
     entry.file = webpFile
     entry.fileName = webpFile.name || 'uploaded-image.webp'
@@ -1127,10 +1182,11 @@ function prepareDraft() {
   successMessage.value = ''
 
   const titleValue = title.value.trim()
+  const abstractRaw = abstractInput.value.replace(/\r\n/g, '\n').trim()
   const bodyValue = bodyInput.value.replace(/\r\n/g, '\n').trim()
 
-  if (!titleValue || !bodyValue) {
-    errorMessage.value = 'Provide a title and body before creating a draft.'
+  if (!titleValue || !abstractRaw || !bodyValue) {
+    errorMessage.value = 'Provide a title, abstract, and body before creating a draft.'
     return
   }
 
@@ -1145,11 +1201,23 @@ function prepareDraft() {
       .map((line) => line.replace(/\s+$/g, ''))
       .join('\n')
       .trim()
-    const summary = createSummary(normalizedBody)
-  const isoDate = selectedDate.value || new Date().toISOString().slice(0, 10)
+    const abstractLines = abstractRaw
+      .split('\n')
+      .map((line) => line.replace(/\s+$/g, '').trim())
+      .filter(Boolean)
+    const abstractParagraph = abstractLines.join('\n')
+    const abstractSummary = abstractLines.join(' ')
+    const fallbackSummary = createSummary(normalizedBody)
+    const summary = abstractSummary || fallbackSummary
+    const isoDate = selectedDate.value || new Date().toISOString().slice(0, 10)
     const section = postType.value
     const config = SECTION_CONFIG[section] || SECTION_CONFIG.news
     const contentDir = config.contentDir
+    const websiteInput = visitLink.value.trim()
+    const website = websiteInput ? sanitizeWebsiteLink(websiteInput) : ''
+    if (website && website !== websiteInput) {
+      visitLink.value = website
+    }
 
     const collectedImages = []
     const preparedList = []
@@ -1190,13 +1258,22 @@ function prepareDraft() {
     if (isEventSection(section)) {
       payload = {
         title: titleValue,
+        abstract: abstractParagraph,
         summary,
+        intro: summary,
         body: normalizedBody,
         date: isoDate,
+      }
+      if (!payload.summary && fallbackSummary) {
+        payload.summary = fallbackSummary
+      }
+      if (website) {
+        payload.website = website
       }
     } else if (section === 'projects') {
       payload = {
         title: titleValue,
+        abstract: abstractParagraph,
         intro: summary,
         description: summary,
         summary,
@@ -1205,14 +1282,27 @@ function prepareDraft() {
         url: `${config.urlPrefix}detail.html?slug=${encodeURIComponent(slugValue)}`,
         date: isoDate,
       }
+      if (website) {
+        payload.website = website
+      } else {
+        delete payload.website
+      }
     } else {
       payload = {
         title: titleValue,
+        abstract: abstractParagraph,
         summary,
+        intro: summary,
         url: `${config.urlPrefix}detail.html?slug=${encodeURIComponent(slugValue)}`,
         body: normalizedBody,
         eyebrow: 'News',
         date: isoDate,
+      }
+      if (!payload.summary && fallbackSummary) {
+        payload.summary = fallbackSummary
+      }
+      if (website) {
+        payload.website = website
       }
     }
 
@@ -1763,9 +1853,11 @@ function downloadDraft() {
 function resetWizard() {
   title.value = ''
   bodyInput.value = ''
+  abstractInput.value = ''
   slug.value = ''
   slugWasEdited.value = false
   selectedDate.value = new Date().toISOString().slice(0, 10)
+  visitLink.value = ''
   initializeImageEntries()
   preparedImages.value = []
   videoUrl.value = ''
@@ -1819,6 +1911,7 @@ async function openPreview() {
     const bodyParagraphs = splitBodyParagraphs(parsed.body)
     const sectionLabel = SECTION_CONFIG[section]?.label || section
     const eyebrow = section === 'news' ? 'News:' : section === 'projects' ? 'Project:' : 'Event:'
+    const intro = parsed.abstract || parsed.intro || parsed.summary || ''
 
     let meta = ''
     let registration = ''
@@ -1827,7 +1920,13 @@ async function openPreview() {
       meta = parsed.meta || formatEventMeta(parsed)
       registration = normalizePreviewLink(parsed.registration || '')
     } else if (section === 'projects') {
-      visitUrl = normalizePreviewLink(parsed.url || '')
+      const websiteSource = parsed.website || parsed.visitUrl || parsed.visitURL || ''
+      if (websiteSource) {
+        visitUrl = normalizePreviewLink(websiteSource)
+      } else if (!parsed.abstract && parsed.url) {
+        // Legacy fallback for older drafts that store the visit link in `url`
+        visitUrl = normalizePreviewLink(parsed.url)
+      }
     }
 
     const related = isEventSection(section)
@@ -1845,7 +1944,7 @@ async function openPreview() {
       sectionLabel,
       eyebrow,
       title: parsed.title || 'Untitled entry',
-      intro: parsed.intro || parsed.summary || '',
+      intro,
       subheading: parsed.subheading || parsed.headline || 'Details',
       bodyParagraphs,
       heroImage,
@@ -1971,6 +2070,17 @@ function sanitizePaperLink(value) {
   }
   const sanitized = sanitizeUrl(trimmed)
   return sanitized && sanitized !== '#' ? sanitized : ''
+}
+
+function sanitizeWebsiteLink(value) {
+  if (!value) return ''
+  const trimmed = String(value).trim()
+  if (!trimmed) return ''
+  const sanitized = sanitizeUrl(trimmed)
+  if (!sanitized || sanitized === '#') {
+    throw new Error('Provide a valid link for “Visit website” or leave it blank.')
+  }
+  return sanitized
 }
 
 function formatEventMeta(detail) {
