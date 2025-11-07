@@ -3,15 +3,17 @@
     <div class="container grid">
       <div class="media card">
         <video
+          ref="video"
           class="media-img"
           :src="`${BASE_URL}content/dtcc-film.mp4`"
-          autoplay
           muted
           loop
           playsinline
           preload="auto"
         ></video>
-        <button class="play" aria-label="Play video">▶</button>
+        <button class="play" @click="togglePlay" :aria-label="isPlaying ? 'Pause video' : 'Play video'">
+          {{ isPlaying ? '⏸' : '▶' }}
+        </button>
       </div>
 
       <template v-if="items.length">
@@ -49,6 +51,22 @@ import { sanitizeUrl, sanitizeSrc } from '../utils/sanitize'
 import { withBase, resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
 
 const BASE_URL = import.meta.env.BASE_URL || '/'
+
+// Video controls
+const video = ref(null)
+const isPlaying = ref(false)
+
+const togglePlay = () => {
+  if (!video.value) return
+
+  if (video.value.paused) {
+    video.value.play()
+    isPlaying.value = true
+  } else {
+    video.value.pause()
+    isPlaying.value = false
+  }
+}
 
 // Load JSON files and images from src/news
 // Each item requires a matching image with the same base name
