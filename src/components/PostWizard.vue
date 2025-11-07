@@ -2569,7 +2569,7 @@ function collectPreviewPapers(parsed) {
   height: auto;
   border-radius: 10px;
   background: #0d0d11;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .preview-detail .gallery-card .caption {
@@ -2613,7 +2613,7 @@ function collectPreviewPapers(parsed) {
   max-height: 320px;
   border-radius: 14px;
   margin-top: 16px;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-color: rgba(242, 243, 249, 0.9);

@@ -163,7 +163,7 @@ const visibleItems = computed(() => items.value.slice(0, visibleCount.value))
 .project .img {
   width: 100%;
   height: 200px;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
   background-color: rgba(242, 243, 249, 0.9);
   border-radius: 14px;

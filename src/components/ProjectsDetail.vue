@@ -331,7 +331,7 @@ async function loadUsersMap() {
   max-height: 320px;
   border-radius: 14px;
   margin-top: 16px;
-  object-fit: contain;
+  object-fit: cover;
   background: rgba(242, 243, 249, 0.9);
   padding: 12px;
   box-sizing: border-box;
@@ -357,7 +357,7 @@ async function loadUsersMap() {
 .project .img {
   width: 100%;
   height: 180px;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
   background-color: rgba(242, 243, 249, 0.9);
   border-radius: 14px;

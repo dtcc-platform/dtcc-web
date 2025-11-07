@@ -146,7 +146,7 @@ const fallbackImage = withBase('content/News Placeholder.webp')
 .note .thumb {
   width: 100%;
   height: 110px;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 10px;
   margin: 8px 0 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.12);

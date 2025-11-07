@@ -220,7 +220,7 @@ onMounted(async () => {
   max-height: 300px;
   border-radius: 14px;
   margin-top: 16px;
-  object-fit: contain;
+  object-fit: cover;
   background: rgba(242, 243, 249, 0.9);
   padding: 12px;
   box-sizing: border-box;

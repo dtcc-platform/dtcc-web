@@ -147,14 +147,14 @@ const fallbackImage = withBase('content/Projects Placeholder.webp')
   width: 100%;
   height: 180px;
   display: block;
-  object-fit: contain;
+  object-fit: cover;
   background-color: rgba(242, 243, 249, 0.9);
   border-radius: 14px;
   padding: 8px;
   box-sizing: border-box;
 }
 .project .img.placeholder {
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
