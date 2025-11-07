@@ -1,0 +1,24 @@
+{
+  "title": "Testing testing",
+  "abstract": "A nice text about something important",
+  "intro": "A nice text about something important",
+  "description": "A nice text about something important",
+  "summary": "A nice text about something important",
+  "body": "This post is very interesting",
+  "subheading": "Details",
+  "url": "/projects/detail.html?slug=testing-testing",
+  "date": "2025-11-07",
+  "previewImage": "content/projects/testing-testing-preview.webp",
+  "image": "content/projects/testing-testing-headline.webp",
+  "headlineImage": "content/projects/testing-testing-headline.webp",
+  "images": [
+    "content/projects/testing-testing-headline.webp"
+  ],
+  "imageCaptions": [
+    "This is how our work is done."
+  ],
+  "video": "https://www.youtube-nocookie.com/embed/3CdQ4nuR2N0",
+  "contacts": [
+    "anders-logg"
+  ]
+}
