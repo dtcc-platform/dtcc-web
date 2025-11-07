@@ -137,20 +137,11 @@
         <fieldset class="field image-fieldset">
           <legend>Images</legend>
 
-          <div v-for="(image, index) in imageEntries" :key="image.id" class="image-entry">
+          <!-- Preview Image Section -->
+          <div v-if="previewImageEntry" class="image-entry">
             <div class="image-entry-header">
-              <span class="image-entry-title">
-                {{ index === 0 ? 'Headline image' : `Additional image ${index}` }}
-              </span>
-              <button
-                v-if="index > 0"
-                type="button"
-                class="btn-icon"
-                aria-label="Remove image"
-                @click="removeImageEntry(index)"
-              >
-                ×
-              </button>
+              <span class="image-entry-title">Preview image</span>
+              <span class="muted" style="font-size: 0.875rem; font-weight: 400; margin-left: 8px;">Used in list/grid views</span>
             </div>
 
             <div class="image-options">
@@ -158,8 +149,8 @@
                 <input
                   type="radio"
                   value="none"
-                  :checked="image.source === 'none'"
-                  @change="updateImageSource(image, 'none')"
+                  :checked="previewImageEntry.source === 'none'"
+                  @change="updatePreviewImageSource('none')"
                 >
                 No image
               </label>
@@ -167,8 +158,8 @@
                 <input
                   type="radio"
                   value="url"
-                  :checked="image.source === 'url'"
-                  @change="updateImageSource(image, 'url')"
+                  :checked="previewImageEntry.source === 'url'"
+                  @change="updatePreviewImageSource('url')"
                 >
                 Link to an online image
               </label>
@@ -176,70 +167,128 @@
                 <input
                   type="radio"
                   value="upload"
-                  :checked="image.source === 'upload'"
-                  @change="updateImageSource(image, 'upload')"
+                  :checked="previewImageEntry.source === 'upload'"
+                  @change="updatePreviewImageSource('upload')"
                 >
                 Upload from your computer
               </label>
             </div>
 
-            <div class="field" v-if="image.source === 'url'">
-              <label :for="`image-url-${image.id}`">Image URL</label>
+            <div class="field" v-if="previewImageEntry.source === 'url'">
+              <label for="preview-image-url">Image URL</label>
               <input
-                :id="`image-url-${image.id}`"
-                v-model="image.url"
+                id="preview-image-url"
+                v-model="previewImageEntry.url"
                 type="text"
                 inputmode="url"
                 placeholder="https://images.unsplash.com/..."
                 autocomplete="off"
                 spellcheck="false"
               >
-              <p class="muted helper">Remote URLs are stored directly in the JSON and manifest.</p>
+              <p class="muted helper">Remote URLs are stored directly in the JSON. Recommended aspect ratio: 16:9 or 4:3 for best display in cards.</p>
             </div>
 
-            <div class="field" v-else-if="image.source === 'upload'">
-              <label :for="`image-file-${image.id}`">Select image</label>
+            <div class="field" v-else-if="previewImageEntry.source === 'upload'">
+              <label for="preview-image-file">Select image</label>
               <input
-                :id="`image-file-${image.id}`"
+                id="preview-image-file"
                 type="file"
                 accept="image/*"
-                @change="onImageFileChange($event, image)"
-                :disabled="image.converting"
+                @change="onPreviewImageFileChange($event)"
+                :disabled="previewImageEntry.converting"
               >
               <p class="muted helper">
-                Saved next to the JSON as <code>{{ uploadPathFor(image, index) }}</code>. Uploads are converted to WebP and
-                resized to fit within {{ image.isHero ? HERO_IMAGE_MAX_DIMENSION : SECONDARY_IMAGE_MAX_DIMENSION }}px on the
-                longest edge.
-                <span v-if="image.converting"> Converting to WebP...</span>
+                Saved as <code>preview.webp</code>. Uploads are converted to WebP and
+                resized to fit within {{ SECONDARY_IMAGE_MAX_DIMENSION }}px on the longest edge.
+                Recommended aspect ratio: 16:9 or 4:3 for best display in cards.
+                <span v-if="previewImageEntry.converting"> Converting to WebP...</span>
               </p>
-              <p v-if="image.fileName && !image.converting" class="file-pill">{{ image.fileName }}</p>
+              <p v-if="previewImageEntry.fileName && !previewImageEntry.converting" class="file-pill">{{ previewImageEntry.fileName }}</p>
+            </div>
+          </div>
+
+          <!-- Headline Image Section -->
+          <div v-if="headlineImageEntry" class="image-entry" style="margin-top: 28px;">
+            <div class="image-entry-header">
+              <span class="image-entry-title">Headline image</span>
+              <span class="muted" style="font-size: 0.875rem; font-weight: 400; margin-left: 8px;">Used on detail pages</span>
             </div>
 
-            <div
-              v-if="!image.isHero && image.source !== 'none'"
-              class="field caption-field"
-            >
-              <label :for="`image-caption-${image.id}`">Caption</label>
+            <div class="image-options">
+              <label>
+                <input
+                  type="radio"
+                  value="none"
+                  :checked="headlineImageEntry.source === 'none'"
+                  @change="updateHeadlineImageSource('none')"
+                >
+                No image
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="url"
+                  :checked="headlineImageEntry.source === 'url'"
+                  @change="updateHeadlineImageSource('url')"
+                >
+                Link to an online image
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="upload"
+                  :checked="headlineImageEntry.source === 'upload'"
+                  @change="updateHeadlineImageSource('upload')"
+                >
+                Upload from your computer
+              </label>
+            </div>
+
+            <div class="field" v-if="headlineImageEntry.source === 'url'">
+              <label for="headline-image-url">Image URL</label>
               <input
-                :id="`image-caption-${image.id}`"
-                v-model="image.caption"
+                id="headline-image-url"
+                v-model="headlineImageEntry.url"
+                type="text"
+                inputmode="url"
+                placeholder="https://images.unsplash.com/..."
+                autocomplete="off"
+                spellcheck="false"
+              >
+              <p class="muted helper">Remote URLs are stored directly in the JSON. Can be wider/larger for hero display.</p>
+            </div>
+
+            <div class="field" v-else-if="headlineImageEntry.source === 'upload'">
+              <label for="headline-image-file">Select image</label>
+              <input
+                id="headline-image-file"
+                type="file"
+                accept="image/*"
+                @change="onHeadlineImageFileChange($event)"
+                :disabled="headlineImageEntry.converting"
+              >
+              <p class="muted helper">
+                Saved as <code>headline.webp</code>. Uploads are converted to WebP and
+                resized to fit within {{ HERO_IMAGE_MAX_DIMENSION }}px on the longest edge.
+                Can be wider/larger format for hero display.
+                <span v-if="headlineImageEntry.converting"> Converting to WebP...</span>
+              </p>
+              <p v-if="headlineImageEntry.fileName && !headlineImageEntry.converting" class="file-pill">{{ headlineImageEntry.fileName }}</p>
+            </div>
+
+            <div class="field caption-field" v-if="headlineImageEntry.source !== 'none'">
+              <label for="headline-image-caption">Caption</label>
+              <input
+                id="headline-image-caption"
+                v-model="headlineImageEntry.caption"
                 type="text"
                 maxlength="220"
-                placeholder="Optional description shown below the image."
+                placeholder="Optional description shown below the headline image."
                 autocomplete="off"
                 spellcheck="true"
               >
             </div>
           </div>
-
-          <button
-            type="button"
-            class="btn-secondary add-image-btn"
-            @click="addImageEntry"
-            :disabled="imageEntries.length >= MAX_IMAGES"
-          >
-            + Add image
-          </button>
         </fieldset>
 
         <div class="field">
