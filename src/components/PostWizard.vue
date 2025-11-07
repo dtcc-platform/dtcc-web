@@ -2216,9 +2216,8 @@ async function openPreview() {
       heroCaption = (parsed.imageCaptions && parsed.imageCaptions[0]) || ''
     }
 
-    // Collect gallery images (excluding the headline image)
-    const imageItems = collectPreviewImages(parsed)
-    const galleryItems = parsed.headlineImage ? imageItems : imageItems.slice(1)
+    // Collect gallery images (preview and headline are separate now)
+    const galleryItems = collectPreviewImages(parsed)
     const video = preparedVideo.value || ensureYouTubeEmbed(parsed.video || '') || ''
     const bodyParagraphs = splitBodyParagraphs(parsed.body)
     const sectionLabel = SECTION_CONFIG[section]?.label || section
