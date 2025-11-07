@@ -2,7 +2,15 @@
   <section id="news" class="section">
     <div class="container grid">
       <div class="media card">
-        <div class="media-img" role="img" aria-label="People walking across tram tracks"></div>
+        <video
+          class="media-img"
+          :src="`${BASE_URL}content/dtcc-film.mp4`"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+        ></video>
         <button class="play" aria-label="Play video">▶</button>
       </div>
 
@@ -39,6 +47,8 @@
 import { computed, ref, onMounted } from 'vue'
 import { sanitizeUrl, sanitizeSrc } from '../utils/sanitize'
 import { withBase, resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
+
+const BASE_URL = import.meta.env.BASE_URL || '/'
 
 // Load JSON files and images from src/news
 // Each item requires a matching image with the same base name
@@ -142,7 +152,7 @@ const fallbackImage = withBase('content/News Placeholder.webp')
 <style scoped>
 .grid { display: grid; grid-template-columns: 1.2fr .8fr .8fr; gap: 20px; align-items: start; }
 .media { position: relative; border-radius: 16px; overflow: hidden; }
-.media-img { height: 280px; background: url('https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat; filter: saturate(110%); }
+.media-img { height: 280px; width: 100%; object-fit: cover; display: block; filter: saturate(110%); }
 .play { position: absolute; inset: auto auto 16px 16px; border: none; border-radius: 50%; width: 48px; height: 48px; background: rgba(255,255,255,0.9); font-size: 18px; cursor: pointer; }
 .note { padding: 18px 18px 16px; border-radius: 14px; }
 .note .thumb {
