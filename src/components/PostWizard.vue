@@ -2204,8 +2204,17 @@ async function openPreview() {
   const section = (draftSection.value || postType.value || 'news')
   try {
     // Use headlineImage if available, otherwise fall back to first image
-    const heroImage = parsed.headlineImage || parsed.image || ''
-    const heroCaption = (parsed.imageCaptions && parsed.imageCaptions[0]) || ''
+    // Check for uploaded file first (doesn't exist on disk yet, need blob URL)
+    let heroImage = ''
+    let heroCaption = ''
+
+    if (preparedHeadlineImage.value && preparedHeadlineImage.value.file) {
+      heroImage = createPreviewObjectUrl(preparedHeadlineImage.value.file)
+      heroCaption = preparedHeadlineImage.value.caption || ''
+    } else if (parsed.headlineImage || parsed.image) {
+      heroImage = sanitizePreviewImage(parsed.headlineImage || parsed.image || '')
+      heroCaption = (parsed.imageCaptions && parsed.imageCaptions[0]) || ''
+    }
 
     // Collect gallery images (excluding the headline image)
     const imageItems = collectPreviewImages(parsed)
