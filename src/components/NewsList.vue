@@ -18,13 +18,15 @@
       <div class="container">
         <div class="cards">
           <article v-for="n in visibleItems" :key="n.id" class="card project">
-            <img
-              :src="n.previewImage || n.image || fallbackImage"
-              :alt="n.title"
-              class="img"
-              loading="lazy"
-              decoding="async"
-            />
+            <a :href="detailHref(n.id)">
+              <img
+                :src="n.previewImage || n.image || fallbackImage"
+                :alt="n.title"
+                class="img"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
             <div class="body">
               <h4 class="h3-30" v-text="n.title" />
               <p class="brodtext-20 muted" v-text="n.summary || n.excerpt || n.description" />

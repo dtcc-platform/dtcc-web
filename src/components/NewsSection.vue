@@ -8,7 +8,9 @@
 
       <template v-if="items.length">
         <article v-for="(n, idx) in items" :key="n.id" class="card note" :class="idx % 2 ? 'yellow' : 'green'">
-          <img :src="n.previewImage || n.image || fallbackImage" :alt="n.title" class="thumb" loading="lazy" decoding="async" />
+          <a :href="n.url || n.link || '#'">
+            <img :src="n.previewImage || n.image || fallbackImage" :alt="n.title" class="thumb" loading="lazy" decoding="async" />
+          </a>
           <span class="eyebrow">{{ n.eyebrow || 'News' }}</span>
           <h3 class="h3-30" v-text="n.title" />
           <p class="brodtext-20 muted" v-text="n.summary || n.excerpt" />

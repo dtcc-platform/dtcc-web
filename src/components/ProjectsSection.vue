@@ -5,13 +5,15 @@
       <div class="cards">
         <template v-if="items.length">
           <article v-for="p in items" :key="p.id" class="card project">
-            <img
-              :src="p.previewImage || p.image || fallbackImage"
-              :alt="p.title"
-              class="img"
-              loading="lazy"
-              decoding="async"
-            />
+            <a :href="p.url || p.link || '#'">
+              <img
+                :src="p.previewImage || p.image || fallbackImage"
+                :alt="p.title"
+                class="img"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
             <div class="body">
               <h4 class="h3-30" v-text="p.title" />
               <p class="brodtext-20 muted" v-text="p.summary || p.excerpt || p.description" />
