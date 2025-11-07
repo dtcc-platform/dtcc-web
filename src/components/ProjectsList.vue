@@ -160,7 +160,16 @@ const visibleItems = computed(() => items.value.slice(0, visibleCount.value))
 .more { color: var(--cta-f26a2e); font-weight: 600; }
 
 .list .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.project .img { width: 100%; height: 200px; object-fit: cover; display: block; background: #ddd; border-radius: 14px; }
+.project .img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  display: block;
+  background-color: rgba(242, 243, 249, 0.9);
+  border-radius: 14px;
+  padding: 8px;
+  box-sizing: border-box;
+}
 .project .body { padding: 14px 16px 18px; }
 .edit-link { opacity: 0.85; }
 

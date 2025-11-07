@@ -87,7 +87,13 @@
         <h3 class="h3-30 section-title">Related projects</h3>
         <div class="cards">
           <article v-for="r in related" :key="r.id" class="card project">
-            <div class="img" :style="{ backgroundImage: r.image ? `url(${r.image})` : undefined }"></div>
+            <img
+              :src="r.image || fallbackImage"
+              :alt="r.title"
+              class="img"
+              loading="lazy"
+              decoding="async"
+            />
             <div class="body">
               <h4 class="h3-30" v-text="r.title" />
               <p class="brodtext-20 muted" v-text="r.summary || r.description || ''" />
@@ -154,6 +160,7 @@ const detailHref = (slug) => withBase(`projects/detail.html?slug=${encodeURIComp
 const wizardEditHref = computed(() =>
   slug && isValidSlug(slug) ? withBase(`post/?section=projects&slug=${encodeURIComponent(slug)}`) : ''
 )
+const fallbackImage = withBase('content/Projects Placeholder.webp')
 
 const normalizeImage = (value) => {
   if (!value) return null
@@ -347,7 +354,16 @@ async function loadUsersMap() {
 .contacts .role { font-size: 14px; }
 
 .related .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.project .img { height: 180px; background: #ddd center/cover no-repeat; }
+.project .img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  display: block;
+  background-color: rgba(242, 243, 249, 0.9);
+  border-radius: 14px;
+  padding: 8px;
+  box-sizing: border-box;
+}
 .project .body { padding: 14px 16px 18px; }
 .project a.more { color: var(--cta-f26a2e); font-weight: 600; }
 .section-title { text-align: center; margin-bottom: 20px; }
