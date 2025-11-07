@@ -2330,10 +2330,16 @@ function collectPreviewImages(parsed) {
     const candidates = []
     if (typeof parsed.image === 'string') candidates.push(parsed.image)
     if (Array.isArray(parsed.images)) candidates.push(...parsed.images)
+
+    // Filter out headline and preview images from gallery
+    const headlineImage = parsed.headlineImage || ''
+    const previewImage = parsed.previewImage || ''
+    const filtered = candidates.filter(img => img !== headlineImage && img !== previewImage)
+
     const captions = Array.isArray(parsed.imageCaptions)
       ? parsed.imageCaptions.map((value) => (typeof value === 'string' ? value : ''))
       : []
-    candidates.forEach((candidate, index) => {
+    filtered.forEach((candidate, index) => {
       const caption = captions[index] || ''
       add(candidate, caption)
     })
