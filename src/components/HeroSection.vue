@@ -57,12 +57,13 @@ const slides = [
   {
     id: 0,
     title: 'A smarter city starts<br>with a digital twin.',
-    video: `${BASE_URL}ssstik.io_1757779073094.mp4`,
+    video: `${BASE_URL}carousel-hero.mp4`,
     poster: ''
   },
   {
     id: 1,
     title: 'Plan with confidence.<br>Test before you build.',
+    video: `${BASE_URL}content/gate-moving-pathlines.mp4`,
   },
   {
     id: 2,
