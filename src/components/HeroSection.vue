@@ -1,5 +1,17 @@
 <template>
-  <section class="hero gradient-hero" role="region" aria-roledescription="carousel" :aria-label="`Hero slideshow (${slides.length} slides)`">
+  <section
+    class="hero gradient-hero"
+    role="region"
+    aria-roledescription="carousel"
+    :aria-label="`Hero slideshow (${slides.length} slides)`"
+    @touchstart="handleTouchStart"
+    @touchmove="handleTouchMove"
+    @touchend="handleTouchEnd"
+    @mousedown="handleMouseDown"
+    @mousemove="handleMouseMove"
+    @mouseup="handleMouseUp"
+    @mouseleave="handleMouseLeave"
+  >
     <!-- Background media (video or image) -->
     <div class="media">
       <transition name="fade" mode="out-in">
@@ -49,7 +61,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { allowBrText } from '../utils/sanitize'
 
 const BASE_URL = import.meta.env.BASE_URL || '/'
@@ -82,6 +94,129 @@ const slides = [
 const current = ref(0)
 const currentSlide = computed(() => slides[current.value])
 function go(i) { current.value = i }
+
+// Navigation functions
+function nextSlide() {
+  current.value = (current.value + 1) % slides.length
+}
+
+function prevSlide() {
+  current.value = (current.value - 1 + slides.length) % slides.length
+}
+
+// Touch tracking for swipe gestures
+const touchStartX = ref(0)
+const touchStartY = ref(0)
+const touchEndX = ref(0)
+const touchEndY = ref(0)
+const minSwipeDistance = 50 // minimum distance in pixels to trigger swipe
+
+function handleTouchStart(e) {
+  touchStartX.value = e.touches[0].clientX
+  touchStartY.value = e.touches[0].clientY
+}
+
+function handleTouchMove(e) {
+  touchEndX.value = e.touches[0].clientX
+  touchEndY.value = e.touches[0].clientY
+}
+
+function handleTouchEnd() {
+  const deltaX = touchEndX.value - touchStartX.value
+  const deltaY = Math.abs(touchEndY.value - touchStartY.value)
+
+  // Only trigger swipe if horizontal movement is significant
+  // and greater than vertical movement (to avoid interfering with scroll)
+  if (Math.abs(deltaX) > minSwipeDistance && Math.abs(deltaX) > deltaY) {
+    if (deltaX > 0) {
+      // Swiped right - go to previous slide
+      prevSlide()
+    } else {
+      // Swiped left - go to next slide
+      nextSlide()
+    }
+  }
+
+  // Reset tracking
+  touchStartX.value = 0
+  touchStartY.value = 0
+  touchEndX.value = 0
+  touchEndY.value = 0
+}
+
+// Mouse drag tracking for desktop
+const mouseStartX = ref(0)
+const mouseStartY = ref(0)
+const mouseEndX = ref(0)
+const mouseEndY = ref(0)
+const isDragging = ref(false)
+
+function handleMouseDown(e) {
+  isDragging.value = true
+  mouseStartX.value = e.clientX
+  mouseStartY.value = e.clientY
+}
+
+function handleMouseMove(e) {
+  if (isDragging.value) {
+    mouseEndX.value = e.clientX
+    mouseEndY.value = e.clientY
+  }
+}
+
+function handleMouseUp() {
+  if (!isDragging.value) return
+
+  const deltaX = mouseEndX.value - mouseStartX.value
+  const deltaY = Math.abs(mouseEndY.value - mouseStartY.value)
+
+  // Only trigger swipe if horizontal movement is significant
+  if (Math.abs(deltaX) > minSwipeDistance && Math.abs(deltaX) > deltaY) {
+    if (deltaX > 0) {
+      // Dragged right - go to previous slide
+      prevSlide()
+    } else {
+      // Dragged left - go to next slide
+      nextSlide()
+    }
+  }
+
+  // Reset tracking
+  isDragging.value = false
+  mouseStartX.value = 0
+  mouseStartY.value = 0
+  mouseEndX.value = 0
+  mouseEndY.value = 0
+}
+
+function handleMouseLeave() {
+  // Reset if mouse leaves the carousel area while dragging
+  isDragging.value = false
+  mouseStartX.value = 0
+  mouseStartY.value = 0
+  mouseEndX.value = 0
+  mouseEndY.value = 0
+}
+
+// Keyboard navigation
+function handleKeydown(e) {
+  if (e.key === 'ArrowLeft') {
+    e.preventDefault()
+    prevSlide()
+  } else if (e.key === 'ArrowRight') {
+    e.preventDefault()
+    nextSlide()
+  }
+}
+
+// Set up and tear down keyboard listener
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown)
+})
 
 // Sanitize slide titles; allow only <br>
 const safeTitle = computed(() => allowBrText(String(currentSlide.value?.title || '')))
