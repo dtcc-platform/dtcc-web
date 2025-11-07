@@ -577,7 +577,13 @@ const SECONDARY_IMAGE_MAX_DIMENSION = 1400
 const MAX_IMAGES = 6
 const imageEntries = ref([])
 const preparedImages = ref([])
+// New: Separate preview and headline image handling
+const previewImageEntry = ref(null)
+const headlineImageEntry = ref(null)
+const preparedPreviewImage = ref(null)
+const preparedHeadlineImage = ref(null)
 initializeImageEntries()
+initializePreviewAndHeadlineImages()
 const videoUrl = ref('')
 const preparedVideo = ref('')
 const MAX_PAPERS = 10
@@ -950,6 +956,39 @@ function updateImageSource(entry, mode) {
   }
 }
 
+function updatePreviewImageSource(mode) {
+  if (!previewImageEntry.value) {
+    previewImageEntry.value = createImageEntry({ isPreview: true })
+  }
+  previewImageEntry.value.source = mode
+  if (mode !== 'upload') {
+    previewImageEntry.value.file = null
+    previewImageEntry.value.fileName = ''
+    previewImageEntry.value.fileExtension = ''
+  }
+  if (mode !== 'url') {
+    previewImageEntry.value.url = ''
+  }
+}
+
+function updateHeadlineImageSource(mode) {
+  if (!headlineImageEntry.value) {
+    headlineImageEntry.value = createImageEntry({ isHero: true })
+  }
+  headlineImageEntry.value.source = mode
+  if (mode !== 'upload') {
+    headlineImageEntry.value.file = null
+    headlineImageEntry.value.fileName = ''
+    headlineImageEntry.value.fileExtension = ''
+  }
+  if (mode !== 'url') {
+    headlineImageEntry.value.url = ''
+  }
+  if (mode === 'none') {
+    headlineImageEntry.value.caption = ''
+  }
+}
+
 async function onImageFileChange(event, entry) {
   const file = event?.target?.files?.[0]
   if (!file) {
@@ -982,6 +1021,66 @@ async function onImageFileChange(event, entry) {
   }
 }
 
+async function onPreviewImageFileChange(event) {
+  if (!previewImageEntry.value) {
+    previewImageEntry.value = createImageEntry({ isPreview: true })
+  }
+  const file = event?.target?.files?.[0]
+  if (!file) {
+    previewImageEntry.value.file = null
+    previewImageEntry.value.fileName = ''
+    previewImageEntry.value.fileExtension = ''
+    previewImageEntry.value.converting = false
+    return
+  }
+
+  previewImageEntry.value.converting = true
+
+  try {
+    const webpFile = await convertToWebP(file, 0.85, { maxDimension: SECONDARY_IMAGE_MAX_DIMENSION })
+    previewImageEntry.value.file = webpFile
+    previewImageEntry.value.fileName = webpFile.name || 'preview.webp'
+    previewImageEntry.value.fileExtension = deriveExtension(webpFile)
+  } catch (error) {
+    console.error('WebP conversion failed for preview, using original:', error)
+    previewImageEntry.value.file = file
+    previewImageEntry.value.fileName = file.name || 'preview-image'
+    previewImageEntry.value.fileExtension = deriveExtension(file)
+  } finally {
+    previewImageEntry.value.converting = false
+  }
+}
+
+async function onHeadlineImageFileChange(event) {
+  if (!headlineImageEntry.value) {
+    headlineImageEntry.value = createImageEntry({ isHero: true })
+  }
+  const file = event?.target?.files?.[0]
+  if (!file) {
+    headlineImageEntry.value.file = null
+    headlineImageEntry.value.fileName = ''
+    headlineImageEntry.value.fileExtension = ''
+    headlineImageEntry.value.converting = false
+    return
+  }
+
+  headlineImageEntry.value.converting = true
+
+  try {
+    const webpFile = await convertToWebP(file, 0.85, { maxDimension: HERO_IMAGE_MAX_DIMENSION })
+    headlineImageEntry.value.file = webpFile
+    headlineImageEntry.value.fileName = webpFile.name || 'headline.webp'
+    headlineImageEntry.value.fileExtension = deriveExtension(webpFile)
+  } catch (error) {
+    console.error('WebP conversion failed for headline, using original:', error)
+    headlineImageEntry.value.file = file
+    headlineImageEntry.value.fileName = file.name || 'headline-image'
+    headlineImageEntry.value.fileExtension = deriveExtension(file)
+  } finally {
+    headlineImageEntry.value.converting = false
+  }
+}
+
 function addImageEntry() {
   if (imageEntries.value.length >= MAX_IMAGES) return
   imageEntries.value = [...imageEntries.value, createImageEntry()]
@@ -995,11 +1094,17 @@ function removeImageEntry(index) {
 }
 
 function initializeImageEntries() {
-  imageEntries.value = [createImageEntry({ isHero: true })]
+  imageEntries.value = []
+}
+
+function initializePreviewAndHeadlineImages() {
+  previewImageEntry.value = createImageEntry({ isPreview: true })
+  headlineImageEntry.value = createImageEntry({ isHero: true })
 }
 
 function createImageEntry({
   isHero = false,
+  isPreview = false,
   source,
   url = '',
   file = null,
@@ -1008,10 +1113,11 @@ function createImageEntry({
   converting = false,
   caption = '',
 } = {}) {
-  const resolvedSource = source || (isHero ? 'none' : 'upload')
+  const resolvedSource = source || ((isHero || isPreview) ? 'none' : 'upload')
   return {
     id: `img-${Math.random().toString(36).slice(2, 10)}`,
     isHero,
+    isPreview,
     source: resolvedSource,
     url,
     file,
@@ -1044,7 +1150,7 @@ function removePaperLink(index) {
   paperLinks.value = next.length ? next : [createPaperLink()]
 }
 
-function resolveImageEntry(entry, { displayIndex, slugValue, contentDir }) {
+function resolveImageEntry(entry, { displayIndex, slugValue, contentDir, isPreview = false, isHero = false }) {
   if (!entry) return null
   if (entry.source === 'none') return null
   if (entry.source === 'url') {
@@ -1060,12 +1166,22 @@ function resolveImageEntry(entry, { displayIndex, slugValue, contentDir }) {
   if (entry.source === 'upload') {
     const file = entry.file
     if (!file) {
-      const label = displayIndex === 0 ? 'headline image' : `image #${displayIndex + 1}`
+      let label = `image #${displayIndex + 1}`
+      if (isPreview) label = 'preview image'
+      else if (isHero) label = 'headline image'
+      else if (displayIndex === 0) label = 'headline image'
       throw new Error(`Select a file for the ${label} or remove it.`)
     }
     const ext = entry.fileExtension || deriveExtension(file) || '.jpg'
-    const suffix = displayIndex === 0 ? '' : `-${displayIndex}`
-    const filename = `${slugValue}${suffix}${ext}`
+    let filename
+    if (isPreview) {
+      filename = `${slugValue}-preview${ext}`
+    } else if (isHero) {
+      filename = `${slugValue}-headline${ext}`
+    } else {
+      const suffix = displayIndex === 0 ? '' : `-${displayIndex}`
+      filename = `${slugValue}${suffix}${ext}`
+    }
     const jsonValue = `content/${contentDir}/${filename}`
     return {
       type: 'upload',
@@ -1260,9 +1376,62 @@ function prepareDraft() {
       visitLink.value = website
     }
 
+    // Handle preview image
+    let previewImage = null
+    if (previewImageEntry.value && previewImageEntry.value.source !== 'none') {
+      const resolved = resolveImageEntry(previewImageEntry.value, {
+        displayIndex: 0,
+        slugValue,
+        contentDir,
+        isPreview: true,
+      })
+      if (resolved) {
+        previewImage = resolved.image
+        preparedPreviewImage.value = {
+          type: resolved.type,
+          jsonValue: resolved.image,
+          ext: resolved.ext || '',
+          file: resolved.file || null,
+          section,
+        }
+      }
+    }
+
+    // Handle headline image
+    let headlineImage = null
+    let headlineCaption = ''
+    if (headlineImageEntry.value && headlineImageEntry.value.source !== 'none') {
+      const resolved = resolveImageEntry(headlineImageEntry.value, {
+        displayIndex: 0,
+        slugValue,
+        contentDir,
+        isHero: true,
+      })
+      if (resolved) {
+        headlineImage = resolved.image
+        headlineCaption = headlineImageEntry.value.caption ? headlineImageEntry.value.caption.trim() : ''
+        preparedHeadlineImage.value = {
+          type: resolved.type,
+          jsonValue: resolved.image,
+          ext: resolved.ext || '',
+          file: resolved.file || null,
+          section,
+          caption: headlineCaption,
+        }
+      }
+    }
+
+    // Handle gallery images
     const collectedImages = []
     const preparedList = []
     const imageCaptions = []
+
+    // Add headline image to the collection for backward compatibility
+    if (headlineImage) {
+      collectedImages.push(headlineImage)
+      imageCaptions.push(headlineCaption)
+    }
+
     imageEntries.value.forEach((entry, index) => {
       if (!entry) return
       const resolved = resolveImageEntry(entry, {
@@ -1351,11 +1520,21 @@ function prepareDraft() {
       }
     }
 
+    // Add preview image
+    if (previewImage) {
+      payload.previewImage = previewImage
+    } else {
+      delete payload.previewImage
+    }
+
+    // Add headline and gallery images
     if (collectedImages.length) {
-      payload.image = collectedImages[0]
+      payload.image = collectedImages[0]  // Backward compatibility
+      payload.headlineImage = headlineImage || collectedImages[0]
       payload.images = collectedImages
     } else {
       delete payload.image
+      delete payload.headlineImage
       delete payload.images
     }
     if (imageCaptions.length && imageCaptions.some(Boolean)) {
@@ -1954,11 +2133,13 @@ async function openPreview() {
 
   const section = (draftSection.value || postType.value || 'news')
   try {
+    // Use headlineImage if available, otherwise fall back to first image
+    const heroImage = parsed.headlineImage || parsed.image || ''
+    const heroCaption = (parsed.imageCaptions && parsed.imageCaptions[0]) || ''
+
+    // Collect gallery images (excluding the headline image)
     const imageItems = collectPreviewImages(parsed)
-    const heroItem = imageItems[0] || { src: '', caption: '' }
-    const galleryItems = imageItems.slice(1)
-    const heroImage = heroItem.src || ''
-    const heroCaption = heroItem.caption || ''
+    const galleryItems = parsed.headlineImage ? imageItems : imageItems.slice(1)
     const video = preparedVideo.value || ensureYouTubeEmbed(parsed.video || '') || ''
     const bodyParagraphs = splitBodyParagraphs(parsed.body)
     const sectionLabel = SECTION_CONFIG[section]?.label || section

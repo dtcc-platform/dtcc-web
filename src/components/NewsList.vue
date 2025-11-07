@@ -19,7 +19,7 @@
         <div class="cards">
           <article v-for="n in visibleItems" :key="n.id" class="card project">
             <img
-              :src="n.image || fallbackImage"
+              :src="n.previewImage || n.image || fallbackImage"
               :alt="n.title"
               class="img"
               loading="lazy"

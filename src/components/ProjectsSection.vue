@@ -6,7 +6,7 @@
         <template v-if="items.length">
           <article v-for="p in items" :key="p.id" class="card project">
             <img
-              :src="p.image || fallbackImage"
+              :src="p.previewImage || p.image || fallbackImage"
               :alt="p.title"
               class="img"
               loading="lazy"

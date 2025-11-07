@@ -11,9 +11,9 @@
           <p class="brodtext-20 muted" v-text="item.intro || item.summary || ''" />
         </div>
       </div>
-      <div v-if="item.image" class="container">
+      <div v-if="item.headlineImage || item.image" class="container">
         <OptimizedImage
-          :src="item.image"
+          :src="item.headlineImage || item.image"
           :alt="item.title"
           img-class="hero-img card"
           loading="eager"
