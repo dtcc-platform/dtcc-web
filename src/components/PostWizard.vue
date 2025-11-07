@@ -2607,6 +2607,20 @@ function collectPreviewPapers(parsed) {
   margin-top: 16px;
 }
 
+.preview-detail .hero-img {
+  width: 100%;
+  height: clamp(180px, 32vw, 320px);
+  max-height: 320px;
+  border-radius: 14px;
+  margin-top: 16px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(242, 243, 249, 0.9);
+  padding: 12px;
+  box-sizing: border-box;
+}
+
 .preview-detail .hero-media .image-caption {
   margin-top: 8px;
   font-size: 0.95rem;
