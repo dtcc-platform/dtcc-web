@@ -1,0 +1,17 @@
+{
+  "title": "bug test",
+  "abstract": "abs",
+  "intro": "abs",
+  "description": "abs",
+  "summary": "abs",
+  "body": "body",
+  "subheading": "Details",
+  "url": "/projects/detail.html?slug=bug-test",
+  "date": "2025-11-07",
+  "previewImage": "content/projects/bug-test-preview.webp",
+  "image": "content/projects/bug-test-headline.webp",
+  "headlineImage": "content/projects/bug-test-headline.webp",
+  "images": [
+    "content/projects/bug-test-headline.webp"
+  ]
+}
