@@ -1904,21 +1904,42 @@ async function publishDraft() {
 
   const uploadStates = preparedImages.value.filter((img) => img.type === 'upload' && img.file)
 
+  // Add preview image to upload states if it's an upload
+  if (preparedPreviewImage.value && preparedPreviewImage.value.type === 'upload' && preparedPreviewImage.value.file) {
+    uploadStates.push(preparedPreviewImage.value)
+  }
+
+  // Add headline image to upload states if it's an upload
+  if (preparedHeadlineImage.value && preparedHeadlineImage.value.type === 'upload' && preparedHeadlineImage.value.file) {
+    uploadStates.push(preparedHeadlineImage.value)
+  }
+
   if (uploadStates.length) {
     const expectedPrefix = `content/${config.contentDir}/`
     const imagesArray = Array.isArray(parsed.images) ? [...parsed.images] : []
     uploadStates.forEach((state) => {
-      const ext = state.ext || (state.file ? deriveExtension(state.file) : '') || '.jpg'
-      const suffix = state.displayIndex === 0 ? '' : `-${state.displayIndex}`
-      const filename = `${slugValue}${suffix}${ext}`
-      const imagePath = `${expectedPrefix}${filename}`
-      imagesArray[state.displayIndex] = imagePath
-      if (state.displayIndex === 0) {
-        parsed.image = imagePath
+      // Check if this is a preview or headline image (they already have correct jsonValue set)
+      const isPreviewOrHeadline = state.jsonValue && (
+        state.jsonValue.includes('-preview.') ||
+        state.jsonValue.includes('-headline.')
+      )
+
+      if (!isPreviewOrHeadline) {
+        // Only regenerate filenames for gallery images
+        const ext = state.ext || (state.file ? deriveExtension(state.file) : '') || '.jpg'
+        const suffix = state.displayIndex === 0 ? '' : `-${state.displayIndex}`
+        const filename = `${slugValue}${suffix}${ext}`
+        const imagePath = `${expectedPrefix}${filename}`
+        imagesArray[state.displayIndex] = imagePath
+        if (state.displayIndex === 0) {
+          parsed.image = imagePath
+        }
+        state.jsonValue = imagePath
+        state.ext = ext
       }
-      state.jsonValue = imagePath
+
+      // Always set section for all images
       state.section = section
-      state.ext = ext
     })
     parsed.images = imagesArray
   }
