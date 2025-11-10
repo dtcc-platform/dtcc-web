@@ -862,6 +862,52 @@ function cleanSlugList(list, limit) {
 }
 
 function applyPrefilledImages(section, data) {
+  // Handle preview image
+  if (data?.previewImage && typeof data.previewImage === 'string') {
+    const trimmed = data.previewImage.trim()
+    if (trimmed) {
+      previewImageEntry.value = createImageEntry({
+        isPreview: true,
+        source: 'url',
+        url: trimmed,
+        fileExtension: inferExtensionFromName(trimmed),
+      })
+      preparedPreviewImage.value = null
+    } else {
+      previewImageEntry.value = createImageEntry({ isPreview: true })
+      preparedPreviewImage.value = null
+    }
+  } else {
+    previewImageEntry.value = createImageEntry({ isPreview: true })
+    preparedPreviewImage.value = null
+  }
+
+  // Handle headline image (with fallback to data.image)
+  const headlineImagePath = data?.headlineImage || data?.image
+  if (headlineImagePath && typeof headlineImagePath === 'string') {
+    const trimmed = headlineImagePath.trim()
+    if (trimmed) {
+      // Use first caption if available for headline image
+      const firstCaption = Array.isArray(data?.imageCaptions) && data.imageCaptions.length > 0
+        ? (typeof data.imageCaptions[0] === 'string' ? data.imageCaptions[0].trim() : '')
+        : ''
+      headlineImageEntry.value = createImageEntry({
+        isHero: true,
+        source: 'url',
+        url: trimmed,
+        fileExtension: inferExtensionFromName(trimmed),
+        caption: firstCaption,
+      })
+      preparedHeadlineImage.value = null
+    } else {
+      headlineImageEntry.value = createImageEntry({ isHero: true })
+      preparedHeadlineImage.value = null
+    }
+  } else {
+    headlineImageEntry.value = createImageEntry({ isHero: true })
+    preparedHeadlineImage.value = null
+  }
+
   const paths = []
   const captions = Array.isArray(data?.imageCaptions)
     ? data.imageCaptions.map((value) => (typeof value === 'string' ? value.trim() : '')).map((value) => value || '')
@@ -1489,6 +1535,10 @@ function prepareDraft() {
         contentDir,
       })
       if (!resolved) return
+      if (headlineImage && resolved.image === headlineImage) {
+        // Skip duplicates when the headline image also exists in the gallery list
+        return
+      }
       collectedImages.push(resolved.image)
       const captionValue = entry.caption ? entry.caption.trim() : ''
       imageCaptions.push(captionValue)
