@@ -8,8 +8,11 @@
   "subheading": "Details",
   "url": "/projects/detail.html?slug=ai-3d-city-modeling",
   "date": "2025-10-31",
-  "image": "content/projects/ai-3d-city-modeling.webp",
+  "previewImage": "content/projects/ai-3d-city-modeling-preview.webp",
+  "image": "content/projects/ai-3d-city-modeling-headline.webp",
+  "headlineImage": "content/projects/ai-3d-city-modeling-headline.webp",
   "images": [
+    "content/projects/ai-3d-city-modeling-headline.webp",
     "content/projects/ai-3d-city-modeling.webp"
   ],
   "contacts": [
