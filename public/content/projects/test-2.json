@@ -1,0 +1,25 @@
+{
+  "title": "Test 2",
+  "abstract": "Some text",
+  "intro": "Some text",
+  "description": "Some text",
+  "summary": "Some text",
+  "body": "Some more text",
+  "subheading": "Details",
+  "url": "/projects/detail.html?slug=test-2",
+  "date": "2025-11-10",
+  "previewImage": "content/projects/test-2-preview.webp",
+  "image": "content/projects/test-2-headline.webp",
+  "headlineImage": "content/projects/test-2-headline.webp",
+  "images": [
+    "content/projects/test-2-headline.webp"
+  ],
+  "related": [
+    "digitizing-trees-in-the-urban-environment",
+    "mixed-realities-and-simulations-for-decision-support"
+  ],
+  "contacts": [
+    "franziska-hunger",
+    "bernt-ketzler"
+  ]
+}
