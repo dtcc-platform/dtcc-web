@@ -1,45 +1,6 @@
 {
   "items": [
     {
-      "base": "load-issue",
-      "image": "content/projects/load-issue-headline.webp"
-    },
-    {
-      "base": "test-3",
-      "image": "content/projects/test-3-headline.webp"
-    },
-    {
-      "base": "test-4",
-      "image": "content/projects/test-4-headline.webp"
-    },
-    {
-      "base": "test-tuesday",
-      "image": "content/projects/test-tuesday-headline.webp"
-    },
-    {
-      "base": "test-tuesday-4",
-      "image": "content/projects/test-tuesday-4-headline.webp"
-    },
-    {
-      "base": "tuesday-test-3",
-      "image": "content/projects/tuesday-test-3-headline.webp"
-    },
-    {
-      "base": "test-2",
-      "image": "content/projects/test-2-headline.webp"
-    },
-    {
-      "base": "bug-test",
-      "image": "content/projects/bug-test-headline.webp"
-    },
-    {
-      "base": "testing-testing",
-      "image": "content/projects/testing-testing-headline.webp"
-    },
-    {
-      "base": "new-test-project"
-    },
-    {
       "base": "ai-3d-city-modeling",
       "image": "content/projects/ai-3d-city-modeling-headline.webp"
     },
@@ -78,21 +39,6 @@
     {
       "base": "reclaimed-redesigned-re-twinned-digital-twins-for-architectural-reuse",
       "image": "content/projects/reclaimed-redesigned-re-twinned-digital-twins-for-architectural-reuse.webp"
-    },
-    {
-      "base": "urban-comfort",
-      "image": "https://images.unsplash.com/photo-1494516192674-b82b5f1e61dc?q=80&w=1200&auto=format"
-    },
-    {
-      "base": "underground-4d",
-      "image": "https://images.unsplash.com/photo-1518306727298-4c17e1bf6942?q=80&w=1200&auto=format&fit=crop"
-    },
-    {
-      "base": "mobility-liveable"
-    },
-    {
-      "base": "green-roofs",
-      "image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop"
     }
   ]
 }
