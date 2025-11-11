@@ -12,6 +12,10 @@
     },
     {
       "base": "extension-2025"
+    },
+    {
+      "base": "test-tuesday-2",
+      "image": "content/news/test-tuesday-2-headline.webp"
     }
   ]
 }
