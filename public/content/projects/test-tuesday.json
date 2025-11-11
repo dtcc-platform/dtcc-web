@@ -1,0 +1,20 @@
+{
+  "title": "Test tuesday",
+  "abstract": "Some text",
+  "intro": "Some text",
+  "description": "Some text",
+  "summary": "Some text",
+  "body": "Some longer text",
+  "subheading": "Details",
+  "url": "/projects/detail.html?slug=test-tuesday",
+  "date": "2025-11-11",
+  "image": "content/projects/test-tuesday-headline.webp",
+  "headlineImage": "content/projects/test-tuesday-headline.webp",
+  "images": [
+    "content/projects/test-tuesday-headline.webp"
+  ],
+  "contacts": [
+    "fredrik-edelvik",
+    "jonas-runberger"
+  ]
+}
