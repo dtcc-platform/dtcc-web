@@ -94,8 +94,9 @@ const webpSrc = computed(() => {
 </script>
 
 <style scoped>
-/* Ensure picture element doesn't add extra spacing */
+/* Picture element acts as a block container for proper image constraints */
 picture {
-  display: contents;
+  display: block;
+  line-height: 0; /* Remove any line-height spacing */
 }
 </style>
