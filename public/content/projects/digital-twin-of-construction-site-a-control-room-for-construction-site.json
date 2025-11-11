@@ -8,10 +8,16 @@
   "subheading": "Details",
   "url": "/projects/detail.html?slug=digital-twin-of-construction-site-a-control-room-for-construction-site",
   "date": "2025-10-31",
-  "image": "content/projects/digital-twin-of-construction-site-a-control-room-for-construction-site.webp",
+  "previewImage": "content/projects/digital-twin-of-construction-site-a-control-room-for-construction-site-preview.webp",
+  "image": "content/projects/digital-twin-of-construction-site-a-control-room-for-construction-site-headline.webp",
+  "headlineImage": "content/projects/digital-twin-of-construction-site-a-control-room-for-construction-site-headline.webp",
   "images": [
-    "content/projects/digital-twin-of-construction-site-a-control-room-for-construction-site.webp",
+    "content/projects/digital-twin-of-construction-site-a-control-room-for-construction-site-headline.webp",
     "content/projects/digital-twin-of-construction-site-a-control-room-for-construction-site-1.webp"
+  ],
+  "imageCaptions": [
+    "",
+    "Figure 1: By combining various technologies, a Digital Twin and a \"remote-sensing\" environment can be realized in AR/VR, where experts and production personnel can collaboratively assist each other in"
   ],
   "related": [
     "bim-based-virtual-takt-planning",
