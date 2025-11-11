@@ -302,9 +302,10 @@ async function loadUsersMap() {
 .intro { padding-top: 36px; }
 .grid2 { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items: center; }
 .hero-img {
+  display: block;  /* Ensure block display */
   width: 100%;
   height: clamp(320px, 40vw, 520px);  /* Responsive height: min 320px, scales with viewport, max 520px */
-  max-height: 520px;  /* Absolute maximum to prevent overwhelming */
+  max-height: 520px !important;  /* Absolute maximum to prevent overwhelming - with !important to override any conflicts */
   border-radius: 14px;
   margin-top: 16px;
   object-fit: cover;  /* Maintains aspect ratio while filling container */

@@ -98,5 +98,13 @@ const webpSrc = computed(() => {
 picture {
   display: block;
   line-height: 0; /* Remove any line-height spacing */
+  max-width: 100%; /* Ensure picture doesn't exceed container */
+}
+
+/* Ensure img elements inside picture respect constraints */
+picture img {
+  display: block;
+  max-width: 100%;
+  height: auto; /* Allow height to be controlled by classes */
 }
 </style>
