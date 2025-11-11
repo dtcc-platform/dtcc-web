@@ -1,13 +1,18 @@
 {
   "title": "Twin Re-Fab",
-  "summary": "The aim of the Twin Re-Fab milestone project was to establish a digital workflow supporting architectural design of renovation and reuse interventions, based on bi-directional d…",
+  "abstract": "The Twin Re-Fab project developed digital workflows connecting architectural design models with the digital twin platform to support circular renovation and reuse through robotic fabrication, enabling efficient, low-carbon construction processes.",
+  "summary": "The Twin Re-Fab project developed digital workflows connecting architectural design models with the digital twin platform to support circular renovation and reuse through robotic fabrication, enabling efficient, low-carbon construction processes.",
+  "intro": "The Twin Re-Fab project developed digital workflows connecting architectural design models with the digital twin platform to support circular renovation and reuse through robotic fabrication, enabling efficient, low-carbon construction processes.",
   "url": "/dtcc-1/detail.html?slug=twin-re-fab",
   "body": "The aim of the Twin Re-Fab milestone project was to establish a digital workflow supporting architectural design of renovation and reuse interventions, based on bi-directional data flows between the digital design models of reused or renovated architectural components, created by an architect, and the digital twin platform, which serves as an active tool for design and planning of the future maintenance, renovation and reuse interventions. The objective was to demonstrate, using experimental architectural prototypes and proof-of-concept workflows, how the geometric data about building components can usefully guide architectural design of machine toolpaths for robotically assisted fabrication processes supporting reuse and renovation, based on additive manufacturing, assembly and other techniques. The overarching purpose was to enable the combination of existing and new building components in line with the principles of circularity and reuse in construction. Because the project assumed the use of robotic technology on the construction site, or in its proximity, the larger gains can embrace minimized human labor and transportation costs, therewith contributing to lowered carbon dioxide emissions related to modern construction.",
   "eyebrow": "News",
   "date": "2025-10-31",
-  "image": "content/dtcc-1/twin-re-fab.webp",
+  "previewImage": "content/dtcc-1/twin-re-fab-preview.webp",
+  "image": "content/dtcc-1/twin-re-fab-headline.webp",
+  "headlineImage": "content/dtcc-1/twin-re-fab-headline.webp",
   "images": [
-    "content/dtcc-1/twin-re-fab.webp"
+    "content/dtcc-1/twin-re-fab-headline.webp",
+    "content/dtcc-1/twin-re-fab-1.webp"
   ],
   "contacts": [
     "malgorzata-zboinska"
