@@ -327,11 +327,13 @@ async function loadUsersMap() {
 .grid2 { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items: center; }
 .hero-img {
   width: 100%;
-  height: clamp(180px, 32vw, 320px);
-  max-height: 320px;
+  height: auto;
+  max-height: 70vh;  /* Prevents overwhelming the page - uses viewport height */
+  min-height: 320px;  /* Ensures minimum visible height */
   border-radius: 14px;
   margin-top: 16px;
-  object-fit: cover;
+  object-fit: cover;  /* Maintains aspect ratio while filling container */
+  object-position: center top;  /* Focus on top-center for architectural images */
   background: rgba(242, 243, 249, 0.9);
   padding: 12px;
   box-sizing: border-box;
@@ -342,7 +344,15 @@ async function loadUsersMap() {
 .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
 .gallery-card { margin: 0; padding: 12px; border-radius: 12px; background: rgba(0, 0, 0, 0.05); display: flex; flex-direction: column; gap: 8px; }
 .gallery-card a { display: block; border-radius: 10px; overflow: hidden; }
-.gallery-card img { display: block; width: 100%; height: auto; border-radius: 10px; object-fit: contain; background: #050507; }
+.gallery-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 60vh;  /* Limit gallery images to 60% of viewport height */
+  border-radius: 10px;
+  object-fit: contain;  /* Preserve aspect ratio, show full image */
+  background: #050507;
+}
 .gallery-card .caption { font-size: 0.9rem; color: rgba(26, 26, 31, 0.7); line-height: 1.4; }
 .video-wrap { position: relative; padding-top: 56.25%; margin-top: 20px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2); }
 .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }

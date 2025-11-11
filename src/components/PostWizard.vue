@@ -623,8 +623,8 @@ const contactError = ref('')
 const selectedContacts = ref([])
 const contactSelectionFull = computed(() => selectedContacts.value.length >= MAX_CONTACTS)
 
-const HERO_IMAGE_MAX_DIMENSION = 1600
-const SECONDARY_IMAGE_MAX_DIMENSION = 1400
+const HERO_IMAGE_MAX_DIMENSION = 2560  // Better for 4K displays
+const SECONDARY_IMAGE_MAX_DIMENSION = 1600  // Sufficient for cards
 const MAX_IMAGES = 6
 const imageEntries = ref([])
 const preparedImages = ref([])
@@ -1170,6 +1170,14 @@ async function onHeadlineImageFileChange(event) {
     headlineImageEntry.value.file = webpFile
     headlineImageEntry.value.fileName = webpFile.name || 'headline.webp'
     headlineImageEntry.value.fileExtension = deriveExtension(webpFile)
+
+    // Generate multiple resolution variants for responsive display
+    // NOTE: Currently stored as metadata only - would need backend support to actually serve different sizes
+    const variants = await generateImageVariants(file, true)
+    if (variants) {
+      headlineImageEntry.value.variants = variants
+      console.log('Generated image variants:', Object.keys(variants))
+    }
   } catch (error) {
     console.error('WebP conversion failed for headline, using original:', error)
     headlineImageEntry.value.file = file
@@ -1205,6 +1213,28 @@ async function autoGeneratePreviewFromHeadlineSource(sourceFile) {
   } finally {
     previewImageEntry.value.converting = false
   }
+}
+
+async function generateImageVariants(sourceFile, isHero = false) {
+  if (!sourceFile) return null
+
+  const variants = {}
+  const sizes = isHero
+    ? [640, 1280, 1920, 2560, 3840] // Multiple sizes for hero images including 4K
+    : [320, 640, 1024, 1600] // Smaller sizes for preview/card images
+
+  for (const size of sizes) {
+    try {
+      const variant = await convertToWebP(sourceFile, 0.85, { maxDimension: size })
+      variants[`${size}w`] = variant
+    } catch (error) {
+      console.error(`Failed to generate ${size}px variant:`, error)
+      // Fall back to using original for this size
+      variants[`${size}w`] = sourceFile
+    }
+  }
+
+  return variants
 }
 
 function addImageEntry() {
