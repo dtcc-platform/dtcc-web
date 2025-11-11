@@ -303,13 +303,12 @@ async function loadUsersMap() {
 .grid2 { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items: center; }
 .hero-img {
   width: 100%;
-  height: auto;
-  max-height: 70vh;  /* Prevents overwhelming the page - uses viewport height */
-  min-height: 320px;  /* Ensures minimum visible height */
+  height: clamp(320px, 40vw, 520px);  /* Responsive height: min 320px, scales with viewport, max 520px */
+  max-height: 520px;  /* Absolute maximum to prevent overwhelming */
   border-radius: 14px;
   margin-top: 16px;
   object-fit: cover;  /* Maintains aspect ratio while filling container */
-  object-position: center top;  /* Focus on top-center for news images */
+  object-position: center;  /* Center focus point */
   background: rgba(242, 243, 249, 0.9);
   padding: 12px;
   box-sizing: border-box;
@@ -323,7 +322,7 @@ async function loadUsersMap() {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 60vh;  /* Limit gallery images to 60% of viewport height */
+  max-height: 400px;  /* Reasonable maximum height for gallery images */
   border-radius: 10px;
   object-fit: contain;  /* Preserve aspect ratio, show full image */
   background: #050507;
