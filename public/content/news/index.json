@@ -1,20 +1,6 @@
 {
   "items": [
     {
-      "base": "test-3",
-      "image": "content/news/test-3-headline.webp"
-    },
-    {
-      "base": "test-tuesday-2",
-      "image": "content/news/test-tuesday-2-headline.webp"
-    },
-    {
-      "base": "test-1"
-    },
-    {
-      "base": "new-test-news-item"
-    },
-    {
       "base": "extension-2025"
     }
   ]

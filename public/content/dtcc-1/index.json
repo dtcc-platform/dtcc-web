@@ -1,11 +1,6 @@
 {
   "items": [
     {
-      "id": "old-msp-1",
-      "title": "Old MSP 1",
-      "date": "2025-10-28"
-    },
-    {
       "id": "crowd-movement",
       "title": "Crowd Movement",
       "date": "2025-10-31"
@@ -14,16 +9,6 @@
       "id": "digital-twins-for-circularity",
       "title": "Digital Twins for Circularity",
       "date": "2025-10-31"
-    },
-    {
-      "id": "testing-crowd-movement",
-      "title": "Testing crowd movement",
-      "date": "2025-11-01"
-    },
-    {
-      "id": "test-2",
-      "title": "Test 2",
-      "date": "2025-11-01"
     },
     {
       "id": "data-models-for-digital-twin-cities",
