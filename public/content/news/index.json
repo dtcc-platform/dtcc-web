@@ -8,6 +8,10 @@
     },
     {
       "base": "extension-2025"
+    },
+    {
+      "base": "test-3",
+      "image": "content/news/test-3-headline.webp"
     }
   ]
 }
