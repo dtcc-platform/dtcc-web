@@ -8,9 +8,12 @@
   "subheading": "Details",
   "url": "/projects/detail.html?slug=mixed-realities-and-simulations-for-decision-support",
   "date": "2025-10-31",
-  "image": "content/projects/mixed-realities-and-simulations-for-decision-support.webp",
+  "previewImage": "content/projects/mixed-realities-and-simulations-for-decision-support-preview.webp",
+  "image": "content/projects/mixed-realities-and-simulations-for-decision-support-headline.webp",
+  "headlineImage": "content/projects/mixed-realities-and-simulations-for-decision-support-headline.webp",
   "images": [
-    "content/projects/mixed-realities-and-simulations-for-decision-support.webp"
+    "content/projects/mixed-realities-and-simulations-for-decision-support-headline.webp",
+    "content/projects/mixed-realities-and-simulations-for-decision-support-1.webp"
   ],
   "contacts": [
     "alexander-hollberg"
