@@ -1,11 +1,14 @@
 {
   "title": "Data Models for Digital Twin Cities",
-  "summary": "Every actor engaged with Digital Twins for urban design and planning uses digital data and digital tools. The process of data acquisition and ingestion is ad hoc, time consuming…",
+  "abstract": "This project developed interoperable, semantic, and linked data models for Digital Twin Cities to integrate urban data across disciplines, enabling collaboration, knowledge sharing, and trust in data for sustainable urban development.",
+  "summary": "This project developed interoperable, semantic, and linked data models for Digital Twin Cities to integrate urban data across disciplines, enabling collaboration, knowledge sharing, and trust in data for sustainable urban development.",
+  "intro": "This project developed interoperable, semantic, and linked data models for Digital Twin Cities to integrate urban data across disciplines, enabling collaboration, knowledge sharing, and trust in data for sustainable urban development.",
   "url": "/dtcc-1/detail.html?slug=data-models-for-digital-twin-cities",
   "body": "Every actor engaged with Digital Twins for urban design and planning uses digital data and digital tools. The process of data acquisition and ingestion is ad hoc, time consuming, repetitive, based on individual practices; the results are kept in siloes and sharing knowledge requires additional effort, if at all possible. To enable collaboration and exchange of knowledge between actors, in order to address complex cross-disciplinary challenges of sustainable urban development, Digital Twins need to provide access to the required urban data and any results produced by the different actors. This project proposed to develop extensible, semantic and linked data models for Digital Twin Cities that integrate the data from the different knowledge domains, offering interoperability to unlock the potential in data. The data models provide representations of the information used and produced in the process of urban design and planning, at different levels of detail and resolution, accessible to all users of the Digital Twin. These data models support the data available from the different municipal, regional, national, and private sources, providing standardised access. The data models must secure trust in the data, including metadata on data provenance and quality.",
   "eyebrow": "News",
   "date": "2025-10-31",
   "image": "content/dtcc-1/data-models-for-digital-twin-cities.webp",
+  "headlineImage": "content/dtcc-1/data-models-for-digital-twin-cities.webp",
   "images": [
     "content/dtcc-1/data-models-for-digital-twin-cities.webp"
   ],
