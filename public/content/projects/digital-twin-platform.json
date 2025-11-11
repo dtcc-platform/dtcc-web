@@ -8,9 +8,11 @@
   "subheading": "Details",
   "url": "/projects/detail.html?slug=digital-twin-platform",
   "date": "2025-10-31",
-  "image": "content/projects/digital-twin-platform.webp",
+  "previewImage": "content/projects/digital-twin-platform-preview.webp",
+  "image": "content/projects/digital-twin-platform-headline.webp",
+  "headlineImage": "content/projects/digital-twin-platform-headline.webp",
   "images": [
-    "content/projects/digital-twin-platform.webp"
+    "content/projects/digital-twin-platform-headline.webp"
   ],
   "contacts": [
     "anders-logg",
