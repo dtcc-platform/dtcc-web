@@ -1,11 +1,14 @@
 {
   "title": "Digital Twin of Construction Site",
-  "summary": "The project aimed to develop and facilitate a digital twin of the construction sites intended to support construction management and decision making. The goal was to create bett…",
+  "abstract": "This project developed a digital twin of construction sites based on the TotalBIM concept to improve efficiency and decision-making by integrating real-time data, 3D models, and on-site information for better management and reduced errors.",
+  "summary": "This project developed a digital twin of construction sites based on the TotalBIM concept to improve efficiency and decision-making by integrating real-time data, 3D models, and on-site information for better management and reduced errors.",
+  "intro": "This project developed a digital twin of construction sites based on the TotalBIM concept to improve efficiency and decision-making by integrating real-time data, 3D models, and on-site information for better management and reduced errors.",
   "url": "/dtcc-1/detail.html?slug=digital-twin-of-construction-site",
   "body": "The project aimed to develop and facilitate a digital twin of the construction sites intended to support construction management and decision making. The goal was to create better working environments by reducing guess work, delays and errors. The majority of construction projects are still conducted traditionally, using 2D drawings, reports, schedules, and photo logs, making the process complicated and inefficient. However, in recent years some innovative construction projects have tried an “production oriented” approach based on Building Information Models (BIM) where 3D geometries and added information is stored in models that serve as legal documents during construction. This approach and concept, focusing totally on BIM as the information placeholder is called “TotalBIM”. The TotalBIM concept offers new possibilities of using BIM as virtual representation of a digital twin of the construction site. In this way, data is fully used on site by construction workers where on-demand information and measurements are created and extracted directly from the BIM. TotalBIM connected to progression monitoring of construction sites using operation feeds through sensor data could be a promising key to empower project managers, site managers and other stakeholders with an advanced decision-making tool that tackles inconsistencies effectively.",
   "eyebrow": "News",
   "date": "2025-11-05",
   "image": "content/dtcc-1/digital-twin-of-construction-site.webp",
+  "headlineImage": "content/dtcc-1/digital-twin-of-construction-site.webp",
   "images": [
     "content/dtcc-1/digital-twin-of-construction-site.webp"
   ],
