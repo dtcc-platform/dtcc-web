@@ -9,9 +9,14 @@
   "url": "/projects/detail.html?slug=phase2-total-bim-a-prerequisite-for-digital-twinning-of-construction-projects",
   "date": "2025-10-31",
   "image": "content/projects/phase2-total-bim-a-prerequisite-for-digital-twinning-of-construction-projects.webp",
+  "headlineImage": "content/projects/phase2-total-bim-a-prerequisite-for-digital-twinning-of-construction-projects.webp",
   "images": [
     "content/projects/phase2-total-bim-a-prerequisite-for-digital-twinning-of-construction-projects.webp",
     "content/projects/phase2-total-bim-a-prerequisite-for-digital-twinning-of-construction-projects-1.webp"
+  ],
+  "imageCaptions": [
+    "",
+    "Figure 3: Production information and issue reporting linked to Total BIM to support live construction data."
   ],
   "related": [
     "bim-based-virtual-takt-planning",
