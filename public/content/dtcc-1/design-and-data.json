@@ -1,11 +1,14 @@
 {
   "title": "Design and Data",
-  "summary": "The Design and Data milestone project aimed at providing a framework for exchanges between digital method development among our industry partners, researchers at Chalmers ACE an…",
+  "abstract": "The Design and Data project established a collaborative framework for integrating computational design methods into digital twin development, enabling data exchange and interoperability across generative, architectural, and structural design processes.",
+  "summary": "The Design and Data project established a collaborative framework for integrating computational design methods into digital twin development, enabling data exchange and interoperability across generative, architectural, and structural design processes.",
+  "intro": "The Design and Data project established a collaborative framework for integrating computational design methods into digital twin development, enabling data exchange and interoperability across generative, architectural, and structural design processes.",
   "url": "/dtcc-1/detail.html?slug=design-and-data",
   "body": "The Design and Data milestone project aimed at providing a framework for exchanges between digital method development among our industry partners, researchers at Chalmers ACE and the formation of digital twins within the DTCC. It will be facilitated in close affiliation with real life cases within the three sub-domains Generative Design, Architectural and Structural Design Interoperability and Design-for-Manufacture, with a strong base in design-driven computational development, or Computational Design. It has a dual overarching objective – to provide a collaborative mode of development that can align development trajectories between partners and the DTCC, and in extension provide direct data exchange at early stage design when key decisions affecting the future of our cities are often made.",
   "eyebrow": "News",
   "date": "2025-10-31",
   "image": "content/dtcc-1/design-and-data.webp",
+  "headlineImage": "content/dtcc-1/design-and-data.webp",
   "images": [
     "content/dtcc-1/design-and-data.webp"
   ],
