@@ -9,6 +9,10 @@
       "image": "content/projects/test-4-headline.webp"
     },
     {
+      "base": "test-tuesday",
+      "image": "content/projects/test-tuesday-headline.webp"
+    },
+    {
       "base": "test-2",
       "image": "content/projects/test-2-headline.webp"
     },
@@ -77,10 +81,6 @@
     {
       "base": "green-roofs",
       "image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop"
-    },
-    {
-      "base": "test-tuesday",
-      "image": "content/projects/test-tuesday-headline.webp"
     }
   ]
 }
