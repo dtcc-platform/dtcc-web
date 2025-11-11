@@ -1,13 +1,17 @@
 {
   "title": "Digital Twins for Circularity",
-  "summary": "The main bulk of all materials is stocked in the built environment, in buildings and infrastructures. Reusing and recycling construction materials from the built environment cou…",
-  "url": "/dtcc-1/digital-twins-for-circularity",
+  "abstract": "This project explored how the Digital Twin City Platform can enable circular construction by mapping and assessing building materials for reuse and recycling, using AI and spatial data to support urban mining and resource-efficient planning.",
+  "summary": "This project explored how the Digital Twin City Platform can enable circular construction by mapping and assessing building materials for reuse and recycling, using AI and spatial data to support urban mining and resource-efficient planning.",
+  "intro": "This project explored how the Digital Twin City Platform can enable circular construction by mapping and assessing building materials for reuse and recycling, using AI and spatial data to support urban mining and resource-efficient planning.",
+  "url": "/dtcc-1/detail.html?slug=digital-twins-for-circularity",
   "body": "The main bulk of all materials is stocked in the built environment, in buildings and infrastructures. Reusing and recycling construction materials from the built environment could potentially reduce the environmental impacts and set construction industry and local governments on a more sustainable path. Thus, reuse and recycling of materials within the planning, design, construction, and demolition processes behind the built environment is one of the key challenges faced by the sector today. While circular economy is easy to describe in theory it remains a challenge to implement. Among several challenges, such as, finding adequate business models for circularity, one major challenge lies in the lack of a structured inventory of the building materials in the existing building stock. The hypothesis was that the digital twin city platform (DTCP) can be used actively to promote resource efficiency by functioning as:\n\n· A spatial search engine where property owners (public and private) can mark their property for partial and/or complete demolition and when in time this will take place.\n· A platform for initial inventory of building materials in these properties using machine learning algorithms to identify exterior building elements based on images and interior materials for certain typologies of buildings using pre-existing databases\n· A platform to store information about building materials for future buildings.\n· A tool to support the assessment of the potential of the identified materials for reuse and recycling (urban mining) on a high level and provide a first (quick and cheap) overview for the detailed planning.\n\nThe circularity project was exploratory and defining, and built on technology and methods already developed but never used in combination. Successful exploration of these methods in the context of circularity and digital twins required identifying the needs from stakeholders, investigation on state-of-the-art methods and data, and testing a workflow that showcases the potential of digital twins for circularity.",
   "eyebrow": "News",
   "date": "2025-10-31",
-  "image": "content/dtcc-1/digital-twins-for-circularity.jpg",
+  "previewImage": "content/dtcc-1/digital-twins-for-circularity-preview.webp",
+  "image": "content/dtcc-1/digital-twins-for-circularity-headline.webp",
+  "headlineImage": "content/dtcc-1/digital-twins-for-circularity-headline.webp",
   "images": [
-    "content/dtcc-1/digital-twins-for-circularity.jpg"
+    "content/dtcc-1/digital-twins-for-circularity-headline.webp"
   ],
   "related": [
     "old-msp-1"
