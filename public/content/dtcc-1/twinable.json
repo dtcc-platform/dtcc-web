@@ -1,11 +1,14 @@
 {
   "title": "Twinable",
-  "summary": "The goal of Twinable was providing the right visualisation, auralisation and interaction methods, tools, and technologies to enable seamless collaboration between different disc…",
+  "abstract": "The Twinable project developed visualization, auralization, and interaction methods that combine physical and virtual environments to enhance collaboration, communication, and participation across disciplines and scales within the Digital Twin City Platform.",
+  "summary": "The Twinable project developed visualization, auralization, and interaction methods that combine physical and virtual environments to enhance collaboration, communication, and participation across disciplines and scales within the Digital Twin City Platform.",
+  "intro": "The Twinable project developed visualization, auralization, and interaction methods that combine physical and virtual environments to enhance collaboration, communication, and participation across disciplines and scales within the Digital Twin City Platform.",
   "url": "/dtcc-1/detail.html?slug=twinable",
   "body": "The goal of Twinable was providing the right visualisation, auralisation and interaction methods, tools, and technologies to enable seamless collaboration between different disciplines, scales, and phases. Twinable combines physical and virtual environments to enable a better understanding of visible and invisible aspects of the built environment. The project buildt on existing research and development activities at Chalmers and the DTCC partners. The innovation laid in combining technologies and methods in novel ways with the Digital Twin City Platform (DTCP) which will provide unique development and research opportunities. Twinable explored research questions such as “How can visualisation and auralisation be combined best on different scales using different technologies?”, “How can participation be facilitated using mixed reality approaches?” and “What is the right level of detail of representation for efficient communication and collaboration?”. More importantly, Twinable supported other milestone projects, explicitly the projects Urban Environmental Comfort Design, Crowd Movement, and Design and Data framework, and partners in numerous use cases on different scales. These include a building permit dialogue support tool using geolocated augmented reality, multi stakeholder collaboration in virtual reality, virtual co-design with children, mixed reality to visualise and auralise comfort criteria (air quality, noise, etc.) and people flows in the urban context, amongst many others. Twinable makes information and data accessible, understandable, and experienceable for researchers, practitioners, and the public. As such, it lies the foundation for successful communication and collaboration for a sustainable built environment.",
   "eyebrow": "News",
   "date": "2025-10-31",
   "image": "content/dtcc-1/twinable.webp",
+  "headlineImage": "content/dtcc-1/twinable.webp",
   "images": [
     "content/dtcc-1/twinable.webp"
   ],
