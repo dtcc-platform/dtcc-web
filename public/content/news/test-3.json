@@ -1,0 +1,16 @@
+{
+  "title": "Test-3",
+  "abstract": "test-3 abs",
+  "summary": "test-3 abs",
+  "intro": "test-3 abs",
+  "url": "/news/detail.html?slug=test-3",
+  "body": "test 3 body",
+  "eyebrow": "News",
+  "date": "2025-11-11",
+  "previewImage": "content/news/test-3-preview.webp",
+  "image": "content/news/test-3-headline.webp",
+  "headlineImage": "content/news/test-3-headline.webp",
+  "images": [
+    "content/news/test-3-headline.webp"
+  ]
+}
