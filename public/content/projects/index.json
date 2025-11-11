@@ -1,10 +1,6 @@
 {
   "items": [
     {
-      "base": "load-issue",
-      "image": "content/projects/load-issue-headline.webp"
-    },
-    {
       "base": "ai-3d-city-modeling",
       "image": "content/projects/ai-3d-city-modeling-headline.webp"
     },
