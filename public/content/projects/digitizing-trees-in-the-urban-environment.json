@@ -8,9 +8,11 @@
   "subheading": "Details",
   "url": "/projects/detail.html?slug=digitizing-trees-in-the-urban-environment",
   "date": "2025-10-31",
-  "image": "content/projects/digitizing-trees-in-the-urban-environment.webp",
+  "previewImage": "content/projects/digitizing-trees-in-the-urban-environment-preview.webp",
+  "image": "content/projects/digitizing-trees-in-the-urban-environment-headline.webp",
+  "headlineImage": "content/projects/digitizing-trees-in-the-urban-environment-headline.webp",
   "images": [
-    "content/projects/digitizing-trees-in-the-urban-environment.webp"
+    "content/projects/digitizing-trees-in-the-urban-environment-headline.webp"
   ],
   "contacts": [
     "franziska-hunger"
