@@ -1,6 +1,10 @@
 {
   "items": [
     {
+      "base": "load-issue",
+      "image": "content/projects/load-issue-headline.webp"
+    },
+    {
       "base": "test-3",
       "image": "content/projects/test-3-headline.webp"
     },
