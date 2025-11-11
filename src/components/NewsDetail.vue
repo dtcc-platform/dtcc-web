@@ -304,12 +304,12 @@ async function loadUsersMap() {
 .hero-img {
   display: block;  /* Ensure block display */
   width: 100%;
-  height: clamp(320px, 40vw, 520px);  /* Responsive height: min 320px, scales with viewport, max 520px */
-  max-height: 520px !important;  /* Absolute maximum to prevent overwhelming - with !important to override any conflicts */
+  height: auto;  /* Let height be automatic based on aspect ratio */
+  max-height: 520px !important;  /* Absolute maximum to prevent overwhelming */
   border-radius: 14px;
   margin-top: 16px;
-  object-fit: cover;  /* Maintains aspect ratio while filling container */
-  object-position: center;  /* Center focus point */
+  object-fit: contain;  /* Show entire image without cropping */
+  object-position: center;  /* Center the image */
   background: rgba(242, 243, 249, 0.9);
   padding: 12px;
   box-sizing: border-box;
@@ -353,7 +353,10 @@ async function loadUsersMap() {
   .gallery { grid-template-columns: 1fr; }
   .video-wrap { padding-top: 56.25%; }
   .contacts .people { grid-template-columns: 1fr; }
-  .hero-img { height: 240px; }
+  .hero-img {
+    height: auto;
+    max-height: 400px !important; /* Smaller max on mobile */
+  }
   .related .cards { grid-template-columns: 1fr; }
   .avatar { height: 200px; width: 200px; }
 }

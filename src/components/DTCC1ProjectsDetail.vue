@@ -319,12 +319,14 @@ async function loadUsersMap() {
 .intro { padding-top: 36px; }
 .grid2 { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items: center; }
 .hero-img {
+  display: block;  /* Ensure block display */
   width: 100%;
-  height: clamp(180px, 32vw, 320px);
-  max-height: 320px;
+  height: auto;  /* Let height be automatic based on aspect ratio */
+  max-height: 520px !important;  /* Absolute maximum to prevent overwhelming */
   border-radius: 14px;
   margin-top: 16px;
-  object-fit: cover;
+  object-fit: contain;  /* Show entire image without cropping */
+  object-position: center;  /* Center the image */
   background: rgba(242, 243, 249, 0.9);
   padding: 12px;
   box-sizing: border-box;
@@ -335,7 +337,15 @@ async function loadUsersMap() {
 .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
 .gallery-card { margin: 0; padding: 12px; border-radius: 12px; background: rgba(0, 0, 0, 0.05); display: flex; flex-direction: column; gap: 8px; }
 .gallery-card a { display: block; border-radius: 10px; overflow: hidden; }
-.gallery-card img { display: block; width: 100%; height: auto; border-radius: 10px; object-fit: contain; background: #050507; }
+.gallery-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 400px;  /* Reasonable maximum height for gallery images */
+  border-radius: 10px;
+  object-fit: contain;  /* Preserve aspect ratio, show full image */
+  background: #050507;
+}
 .gallery-card .caption { font-size: 0.9rem; color: rgba(26, 26, 31, 0.7); line-height: 1.4; }
 .video-wrap { position: relative; padding-top: 56.25%; margin-top: 20px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2); }
 .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
@@ -358,7 +368,10 @@ async function loadUsersMap() {
 
 @media (max-width: 1000px) {
   .grid2 { grid-template-columns: 1fr; }
-  .hero-img { height: 240px; }
+  .hero-img {
+    height: auto;
+    max-height: 400px !important; /* Smaller max on mobile */
+  }
   .gallery { grid-template-columns: 1fr; }
   .avatar { height: 200px; width: 200px; }
   .video-wrap { padding-top: 56.25%; }
