@@ -143,6 +143,7 @@
               <span class="image-entry-title">Preview image</span>
               <span class="muted" style="font-size: 0.875rem; font-weight: 400; margin-left: 8px;">Used in list/grid views</span>
             </div>
+            <p class="muted helper">Automatically generated from your headline upload so cards always match the hero image. Adjust below only if you need a different crop.</p>
 
             <div class="image-options">
               <label>
@@ -213,6 +214,7 @@
               <span class="image-entry-title">Headline image</span>
               <span class="muted" style="font-size: 0.875rem; font-weight: 400; margin-left: 8px;">Used on detail pages</span>
             </div>
+            <p class="muted helper">Upload a local hero image (remote URLs are only for legacy edits). The preview image for cards is derived from this upload.</p>
 
             <div class="image-options">
               <label>
@@ -1081,6 +1083,8 @@ function updateHeadlineImageSource(mode) {
   }
   if (mode === 'none') {
     headlineImageEntry.value.caption = ''
+    previewImageEntry.value = createImageEntry({ isPreview: true })
+    preparedPreviewImage.value = null
   }
 }
 
@@ -1174,6 +1178,33 @@ async function onHeadlineImageFileChange(event) {
   } finally {
     headlineImageEntry.value.converting = false
   }
+
+  await autoGeneratePreviewFromHeadlineSource(file)
+}
+
+async function autoGeneratePreviewFromHeadlineSource(sourceFile) {
+  if (!sourceFile) return
+  if (!previewImageEntry.value) {
+    previewImageEntry.value = createImageEntry({ isPreview: true })
+  }
+
+  previewImageEntry.value.source = 'upload'
+  previewImageEntry.value.url = ''
+  previewImageEntry.value.converting = true
+
+  try {
+    const previewWebp = await convertToWebP(sourceFile, 0.85, { maxDimension: SECONDARY_IMAGE_MAX_DIMENSION })
+    previewImageEntry.value.file = previewWebp
+    previewImageEntry.value.fileName = previewWebp.name || 'preview.webp'
+    previewImageEntry.value.fileExtension = deriveExtension(previewWebp)
+  } catch (error) {
+    console.error('Auto-generated preview conversion failed, using original file:', error)
+    previewImageEntry.value.file = sourceFile
+    previewImageEntry.value.fileName = sourceFile.name || 'preview-image'
+    previewImageEntry.value.fileExtension = deriveExtension(sourceFile)
+  } finally {
+    previewImageEntry.value.converting = false
+  }
 }
 
 function addImageEntry() {
@@ -1195,6 +1226,8 @@ function initializeImageEntries() {
 function initializePreviewAndHeadlineImages() {
   previewImageEntry.value = createImageEntry({ isPreview: true })
   headlineImageEntry.value = createImageEntry({ isHero: true })
+  preparedPreviewImage.value = null
+  preparedHeadlineImage.value = null
 }
 
 function createImageEntry({
