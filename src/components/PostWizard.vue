@@ -293,6 +293,96 @@
           </div>
         </fieldset>
 
+        <!-- Gallery Images Section -->
+        <fieldset class="image-group">
+          <legend>Gallery images</legend>
+          <p class="muted helper">Add images that will appear within the article content. You can add up to 6 images with captions.</p>
+
+          <div class="image-entries">
+            <div v-for="(entry, index) in imageEntries" :key="entry.id" class="image-entry">
+              <div class="image-entry-header">
+                <span class="image-entry-title">Image {{ index + 1 }}</span>
+                <button
+                  v-if="index > 0"
+                  type="button"
+                  class="btn-remove"
+                  @click="removeImageEntry(index)"
+                  title="Remove image"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div class="image-options">
+                <label>
+                  <input
+                    type="radio"
+                    :name="`gallery-image-source-${entry.id}`"
+                    :value="'upload'"
+                    v-model="entry.source"
+                    @change="updateGalleryImageSource(index, 'upload')"
+                  />
+                  Upload file
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    :name="`gallery-image-source-${entry.id}`"
+                    :value="'url'"
+                    v-model="entry.source"
+                    @change="updateGalleryImageSource(index, 'url')"
+                  />
+                  Remote URL
+                </label>
+              </div>
+
+              <div v-if="entry.source === 'upload'" class="image-upload">
+                <input
+                  type="file"
+                  :id="`gallery-image-file-${entry.id}`"
+                  accept="image/*"
+                  @change="onGalleryImageFileChange($event, index)"
+                />
+                <p v-if="entry.fileName" class="muted helper">
+                  Selected: {{ entry.fileName }}
+                  <span v-if="entry.converting"> Converting to WebP...</span>
+                </p>
+              </div>
+
+              <div v-if="entry.source === 'url'" class="image-url">
+                <input
+                  type="url"
+                  v-model="entry.url"
+                  :placeholder="`Enter image URL for image ${index + 1}`"
+                  spellcheck="false"
+                />
+              </div>
+
+              <div class="field">
+                <label :for="`gallery-caption-${entry.id}`">Caption (optional)</label>
+                <input
+                  :id="`gallery-caption-${entry.id}`"
+                  type="text"
+                  v-model="entry.caption"
+                  :placeholder="`Caption for image ${index + 1}`"
+                  maxlength="200"
+                  spellcheck="true"
+                />
+              </div>
+            </div>
+          </div>
+
+          <button
+            v-if="imageEntries.length < MAX_IMAGES"
+            type="button"
+            class="btn-add"
+            @click="addImageEntry"
+          >
+            + Add image
+          </button>
+          <p v-else class="muted helper">Maximum {{ MAX_IMAGES }} images reached</p>
+        </fieldset>
+
         <div class="field">
           <label for="video-url">YouTube video (optional)</label>
           <input
@@ -1237,6 +1327,42 @@ async function generateImageVariants(sourceFile, isHero = false) {
   return variants
 }
 
+function updateGalleryImageSource(index, mode) {
+  if (!imageEntries.value[index]) return
+  imageEntries.value[index].source = mode
+  if (mode === 'none' || mode === 'upload') {
+    imageEntries.value[index].url = ''
+  }
+  if (mode === 'none') {
+    imageEntries.value[index].file = null
+    imageEntries.value[index].fileName = ''
+    imageEntries.value[index].fileExtension = ''
+  }
+}
+
+async function onGalleryImageFileChange(event, index) {
+  const file = event.target.files?.[0]
+  if (!file || !imageEntries.value[index]) return
+
+  imageEntries.value[index].source = 'upload'
+  imageEntries.value[index].url = ''
+  imageEntries.value[index].converting = true
+
+  try {
+    const webpFile = await convertToWebP(file, 0.85, { maxDimension: SECONDARY_IMAGE_MAX_DIMENSION })
+    imageEntries.value[index].file = webpFile
+    imageEntries.value[index].fileName = webpFile.name || `image-${index + 1}.webp`
+    imageEntries.value[index].fileExtension = deriveExtension(webpFile)
+  } catch (error) {
+    console.error(`WebP conversion failed for gallery image ${index + 1}, using original:`, error)
+    imageEntries.value[index].file = file
+    imageEntries.value[index].fileName = file.name || `image-${index + 1}`
+    imageEntries.value[index].fileExtension = deriveExtension(file)
+  } finally {
+    imageEntries.value[index].converting = false
+  }
+}
+
 function addImageEntry() {
   if (imageEntries.value.length >= MAX_IMAGES) return
   imageEntries.value = [...imageEntries.value, createImageEntry()]
@@ -1250,7 +1376,8 @@ function removeImageEntry(index) {
 }
 
 function initializeImageEntries() {
-  imageEntries.value = []
+  // Start with one empty gallery image entry
+  imageEntries.value = [createImageEntry()]
 }
 
 function initializePreviewAndHeadlineImages() {
@@ -2758,6 +2885,36 @@ function collectPreviewPapers(parsed) {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+}
+
+.btn-add {
+  background: var(--cta-f26a2e);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.btn-add:hover {
+  filter: brightness(1.1);
+}
+
+.btn-remove {
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-remove:hover {
+  background: #c82333;
 }
 
 .image-entry-title {

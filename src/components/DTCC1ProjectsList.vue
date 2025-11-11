@@ -17,7 +17,7 @@
     <section class="section gradient-sunrise list">
       <div class="container">
         <div class="cards">
-          <article v-for="p in visibleItems" :key="p.id" class="card project">
+          <article v-for="p in items" :key="p.id" class="card project">
             <a :href="detailHref(p.id)">
               <img
                 :src="p.image || fallbackImage"
@@ -43,9 +43,6 @@
             </div>
           </article>
         </div>
-        <div v-if="items.length > visibleCount" class="more-wrap">
-          <button class="btn-more" @click="showMore">Load more</button>
-        </div>
       </div>
     </section>
   </main>
@@ -63,8 +60,6 @@ const imageModules = import.meta.glob('../dtcc-1/*.{jpg,jpeg,png,webp}', { eager
 
 // Runtime source from public/content/dtcc-1
 const runtimeItems = ref([])
-const visibleCount = ref(4)
-const showMore = () => { visibleCount.value = Math.min(visibleCount.value + 4, items.value.length) }
 const { isAuthenticated } = usePostSession()
 
 const normalizeImage = (value) => {
@@ -151,7 +146,6 @@ const items = computed(() => {
 const detailHref = (slug) => withBase(`dtcc-1/detail.html?slug=${encodeURIComponent(slug)}`)
 const editHref = (slug) => withBase(`post/?section=events-archive&slug=${encodeURIComponent(slug)}`)
 const fallbackImage = withBase('content/Projects Placeholder.webp')
-const visibleItems = computed(() => items.value.slice(0, visibleCount.value))
 </script>
 
 <style scoped>
@@ -164,9 +158,6 @@ const visibleItems = computed(() => items.value.slice(0, visibleCount.value))
 .project .img { width: 100%; height: 200px; object-fit: cover; display: block; background: #ddd; border-radius: 14px; }
 .project .body { padding: 14px 16px 18px; }
 
-.more-wrap { text-align: center; margin-top: 12px; }
-.btn-more { background: var(--cta-f26a2e); color: #fff; border: 0; border-radius: 8px; padding: 10px 16px; font-weight: 600; cursor: pointer; }
-.btn-more:hover { filter: brightness(1.05); }
 
 @media (max-width: 1000px) {
   .grid2 { grid-template-columns: 1fr; }
