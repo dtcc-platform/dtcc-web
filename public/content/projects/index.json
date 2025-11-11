@@ -13,6 +13,10 @@
       "image": "content/projects/test-tuesday-headline.webp"
     },
     {
+      "base": "test-tuesday-4",
+      "image": "content/projects/test-tuesday-4-headline.webp"
+    },
+    {
       "base": "tuesday-test-3",
       "image": "content/projects/tuesday-test-3-headline.webp"
     },
