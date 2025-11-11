@@ -1,11 +1,14 @@
 {
   "title": "Urban Environmental Comfort Design",
-  "summary": "Urban densification modifies wind, temperature, noise, and air quality in both city scales and microscales like streets, neighbourhoods, parks. The UECD project aimed at providi…",
+  "abstract": "The UECD project developed automated methods and visualization tools on the Digital Twin City Platform to assess and compare urban comfort factors such as wind, microclimate, pollution, and noise, supporting data-driven design and planning of sustainable cities.",
+  "summary": "The UECD project developed automated methods and visualization tools on the Digital Twin City Platform to assess and compare urban comfort factors such as wind, microclimate, pollution, and noise, supporting data-driven design and planning of sustainable cities.",
+  "intro": "The UECD project developed automated methods and visualization tools on the Digital Twin City Platform to assess and compare urban comfort factors such as wind, microclimate, pollution, and noise, supporting data-driven design and planning of sustainable cities.",
   "url": "/dtcc-1/detail.html?slug=urban-environmental-comfort-design",
   "body": "Urban densification modifies wind, temperature, noise, and air quality in both city scales and microscales like streets, neighbourhoods, parks. The UECD project aimed at providing a user-friendly and highly automated framework to allow needs-driven result generation of urban comfort criteria with efficient and comprehensible visualisation. The project buildt on existing research and development activities at FCC and Chalmers, and at the DTCC partner organizations. The research focus was to develop methods, algorithms, and software demonstrators to enable the planning and design process of cities and public places to assess information about wind, microclimate, pollution, and noise and to compare simulation results with real-world sensor data. The project provided an automated workflow on the DTC Platform including automated meshing, level of detail simulations and high-end visualization and provide a decision support tool for urban planners and architects. The fluid dynamics software IBOFlow® developed at FCC, including modules for heat transfer, solar radiation, emission models, and green infrastructure elements, is very well suited to facilitate such an automated workflow. A comprehensive set of validation cases was provided by the project partners covering several phases of the urban planning process.",
   "eyebrow": "News",
   "date": "2025-10-31",
   "image": "content/dtcc-1/urban-environmental-comfort-design.webp",
+  "headlineImage": "content/dtcc-1/urban-environmental-comfort-design.webp",
   "images": [
     "content/dtcc-1/urban-environmental-comfort-design.webp"
   ],
