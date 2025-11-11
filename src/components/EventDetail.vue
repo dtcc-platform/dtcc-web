@@ -228,7 +228,7 @@ onMounted(async () => {
 
 .body { padding-top: 24px; padding-bottom: 24px; }
 .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
-.gallery-card { margin: 0; padding: 12px; border-radius: 12px; background: rgba(0, 0, 0, 0.05); display: flex; flex-direction: column; gap: 8px; }
+.gallery-card { margin: 0; padding: 12px; border-radius: 12px; background: rgba(242, 243, 249, 0.9); display: flex; flex-direction: column; gap: 8px; }
 .gallery-card a { display: block; border-radius: 10px; overflow: hidden; }
 .gallery-card img { display: block; width: 100%; height: auto; border-radius: 10px; object-fit: contain; background: #050507; }
 .gallery-card .caption { font-size: 0.9rem; color: rgba(26, 26, 31, 0.7); line-height: 1.4; }

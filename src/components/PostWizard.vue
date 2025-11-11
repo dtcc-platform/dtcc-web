@@ -318,6 +318,16 @@
                   <input
                     type="radio"
                     :name="`gallery-image-source-${entry.id}`"
+                    :value="'none'"
+                    v-model="entry.source"
+                    @change="updateGalleryImageSource(index, 'none')"
+                  />
+                  No image
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    :name="`gallery-image-source-${entry.id}`"
                     :value="'upload'"
                     v-model="entry.source"
                     @change="updateGalleryImageSource(index, 'upload')"
@@ -1369,10 +1379,10 @@ function addImageEntry() {
 }
 
 function removeImageEntry(index) {
-  if (index <= 0) return
+  if (index < 0 || index >= imageEntries.value.length) return
   const next = [...imageEntries.value]
   next.splice(index, 1)
-  imageEntries.value = next.length ? next : [createImageEntry({ isHero: true })]
+  imageEntries.value = next.length ? next : [createImageEntry()]
 }
 
 function initializeImageEntries() {
@@ -1398,7 +1408,7 @@ function createImageEntry({
   converting = false,
   caption = '',
 } = {}) {
-  const resolvedSource = source || ((isHero || isPreview) ? 'none' : 'upload')
+  const resolvedSource = source || 'none'
   return {
     id: `img-${Math.random().toString(36).slice(2, 10)}`,
     isHero,
