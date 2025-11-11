@@ -9,9 +9,14 @@
   "url": "/projects/detail.html?slug=bim-based-virtual-takt-planning",
   "date": "2025-10-31",
   "image": "content/projects/bim-based-virtual-takt-planning.webp",
+  "headlineImage": "content/projects/bim-based-virtual-takt-planning.webp",
   "images": [
     "content/projects/bim-based-virtual-takt-planning.webp",
     "content/projects/bim-based-virtual-takt-planning-1.webp"
+  ],
+  "imageCaptions": [
+    "",
+    "Figure 2: Digital information and deliverables connected to a single virtual takt zone"
   ],
   "related": [
     "phase2-total-bim-a-prerequisite-for-digital-twinning-of-construction-projects",
