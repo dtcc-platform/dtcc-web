@@ -1,14 +1,17 @@
 {
   "title": "Crowd Movement",
-  "summary": "The project aimed to support decision making in the urban planning and design process through the development of simulation models to predict pedestrian movement. Pedestrian Mov…",
-  "url": "/dtcc-1/crowd-movement",
+  "abstract": "This project developed integrated statistical and agent-based models to simulate pedestrian movement and support urban planning decisions by linking built environment design variables to mobility, exposure, and social dynamics in cities.",
+  "summary": "This project developed integrated statistical and agent-based models to simulate pedestrian movement and support urban planning decisions by linking built environment design variables to mobility, exposure, and social dynamics in cities.",
+  "intro": "This project developed integrated statistical and agent-based models to simulate pedestrian movement and support urban planning decisions by linking built environment design variables to mobility, exposure, and social dynamics in cities.",
+  "url": "/dtcc-1/detail.html?slug=crowd-movement",
   "body": "The project aimed to support decision making in the urban planning and design process through the development of simulation models to predict pedestrian movement. Pedestrian Movement is central for many processes in cities e.g. sustainable mobility, development of local markets and social integration. Furthermore, these simulations can be used to forecast citizens relative exposure in public spaces to e.g. noise, wind and air pollution, but also green exposure. Because supporting decision making in the urban planning and design process was the primary aim, the models we developed had a particular focus on the built environment variables (e.g. built density, street centrality, street width, etc) that can be influenced through design and planning and that affect pedestrian movement. Two modelling approaches were integrated to seamlessly simulate movement patterns from the macroscale (e.g. city, neighbourhoods) to the microscale (e.g. street crossing, public square). The first builds on a statistical model, while the second uses agent-based modelling.",
   "eyebrow": "News",
   "date": "2025-10-31",
-  "image": "content/dtcc-1/crowd-movement.png",
+  "image": "content/dtcc-1/crowd-movement-headline.webp",
+  "headlineImage": "content/dtcc-1/crowd-movement-headline.webp",
   "images": [
-    "content/dtcc-1/crowd-movement.png",
-    "content/dtcc-1/crowd-movement-1.png"
+    "content/dtcc-1/crowd-movement-headline.webp",
+    "content/dtcc-1/crowd-movement-1.webp"
   ],
   "related": [
     "old-msp-1"
