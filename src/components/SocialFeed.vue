@@ -1,5 +1,5 @@
 <template>
-  <section class="section social-feed">
+  <section id="linkedin-feed" class="section social-feed">
     <div class="container">
       <header class="feed-header">
         <h2 class="h3-30">From LinkedIn</h2>

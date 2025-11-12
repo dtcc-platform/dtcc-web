@@ -3,7 +3,6 @@
     <HeaderNav />
     <HeroSection />
     <IntroSection />
-    <NewsSection />
     <GradientFeature />
     <WhatAreTwins />
     <ProjectsSection />
@@ -18,7 +17,6 @@ import { defineAsyncComponent } from 'vue'
 import HeaderNav from './components/HeaderNav.vue'
 import HeroSection from './components/HeroSection.vue'
 import IntroSection from './components/IntroSection.vue'
-import NewsSection from './components/NewsSection.vue'
 import GradientFeature from './components/GradientFeature.vue'
 import WhatAreTwins from './components/WhatAreTwins.vue'
 import ProjectsSection from './components/ProjectsSection.vue'

@@ -659,14 +659,12 @@ import { convertToWebP } from '../utils/imageConversion'
 import { resolveUrl, withBase } from '../utils/paths.js'
 
 const TYPE_OPTIONS = [
-  { value: 'news', label: 'News' },
   { value: 'projects', label: 'Projects' },
   { value: 'events-archive', label: 'Projects Archive' },
   { value: 'events', label: 'Events' },
 ]
 
 const SECTION_CONFIG = {
-  news: { label: 'News', contentDir: 'news', urlPrefix: '/news/' },
   events: { label: 'Events', contentDir: 'events', urlPrefix: '/events/' },
   'events-archive': { label: 'Projects Archive', contentDir: 'dtcc-1', urlPrefix: '/dtcc-1/' },
   projects: { label: 'Projects', contentDir: 'projects', urlPrefix: '/projects/' },
@@ -698,7 +696,7 @@ const normalizedSlugParam = rawSlugParam.trim()
 const prefillSlug = normalizedSlugParam && isValidSlug(normalizedSlugParam) ? normalizedSlugParam.toLowerCase() : ''
 const shouldPrefill = Boolean(prefillSection && prefillSlug)
 
-const postType = ref('news')
+const postType = ref('projects')
 if (prefillSection) {
   postType.value = prefillSection
 }
