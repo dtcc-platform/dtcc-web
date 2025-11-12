@@ -4,7 +4,7 @@
     <section class="section gradient-sunrise intro">
       <div class="container grid2">
         <div>
-          <h1 class="h2-50">About us:<br>Our vision and our mission</h1>
+          <h1 class="h2-50">About DTCC:<br>Our vision and our mission</h1>
           <a class="more" href="#contact">Contact us »</a>
         </div>
         <div>
