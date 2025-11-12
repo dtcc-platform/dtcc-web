@@ -3,7 +3,7 @@
     <section class="section gradient-sunrise intro">
       <div class="container grid2">
         <div class="intro-copy">
-          <h1 class="h2-50">Partners powering the Digital Twin Platform</h1>
+          <h1 class="h2-50">35 partners from academia, industry and the public sector</h1>
           <p class="brodtext-20 muted">
             DTCC is built on collaboration. Our partners represent academia, industry, the public sector, and international networks, creating a broad and balanced foundation for innovation. This diversity ensures that our work is both scientifically rigorous and practically relevant. By combining different forms of expertise, DTCC can address complex urban challenges from multiple angles and turn research into solutions that will help shape tomorrow's cities.
           </p>
@@ -36,7 +36,7 @@
           <h2 class="h3-30">Partner organisations</h2>
           <p class="brodtext-20 muted">
             An alphabetical overview of the universities, municipalities, agencies and companies that contribute
-            to the Digital Twin Cities Centre. The list updates automatically from <code>public/content/partners</code>.
+            to the Digital Twin Cities Centre.
           </p>
         </header>
         <div class="roster-grid">
