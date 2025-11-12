@@ -89,15 +89,7 @@ const slides = [
   },
   {
     id: 2,
-    title: 'From data to decisions —<br>creating liveable cities.',
-  },
-  {
-    id: 3,
     title: 'Shaping tomorrow\'s cities<br>with digital twins'
-  },
-  {
-    id: 4,
-    title: 'From cutting-edge research<br>to real-world solutions'
   }
 ]
 
