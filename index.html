@@ -21,6 +21,9 @@
     <link rel="dns-prefetch" href="https://www.youtube-nocookie.com">
     <!-- Added font-display=swap to prevent FOIT (Flash of Invisible Text) -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600;700&display=swap" rel="stylesheet">
+    <!-- Preload first two carousel videos for instant playback -->
+    <link rel="preload" href="/carousel-hero.mp4" as="video" fetchpriority="high">
+    <link rel="preload" href="/content/gate-moving-pathlines.mp4" as="video" fetchpriority="high">
     <!-- Prefetch common content for faster navigation -->
     <link rel="prefetch" href="/content/projects/index.json" as="fetch" crossorigin>
     <link rel="prefetch" href="/content/news/index.json" as="fetch" crossorigin>

@@ -26,6 +26,8 @@
           :loop="currentSlide.loop === true"
           playsinline
           preload="auto"
+          :fetchpriority="current <= 1 ? 'high' : 'auto'"
+          loading="eager"
         ></video>
         <img
           v-else-if="currentSlide.image"
@@ -46,6 +48,8 @@
         :src="slides[slideIndex].video"
         preload="auto"
         muted
+        :fetchpriority="slideIndex <= 1 ? 'high' : 'auto'"
+        loading="eager"
       />
     </div>
     <div class="hero-stars">
@@ -231,13 +235,32 @@ function handleKeydown(e) {
   }
 }
 
+// Immediately preload first two videos for faster start
+const preloadFirstVideos = () => {
+  // Priority preload for first two videos
+  [0, 1].forEach(index => {
+    if (slides[index]?.video) {
+      const video = document.createElement('video')
+      video.src = slides[index].video
+      video.preload = 'auto'
+      video.muted = true
+      video.setAttribute('fetchpriority', 'high')
+      video.load() // Explicitly start loading with high priority
+    }
+  })
+}
+
+// Start preloading immediately when component is created
+preloadFirstVideos()
+
 // Preload all videos on mount for optimal performance
 onMounted(() => {
   window.addEventListener('keydown', handleKeydown)
 
-  // Preload all videos by creating video elements
+  // Preload remaining videos by creating video elements
   slides.forEach((slide, index) => {
-    if (slide.video && index !== current.value) {
+    // Skip if already preloaded (first two) or currently showing
+    if (slide.video && index > 1 && index !== current.value) {
       const video = document.createElement('video')
       video.src = slide.video
       video.preload = 'auto'
