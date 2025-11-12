@@ -22,6 +22,10 @@ on:
         default: '24'
         type: string
 
+permissions:
+  actions: write
+  contents: read
+
 jobs:
   delete-artifacts:
     runs-on: ubuntu-latest
