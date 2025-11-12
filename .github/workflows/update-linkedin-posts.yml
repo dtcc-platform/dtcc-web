@@ -59,70 +59,78 @@ jobs:
             echo "has_changes=true" >> $GITHUB_OUTPUT
             echo "change_summary=Force update of LinkedIn posts" >> $GITHUB_OUTPUT
           else
-            # Compare JSON files (ignoring whitespace differences)
-            if ! python3 -c "
-import json
-import sys
+            # Create a Python script to compare files
+            cat > compare_posts.py << 'PYTHON_SCRIPT'
+          import json
+          import sys
 
-try:
-    with open('public/content/social/linkedin_posts_complete.json', 'r') as f1:
-        new_data = json.load(f1)
-    with open('public/content/social/linkedin_posts_backup.json', 'r') as f2:
-        old_data = json.load(f2)
+          try:
+              with open('public/content/social/linkedin_posts_complete.json', 'r') as f1:
+                  new_data = json.load(f1)
+              with open('public/content/social/linkedin_posts_backup.json', 'r') as f2:
+                  old_data = json.load(f2)
 
-    # Compare counts
-    old_count = old_data.get('total_posts', 0)
-    new_count = new_data.get('total_posts', 0)
+              # Compare counts
+              old_count = old_data.get('total_posts', 0)
+              new_count = new_data.get('total_posts', 0)
 
-    # Compare post IDs
-    old_ids = set(p.get('post_id', '') for p in old_data.get('posts', []))
-    new_ids = set(p.get('post_id', '') for p in new_data.get('posts', []))
+              # Compare post IDs
+              old_ids = set(p.get('post_id', '') for p in old_data.get('posts', []))
+              new_ids = set(p.get('post_id', '') for p in new_data.get('posts', []))
 
-    added = new_ids - old_ids
-    removed = old_ids - new_ids
+              added = new_ids - old_ids
+              removed = old_ids - new_ids
 
-    if added or removed or old_count != new_count:
-        print(f'Changes detected:')
-        print(f'  Posts: {old_count} → {new_count}')
-        if added:
-            print(f'  Added: {len(added)} new post(s)')
-        if removed:
-            print(f'  Removed: {len(removed)} post(s)')
-        sys.exit(1)  # Changes found
-    else:
-        print('No changes detected')
-        sys.exit(0)  # No changes
-except Exception as e:
-    print(f'Error comparing files: {e}')
-    sys.exit(1)  # Treat errors as changes
-            "; then
+              if added or removed or old_count != new_count:
+                  print(f'Changes detected:')
+                  print(f'  Posts: {old_count} → {new_count}')
+                  if added:
+                      print(f'  Added: {len(added)} new post(s)')
+                  if removed:
+                      print(f'  Removed: {len(removed)} post(s)')
+                  sys.exit(1)  # Changes found
+              else:
+                  print('No changes detected')
+                  sys.exit(0)  # No changes
+          except Exception as e:
+              print(f'Error comparing files: {e}')
+              sys.exit(1)  # Treat errors as changes
+          PYTHON_SCRIPT
+
+            # Run the comparison
+            if ! python3 compare_posts.py; then
               echo "has_changes=true" >> $GITHUB_OUTPUT
 
               # Generate change summary
-              SUMMARY=$(python3 -c "
-import json
-try:
-    with open('public/content/social/linkedin_posts_complete.json', 'r') as f:
-        data = json.load(f)
-    with open('public/content/social/linkedin_posts_backup.json', 'r') as f:
-        old = json.load(f)
-    old_count = old.get('total_posts', 0)
-    new_count = data.get('total_posts', 0)
-    diff = new_count - old_count
-    if diff > 0:
-        print(f'Added {diff} new LinkedIn post(s)')
-    elif diff < 0:
-        print(f'Removed {abs(diff)} LinkedIn post(s)')
-    else:
-        print('Updated LinkedIn posts')
-except:
-    print('Updated LinkedIn posts')
-              ")
+              cat > get_summary.py << 'SUMMARY_SCRIPT'
+          import json
+          try:
+              with open('public/content/social/linkedin_posts_complete.json', 'r') as f:
+                  data = json.load(f)
+              with open('public/content/social/linkedin_posts_backup.json', 'r') as f:
+                  old = json.load(f)
+              old_count = old.get('total_posts', 0)
+              new_count = data.get('total_posts', 0)
+              diff = new_count - old_count
+              if diff > 0:
+                  print(f'Added {diff} new LinkedIn post(s)')
+              elif diff < 0:
+                  print(f'Removed {abs(diff)} LinkedIn post(s)')
+              else:
+                  print('Updated LinkedIn posts')
+          except:
+              print('Updated LinkedIn posts')
+          SUMMARY_SCRIPT
+
+              SUMMARY=$(python3 get_summary.py)
               echo "change_summary=$SUMMARY" >> $GITHUB_OUTPUT
             else
               echo "has_changes=false" >> $GITHUB_OUTPUT
               echo "change_summary=No changes detected" >> $GITHUB_OUTPUT
             fi
+
+            # Clean up temporary files
+            rm -f compare_posts.py get_summary.py
           fi
 
       - name: Display fetch results
