@@ -25,9 +25,8 @@
           muted
           :loop="currentSlide.loop === true"
           playsinline
-          preload="auto"
+          :preload="current === 0 ? 'auto' : 'metadata'"
           :fetchpriority="current <= 1 ? 'high' : 'auto'"
-          loading="eager"
         ></video>
         <img
           v-else-if="currentSlide.image"
@@ -39,18 +38,6 @@
         <div v-else :key="'c'+currentSlide.id" class="bg-fallback" />
       </transition>
       <div class="media-overlay"></div>
-    </div>
-    <!-- Hidden video elements for preloading adjacent slides -->
-    <div style="display: none;">
-      <video
-        v-for="slideIndex in preloadIndexes"
-        :key="'preload-' + slideIndex"
-        :src="slides[slideIndex].video"
-        preload="auto"
-        muted
-        :fetchpriority="slideIndex <= 1 ? 'high' : 'auto'"
-        loading="eager"
-      />
     </div>
     <div class="hero-stars">
       <div v-for="n in 60" :key="n" class="star" :style="starStyle(n)"></div>
@@ -100,26 +87,6 @@ const slides = [
 const current = ref(0)
 const currentSlide = computed(() => slides[current.value])
 function go(i) { current.value = i }
-
-// Compute which videos to preload (adjacent slides)
-const preloadIndexes = computed(() => {
-  const indexes = []
-  const slidesLength = slides.length
-
-  // Get next slide index
-  const nextIndex = (current.value + 1) % slidesLength
-  if (slides[nextIndex].video) {
-    indexes.push(nextIndex)
-  }
-
-  // Get previous slide index
-  const prevIndex = (current.value - 1 + slidesLength) % slidesLength
-  if (slides[prevIndex].video) {
-    indexes.push(prevIndex)
-  }
-
-  return indexes
-})
 
 // Navigation functions
 function nextSlide() {
@@ -235,39 +202,13 @@ function handleKeydown(e) {
   }
 }
 
-// Immediately preload first two videos for faster start
-const preloadFirstVideos = () => {
-  // Priority preload for first two videos
-  [0, 1].forEach(index => {
-    if (slides[index]?.video) {
-      const video = document.createElement('video')
-      video.src = slides[index].video
-      video.preload = 'auto'
-      video.muted = true
-      video.setAttribute('fetchpriority', 'high')
-      video.load() // Explicitly start loading with high priority
-    }
-  })
-}
-
-// Start preloading immediately when component is created
-preloadFirstVideos()
-
-// Preload all videos on mount for optimal performance
+// Lifecycle hooks
 onMounted(() => {
   window.addEventListener('keydown', handleKeydown)
 
-  // Preload remaining videos by creating video elements
-  slides.forEach((slide, index) => {
-    // Skip if already preloaded (first two) or currently showing
-    if (slide.video && index > 1 && index !== current.value) {
-      const video = document.createElement('video')
-      video.src = slide.video
-      video.preload = 'auto'
-      video.muted = true
-      video.load() // Explicitly start loading
-    }
-  })
+  // Note: Video preloading is handled by HTML <link rel="preload"> tags
+  // for the first two videos, and browser's intelligent preloading
+  // for subsequent videos based on the preload="metadata" attribute
 })
 
 onUnmounted(() => {
