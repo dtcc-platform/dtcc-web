@@ -10,15 +10,22 @@
       <div v-if="isLoading" class="status muted">Loading feed…</div>
       <div v-else-if="errorMessage" class="alert error">{{ errorMessage }}</div>
       <div v-else-if="!displayedPosts.length" class="status muted">No recent posts available. Check back soon.</div>
-      <div v-else class="cards">
-        <article v-for="post in displayedPosts" :key="post.id" class="card">
-          <div class="media" :class="{ placeholder: !post.image }" :style="post.image ? { backgroundImage: `url(${post.image})` } : undefined"></div>
-          <div class="body">
-            <p class="meta">{{ post.published }}</p>
-            <p class="summary">{{ post.summary }}</p>
-            <a class="more" :href="post.url" target="_blank" rel="noopener">Read on LinkedIn »</a>
-          </div>
-        </article>
+      <div v-else>
+        <div class="cards">
+          <article v-for="post in displayedPosts" :key="post.id" class="card">
+            <div class="media" :class="{ placeholder: !post.image }" :style="post.image ? { backgroundImage: `url(${post.image})` } : undefined"></div>
+            <div class="body">
+              <p class="meta">{{ post.published }}</p>
+              <p class="summary">{{ post.summary }}</p>
+              <a class="more" :href="post.url" target="_blank" rel="noopener">Read on LinkedIn »</a>
+            </div>
+          </article>
+        </div>
+        <div v-if="hasMorePosts" class="load-more-container">
+          <button @click="loadMore" class="load-more-btn">
+            Load More Posts
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -30,12 +37,15 @@ import { withBase, resolveUrl } from '../utils/paths'
 import { sanitizeSrc, sanitizeUrl } from '../utils/sanitize'
 
 const FEED_PATH = 'content/social/linkedin_posts_complete.json'
-const MAX_POSTS = 6
+const MAX_POSTS = 20  // Maximum posts to fetch
+const INITIAL_DISPLAY = 6  // Initial posts to display
+const POSTS_PER_LOAD = 6  // Posts to load on each "Load More" click
 const companyUrl = 'https://www.linkedin.com/company/digital-twin-cities-centre/'
 
 const isLoading = ref(true)
 const errorMessage = ref('')
 const posts = ref([])
+const currentDisplayCount = ref(INITIAL_DISPLAY)
 
 onMounted(async () => {
   try {
@@ -56,7 +66,15 @@ onMounted(async () => {
   }
 })
 
-const displayedPosts = computed(() => posts.value)
+const displayedPosts = computed(() => posts.value.slice(0, currentDisplayCount.value))
+const hasMorePosts = computed(() => currentDisplayCount.value < posts.value.length)
+
+function loadMore() {
+  currentDisplayCount.value = Math.min(
+    currentDisplayCount.value + POSTS_PER_LOAD,
+    posts.value.length
+  )
+}
 
 function normalizePost(raw = {}) {
   const textSource = raw.commentary || raw.original_data?.commentary || ''
@@ -122,6 +140,25 @@ function cryptoRandomId() {
 .summary { font-size: 1rem; line-height: 1.5; color: #1b1b1f; }
 .more { color: var(--cta-f26a2e); font-weight: 600; text-decoration: none; }
 .more:hover { text-decoration: underline; }
+.load-more-container { display: flex; justify-content: center; margin-top: 40px; }
+.load-more-btn {
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--cta-f26a2e);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+.load-more-btn:hover {
+  background: #d94e1e;
+  transform: translateY(-1px);
+}
+.load-more-btn:active {
+  transform: translateY(0);
+}
 @media (max-width: 700px) {
   .feed-header { flex-direction: column; align-items: flex-start; }
 }
