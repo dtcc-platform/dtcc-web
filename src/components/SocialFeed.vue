@@ -11,33 +11,15 @@
       <div v-else-if="errorMessage" class="alert error">{{ errorMessage }}</div>
       <div v-else-if="!displayedPosts.length" class="status muted">No recent posts available. Check back soon.</div>
       <div v-else>
-        <div class="feed-grid">
-          <div class="video-container card">
-            <video
-              ref="video"
-              class="video-player"
-              :src="`${BASE_URL}content/dtcc-film.mp4`"
-              muted
-              loop
-              playsinline
-              preload="auto"
-            ></video>
-            <button class="play-btn" @click="togglePlay" :aria-label="isPlaying ? 'Pause video' : 'Play video'">
-              {{ isPlaying ? '⏸' : '▶' }}
-            </button>
-          </div>
-          <div class="posts-container">
-            <div class="cards">
-              <article v-for="post in displayedPosts" :key="post.id" class="card">
-                <div class="media" :class="{ placeholder: !post.image }" :style="post.image ? { backgroundImage: `url(${post.image})` } : undefined"></div>
-                <div class="body">
-                  <p class="meta">{{ post.published }}</p>
-                  <p class="summary">{{ post.summary }}</p>
-                  <a class="more" :href="post.url" target="_blank" rel="noopener">Read on LinkedIn »</a>
-                </div>
-              </article>
+        <div class="cards">
+          <article v-for="post in displayedPosts" :key="post.id" class="card">
+            <div class="media" :class="{ placeholder: !post.image }" :style="post.image ? { backgroundImage: `url(${post.image})` } : undefined"></div>
+            <div class="body">
+              <p class="meta">{{ post.published }}</p>
+              <p class="summary">{{ post.summary }}</p>
+              <a class="more" :href="post.url" target="_blank" rel="noopener">Read on LinkedIn »</a>
             </div>
-          </div>
+          </article>
         </div>
         <div v-if="hasMorePosts" class="load-more-container">
           <button @click="loadMore" class="load-more-btn">
@@ -54,7 +36,6 @@ import { computed, onMounted, ref } from 'vue'
 import { withBase, resolveUrl } from '../utils/paths'
 import { sanitizeSrc, sanitizeUrl } from '../utils/sanitize'
 
-const BASE_URL = import.meta.env.BASE_URL || '/'
 const FEED_PATH = 'content/social/linkedin_posts_complete.json'
 const MAX_POSTS = 20  // Maximum posts to fetch
 const INITIAL_DISPLAY = 6  // Initial posts to display
@@ -65,22 +46,6 @@ const isLoading = ref(true)
 const errorMessage = ref('')
 const posts = ref([])
 const currentDisplayCount = ref(INITIAL_DISPLAY)
-
-// Video controls
-const video = ref(null)
-const isPlaying = ref(false)
-
-const togglePlay = () => {
-  if (!video.value) return
-
-  if (video.value.paused) {
-    video.value.play()
-    isPlaying.value = true
-  } else {
-    video.value.pause()
-    isPlaying.value = false
-  }
-}
 
 onMounted(async () => {
   try {
@@ -166,23 +131,6 @@ function cryptoRandomId() {
 .status { padding: 18px; border-radius: 10px; background: rgba(0, 0, 0, 0.04); }
 .alert { padding: 18px; border-radius: 10px; font-weight: 500; }
 .alert.error { background: rgba(207, 62, 62, 0.12); color: #6d1a1a; }
-.feed-grid { display: grid; grid-template-columns: 1.2fr 1.8fr; gap: 20px; align-items: start; }
-.video-container { position: relative; border-radius: 16px; overflow: hidden; height: fit-content; }
-.video-player { width: 100%; height: 280px; object-fit: cover; display: block; filter: saturate(110%); }
-.play-btn {
-  position: absolute;
-  inset: auto auto 16px 16px;
-  border: none;
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  background: rgba(255,255,255,0.9);
-  font-size: 18px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.play-btn:hover { background: rgba(255,255,255,1); }
-.posts-container { width: 100%; }
 .cards { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 .card { display: flex; flex-direction: column; border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08); }
 .media { height: 180px; background: #1b2a4a center/cover no-repeat; }
@@ -210,10 +158,6 @@ function cryptoRandomId() {
 }
 .load-more-btn:active {
   transform: translateY(0);
-}
-@media (max-width: 1100px) {
-  .feed-grid { grid-template-columns: 1fr; }
-  .video-player { height: 220px; }
 }
 @media (max-width: 700px) {
   .feed-header { flex-direction: column; align-items: flex-start; }
