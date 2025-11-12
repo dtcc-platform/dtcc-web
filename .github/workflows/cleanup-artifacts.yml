@@ -1,0 +1,118 @@
+name: Cleanup Old Artifacts
+
+on:
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      delete_all:
+        description: 'Delete ALL github-pages artifacts (not just old ones)'
+        required: false
+        default: false
+        type: boolean
+      dry_run:
+        description: 'Dry run - only show what would be deleted'
+        required: false
+        default: false
+        type: boolean
+      max_age_hours:
+        description: 'Delete artifacts older than this many hours (default: 24)'
+        required: false
+        default: '24'
+        type: string
+
+jobs:
+  delete-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete old artifacts
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            // Parse inputs
+            const deleteAll = context.eventName === 'workflow_dispatch' &&
+                            context.payload.inputs?.delete_all === 'true';
+            const dryRun = context.eventName === 'workflow_dispatch' &&
+                          context.payload.inputs?.dry_run === 'true';
+            const maxAgeHours = context.eventName === 'workflow_dispatch' &&
+                               context.payload.inputs?.max_age_hours
+                               ? parseInt(context.payload.inputs.max_age_hours) : 24;
+
+            console.log('=== Cleanup Configuration ===');
+            console.log(`Delete All: ${deleteAll}`);
+            console.log(`Dry Run: ${dryRun}`);
+            console.log(`Max Age: ${maxAgeHours} hours`);
+            console.log('============================\n');
+
+            // Get all artifacts
+            const artifacts = await github.rest.actions.listArtifactsForRepo({
+              owner,
+              repo,
+              per_page: 100
+            });
+
+            // Filter for github-pages artifacts
+            const ghPagesArtifacts = artifacts.data.artifacts.filter(
+              artifact => artifact.name === 'github-pages'
+            );
+
+            console.log(`Found ${ghPagesArtifacts.length} github-pages artifact(s)\n`);
+
+            if (ghPagesArtifacts.length === 0) {
+              console.log('No github-pages artifacts to clean up.');
+              return;
+            }
+
+            // Calculate age threshold
+            const ageThreshold = Date.now() - (maxAgeHours * 60 * 60 * 1000);
+            let deletedCount = 0;
+            let skippedCount = 0;
+
+            // Sort by creation date (newest first) to potentially keep the newest
+            ghPagesArtifacts.sort((a, b) =>
+              new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+            );
+
+            for (let i = 0; i < ghPagesArtifacts.length; i++) {
+              const artifact = ghPagesArtifacts[i];
+              const createdAt = new Date(artifact.created_at).getTime();
+              const ageInHours = Math.floor((Date.now() - createdAt) / (60 * 60 * 1000));
+
+              // Skip the most recent artifact unless deleteAll is true
+              if (i === 0 && !deleteAll) {
+                console.log(`KEEP: Most recent artifact (${artifact.id}) - Age: ${ageInHours} hours`);
+                skippedCount++;
+                continue;
+              }
+
+              // Check if artifact should be deleted
+              const shouldDelete = deleteAll || createdAt < ageThreshold;
+
+              if (shouldDelete) {
+                if (dryRun) {
+                  console.log(`DRY RUN - Would delete: ${artifact.name} (${artifact.id}) - Age: ${ageInHours} hours`);
+                } else {
+                  console.log(`DELETING: ${artifact.name} (${artifact.id}) - Age: ${ageInHours} hours`);
+                  await github.rest.actions.deleteArtifact({
+                    owner,
+                    repo,
+                    artifact_id: artifact.id
+                  });
+                }
+                deletedCount++;
+              } else {
+                console.log(`KEEP: ${artifact.name} (${artifact.id}) - Age: ${ageInHours} hours`);
+                skippedCount++;
+              }
+            }
+
+            console.log('\n=== Summary ===');
+            console.log(`Deleted: ${deletedCount} artifact(s)`);
+            console.log(`Kept: ${skippedCount} artifact(s)`);
+            if (dryRun) {
+              console.log('(DRY RUN - no actual deletions performed)');
+            }
