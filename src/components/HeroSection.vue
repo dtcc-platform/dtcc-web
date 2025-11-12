@@ -38,6 +38,16 @@
       </transition>
       <div class="media-overlay"></div>
     </div>
+    <!-- Hidden video elements for preloading adjacent slides -->
+    <div style="display: none;">
+      <video
+        v-for="slideIndex in preloadIndexes"
+        :key="'preload-' + slideIndex"
+        :src="slides[slideIndex].video"
+        preload="auto"
+        muted
+      />
+    </div>
     <div class="hero-stars">
       <div v-for="n in 60" :key="n" class="star" :style="starStyle(n)"></div>
     </div>
@@ -94,6 +104,26 @@ const slides = [
 const current = ref(0)
 const currentSlide = computed(() => slides[current.value])
 function go(i) { current.value = i }
+
+// Compute which videos to preload (adjacent slides)
+const preloadIndexes = computed(() => {
+  const indexes = []
+  const slidesLength = slides.length
+
+  // Get next slide index
+  const nextIndex = (current.value + 1) % slidesLength
+  if (slides[nextIndex].video) {
+    indexes.push(nextIndex)
+  }
+
+  // Get previous slide index
+  const prevIndex = (current.value - 1 + slidesLength) % slidesLength
+  if (slides[prevIndex].video) {
+    indexes.push(prevIndex)
+  }
+
+  return indexes
+})
 
 // Navigation functions
 function nextSlide() {
@@ -209,9 +239,20 @@ function handleKeydown(e) {
   }
 }
 
-// Set up and tear down keyboard listener
+// Preload all videos on mount for optimal performance
 onMounted(() => {
   window.addEventListener('keydown', handleKeydown)
+
+  // Preload all videos by creating video elements
+  slides.forEach((slide, index) => {
+    if (slide.video && index !== current.value) {
+      const video = document.createElement('video')
+      video.src = slide.video
+      video.preload = 'auto'
+      video.muted = true
+      video.load() // Explicitly start loading
+    }
+  })
 })
 
 onUnmounted(() => {
