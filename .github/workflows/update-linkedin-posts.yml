@@ -1,0 +1,196 @@
+name: Update LinkedIn Posts
+
+on:
+  workflow_dispatch:
+    inputs:
+      force_update:
+        description: 'Force update even if no changes detected'
+        required: false
+        default: false
+        type: boolean
+  schedule:
+    # Run weekly on Mondays at 9 AM UTC (optional - remove if you only want manual)
+    - cron: '0 9 * * 1'
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-linkedin-posts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install requests
+
+      - name: Create backup of current posts
+        run: |
+          if [ -f "public/content/social/linkedin_posts_complete.json" ]; then
+            cp public/content/social/linkedin_posts_complete.json public/content/social/linkedin_posts_backup.json
+          fi
+
+      - name: Fetch LinkedIn posts
+        env:
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+        run: |
+          echo "Starting LinkedIn posts fetch..."
+          python3 scripts/linkedin_scrape.py
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if [ ! -f "public/content/social/linkedin_posts_backup.json" ]; then
+            echo "No backup file - this is the first run"
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "change_summary=Initial LinkedIn posts fetch" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.inputs.force_update }}" = "true" ]; then
+            echo "Force update requested"
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "change_summary=Force update of LinkedIn posts" >> $GITHUB_OUTPUT
+          else
+            # Compare JSON files (ignoring whitespace differences)
+            if ! python3 -c "
+import json
+import sys
+
+try:
+    with open('public/content/social/linkedin_posts_complete.json', 'r') as f1:
+        new_data = json.load(f1)
+    with open('public/content/social/linkedin_posts_backup.json', 'r') as f2:
+        old_data = json.load(f2)
+
+    # Compare counts
+    old_count = old_data.get('total_posts', 0)
+    new_count = new_data.get('total_posts', 0)
+
+    # Compare post IDs
+    old_ids = set(p.get('post_id', '') for p in old_data.get('posts', []))
+    new_ids = set(p.get('post_id', '') for p in new_data.get('posts', []))
+
+    added = new_ids - old_ids
+    removed = old_ids - new_ids
+
+    if added or removed or old_count != new_count:
+        print(f'Changes detected:')
+        print(f'  Posts: {old_count} → {new_count}')
+        if added:
+            print(f'  Added: {len(added)} new post(s)')
+        if removed:
+            print(f'  Removed: {len(removed)} post(s)')
+        sys.exit(1)  # Changes found
+    else:
+        print('No changes detected')
+        sys.exit(0)  # No changes
+except Exception as e:
+    print(f'Error comparing files: {e}')
+    sys.exit(1)  # Treat errors as changes
+            "; then
+              echo "has_changes=true" >> $GITHUB_OUTPUT
+
+              # Generate change summary
+              SUMMARY=$(python3 -c "
+import json
+try:
+    with open('public/content/social/linkedin_posts_complete.json', 'r') as f:
+        data = json.load(f)
+    with open('public/content/social/linkedin_posts_backup.json', 'r') as f:
+        old = json.load(f)
+    old_count = old.get('total_posts', 0)
+    new_count = data.get('total_posts', 0)
+    diff = new_count - old_count
+    if diff > 0:
+        print(f'Added {diff} new LinkedIn post(s)')
+    elif diff < 0:
+        print(f'Removed {abs(diff)} LinkedIn post(s)')
+    else:
+        print('Updated LinkedIn posts')
+except:
+    print('Updated LinkedIn posts')
+              ")
+              echo "change_summary=$SUMMARY" >> $GITHUB_OUTPUT
+            else
+              echo "has_changes=false" >> $GITHUB_OUTPUT
+              echo "change_summary=No changes detected" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      - name: Display fetch results
+        run: |
+          echo "=== LinkedIn Posts Update Results ==="
+          echo "Changes detected: ${{ steps.check_changes.outputs.has_changes }}"
+          echo "Summary: ${{ steps.check_changes.outputs.change_summary }}"
+
+          if [ -f "public/content/social/linkedin_posts_complete.json" ]; then
+            POST_COUNT=$(python3 -c "import json; data = json.load(open('public/content/social/linkedin_posts_complete.json')); print(data.get('total_posts', 0))")
+            MEDIA_COUNT=$(python3 -c "import json; data = json.load(open('public/content/social/linkedin_posts_complete.json')); print(data.get('posts_with_media', 0))")
+            IMAGE_COUNT=$(python3 -c "import json; data = json.load(open('public/content/social/linkedin_posts_complete.json')); print(data.get('posts_with_images', 0))")
+
+            echo ""
+            echo "Current statistics:"
+            echo "  Total posts: $POST_COUNT"
+            echo "  Posts with media: $MEDIA_COUNT"
+            echo "  Posts with images: $IMAGE_COUNT"
+          fi
+
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Add the JSON file and any new images
+          git add public/content/social/linkedin_posts_complete.json
+          git add public/content/social/linkedin-images/
+
+          # Check if there are actual changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update LinkedIn posts - ${{ steps.check_changes.outputs.change_summary }}"
+            git push origin ${{ github.ref_name }}
+            echo "✓ Changes committed and pushed successfully"
+          fi
+
+      - name: Clean up backup
+        if: always()
+        run: |
+          rm -f public/content/social/linkedin_posts_backup.json
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## LinkedIn Posts Update Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ steps.check_changes.outputs.has_changes }}" = "true" ]; then
+            echo "✅ **Status:** Posts updated successfully" >> $GITHUB_STEP_SUMMARY
+            echo "📝 **Changes:** ${{ steps.check_changes.outputs.change_summary }}" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "ℹ️ **Status:** No updates needed" >> $GITHUB_STEP_SUMMARY
+            echo "📝 **Note:** LinkedIn posts are already up to date" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ -f "public/content/social/linkedin_posts_complete.json" ]; then
+            POST_COUNT=$(python3 -c "import json; data = json.load(open('public/content/social/linkedin_posts_complete.json')); print(data.get('total_posts', 0))")
+            echo "### Current Statistics" >> $GITHUB_STEP_SUMMARY
+            echo "- Total posts in feed: **$POST_COUNT**" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🔄 **Triggered by:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "👤 **Initiated by:** @${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          fi
