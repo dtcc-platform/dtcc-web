@@ -154,7 +154,7 @@ url = "https://api.linkedin.com/rest/posts"
 params = {
     "author": f"urn:li:organization:{ORGANIZATION_ID}",
     "q": "author",
-    "count": 10,
+    "count": 20,
     "sortBy": "LAST_MODIFIED"
 }
 

@@ -1,8 +1,8 @@
 {
   "organization_id": "100491988",
-  "total_posts": 10,
-  "posts_with_media": 10,
-  "posts_with_images": 10,
+  "total_posts": 20,
+  "posts_with_media": 20,
+  "posts_with_images": 20,
   "posts": [
     {
       "post_id": "urn:li:share:7383773548672266240",
@@ -15,11 +15,11 @@
         "has_media": true,
         "media_type": "image",
         "media_urn": "urn:li:image:D4D22AQFokP2DGqmp6g",
-        "image_url": "content/social/linkedin-images/738377354867-559171d0.jpg",
+        "image_url": "content/social/linkedin-images/738377354867-b705cc15.jpg",
         "thumbnail_urn": null,
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/738377354867-559171d0.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFokP2DGqmp6g/feedshare-shrink_2048_1536/B4DZnhu6NOGkAw-/0/1760428796975?e=1763596800&v=beta&t=n76zamlbAcAIt2mhConr8plq965aKclnEA_JNLVCON8"
+        "local_image_path": "content/social/linkedin-images/738377354867-b705cc15.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFokP2DGqmp6g/feedshare-shrink_2048_1536/B4DZnhu6NOGkAw-/0/1760428796975?e=1764806400&v=beta&t=P9X9y8bZ8zmltxVUtBRa966DPL9tOCpT2wxg76APDwc"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -57,11 +57,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/732871878503-1be0dd97.jpg",
+        "image_url": "content/social/linkedin-images/732871878503-c45aa976.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQEbdkWX0fusCg",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/732871878503-1be0dd97.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQEbdkWX0fusCg/articleshare-shrink_1280_800/B4DZbTV8WhGwAQ-/0/1747302467632?e=1762603200&v=beta&t=mDA695R_0bUefV0n7cmR7ANLqly-PQk-t3Psb-61ZIk"
+        "local_image_path": "content/social/linkedin-images/732871878503-c45aa976.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQEbdkWX0fusCg/articleshare-shrink_1280_800/B4DZbTV8WhGwAQ-/0/1747302467632?e=1763546400&v=beta&t=i0mGNQt7xOqLAnbAaH4PLNQUuWVW7dgY2UK_alz5lmg"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -101,11 +101,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/732831947115-a5bc18bb.jpg",
+        "image_url": "content/social/linkedin-images/732831947115-75b0a29a.jpg",
         "thumbnail_urn": "urn:li:image:D4D22AQFf5KLhqm3ptQ",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/732831947115-a5bc18bb.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFf5KLhqm3ptQ/feedshare-shrink_2048_1536/B4DZbNrtKKGwAo-/0/1747207509426?e=1763596800&v=beta&t=B9g7AYb81nJ6eyGKZO__NVGFX1ZfWsBHe6L49z5lBeU"
+        "local_image_path": "content/social/linkedin-images/732831947115-75b0a29a.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFf5KLhqm3ptQ/feedshare-shrink_2048_1536/B4DZbNrtKKGwAo-/0/1747207509426?e=1764806400&v=beta&t=Jj26v-kCtTg5MXOZzn34-st5soD6f1nIgcS74yN38_Q"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -145,11 +145,11 @@
         "has_media": true,
         "media_type": "image",
         "media_urn": "urn:li:image:D4D22AQHt9eWuLgyunQ",
-        "image_url": "content/social/linkedin-images/732041802260-ffb6b5f8.jpg",
+        "image_url": "content/social/linkedin-images/732041802260-fba60e9d.jpg",
         "thumbnail_urn": null,
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/732041802260-ffb6b5f8.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQHt9eWuLgyunQ/feedshare-shrink_2048_1536/B4DZZdZZfHG0B4-/0/1745323662050?e=1763596800&v=beta&t=LqEPc0VJLVhdjEwBMwRqrgWEOV66LGTEEqd1epk4lKM"
+        "local_image_path": "content/social/linkedin-images/732041802260-fba60e9d.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQHt9eWuLgyunQ/feedshare-shrink_2048_1536/B4DZZdZZfHG0B4-/0/1745323662050?e=1764806400&v=beta&t=8AK_4jZRx4Duc8r6X3VZbf2LaXQ9qmK8ub0ptEtN7o4"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -187,11 +187,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/727541963087-8b91f267.jpg",
+        "image_url": "content/social/linkedin-images/727541963087-d9319dac.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQGOaJH5sfpV3g",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/727541963087-8b91f267.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGOaJH5sfpV3g/articleshare-shrink_800/B4DZlicWnEGkAM-/0/1758293224884?e=1762603200&v=beta&t=5afQ5ft5QBPigXD7fwnF028kMZuJpWVVxs8rdBwVNGA"
+        "local_image_path": "content/social/linkedin-images/727541963087-d9319dac.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGOaJH5sfpV3g/articleshare-shrink_800/B4DZlicWnEGkAM-/0/1758293224884?e=1763546400&v=beta&t=bSlU9liXoxKEIaafvPUT7NXp3e9_4F59X1Nva0572PM"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -231,11 +231,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/726752822013-ab0882ed.jpg",
+        "image_url": "content/social/linkedin-images/726752822013-7f77ddb8.jpg",
         "thumbnail_urn": "urn:li:image:D5627AQGtRoFGVXuVOQ",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/726752822013-ab0882ed.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D5627AQGtRoFGVXuVOQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1732713690878?e=1762603200&v=beta&t=y4ryciOVNGTBPsGM3s3nVhHlMzPV0GNZWJ2BGbExJdg"
+        "local_image_path": "content/social/linkedin-images/726752822013-7f77ddb8.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D5627AQGtRoFGVXuVOQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1732713690878?e=1763546400&v=beta&t=Jvx-Sd8NpHKQzi_W91DXgkVTHHYVAVpiLj6qlTWwdZA"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -275,11 +275,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/726529002921-4f3333ff.jpg",
+        "image_url": "content/social/linkedin-images/726529002921-cebd4d95.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQGMki-RixNzYg",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/726529002921-4f3333ff.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGMki-RixNzYg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1732180092266?e=1762603200&v=beta&t=beaUuzeotCzcRSnhuIrQHmM_uRIeYSOj3Ovoq6fcSq4"
+        "local_image_path": "content/social/linkedin-images/726529002921-cebd4d95.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGMki-RixNzYg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1732180092266?e=1763546400&v=beta&t=v46ZMk-OePzb6xUjj3CmsHzOTKIUOVnaZ0gA7iDL-VQ"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -319,11 +319,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/726027071033-fe261b4c.jpg",
+        "image_url": "content/social/linkedin-images/726027071033-cadc28fb.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQE27OWKRncEiQ",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/726027071033-fe261b4c.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQE27OWKRncEiQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1730983383961?e=1762603200&v=beta&t=x4GKnjJ_eDGNknfGq88wMj8OMqS_R3aHnXd3q0MWL7A"
+        "local_image_path": "content/social/linkedin-images/726027071033-cadc28fb.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQE27OWKRncEiQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1730983383961?e=1763546400&v=beta&t=MHCQtux5cxgYCxFs1OCSltSUmK-MQAzeksQXftj3evc"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -363,11 +363,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/725191033022-1afe2999.jpg",
+        "image_url": "content/social/linkedin-images/725191033022-f4095548.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQFyIHpeckUhMg",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/725191033022-1afe2999.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1762603200&v=beta&t=_9wPYQIuehXaBhr05HL_Ho7T1YRJNUMYEP9J1gZMygY"
+        "local_image_path": "content/social/linkedin-images/725191033022-f4095548.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1763546400&v=beta&t=B-xSZNBD7NXjp3QsKlr8BoJ7DEn262dE-S3WmgjSWUM"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -407,11 +407,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/724752076475-1afe2999.jpg",
+        "image_url": "content/social/linkedin-images/724752076475-f4095548.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQFyIHpeckUhMg",
         "source": "reshare_parent",
-        "local_image_path": "content/social/linkedin-images/724752076475-1afe2999.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1762603200&v=beta&t=_9wPYQIuehXaBhr05HL_Ho7T1YRJNUMYEP9J1gZMygY"
+        "local_image_path": "content/social/linkedin-images/724752076475-f4095548.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1763546400&v=beta&t=B-xSZNBD7NXjp3QsKlr8BoJ7DEn262dE-S3WmgjSWUM"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -438,6 +438,446 @@
       "reshare_parent_id": "urn:li:share:7234843484459827201",
       "reshare_root_id": "urn:li:share:7234843484459827201",
       "resolved_media_parent_id": "urn:li:share:7234843484459827201"
+    },
+    {
+      "post_id": "urn:li:share:7247246349539176451",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7247246349539176451/",
+      "published_at": 1727878177243,
+      "commentary": "Did you know that urban densification affects wind, heat, noise, and air quality at every level, from city blocks to individual streets? How can urban planners ensure these environmental factors are accounted for in their designs? These, and many more questions were investigated by @[Franziska Hunger](urn:li:person:RqCpkr5\\_SS) and the team working in the DTCC Milestone Project called Urban Environmental Comfort Design. Read more on our website.",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "content/social/linkedin-images/724724634953-d2713f14.jpg",
+        "thumbnail_urn": "urn:li:image:D4D27AQGnjpWFPiUGsQ",
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/724724634953-d2713f14.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGnjpWFPiUGsQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1727877978070?e=1763546400&v=beta&t=r9X3gXeOWcwGEVt8ifwROLCHyPluyoUkDZtc9H4EO6s"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1727878177243,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1727878182555,
+        "visibility": "PUBLIC",
+        "publishedAt": 1727878177243,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7247246349539176451",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "Urban densification influences wind, temperature, noise, daylight and air quality in both city scales and microscales like streets, neighbourhoods, parks. While software for wind simulation is available and best-practise guidelines have been...",
+            "thumbnail": "urn:li:image:D4D27AQGnjpWFPiUGsQ",
+            "source": "https://dtcc.chalmers.se/urban-environmental-comfort-design/",
+            "title": "Urban Environmental Comfort Design",
+            "thumbnailAltText": ""
+          }
+        },
+        "commentary": "Did you know that urban densification affects wind, heat, noise, and air quality at every level, from city blocks to individual streets? How can urban planners ensure these environmental factors are accounted for in their designs? These, and many more questions were investigated by @[Franziska Hunger](urn:li:person:RqCpkr5\\_SS) and the team working in the DTCC Milestone Project called Urban Environmental Comfort Design. Read more on our website.",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7234843484459827201",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7234843484459827201/",
+      "published_at": 1724921103726,
+      "commentary": "On October 18th it's time for our next Milestone Project Lunch Seminar: Data models for digital twin cities. The seminar will be held by @[Jorge Gil](urn:li:person:sTuxaNPo7O) at 12.15 on Zoom. See you there!",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "content/social/linkedin-images/723484348445-f4095548.jpg",
+        "thumbnail_urn": "urn:li:image:D4D27AQFyIHpeckUhMg",
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/723484348445-f4095548.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1763546400&v=beta&t=B-xSZNBD7NXjp3QsKlr8BoJ7DEn262dE-S3WmgjSWUM"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1724921103726,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1724923331079,
+        "visibility": "PUBLIC",
+        "publishedAt": 1724921103726,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7234843484459827201",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "This year we will present our Milestone Projects within DTCC in the form of digital lunch seminars via Zoom. Join us and learn more about the research being done in the Digital Twin area! More information about this event coming soon. Don't miss our...",
+            "thumbnail": "urn:li:image:D4D27AQFyIHpeckUhMg",
+            "source": "https://ui.ungpd.com/Events/0ee57923-5123-4de8-800d-f763d09f5265",
+            "title": "DTCC Milestone Projects Lunch Seminars 2024: Data models for digital twin cities"
+          }
+        },
+        "commentary": "On October 18th it's time for our next Milestone Project Lunch Seminar: Data models for digital twin cities. The seminar will be held by @[Jorge Gil](urn:li:person:sTuxaNPo7O) at 12.15 on Zoom. See you there!",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": true
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7216722281765490689",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7216722281765490689/",
+      "published_at": 1720600672386,
+      "commentary": "Exciting news! @[Digital Twin Cities Centre](urn:li:organization:100491988) have received approval to continue our research for another five years. We have successfully completed numerous projects and are now planning for the future! \n\n- We’re very proud and happy with the results produced within the centre so far. We’ve had the pleasure of working with many engaged partners who see great benefit in using our research results as an important step in moving into the future of design and construction. Together with them and our skilled colleagues we are hoping to produce many more important insights over the next five years, says @[Anders Logg](urn:li:person:kh7K8aieoy), director of Digital Twin Cities Centre. \n\nRead the full story on our website.\n@[Bernd Ketzler](urn:li:person:qCF20l2VxW) @[Minna Karstunen](urn:li:person:08o21EqG70) @[Vasilis Naserentin](urn:li:person:7GS74ZGr6j)",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "content/social/linkedin-images/721672228176-f260959c.jpg",
+        "thumbnail_urn": "urn:li:image:D4D22AQFjmWNcmy_r-A",
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/721672228176-f260959c.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFjmWNcmy_r-A/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1720600523421?e=1764806400&v=beta&t=VGl8gOi4y_9xOviQCfzDyUe00-7-AtP7nAOZavP8QVM"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1720600672386,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1720624258453,
+        "visibility": "PUBLIC",
+        "publishedAt": 1720600672386,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7216722281765490689",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "The Digital Twin Cities Centre has received approval to continue its research for another five years. The centre has successfully completed numerous projects and is now planning for the future. Digital Twin Cities Centre has been given the green light...",
+            "thumbnail": "urn:li:image:D4D22AQFjmWNcmy_r-A",
+            "source": "https://dtcc.chalmers.se/five-more-years-for-digital-twin-cities-center/",
+            "title": "Five more years for Digital Twin Cities Center"
+          }
+        },
+        "commentary": "Exciting news! @[Digital Twin Cities Centre](urn:li:organization:100491988) have received approval to continue our research for another five years. We have successfully completed numerous projects and are now planning for the future! \n\n- We’re very proud and happy with the results produced within the centre so far. We’ve had the pleasure of working with many engaged partners who see great benefit in using our research results as an important step in moving into the future of design and construction. Together with them and our skilled colleagues we are hoping to produce many more important insights over the next five years, says @[Anders Logg](urn:li:person:kh7K8aieoy), director of Digital Twin Cities Centre. \n\nRead the full story on our website.\n@[Bernd Ketzler](urn:li:person:qCF20l2VxW) @[Minna Karstunen](urn:li:person:08o21EqG70) @[Vasilis Naserentin](urn:li:person:7GS74ZGr6j)",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": true
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7208433716367368192",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7208433716367368192/",
+      "published_at": 1718624524327,
+      "commentary": "How can urban mining help meet the challenge of using existing material to build something new? The new Chalmers research project on urban mining evolved from the DTCC Digital Twins for Circularity Milestone project. Make sure to read the article in Framtidens Forskning with @[Alexander Hollberg](urn:li:person:Vf3wqQAlwB), research leader for the project along with the DTCC Milestone Project Twinable.",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "content/social/linkedin-images/720843371636-1c033951.jpg",
+        "thumbnail_urn": "urn:li:image:D4D27AQFBUabdKNwGhg",
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/720843371636-1c033951.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFBUabdKNwGhg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718623977187?e=1763546400&v=beta&t=DBwoGG74Vm8PpLWWaHjgLxNJdLRkBj-MKueML6b4WOQ"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1718624524327,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1718624535884,
+        "visibility": "PUBLIC",
+        "publishedAt": 1718624524327,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7208433716367368192",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "Det är kombinationen av AI-teknik och annan expertis som verkligen kan göra skillnad.",
+            "thumbnail": "urn:li:image:D4D27AQFBUabdKNwGhg",
+            "source": "https://framtidensforskning.se/2024/06/12/skapar-verktyg-for-urban-mining-i-praktiken/",
+            "title": "Skapar verktyg för urban mining i praktiken - Framtidens forskning"
+          }
+        },
+        "commentary": "How can urban mining help meet the challenge of using existing material to build something new? The new Chalmers research project on urban mining evolved from the DTCC Digital Twins for Circularity Milestone project. Make sure to read the article in Framtidens Forskning with @[Alexander Hollberg](urn:li:person:Vf3wqQAlwB), research leader for the project along with the DTCC Milestone Project Twinable.",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7206975527105048576",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7206975527105048576/",
+      "published_at": 1718276864958,
+      "commentary": "Tomorrow at 12.15 it's finally time for our next Milestone Project Lunch Seminar! This time, @[Jorge Gil](urn:li:person:sTuxaNPo7O) will present the project Data models for digital twin cities. There's still time to sign up and join!",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "content/social/linkedin-images/720697552710-90d0cb0d.jpg",
+        "thumbnail_urn": "urn:li:image:D4D22AQEBqbmXhCz5uw",
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/720697552710-90d0cb0d.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQEBqbmXhCz5uw/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1718276798337?e=1764806400&v=beta&t=_yUX0sLVwKqp5w-IH1fSF7Lpx-XjqLrUrR4rdL2flik"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1718276864958,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1718276884934,
+        "visibility": "PUBLIC",
+        "publishedAt": 1718276864958,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7206975527105048576",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "This year we will present our Milestone Projects within DTCC in the form of digital lunch seminars via Zoom. Join us and learn more about the research being done in the Digital Twin area! More information about this event coming soon. Don't miss our...",
+            "thumbnail": "urn:li:image:D4D22AQEBqbmXhCz5uw",
+            "source": "https://ui.ungpd.com/Events/0ee57923-5123-4de8-800d-f763d09f5265",
+            "title": "DTCC Milestone Projects Lunch Seminars 2024: Data models for digital twin cities"
+          }
+        },
+        "commentary": "Tomorrow at 12.15 it's finally time for our next Milestone Project Lunch Seminar! This time, @[Jorge Gil](urn:li:person:sTuxaNPo7O) will present the project Data models for digital twin cities. There's still time to sign up and join!",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7205878765489446914",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7205878765489446914/",
+      "published_at": 1718015376590,
+      "commentary": "Did you miss Total BIM-dagen at Chalmers on May 30th? You can now watch all the presentations on our Youtube channel \\(in Swedish\\). ",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "content/social/linkedin-images/720587876548-766f7b0c.jpg",
+        "thumbnail_urn": "urn:li:image:D4D22AQHJPOS12FMMFw",
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/720587876548-766f7b0c.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQHJPOS12FMMFw/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1719174880957?e=1764806400&v=beta&t=ohrJd_7M0BJCcLUQpaZd4Z36KdGFNCbcLlkVzWNnm38"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1718015376590,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1718015380075,
+        "visibility": "PUBLIC",
+        "publishedAt": 1718015376590,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7205878765489446914",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "Den 30 maj 2024 hölls Total BIM-dagen på Chalmers. Dagen tillägnades Total BIM, en metod som revolutionerar byggbranschen genom att använda modeller istället...",
+            "thumbnail": "urn:li:image:D4D22AQHJPOS12FMMFw",
+            "source": "https://www.youtube.com/playlist?list=PLJYX5zZT5jp9IP3HxeFw6Gs89pYzj9yKQ",
+            "title": "Total BIM-dagen 2024 - YouTube"
+          }
+        },
+        "commentary": "Did you miss Total BIM-dagen at Chalmers on May 30th? You can now watch all the presentations on our Youtube channel \\(in Swedish\\). ",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7201886933747175426",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7201886933747175426/",
+      "published_at": 1717063649727,
+      "commentary": "Great day in Runan \\@ @[Chalmers tekniska högskola](urn:li:organization:5074) when Total BIM-day kicked off this morning!\n\n{hashtag|\\#|digitaltwincitiescentre} {hashtag|\\#|chalmerstekniskahögskola} {hashtag|\\#|sbuf} {hashtag|\\#|cmb} {hashtag|\\#|totalbim}",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "image",
+        "media_urn": "urn:li:image:D4D22AQEQHr2u3kgFXg",
+        "image_url": "content/social/linkedin-images/720188693374-ac086a4f.jpg",
+        "thumbnail_urn": null,
+        "source": "reshare_parent",
+        "local_image_path": "content/social/linkedin-images/720188693374-ac086a4f.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQEQHr2u3kgFXg/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1717055789475?e=1764806400&v=beta&t=d24UUrheISxJ2cOACXfIhgeESrbH82XZVKBaarlQ-OI"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1717063649727,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1717063653053,
+        "visibility": "PUBLIC",
+        "publishedAt": 1717063649727,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7201886933747175426",
+        "reshareContext": {
+          "parent": "urn:li:share:7201853971911626752",
+          "root": "urn:li:share:7201853971911626752"
+        },
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "commentary": "Great day in Runan \\@ @[Chalmers tekniska högskola](urn:li:organization:5074) when Total BIM-day kicked off this morning!\n\n{hashtag|\\#|digitaltwincitiescentre} {hashtag|\\#|chalmerstekniskahögskola} {hashtag|\\#|sbuf} {hashtag|\\#|cmb} {hashtag|\\#|totalbim}",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      },
+      "reshare_parent_id": "urn:li:share:7201853971911626752",
+      "reshare_root_id": "urn:li:share:7201853971911626752",
+      "resolved_media_parent_id": "urn:li:share:7201853971911626752"
+    },
+    {
+      "post_id": "urn:li:share:7199009538182696960",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7199009538182696960/",
+      "published_at": 1716377625139,
+      "commentary": "LAST CHANCE: Tomorrow at 9 AM the sign-up for Total BIM-dagen on May 30th closes. Don't miss this opportunity to view many interesting speakers and meet industry colleagues at Runan, Chalmers. ",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "content/social/linkedin-images/719900953818-7d0bf057.jpg",
+        "thumbnail_urn": "urn:li:image:D4D27AQEFI4QMqcDPlw",
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/719900953818-7d0bf057.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQEFI4QMqcDPlw/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1711439588191?e=1763546400&v=beta&t=Ov8kdPNnTrzi-jbhQc1SW1QWf9tZt_8brVH9SiUmNNQ"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1716377625139,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1716377631770,
+        "visibility": "PUBLIC",
+        "publishedAt": 1716377625139,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7199009538182696960",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "Konferens",
+            "thumbnail": "urn:li:image:D4D27AQEFI4QMqcDPlw",
+            "source": "https://cmbchalmers.confetti.events/total-bim-dagen",
+            "title": "Total BIM – Framtidens digitala byggprocess är här!"
+          }
+        },
+        "commentary": "LAST CHANCE: Tomorrow at 9 AM the sign-up for Total BIM-dagen on May 30th closes. Don't miss this opportunity to view many interesting speakers and meet industry colleagues at Runan, Chalmers. ",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7196511790887759872",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7196511790887759872/",
+      "published_at": 1715844609042,
+      "commentary": "By using a digital model as the only dynamic source of information on the construction site instead of traditional drawings, you can both make significant cost savings, shorten the project time and get an integrated communication flow. But to succeed you need to go \"Total BIM\" - completely abandon the 2D drawing and change your mindset. \n\nRead the interesting article with @[Mattias Roupé](urn:li:person:gpg-vzsrfh) and @[Oliver Disney](urn:li:person:YVPbFt4NdC) and make sure to join Total BIM-dagen on May 30th at Chalmers. More info and sign-up in the comments.",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "content/social/linkedin-images/719651179088-3ca1240a.jpg",
+        "thumbnail_urn": "urn:li:image:D4D27AQFPCp-8IdsQwg",
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/719651179088-3ca1240a.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFPCp-8IdsQwg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1748869033093?e=1763546400&v=beta&t=LZ_eXRKJh8DgRDwrUJTTMu-jjzEtpBFBnjvc2OFmneg"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1715782116061,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1715844609114,
+        "visibility": "PUBLIC",
+        "publishedAt": 1715844609042,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7196511790887759872",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "Using a digital model as a single dynamic source of information on the building site instead of traditional drawings, can deliver significant cost savings,…",
+            "thumbnail": "urn:li:image:D4D27AQFPCp-8IdsQwg",
+            "source": "https://www.chalmers.se/en/current/news/ace-total-bim/",
+            "title": "Total BIM: Toward transforming construction"
+          }
+        },
+        "commentary": "By using a digital model as the only dynamic source of information on the construction site instead of traditional drawings, you can both make significant cost savings, shorten the project time and get an integrated communication flow. But to succeed you need to go \"Total BIM\" - completely abandon the 2D drawing and change your mindset. \n\nRead the interesting article with @[Mattias Roupé](urn:li:person:gpg-vzsrfh) and @[Oliver Disney](urn:li:person:YVPbFt4NdC) and make sure to join Total BIM-dagen on May 30th at Chalmers. More info and sign-up in the comments.",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7196499842318102528",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7196499842318102528/",
+      "published_at": 1715779267080,
+      "commentary": "Did you miss our Milestone Project Lunch Seminar on Digital Twins for Circularity? No worries - you can watch it on our Youtube channel, presented by @[Leonardo Rosado](urn:li:person:okoYJqimqk). Enjoy!",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "content/social/linkedin-images/719649984231-9e245b25.jpg",
+        "thumbnail_urn": "urn:li:image:D4D27AQGz_ArWgJ1WBg",
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/719649984231-9e245b25.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGz_ArWgJ1WBg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1715779207606?e=1763546400&v=beta&t=XApiqIpGdNW_d9jw0bcT-021y0XqIgN7aFXzxgLP8YQ"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1715779267080,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1715779267527,
+        "visibility": "PUBLIC",
+        "publishedAt": 1715779267080,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7196499842318102528",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "In this DTCC Milestone Project lunch seminar, Leonardo Rosado presents the mockup tool that has been developed to characterise the building stock of materials in Gothenburg for potential recycling and reuse.",
+            "thumbnail": "urn:li:image:D4D27AQGz_ArWgJ1WBg",
+            "source": "https://www.youtube.com/watch?v=jyoRbiPOzQQ",
+            "title": "DTCC Milestone Project Lunch Seminars 2024: Digital Twins for Circularity"
+          }
+        },
+        "commentary": "Did you miss our Milestone Project Lunch Seminar on Digital Twins for Circularity? No worries - you can watch it on our Youtube channel, presented by @[Leonardo Rosado](urn:li:person:okoYJqimqk). Enjoy!",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
     }
   ]
 }
