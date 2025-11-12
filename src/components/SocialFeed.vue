@@ -59,6 +59,8 @@ onMounted(async () => {
       .map(normalizePost)
       .filter((post) => post.summary || post.image)
     posts.value = mapped.slice(0, MAX_POSTS)
+    // Preload the first batch of hidden images
+    preloadNextBatch()
   } catch (err) {
     errorMessage.value = err instanceof Error ? err.message : String(err)
   } finally {
@@ -69,11 +71,27 @@ onMounted(async () => {
 const displayedPosts = computed(() => posts.value.slice(0, currentDisplayCount.value))
 const hasMorePosts = computed(() => currentDisplayCount.value < posts.value.length)
 
+// Preload images for upcoming posts
+function preloadNextBatch() {
+  const nextStart = currentDisplayCount.value
+  const nextEnd = Math.min(nextStart + POSTS_PER_LOAD, posts.value.length)
+
+  for (let i = nextStart; i < nextEnd; i++) {
+    const post = posts.value[i]
+    if (post?.image) {
+      const img = new Image()
+      img.src = post.image
+    }
+  }
+}
+
 function loadMore() {
   currentDisplayCount.value = Math.min(
     currentDisplayCount.value + POSTS_PER_LOAD,
     posts.value.length
   )
+  // Preload the next batch after loading current one
+  preloadNextBatch()
 }
 
 function normalizePost(raw = {}) {
