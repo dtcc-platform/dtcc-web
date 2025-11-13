@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Performance Test</title>
+  <style>
+    body { font-family: monospace; padding: 20px; background: #1a1a1a; color: #fff; }
+    .good { color: #4caf50; }
+    .warning { color: #ff9800; }
+    .poor { color: #f44336; }
+    h2 { border-bottom: 2px solid #444; padding-bottom: 10px; }
+    .metric { margin: 10px 0; padding: 10px; background: #2a2a2a; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <h1>DTCC Web Performance Test</h1>
+  <div id="results">Loading performance metrics...</div>
+
+  <script>
+    function getScoreClass(value, goodThreshold, poorThreshold) {
+      if (value < goodThreshold) return 'good';
+      if (value < poorThreshold) return 'warning';
+      return 'poor';
+    }
+
+    function formatMs(ms) {
+      return ms ? `${ms.toFixed(1)}ms` : 'N/A';
+    }
+
+    async function measurePerformance() {
+      const results = document.getElementById('results');
+      let html = '<h2>Core Web Vitals</h2>';
+
+      // Wait for page to fully load
+      if (document.readyState !== 'complete') {
+        await new Promise(resolve => window.addEventListener('load', resolve));
+      }
+
+      // Get Navigation Timing
+      const perfData = performance.getEntriesByType('navigation')[0];
+
+      // Calculate metrics
+      const ttfb = perfData.responseStart - perfData.fetchStart;
+      const domContentLoaded = perfData.domContentLoadedEventEnd - perfData.fetchStart;
+      const fullLoad = perfData.loadEventEnd - perfData.fetchStart;
+
+      // Try to get LCP
+      let lcp = null;
+      const lcpEntries = performance.getEntriesByType('largest-contentful-paint');
+      if (lcpEntries.length > 0) {
+        lcp = lcpEntries[lcpEntries.length - 1].startTime;
+      }
+
+      // Get FCP
+      let fcp = null;
+      const fcpEntries = performance.getEntriesByName('first-contentful-paint');
+      if (fcpEntries.length > 0) {
+        fcp = fcpEntries[0].startTime;
+      }
+
+      // Display results
+      html += '<div class="metric">';
+      html += '<strong>TTFB (Time to First Byte):</strong> ';
+      html += `<span class="${getScoreClass(ttfb, 600, 1800)}">${formatMs(ttfb)}</span>`;
+      html += ' (Good < 600ms, Poor > 1800ms)';
+      html += '</div>';
+
+      html += '<div class="metric">';
+      html += '<strong>FCP (First Contentful Paint):</strong> ';
+      html += `<span class="${fcp ? getScoreClass(fcp, 1800, 3000) : ''}">${formatMs(fcp)}</span>`;
+      html += ' (Good < 1.8s, Poor > 3.0s)';
+      html += '</div>';
+
+      html += '<div class="metric">';
+      html += '<strong>LCP (Largest Contentful Paint):</strong> ';
+      if (lcp) {
+        html += `<span class="${getScoreClass(lcp, 2500, 4000)}">${formatMs(lcp)}</span>`;
+        html += ' (Good < 2.5s, Poor > 4.0s)';
+      } else {
+        html += '<span>Not available - use Chrome DevTools for accurate LCP</span>';
+      }
+      html += '</div>';
+
+      html += '<div class="metric">';
+      html += '<strong>DOM Content Loaded:</strong> ';
+      html += `<span class="${getScoreClass(domContentLoaded, 2000, 4000)}">${formatMs(domContentLoaded)}</span>`;
+      html += '</div>';
+
+      html += '<div class="metric">';
+      html += '<strong>Full Page Load:</strong> ';
+      html += `<span class="${getScoreClass(fullLoad, 3000, 5000)}">${formatMs(fullLoad)}</span>`;
+      html += '</div>';
+
+      // Resource timing
+      html += '<h2>Resource Loading</h2>';
+
+      const resources = performance.getEntriesByType('resource');
+      const posters = resources.filter(r => r.name.includes('poster'));
+      const videos = resources.filter(r => r.name.includes('.mp4'));
+
+      if (posters.length > 0) {
+        html += '<div class="metric"><strong>Poster Images:</strong><ul>';
+        posters.forEach(p => {
+          const loadTime = p.responseEnd - p.fetchStart;
+          html += `<li>${p.name.split('/').pop()}: `;
+          html += `<span class="${getScoreClass(loadTime, 200, 500)}">${formatMs(loadTime)}</span></li>`;
+        });
+        html += '</ul></div>';
+      }
+
+      if (videos.length > 0) {
+        html += '<div class="metric"><strong>Videos:</strong><ul>';
+        videos.forEach(v => {
+          const loadTime = v.responseEnd - v.fetchStart;
+          html += `<li>${v.name.split('/').pop()}: `;
+          html += `<span class="${getScoreClass(loadTime, 2000, 5000)}">${formatMs(loadTime)}</span></li>`;
+        });
+        html += '</ul></div>';
+      }
+
+      html += '<h2>Recommendations</h2>';
+      html += '<div class="metric">';
+      html += '<p>For accurate LCP and CLS scores:</p>';
+      html += '<ol>';
+      html += '<li>Open Chrome DevTools (F12)</li>';
+      html += '<li>Go to Lighthouse tab</li>';
+      html += '<li>Run Performance audit</li>';
+      html += '</ol>';
+      html += '<p>Or visit your site and run this in console:</p>';
+      html += '<code>performance.getEntriesByType("largest-contentful-paint")</code>';
+      html += '</div>';
+
+      results.innerHTML = html;
+    }
+
+    // Run measurement
+    if (document.readyState === 'complete') {
+      setTimeout(measurePerformance, 100);
+    } else {
+      window.addEventListener('load', () => setTimeout(measurePerformance, 100));
+    }
+  </script>
+</body>
+</html>
