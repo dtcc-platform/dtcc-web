@@ -182,7 +182,7 @@ const pillars = computed(() => [
 .pillars { padding-top: 20px; padding-bottom: 40px; }
 .pillars-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .pillar { padding: 28px; display: flex; flex-direction: column; gap: 16px; }
-.pillar h2 { color: white; }
+.pillar h2 { color: var(--cta-f26a2e); }
 .partners-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .partners-list li { font-weight: 600; color: white; }
 
