@@ -20,16 +20,12 @@ import IntroSection from './components/IntroSection.vue'
 import GradientFeature from './components/GradientFeature.vue'
 import WhatAreTwins from './components/WhatAreTwins.vue'
 import ProjectsSection from './components/ProjectsSection.vue'
+import SocialFeed from './components/SocialFeed.vue'  // Loaded eagerly to fix navigation
 import FooterSection from './components/FooterSection.vue'
 import LoadingSpinner from './components/LoadingSpinner.vue'
 
 // Lazy load below-the-fold components - loads when user scrolls
-const SocialFeed = defineAsyncComponent({
-  loader: () => import('./components/SocialFeed.vue'),
-  loadingComponent: LoadingSpinner,
-  delay: 200,
-  timeout: 10000
-})
+// Note: SocialFeed is now eagerly loaded since it's a navigation target (#linkedin-feed)
 
 const CTAStudents = defineAsyncComponent({
   loader: () => import('./components/CTAStudents.vue'),
