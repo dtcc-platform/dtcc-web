@@ -1,14 +1,16 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { visualizer } from 'rollup-plugin-visualizer'
-import viteCompression from 'vite-plugin-compression'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  // Auto-detect GitHub Pages builds and set the proper base path
+  // Auto-detect deployment target and set the proper base path
+  // For CloudFront: DEPLOY_TARGET=cloudfront sets base to '/'
+  // For GitHub Pages: Auto-detects and sets base to '/dtcc-web/'
   const isGhActions = process.env.GITHUB_ACTIONS === 'true'
   const repo = process.env.GITHUB_REPOSITORY?.split('/')?.pop() || ''
-  const base = isGhActions && repo ? `/${repo}/` : '/'
+  const isCloudFront = process.env.DEPLOY_TARGET === 'cloudfront'
+  const base = isCloudFront ? '/' : (isGhActions && repo ? `/${repo}/` : '/')
   return {
     plugins: [
       vue(),
@@ -18,22 +20,8 @@ export default defineConfig(({ mode }) => {
         gzipSize: true,
         brotliSize: true,
       }),
-      // Gzip compression
-      viteCompression({
-        verbose: true,
-        disable: false,
-        threshold: 1024, // Only compress files larger than 1KB
-        algorithm: 'gzip',
-        ext: '.gz',
-      }),
-      // Brotli compression
-      viteCompression({
-        verbose: true,
-        disable: false,
-        threshold: 1024,
-        algorithm: 'brotliCompress',
-        ext: '.br',
-      }),
+      // Note: Compression is handled by CloudFront for AWS deployments
+      // GitHub Pages deployment uses pre-compression if needed
     ],
     base,
     build: {
