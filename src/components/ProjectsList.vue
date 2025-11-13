@@ -4,7 +4,7 @@
     <section class="section gradient-sunrise intro">
       <div class="container grid2">
         <div>
-          <h1 class="h2-50">Projects landing:<br>Our latest projects</h1>
+          <h1 class="h2-50">Our latest projects</h1>
         </div>
         <div>
           <p class="brodtext-20 muted">
