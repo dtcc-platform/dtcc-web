@@ -224,6 +224,7 @@ const pillars = computed(() => [
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  align-self: flex-start;
   padding: 12px 32px;
   font-size: 1rem;
   font-weight: 600;
