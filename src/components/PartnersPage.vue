@@ -224,19 +224,23 @@ const pillars = computed(() => [
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 18px;
-  border-radius: 999px;
+  padding: 12px 32px;
+  font-size: 1rem;
   font-weight: 600;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  color: white;
+  color: #fff;
+  background: var(--cta-f26a2e);
+  border: none;
+  border-radius: 8px;
   text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  transition: background 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
 }
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: var(--unnamed-color-fada36);
+  background: #d94e1e;
+  transform: translateY(-1px);
+}
+.btn-secondary:active {
+  transform: translateY(0);
 }
 
 @media (max-width: 1200px) {
