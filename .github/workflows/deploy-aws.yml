@@ -12,6 +12,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      # Expose secrets as env vars so they can be used in if conditionals
+      # (secrets cannot be directly referenced in if conditions)
+      CLOUDFRONT_DIST_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
 
     steps:
       - name: Checkout code
@@ -62,10 +66,10 @@ jobs:
             --delete
 
       - name: Invalidate CloudFront cache
-        if: ${{ github.event.inputs.invalidate_cloudfront == 'true' && secrets.CLOUDFRONT_DISTRIBUTION_ID != '' }}
+        if: ${{ github.event.inputs.invalidate_cloudfront == 'true' && env.CLOUDFRONT_DIST_ID != '' }}
         run: |
           aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --distribution-id ${{ env.CLOUDFRONT_DIST_ID }} \
             --paths "/*.html" "/news/*.html" "/projects/*.html" "/events/*.html" "/partners/*.html" "/gallery/*.html" "/contact/*.html" "/dtcc-1/*.html" "/content/*"
 
       - name: Deployment summary
@@ -73,6 +77,6 @@ jobs:
           echo "✅ Deployment completed successfully!"
           echo "📦 Bucket: s3://${{ secrets.S3_BUCKET }}"
           echo "🌍 Region: eu-north-1"
-          if [ "${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}" != "" ]; then
+          if [ -n "${{ env.CLOUDFRONT_DIST_ID }}" ]; then
             echo "🚀 CloudFront invalidation: ${{ github.event.inputs.invalidate_cloudfront }}"
           fi
