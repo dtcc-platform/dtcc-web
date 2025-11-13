@@ -40,15 +40,20 @@
               v-for="(image, i) in galleryItems"
               :key="`${i}-${image.src}`"
               class="gallery-card"
+              role="button"
+              tabindex="0"
+              @click="openLightbox(image)"
+              @keydown.enter.prevent="openLightbox(image)"
+              @keydown.space.prevent="openLightbox(image)"
             >
-              <a :href="image.src" target="_blank" rel="noopener">
+              <div class="image-wrapper">
                 <img
                   :src="image.src"
                   :alt="image.caption || `${item.title} image ${i + 2}`"
                   loading="lazy"
                   decoding="async"
                 />
-              </a>
+              </div>
               <figcaption v-if="image.caption" class="caption">{{ image.caption }}</figcaption>
             </figure>
           </div>
@@ -115,10 +120,28 @@
       </div>
     </section>
   </main>
+
+  <!-- Lightbox for gallery images -->
+  <div
+    v-if="activeImage"
+    class="lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Image lightbox"
+    @click.self="closeLightbox"
+  >
+    <div class="panel">
+      <button class="close" type="button" aria-label="Close lightbox" @click="closeLightbox">×</button>
+      <img class="full" :src="activeImage.src" :alt="activeImage.caption || item.title" />
+      <div v-if="activeImage.caption" class="caption-panel">
+        <p class="brodtext-20" v-text="activeImage.caption" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { sanitizeSrc, sanitizeUrl, isValidSlug } from '../utils/sanitize'
 import { withBase, resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
 import { ensureYouTubeEmbed } from '../utils/video'
@@ -138,6 +161,21 @@ const related = ref([])
 const contacts = ref([])
 const MAX_CONTACTS = 2
 const { isAuthenticated } = usePostSession()
+
+// Lightbox state for gallery images
+const activeImage = ref(null)
+
+const openLightbox = (image) => {
+  activeImage.value = image
+}
+
+const closeLightbox = () => {
+  activeImage.value = null
+}
+
+const handleKeydown = (event) => {
+  if (event.key === 'Escape') closeLightbox()
+}
 const videoEmbed = computed(() => item.value?.video || null)
 const galleryItems = computed(() => {
   const images = Array.isArray(item.value?.images) ? item.value.images : []
@@ -193,6 +231,9 @@ const normalizePapers = (value) => {
 }
 
 onMounted(async () => {
+  // Add keyboard listener for lightbox
+  window.addEventListener('keydown', handleKeydown)
+
   if (!slug || !isValidSlug(slug)) return
   try {
     const r = await fetch(resolveUrl(`content/projects/${slug}.json`), { cache: 'default' })
@@ -295,6 +336,10 @@ onMounted(async () => {
   } catch (_) {}
 })
 
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown)
+})
+
 let usersCache = null
 async function loadUsersMap() {
   if (usersCache) return usersCache
@@ -342,8 +387,30 @@ async function loadUsersMap() {
 
 .body { padding-top: 24px; padding-bottom: 24px; }
 .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
-.gallery-card { margin: 0; padding: 12px; border-radius: 12px; background: rgba(242, 243, 249, 0.9); display: flex; flex-direction: column; gap: 8px; }
-.gallery-card a { display: block; border-radius: 10px; overflow: hidden; }
+.gallery-card {
+  margin: 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(242, 243, 249, 0.9);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.gallery-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.gallery-card:focus-visible {
+  box-shadow: 0 0 0 3px rgba(250, 218, 54, 0.65);
+}
+.gallery-card .image-wrapper {
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+}
 .gallery-card img {
   display: block;
   width: 100%;
@@ -382,6 +449,57 @@ async function loadUsersMap() {
 .papers-list li { margin-bottom: 6px; }
 .papers-list a { color: var(--cta-f26a2e); font-weight: 600; word-break: break-word; }
 
+/* Lightbox styles */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 14, 0.75);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  z-index: 50;
+  backdrop-filter: blur(4px);
+}
+.panel {
+  background: #fff;
+  border-radius: 18px;
+  max-width: min(1200px, 92vw);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.35);
+  position: relative;
+}
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: none;
+  background: rgba(17,17,23,0.7);
+  color: #fff;
+  font-size: 22px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  transition: filter 0.2s;
+}
+.close:hover { filter: brightness(1.1); }
+.full {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  max-height: 70vh;
+  background: #050507;
+}
+.caption-panel {
+  padding: 20px 24px 24px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,1) 70%);
+}
+
 @media (max-width: 1000px) {
   .grid2 { grid-template-columns: 1fr; }
   .hero-img {
@@ -394,5 +512,7 @@ async function loadUsersMap() {
   .contacts .people { grid-template-columns: 1fr; }
   .related .cards { grid-template-columns: 1fr; }
   .papers-list { padding-left: 20px; }
+  .panel { max-height: 92vh; }
+  .full { max-height: 58vh; }
 }
 </style>
