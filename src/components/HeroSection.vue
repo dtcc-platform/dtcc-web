@@ -71,12 +71,13 @@ const slides = [
     id: 0,
     title: 'A smarter city starts<br>with a digital twin.',
     video: `${BASE_URL}carousel-hero.mp4`,
-    poster: ''
+    poster: `${BASE_URL}carousel-hero-poster.jpg`
   },
   {
     id: 1,
     title: 'Plan with confidence.<br>Test before you build.',
     video: `${BASE_URL}content/gate-moving-pathlines.mp4`,
+    poster: `${BASE_URL}content/gate-moving-pathlines-poster.jpg`
   },
   {
     id: 2,
