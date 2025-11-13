@@ -5,11 +5,7 @@
         <div>
           <h1 class="h2-50">Gallery</h1>
           <p class="brodtext-20 muted">
-            A visual record of DTCC projects, experiments, and community moments. Items are sourced from the
-            repository content folder so new imagery can be published without a code change.
-          </p>
-          <p class="brodtext-20 muted" v-if="items.length">
-            Currently featuring {{ items.length }} highlight{{ items.length === 1 ? '' : 's' }}.
+            A visual record of DTCC projects, experiments, and community moments.
           </p>
         </div>
       </div>
