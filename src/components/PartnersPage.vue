@@ -68,11 +68,6 @@
       <div class="container grid2">
         <div>
           <h2 class="h3-30">Interested in partnering with DTCC?</h2>
-          <p class="brodtext-20 muted">
-            We welcome organisations that want to experiment, pilot and scale digital twin solutions for
-            the built environment. Whether you are exploring research collaboration, innovation projects or
-            long-term memberships, we would love to start a conversation.
-          </p>
         </div>
         <div class="cta-box card">
           <p class="brodtext-20 muted">
