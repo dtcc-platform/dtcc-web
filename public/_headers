@@ -1,0 +1,12 @@
+# Netlify Headers Configuration
+# Copy this file to your Netlify deployment for proper CSP with frame-ancestors
+
+/*
+  # Content Security Policy with frame-ancestors
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'; frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com; child-src 'self' https://www.youtube-nocookie.com https://www.youtube.com; connect-src 'self'; img-src 'self' https: data: blob:; media-src 'self' https:; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; upgrade-insecure-requests
+
+  # Additional security headers
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
