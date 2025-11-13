@@ -2,6 +2,46 @@
 
 This guide explains how to deploy the DTCC web platform to AWS S3 and CloudFront.
 
+## 🚀 Quick Start (Automated CLI Setup)
+
+**The fastest way to set up everything:**
+
+```bash
+# 1. Configure AWS CLI credentials first
+aws configure
+
+# 2. Edit bucket name in the script if desired (optional)
+nano scripts/setup-aws-cloudfront.sh
+
+# 3. Run the automated setup script
+./scripts/setup-aws-cloudfront.sh
+```
+
+This script automatically creates:
+- ✅ S3 bucket with proper permissions
+- ✅ CloudFront Origin Access Control (OAC)
+- ✅ Response Headers Policy (CSP, security headers)
+- ✅ CloudFront distribution with optimized cache behaviors
+- ✅ S3 bucket policy for CloudFront access
+
+**Takes ~15 minutes** (most of it is waiting for CloudFront deployment).
+
+The script will output your:
+- `CLOUDFRONT_DISTRIBUTION_ID`
+- `S3_BUCKET` name
+- CloudFront URL
+
+Add these to GitHub Secrets and you're ready to deploy!
+
+### Optional: Teardown Everything
+
+To delete all resources:
+```bash
+./scripts/teardown-aws-cloudfront.sh
+```
+
+---
+
 ## Overview
 
 The DTCC web platform supports dual deployment:
