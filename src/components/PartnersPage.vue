@@ -219,12 +219,12 @@ const pillars = computed(() => [
 }
 
 .contact-cta { padding: 40px 0; background: rgba(0, 0, 0, 0.5); }
-.cta-box { padding: 28px; display: flex; flex-direction: column; gap: 16px; }
+.cta-box { padding: 28px; display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center; }
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  align-self: flex-start;
+  align-self: center;
   padding: 12px 32px;
   font-size: 1rem;
   font-weight: 600;
