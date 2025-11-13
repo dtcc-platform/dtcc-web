@@ -49,7 +49,7 @@ const currentDisplayCount = ref(INITIAL_DISPLAY)
 
 onMounted(async () => {
   try {
-    const response = await fetch(withBase(FEED_PATH), { cache: 'no-store' })
+    const response = await fetch(withBase(FEED_PATH), { cache: 'default' })
     if (!response.ok) {
       throw new Error(`Unable to load LinkedIn feed (${response.status})`)
     }

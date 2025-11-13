@@ -9,7 +9,7 @@
           muted
           loop
           playsinline
-          preload="auto"
+          preload="metadata"
         ></video>
         <button class="play" @click="togglePlay" :aria-label="isPlaying ? 'Pause video' : 'Play video'">
           {{ isPlaying ? '⏸' : '▶' }}
