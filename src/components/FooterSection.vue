@@ -14,13 +14,13 @@
       </div>
       <div>
         <div class="eyebrow">Contact</div>
-        <div class="brodtext-20 muted">Bernd Ketzler<br/>Scientific Coordinator<br/>dtcc@chalmers.se</div>
+        <div class="address">dtcc@chalmers.se</div>
       </div>
       <div>
         <div class="eyebrow">Follow</div>
-        <div class="brodtext-20 muted">
-          <a href="https://www.linkedin.com/company/digital-twin-cities-centre/" target="_blank" rel="noopener">LinkedIn</a>
-          <!-- <br><a href="#">Instagram</a> -->
+        <div class="address">
+          <a href="https://www.linkedin.com/company/digital-twin-cities-centre/" target="_blank" rel="noopener">LinkedIn</a><br/>
+          <a href="https://www-1.dtcc.chalmers.se" target="_blank" rel="noopener">DTCC 2020-2025</a>
         </div>
       </div>
     </div>
@@ -46,6 +46,13 @@
   font-size: 16px;
   line-height: 1.4;
   font-weight: var(--weight-300, 300);
+}
+.address a {
+  color: #ffffff;
+  text-decoration: none;
+}
+.address a:hover {
+  text-decoration: underline;
 }
 .legal { border-top: 1px solid rgba(255,255,255,0.08); margin-top: 20px; padding-top: 16px; color: var(--unnamed-color-fada36); text-align: center; }
 /* Ensure legal text stays yellow even if it has .muted */
