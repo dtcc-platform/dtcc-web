@@ -75,9 +75,8 @@ const slides = [
   },
   {
     id: 1,
-    title: 'Plan with confidence.<br>Test before you build.'
-    // video: `${BASE_URL}content/gate-moving-pathlines.mp4`, // Disabled
-    // poster: `${BASE_URL}content/gate-moving-pathlines-poster.jpg` // Disabled
+    title: 'Plan with confidence.<br>Test before you build.',
+    video: `${BASE_URL}content/gate-moving-pathlines-downscaled.mp4`
   },
   {
     id: 2,
