@@ -76,7 +76,7 @@ const slides = [
   {
     id: 1,
     title: 'Plan with confidence<br>Test before you build',
-    video: `${BASE_URL}content/gate-moving-pathlines-downscaled.mp4`
+    video: `${BASE_URL}content/gate-moving-pathlines-optimized.mp4`
   },
   {
     id: 2,
