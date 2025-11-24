@@ -8,9 +8,11 @@
   "subheading": "Details",
   "url": "/projects/detail.html?slug=digital-live-building-twin",
   "date": "2025-10-31",
-  "image": "content/projects/digital-live-building-twin.webp",
+  "previewImage": "content/projects/digital-live-building-twin-preview.webp",
+  "image": "content/projects/digital-live-building-twin-headline.webp",
+  "headlineImage": "content/projects/digital-live-building-twin-headline.webp",
   "images": [
-    "content/projects/digital-live-building-twin.webp"
+    "content/projects/digital-live-building-twin-headline.webp"
   ],
   "contacts": [
     "franziska-hunger"
