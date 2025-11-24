@@ -8,10 +8,11 @@
   "subheading": "Details",
   "url": "/projects/detail.html?slug=reclaimed-redesigned-re-twinned-digital-twins-for-architectural-reuse",
   "date": "2025-10-31",
-  "image": "content/projects/reclaimed-redesigned-re-twinned-digital-twins-for-architectural-reuse.webp",
+  "previewImage": "content/projects/reclaimed-redesigned-re-twinned-digital-twins-for-architectural-reuse-preview.webp",
+  "image": "content/projects/reclaimed-redesigned-re-twinned-digital-twins-for-architectural-reuse-headline.webp",
+  "headlineImage": "content/projects/reclaimed-redesigned-re-twinned-digital-twins-for-architectural-reuse-headline.webp",
   "images": [
-    "content/projects/reclaimed-redesigned-re-twinned-digital-twins-for-architectural-reuse.webp",
-    "content/projects/reclaimed-redesigned-re-twinned-digital-twins-for-architectural-reuse-1.webp"
+    "content/projects/reclaimed-redesigned-re-twinned-digital-twins-for-architectural-reuse-headline.webp"
   ],
   "contacts": [
     "malgorzata-zboinska"
