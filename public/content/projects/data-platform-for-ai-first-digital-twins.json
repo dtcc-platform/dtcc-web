@@ -8,9 +8,11 @@
   "subheading": "Details",
   "url": "/projects/detail.html?slug=data-platform-for-ai-first-digital-twins",
   "date": "2025-10-31",
-  "image": "content/projects/data-platform-for-ai-first-digital-twins.webp",
+  "previewImage": "content/projects/data-platform-for-ai-first-digital-twins-preview.webp",
+  "image": "content/projects/data-platform-for-ai-first-digital-twins-headline.webp",
+  "headlineImage": "content/projects/data-platform-for-ai-first-digital-twins-headline.webp",
   "images": [
-    "content/projects/data-platform-for-ai-first-digital-twins.webp"
+    "content/projects/data-platform-for-ai-first-digital-twins-headline.webp"
   ],
   "contacts": [
     "dag-wastberg"
