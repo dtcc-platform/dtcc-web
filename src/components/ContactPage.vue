@@ -4,14 +4,14 @@
     <section class="section gradient-sunrise intro">
       <div class="container grid2">
         <div>
-          <h1 class="h3-30">Operative management team</h1>
+          <h1 class="h3-30">Operative Management Team</h1>
           <div class="links">
             <a class="more" :href="base + 'about/'">About us »</a>
           </div>
         </div>
         <div>
           <p class="brodtext-20 muted">
-            The Operational Management Team is responsible for the daily operations of the centre,
+            The Operative Management Team is responsible for the daily operations of the centre,
             including promoting its activities and achievements, managing finances, providing technical support,
             preparing project reports, and maintaining relations with the funding organization.
           </p>
@@ -119,7 +119,7 @@
         <div>
           <p class="brodtext-20 muted">
             External advisors provide independent perspectives, benchmark DTCC internationally, and suggest
-            new collaborations that strengthen our research agenda.
+            new collaborations and directions that strengthen our research agenda.
           </p>
         </div>
       </div>

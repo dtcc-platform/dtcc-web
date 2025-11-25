@@ -103,7 +103,7 @@ const PARTNER_LINKS = {
   Chalmers: 'https://www.chalmers.se/',
   'Democritus University of Thrace': 'https://www.duth.gr/en',
   'Doing Good': 'https://www.doinggood.se/',
-  'Fraunhofer Chalmers': 'https://www.fcc.chalmers.se/',
+  'Fraunhofer-Chalmers Centre': 'https://www.fcc.chalmers.se/',
   'Gdańsk University of Technology': 'https://pg.edu.pl/en',
   'Göteborgs stad': 'https://goteborg.se/',
   'Halmstads kommun': 'https://www.halmstad.se/',
@@ -114,7 +114,7 @@ const PARTNER_LINKS = {
   Lantmäteriet: 'https://www.lantmateriet.se/',
   Liljewall: 'https://liljewall.se/',
   'Lindholmen Science Park': 'https://www.lindholmen.se/',
-  'Lunds University': 'https://www.lunduniversity.lu.se/',
+  'Lund University': 'https://www.lunduniversity.lu.se/',
   'Lunds kommun': 'https://www.lund.se/',
   NCC: 'https://www.ncc.se/',
   NTNU: 'https://www.ntnu.edu/',
@@ -129,7 +129,7 @@ const PARTNER_LINKS = {
   'University of Patras': 'https://www.upatras.gr/en/',
   'University of Salento': 'https://international.unisalento.it/',
   'University of Twente': 'https://www.utwente.nl/en/',
-  'University of the Aegan': 'https://www.aegean.gr/en/',
+  'University of the Aegean': 'https://www.aegean.gr/en/',
   Winniio: 'https://winniio.com/',
 }
 
@@ -159,7 +159,7 @@ const pillars = computed(() => [
   {
     title: 'Public sector',
     description:
-      'Municipalities and agencies ensure that platform development aligns with societal challenges, open data policies and long-term planning needs.',
+      'Municipalities and agencies ensure that research aligns with societal challenges, open data policies and long-term planning needs.',
     examples: ['Göteborgs Stad', 'Höganäs Kommun', 'Chalmers Industriteknik'],
   },
   {

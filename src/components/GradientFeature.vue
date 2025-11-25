@@ -3,7 +3,7 @@
     <div class="gradient-sunrise angled">
       <div class="container inner">
         <div class="left">
-          <h2 class="h2-50">Creating<br>liveable<br>cities.</h2>
+          <h2 class="h2-50">Creating<br>liveable<br>cities</h2>
         </div>
         <div class="right">
           <div class="video-container">
