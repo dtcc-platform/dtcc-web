@@ -49,6 +49,19 @@
         </div>
       </div>
     </section>
+
+    <section class="section gradient-sunrise body">
+      <div class="container grid2">
+        <div>
+          <h2 class="h3-30">Funding</h2>
+        </div>
+        <div>
+          <p class="brodtext-20 muted">
+            DTCC is funded by Sweden's Innovation Agency <a href="https://www.vinnova.se/" target="_blank" rel="noopener">Vinnova</a> under Grant No. 2024-03904.
+          </p>
+        </div>
+      </div>
+    </section>
   </main>
 </template>
 
