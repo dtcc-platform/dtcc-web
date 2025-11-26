@@ -107,7 +107,23 @@ def extract_media_info(post, access_token):
             media_info["media_type"] = "video"
         elif 'document' in media_urn:
             media_info["media_type"] = "document"
-    
+
+    # Check for multiImage (carousel posts) - use first image
+    elif 'multiImage' in content:
+        multi_image = content['multiImage']
+        images = multi_image.get('images', [])
+        if images:
+            first_image = images[0]
+            media_urn = first_image.get('id', '')
+            media_info["media_urn"] = media_urn
+            media_info["has_media"] = True
+            media_info["media_type"] = "image"
+            # Fetch image URL using existing function
+            if 'image' in media_urn:
+                image_details = get_image_details(media_urn, access_token)
+                if image_details:
+                    media_info["image_url"] = image_details.get('downloadUrl')
+
     # Check for article with thumbnail
     if 'article' in content:
         article = content['article']
