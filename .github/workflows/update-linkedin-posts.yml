@@ -9,8 +9,8 @@ on:
         default: false
         type: boolean
   schedule:
-    # Run weekly on Mondays at 9 AM UTC (optional - remove if you only want manual)
-    - cron: '0 9 * * 1'
+    # Run daily at midnight UTC
+    - cron: '0 0 * * *'
 
 permissions:
   contents: write
