@@ -1,5 +1,7 @@
 {
   "title": "Gibraltargatan district",
-  "description": "Urban geometry capture of Gibraltargatan demonstrating street-level simulation assets. For more info on the project, visit https://www.youtube.com/watch?v=-4btcZW-g1c",
+  "description": "Urban geometry capture of Gibraltargatan demonstrating street-level simulation assets.",
+  "link": "https://www.youtube.com/watch?v=-4btcZW-g1c",
+  "linkText": "More info on the project",
   "image": "/content/gallery/gibraltargatan.webp"
 }
