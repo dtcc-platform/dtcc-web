@@ -28,6 +28,7 @@
             <figcaption>
               <h3 class="h3-30" v-text="entry.title" />
               <p class="brodtext-20 muted" v-text="entry.description" />
+              <a v-if="entry.link" class="more" :href="entry.link" target="_blank" rel="noopener" @click.stop>{{ entry.linkText }} &raquo;</a>
             </figcaption>
           </figure>
         </div>
@@ -55,6 +56,7 @@
         <div class="caption">
           <h3 class="h3-30" :id="`gallery-item-${activeItem.id}`" v-text="activeItem.title" />
           <p class="brodtext-20 muted" v-text="activeItem.description" />
+          <a v-if="activeItem.link" class="more" :href="activeItem.link" target="_blank" rel="noopener">{{ activeItem.linkText }} &raquo;</a>
         </div>
       </div>
     </div>
@@ -80,7 +82,9 @@ const normalizeItem = (payload = {}, fallbackId = '') => {
   const description = payload.description || payload.summary || payload.caption || ''
   const imageCandidate = payload.image || payload.thumbnail || null
   const image = sanitizeSrc(resolveUrl(imageCandidate))
-  return image ? { id, title, description, image } : null
+  const link = payload.link || payload.url || ''
+  const linkText = payload.linkText || 'Learn more'
+  return image ? { id, title, description, image, link, linkText } : null
 }
 
 const open = (item) => { activeItem.value = item }
@@ -199,6 +203,8 @@ const items = computed(() => {
   background-position: center;
 }
 .tile figcaption { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 10px; }
+a.more { color: var(--cta-f26a2e); font-weight: 600; text-decoration: none; }
+a.more:hover { text-decoration: underline; }
 .tile { cursor: pointer; outline: none; }
 .tile:focus-visible { box-shadow: 0 0 0 3px rgba(250, 218, 54, 0.65); }
 
