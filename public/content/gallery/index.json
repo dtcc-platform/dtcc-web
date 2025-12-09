@@ -1,7 +1,7 @@
 {
   "items": [
-    { "base": "city-scan" },
-    { "base": "wind-tunnel" },
-    { "base": "campus-model" }
+    { "base": "chalmers" },
+    { "base": "gibraltargatan" },
+    { "base": "lindholmen" }
   ]
 }

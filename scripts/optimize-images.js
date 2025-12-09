@@ -35,6 +35,9 @@ const IMAGES_TO_OPTIMIZE = [
   'content/Tara-Wood-BW.jpg',
   'content/News Placeholder.png',
   'content/Projects Placeholder.png',
+  'content/chalmers.png',
+  'content/gibraltargatan.png',
+  'content/lindholmen.png',
 ];
 
 /**
