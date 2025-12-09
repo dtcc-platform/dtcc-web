@@ -80,7 +80,8 @@ const slides = [
   },
   {
     id: 2,
-    title: 'Shaping tomorrow\'s cities<br>with digital twins'
+    title: 'Shaping tomorrow\'s cities<br>with digital twins',
+    image: `${BASE_URL}content/HighresScreenshot00115.webp`
   }
 ]
 
