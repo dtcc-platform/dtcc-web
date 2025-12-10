@@ -1,5 +1,7 @@
 {
   "title": "Lindholmen science park",
   "description": "Multi-layer model of Lindholmen combining structural and environmental data for urban planning.",
+  "link": "https://www.fcc.chalmers.se/software/ips/iboflow/",
+  "linkText": "More info on the project",
   "image": "/content/gallery/lindholmen.webp"
 }
