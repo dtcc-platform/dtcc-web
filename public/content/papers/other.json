@@ -1,0 +1,44 @@
+{
+  "name": "Other",
+  "slug": "other",
+  "count": 2,
+  "fetched_at": "2025-12-10T12:26:28.557580+00:00",
+  "papers": [
+    {
+      "id": 42,
+      "doi": "10.1088/1742-6596/2600/3/032006",
+      "title": "Gothenburg Digital Twin. Modelling and communicating the effect of temperature change scenarios on building demand",
+      "author_name": "D Maiullari",
+      "journal": "Journal of Physics: Conference Series",
+      "date": "2023-11-01",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Claudio Nageli",
+        "Andreas Rudena",
+        "Liane Thuvander"
+      ]
+    },
+    {
+      "id": 70,
+      "doi": "10.1007/978-3-031-63227-3_30",
+      "title": "Non-intrusive Weather Analysis for Sustainable Preservation in Cultural Heritage Buildings",
+      "author_name": "Asimina Dimara",
+      "journal": "IFIP Advances in Information and Communication Technology",
+      "date": "2024-01-01",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Mariya Pantusheva",
+        "Radostin Mitkov",
+        "Vasilis Naserentin",
+        "George Spaias",
+        "Orfeas Eleftheriou",
+        "Stelios Krinidis",
+        "Christos-Nikolaos Anagnostopoulos",
+        "Dessislava Petrova-Antonova",
+        "Anders Logg"
+      ]
+    }
+  ]
+}

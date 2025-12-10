@@ -1,0 +1,238 @@
+{
+  "name": "Twinable",
+  "slug": "twinable",
+  "count": 14,
+  "fetched_at": "2025-12-10T12:26:28.557580+00:00",
+  "papers": [
+    {
+      "id": 32,
+      "doi": "10.1088/1755-1315/1078/1/012087",
+      "title": "Matching energy targets, stakeholders’ needs and modelling choices in developing urban energy scenarios",
+      "author_name": "D Maiullari",
+      "journal": "IOP Conference Series: Earth and Environmental Science",
+      "date": "2022-09-01",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "A Palm",
+        "H Wallbaum",
+        "L Thuvander"
+      ]
+    },
+    {
+      "id": 34,
+      "doi": "10.1088/1755-1315/1085/1/012041",
+      "title": "Pathways towards carbon neutrality: A participatory analysis of the Gothenburg’s energy plan",
+      "author_name": "D Maiullari",
+      "journal": "IOP Conference Series: Earth and Environmental Science",
+      "date": "2022-09-01",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "A Palm",
+        "H Wallbaum",
+        "L Thuvander"
+      ]
+    },
+    {
+      "id": 36,
+      "doi": "10.5194/isprs-archives-XLVIII-4-W5-2022-189-2022",
+      "title": "PROCEDURAL DIGITAL TWIN GENERATION FOR CO-CREATING IN VR FOCUSING ON VEGETATION",
+      "author_name": "L. Thuvander",
+      "journal": "The International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences",
+      "date": "2022-10-17",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "S. Somanath",
+        "A. Hollberg"
+      ]
+    },
+    {
+      "id": 56,
+      "doi": "10.1007/978-3-031-37189-9_17",
+      "title": "Visualizing Invisible Environmental Data in VR: Development and Implementation of Design Concepts for Communicating Urban Air Quality in a Virtual City Model",
+      "author_name": "Clara Larsson",
+      "journal": "Communications in Computer and Information Science",
+      "date": "2023-01-01",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Beata Stahre Wästberg",
+        "Daniel Sjölie",
+        "Thommy Eriksson",
+        "Håkan Pleijel"
+      ]
+    },
+    {
+      "id": 74,
+      "doi": "10.1016/j.compenvurbsys.2024.102242",
+      "title": "Activity-based simulations for neighbourhood planning towards social-spatial equity",
+      "author_name": "S. Somanath",
+      "journal": "Computers, Environment and Urban Systems",
+      "date": "2025-04-01",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "L. Thuvander",
+        "J. Gil",
+        "A. Hollberg"
+      ]
+    },
+    {
+      "id": 78,
+      "doi": "10.1016/j.dib.2024.110945",
+      "title": "An activity-based synthetic population of Gothenburg, Sweden: Dataset of residents in neighbourhoods",
+      "author_name": "Sanjay Somanath",
+      "journal": "Data in Brief",
+      "date": "2024-12-01",
+      "url": "",
+      "publication_type": "Other",
+      "additional_authors": [
+        "Liane Thuvander",
+        "Alexander Hollberg"
+      ]
+    },
+    {
+      "id": 80,
+      "doi": "10.1088/1755-1315/1363/1/012085",
+      "title": "Towards Positive Energy Districts: Multi-criteria framework and Quality Assurance",
+      "author_name": "E Malakhatka",
+      "journal": "IOP Conference Series: Earth and Environmental Science",
+      "date": "2024-06-01",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "D Wästberg",
+        "H Wallbaum",
+        "P Pooyanfar",
+        "İ Dursun",
+        "G Hofer",
+        "L Thuvander"
+      ]
+    },
+    {
+      "id": 102,
+      "doi": "10.1177/23998083241286030",
+      "title": "Digital twin for supporting decision-making and stakeholder collaboration in urban decarbonization processes. A participatory development in Gothenburg",
+      "author_name": "Daniela Maiullari",
+      "journal": "Environment and Planning B: Urban Analytics and City Science",
+      "date": "2024-10-01",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Claudio Nageli",
+        "Andreas Rudena",
+        "Åsa Isacson",
+        "Giliam Dokter",
+        "Ilse Ellenbroek",
+        "Holger Wallbaum",
+        "Liane Thuvander"
+      ]
+    },
+    {
+      "id": 107,
+      "doi": "chalmers/517283",
+      "title": "Visualisering och auralisering av buller i stadsmiljö",
+      "author_name": "Beata Stahre Wästberg",
+      "journal": "Bygg & teknik",
+      "date": "2020-01-01",
+      "url": "https://research.chalmers.se/publication/517283",
+      "publication_type": "Other",
+      "additional_authors": [
+        "Jens Forssén",
+        "Liane Thuvander",
+        "Monica Billger",
+        "Anders Logg",
+        "Fabio Latino"
+      ]
+    },
+    {
+      "id": 109,
+      "doi": "chalmers/534214",
+      "title": "An Urban Planning Tool Demonstrator with Auralisation and Visualisation of the Sound Environment",
+      "author_name": "Jens Forssén",
+      "journal": "Proceedings of the FA2020 Conference (Forum Acusticum)",
+      "date": "2020-01-01",
+      "url": "https://research.chalmers.se/publication/534214",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Patrik Höstmad",
+        "Beata Stahre Wästberg",
+        "Monica Billger",
+        "Mikael Ögren",
+        "Fabio Latino",
+        "Vasilis Naserentin",
+        "Orfeas Eleftheriou"
+      ]
+    },
+    {
+      "id": 111,
+      "doi": "chalmers/534213",
+      "title": "Visualisation of traffic noise exposure and health impact in a 3D urban environment",
+      "author_name": "Mikael Ögren",
+      "journal": "ICBEN 2021 Congress on Noise as a Public Health Problem",
+      "date": "2021-01-01",
+      "url": "https://research.chalmers.se/publication/534213",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Jens Forssén",
+        "Patrik Höstmad",
+        "Beata Stahre Wästberg",
+        "Monica Billger",
+        "Vasilis Naserentin",
+        "Orfeas Eleftheriou",
+        "Fabio Latino"
+      ]
+    },
+    {
+      "id": 113,
+      "doi": "diva/1902122",
+      "title": "MiljöVis: Effektiv representation av miljödata i digitala modeller",
+      "author_name": "Beata Stahre Wästberg",
+      "journal": "Trafikverket",
+      "date": "2021-01-01",
+      "url": "https://www.diva-portal.org/smash/record.jsf?pid=diva2:1902122",
+      "publication_type": "Other",
+      "additional_authors": [
+        "Monica Billger",
+        "Liane Thuvander",
+        "Fabio Latino",
+        "Sanjay Somanath",
+        "Susanne van Raalte"
+      ]
+    },
+    {
+      "id": 115,
+      "doi": "chalmers/523088",
+      "title": "Att synliggöra det osynliga - Kartläggning av representation av miljödata i digitala modeller",
+      "author_name": "Beata Stahre Wästberg",
+      "journal": "Trafikverket",
+      "date": "2021-01-01",
+      "url": "https://research.chalmers.se/publication/523088",
+      "publication_type": "Other",
+      "additional_authors": [
+        "Liane Thuvander",
+        "Susanne Van Raalte",
+        "Monica Billger"
+      ]
+    },
+    {
+      "id": 123,
+      "doi": "chalmers/524326",
+      "title": "AI-baserad segementering av fasader för att optimera renovering i en större skala",
+      "author_name": "Sanjay Somanath",
+      "journal": "Bygg och teknik",
+      "date": "2021-01-01",
+      "url": "https://research.chalmers.se/publication/524326",
+      "publication_type": "Other",
+      "additional_authors": [
+        "Yinan Yu",
+        "Nils Nordmark",
+        "Mola Ayenew",
+        "Liane Thuvander",
+        "Alexander Hollberg"
+      ]
+    }
+  ]
+}

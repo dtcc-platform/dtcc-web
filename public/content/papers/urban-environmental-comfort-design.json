@@ -1,0 +1,152 @@
+{
+  "name": "Urban environmental comfort design",
+  "slug": "urban-environmental-comfort-design",
+  "count": 8,
+  "fetched_at": "2025-12-10T12:26:28.557580+00:00",
+  "papers": [
+    {
+      "id": 1,
+      "doi": "10.1088/1742-6596/3027/1/012079",
+      "title": "Towards a Comprehensive Workflow for Mesh Generation in Urban Wind Engineering using CFD",
+      "author_name": "Mariya Pantusheva",
+      "journal": "Journal of Physics: Conference Series",
+      "date": "2025-06-01",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Dessislava Petrova-Antonova",
+        "Vasilis Naserentin",
+        "Radostin Mitkov",
+        "George Spaias",
+        "Anders Logg"
+      ]
+    },
+    {
+      "id": 24,
+      "doi": "10.1016/j.ifacol.2022.08.069",
+      "title": "Using the Octree Immersed Boundary Method for urban wind CFD simulations",
+      "author_name": "R. Mitkov",
+      "journal": "IFAC-PapersOnLine",
+      "date": "2022-01-01",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "M. Pantusheva",
+        "V. Naserentin",
+        "P.O. Hristov",
+        "D. Wästberg",
+        "F. Hunger",
+        "A. Mark",
+        "D. Petrova-Antonova",
+        "F. Edelvik",
+        "A. Logg"
+      ]
+    },
+    {
+      "id": 38,
+      "doi": "10.3390/make6010006",
+      "title": "Predicting Wind Comfort in an Urban Area: A Comparison of a Regression- with a Classification-CNN for General Wind Rose Statistics",
+      "author_name": "Jennifer Werner",
+      "journal": "Machine Learning and Knowledge Extraction",
+      "date": "2024-01-04",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Dimitri Nowak",
+        "Franziska Hunger",
+        "Tomas Johnson",
+        "Andreas Mark",
+        "Alexander Gösta",
+        "Fredrik Edelvik"
+      ]
+    },
+    {
+      "id": 62,
+      "doi": "10.1016/j.buildenv.2024.112036",
+      "title": "Evaluation of an immersed boundary numerical framework to address the wind field in complex urban topographies",
+      "author_name": "Patricia Vanky",
+      "journal": "Building and Environment",
+      "date": "2024-12-01",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Andreas Mark",
+        "Franziska Hunger",
+        "Gabriella Villamor Saucedo",
+        "Marie Haeger-Eugensson",
+        "Jens Christian Bennetsen",
+        "Joaquim Tarraso",
+        "Marco Adelfio",
+        "Angela Sasic Kalagasidis",
+        "Gaetano Sardina"
+      ]
+    },
+    {
+      "id": 66,
+      "doi": "10.5194/isprs-annals-X-4-W4-2024-131-2024",
+      "title": "The Role of Computational Fluid Dynamics within City Digital Twins: Opportunities and Challenges",
+      "author_name": "Radostin Mitkov",
+      "journal": "ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences",
+      "date": "2024-05-31",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Mariya Pantusheva",
+        "Dessislava Petrova-Antonova",
+        "Vasilis Naserentin",
+        "Anders Logg"
+      ]
+    },
+    {
+      "id": 94,
+      "doi": "10.1088/1742-6596/3027/1/012060",
+      "title": "On the variety and adequacy of different solution verification approaches in computational wind engineering",
+      "author_name": "Radostin Mitkov",
+      "journal": "Journal of Physics: Conference Series",
+      "date": "2025-06-01",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Petar O. Hristov",
+        "Franziska Hunger",
+        "Andreas Mark"
+      ]
+    },
+    {
+      "id": 96,
+      "doi": "10.1016/j.engappai.2024.108812",
+      "title": "Optimisation of city structures with respect to high wind speeds using U-Net models",
+      "author_name": "Dimitri Nowak",
+      "journal": "Engineering Applications of Artificial Intelligence",
+      "date": "2024-09-01",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Jennifer Werner",
+        "Quentin Parsons",
+        "Tomas Johnson",
+        "Andreas Mark",
+        "Fredrik Edelvik"
+      ]
+    },
+    {
+      "id": 149,
+      "doi": "chalmers/537551",
+      "title": "Addressing wind comfort in an urban area using an immersed boundary framework",
+      "author_name": "Patricia Vanky",
+      "journal": "Technische Mechanik",
+      "date": "2023-01-01",
+      "url": "https://research.chalmers.se/publication/537551",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Andreas Mark",
+        "Franziska Hunger",
+        "Marie Haeger-Eugensson",
+        "Joaquim Tarraso",
+        "Marco Adelfio",
+        "Angela Sasic Kalagasidis",
+        "Gaetano Sardina"
+      ]
+    }
+  ]
+}

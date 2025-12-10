@@ -1,0 +1,298 @@
+{
+  "name": "4D digital twin for underground and natural hazards",
+  "slug": "4d-digital-twin-for-underground-and-natural-hazards",
+  "count": 21,
+  "fetched_at": "2025-12-10T12:26:28.557580+00:00",
+  "papers": [
+    {
+      "id": 16,
+      "doi": "10.1016/j.compgeo.2021.104027",
+      "title": "Modelling the construction and long-term response of Göta Tunnel",
+      "author_name": "Johannes Tornborg",
+      "journal": "Computers and Geotechnics",
+      "date": "2021-06-01",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Mats Karlsson",
+        "Anders Kullingsjö",
+        "Minna Karstunen"
+      ]
+    },
+    {
+      "id": 18,
+      "doi": "10.1088/1755-1315/710/1/012002",
+      "title": "From soft soil modelling to engineering application",
+      "author_name": "Minna Karstunen",
+      "journal": "IOP Conference Series: Earth and Environmental Science",
+      "date": "2021-04-01",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": []
+    },
+    {
+      "id": 20,
+      "doi": "10.1088/1755-1315/710/1/012053",
+      "title": "Experience from short-and long-term performance of deep excavations in soft sensitive clays",
+      "author_name": "Johannes Tornborg",
+      "journal": "IOP Conference Series: Earth and Environmental Science",
+      "date": "2021-04-01",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Mats Karlsson",
+        "Anders Kullingsjö",
+        "Minna Karstunen"
+      ]
+    },
+    {
+      "id": 76,
+      "doi": "10.1016/j.tust.2024.105788",
+      "title": "A grid-based methodology for the assessment of time-dependent building damage at large scale",
+      "author_name": "Pierre Wikby",
+      "journal": "Tunnelling and Underground Space Technology",
+      "date": "2024-07-01",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Ezra Haaf",
+        "Ayman Abed",
+        "Lars Rosén",
+        "Jonas Sundell",
+        "Minna Karstunen"
+      ]
+    },
+    {
+      "id": 84,
+      "doi": "10.1061/JGGEFK.GTENG-10955",
+      "title": "Permanent Sheet Pile Wall in Soft Sensitive Clay",
+      "author_name": "Johannes Tornborg",
+      "journal": "Journal of Geotechnical and Geoenvironmental Engineering",
+      "date": "2023-06-01",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Mats Karlsson",
+        "Minna Karstunen"
+      ]
+    },
+    {
+      "id": 86,
+      "doi": "10.1016/j.compgeo.2023.105687",
+      "title": "Finite element analysis for a deep excavation in soft clay supported by lime-cement columns",
+      "author_name": "Sinem Bozkurt",
+      "journal": "Computers and Geotechnics",
+      "date": "2023-10-01",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Ayman Abed",
+        "Minna Karstunen"
+      ]
+    },
+    {
+      "id": 90,
+      "doi": "10.1680/jgeot.24.01066",
+      "title": "On the development of effective heave pressure in deep excavations",
+      "author_name": "Johannes Tornborg",
+      "journal": "Géotechnique",
+      "date": "2024-11-26",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Mats Karlsson",
+        "Jelke Dijkstra",
+        "Minna Karstunen"
+      ]
+    },
+    {
+      "id": 92,
+      "doi": "10.1016/j.enggeo.2024.107705",
+      "title": "A metamodel for estimating time-dependent groundwater-induced subsidence at large scales",
+      "author_name": "Ezra Haaf",
+      "journal": "Engineering Geology",
+      "date": "2024-11-01",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Pierre Wikby",
+        "Ayman Abed",
+        "Jonas Sundell",
+        "Eric McGivney",
+        "Lars Rosén",
+        "Minna Karstunen"
+      ]
+    },
+    {
+      "id": 98,
+      "doi": "10.1016/j.asoc.2024.111429",
+      "title": "Particle Filter based on Jaya optimisation for Bayesian updating of nonlinear models",
+      "author_name": "Amardeep Amavasai",
+      "journal": "Applied Soft Computing",
+      "date": "2024-06-01",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Jelke Dijkstra"
+      ]
+    },
+    {
+      "id": 100,
+      "doi": "10.1016/j.compgeo.2023.105936",
+      "title": "Data assimilation for Bayesian updating of predicted embankment response using monitoring data",
+      "author_name": "Amardeep Amavasai",
+      "journal": "Computers and Geotechnics",
+      "date": "2024-01-01",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Hossein Tahershamsi",
+        "Tara Wood",
+        "Jelke Dijkstra"
+      ]
+    },
+    {
+      "id": 139,
+      "doi": "chalmers/539292",
+      "title": "Advanced numerical models for geotechnical problems on soft clays",
+      "author_name": "Minna Karstunen",
+      "journal": "XXXI Reunión Nacional de Ingeniería Geotécnica (10th Raúl J. Marsal Córdoba Lecture)",
+      "date": "2022-01-01",
+      "url": "https://research.chalmers.se/publication/539292",
+      "publication_type": "Conference proceedings",
+      "additional_authors": []
+    },
+    {
+      "id": 141,
+      "doi": "chalmers/536699",
+      "title": "FEniCS simulation of a partially saturated slope under varying environmental loads",
+      "author_name": "Ayman Abed",
+      "journal": "NUMGE 2023 - 10th European Conference on Numerical Methods in Geotechnical Engineering",
+      "date": "2023-01-01",
+      "url": "https://research.chalmers.se/publication/536699",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Eleni Gerolymatou",
+        "Minna Karstunen"
+      ]
+    },
+    {
+      "id": 143,
+      "doi": "chalmers/538872",
+      "title": "2D & 3D numerical analyses of a deep excavation supported by LC columns",
+      "author_name": "Sinem Bozkurt",
+      "journal": "NUMGE 2023 - 10th European Conference on Numerical Methods in Geotechnical Engineering",
+      "date": "2023-01-01",
+      "url": "https://research.chalmers.se/publication/538872",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Ayman Abed",
+        "Minna Karstunen"
+      ]
+    },
+    {
+      "id": 145,
+      "doi": "chalmers/539290",
+      "title": "From theory to practice - numerical modelling of geostructures on soft natural clays",
+      "author_name": "Minna Karstunen",
+      "journal": "NUMGE 2023 - 10th European Conference on Numerical Methods in Geotechnical Engineering",
+      "date": "2023-01-01",
+      "url": "https://research.chalmers.se/publication/539290",
+      "publication_type": "Conference proceedings",
+      "additional_authors": []
+    },
+    {
+      "id": 147,
+      "doi": "chalmers/538828",
+      "title": "The influence of parameter variability on subsidence",
+      "author_name": "Pierre Wikby",
+      "journal": "NUMGE 2023 - 10th European Conference on Numerical Methods in Geotechnical Engineering",
+      "date": "2023-01-01",
+      "url": "https://research.chalmers.se/publication/538828",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Ayman Abed",
+        "Mats Karlsson",
+        "Jonas Sundell",
+        "Minna Karstunen"
+      ]
+    },
+    {
+      "id": 155,
+      "doi": "chalmers/545194",
+      "title": "Implementation of a new thermo-viscoplastic soil model using FEniCS platform",
+      "author_name": "Xiaoyang Cheng",
+      "journal": "NGM2024 - 19th Nordic Geotechnical Meeting",
+      "date": "2024-01-01",
+      "url": "https://research.chalmers.se/en/publication/545194",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Yanling Li",
+        "Minna Karstunen",
+        "Jelke Dijkstra",
+        "Ayman Abed"
+      ]
+    },
+    {
+      "id": 157,
+      "doi": "chalmers/544215",
+      "title": "Alternative ways of modelling stabilised excavations",
+      "author_name": "Sinem Bozkurt",
+      "journal": "NGM2024 - 19th Nordic Geotechnical Meeting",
+      "date": "2024-01-01",
+      "url": "https://research.chalmers.se/en/publication/544215",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Ayman Abed",
+        "Minna Karstunen"
+      ]
+    },
+    {
+      "id": 159,
+      "doi": "chalmers/544214",
+      "title": "FEniCS simulation of artesian conditions in clay slope",
+      "author_name": "Kseniia Muratova",
+      "journal": "NGM2024 - 19th Nordic Geotechnical Meeting",
+      "date": "2024-01-01",
+      "url": "https://research.chalmers.se/en/publication/544214",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Ayman Abed",
+        "Minna Karstunen"
+      ]
+    },
+    {
+      "id": 161,
+      "doi": "chalmers/544213",
+      "title": "Is there future for soft clay modelling?",
+      "author_name": "Minna Karstunen",
+      "journal": "NGM2024 - 19th Nordic Geotechnical Meeting",
+      "date": "2024-01-01",
+      "url": "https://research.chalmers.se/publication/544213",
+      "publication_type": "Conference proceedings",
+      "additional_authors": []
+    },
+    {
+      "id": 163,
+      "doi": "chalmers/537011",
+      "title": "On modelling of slope stability in sensitive clay: the effect of time and state",
+      "author_name": "Carolina Sellin",
+      "journal": "Chalmers University of Technology (PhD Dissertation)",
+      "date": "2023-01-01",
+      "url": "https://research.chalmers.se/publication/537011",
+      "publication_type": "Other",
+      "additional_authors": []
+    },
+    {
+      "id": 165,
+      "doi": "chalmers/536782",
+      "title": "Beyond the deterministic approach - on the feasibility of data assimilation methods in geotechnics",
+      "author_name": "Amardeep Amavasai",
+      "journal": "Chalmers University of Technology (PhD Dissertation)",
+      "date": "2023-01-01",
+      "url": "https://research.chalmers.se/publication/536782",
+      "publication_type": "Other",
+      "additional_authors": []
+    }
+  ]
+}

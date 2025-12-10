@@ -1,0 +1,215 @@
+{
+  "name": "Digital twin platform",
+  "slug": "digital-twin-platform",
+  "count": 12,
+  "fetched_at": "2025-12-10T12:26:28.557580+00:00",
+  "papers": [
+    {
+      "id": 8,
+      "doi": "10.2148/benv.46.4.547",
+      "title": "Digital Twins for Cities: A State of the Art Review",
+      "author_name": "Bernd Ketzler",
+      "journal": "Built Environment",
+      "date": "2020-12-01",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Vasilis Naserentin",
+        "Fabio Latino",
+        "Christopher Zangelidis",
+        "Liane Thuvander",
+        "Anders Logg"
+      ]
+    },
+    {
+      "id": 10,
+      "doi": "10.1088/1755-1315/588/5/052041",
+      "title": "Towards spatial integration of qualitative data for urban transformation – challenges with automated geovisualization of perception of urban places",
+      "author_name": "L Thuvander",
+      "journal": "IOP Conference Series: Earth and Environmental Science",
+      "date": "2020-11-01",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "F Latino",
+        "C Zangelidis",
+        "M Adelfio",
+        "V Naserentin",
+        "A Logg"
+      ]
+    },
+    {
+      "id": 26,
+      "doi": "10.1016/j.ifacol.2022.08.070",
+      "title": "Combining Open Source and Commercial Tools in Digital Twin for Cities Generation",
+      "author_name": "V. Naserentin",
+      "journal": "IFAC-PapersOnLine",
+      "date": "2022-01-01",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "S. Somanath",
+        "O. Eleftheriou",
+        "A. Logg"
+      ]
+    },
+    {
+      "id": 28,
+      "doi": "10.1016/j.ifacol.2022.08.068",
+      "title": "Roof Segmentation Towards Digital Twin Generation in LoD2+ Using Deep Learning",
+      "author_name": "N. Kolibarov",
+      "journal": "IFAC-PapersOnLine",
+      "date": "2022-01-01",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "D. Wästberg",
+        "V. Naserentin",
+        "D. Petrova-Antonova",
+        "S. Ilieva",
+        "A. Logg"
+      ]
+    },
+    {
+      "id": 54,
+      "doi": "10.1007/978-3-031-35871-5_15",
+      "title": "A Review and Case Study of Neural Network Techniques for Automated Generation of High Level-of-Detail 3D City Models",
+      "author_name": "Vasilis Naserentin",
+      "journal": "Springer Proceedings in Mathematics &amp; Statistics",
+      "date": "2023-01-01",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Georgios Spaias",
+        "Anestis Kaimakamidis",
+        "Nikos Pitsianis",
+        "Anders Logg"
+      ]
+    },
+    {
+      "id": 58,
+      "doi": "10.1080/19401493.2024.2320112",
+      "title": "Towards digital twinning for multi-domain simulation workflows in urban design: a case study in Gothenburg",
+      "author_name": "Alex Gonzalez-Caceres",
+      "journal": "Journal of Building Performance Simulation",
+      "date": "2024-02-27",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Franziska Hunger",
+        "Jens Forssén",
+        "Sanjay Somanath",
+        "Andreas Mark",
+        "Vasilis Naserentin",
+        "Joakim Bohlin",
+        "Anders Logg",
+        "Beata Wästberg",
+        "Dominika Komisarczyk",
+        "Fredrik Edelvik",
+        "Alexander Hollberg"
+      ]
+    },
+    {
+      "id": 60,
+      "doi": "10.21105/joss.04928",
+      "title": "DTCC Builder: A mesh generator for automatic,\nefficient, and robust mesh generation for large-scale city modeling and\nsimulation",
+      "author_name": "Anders Logg",
+      "journal": "Journal of Open Source Software",
+      "date": "2023-06-01",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Vasilis Naserentin",
+        "Dag Wästberg"
+      ]
+    },
+    {
+      "id": 64,
+      "doi": "10.3390/rs16111939",
+      "title": "Towards Urban Digital Twins: A Workflow for Procedural Visualization Using Geospatial Data",
+      "author_name": "Sanjay Somanath",
+      "journal": "Remote Sensing",
+      "date": "2024-05-28",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Vasilis Naserentin",
+        "Orfeas Eleftheriou",
+        "Daniel Sjölie",
+        "Beata Wästberg",
+        "Anders Logg"
+      ]
+    },
+    {
+      "id": 68,
+      "doi": "10.1007/978-3-031-63227-3_28",
+      "title": "Data Collection and Wrangling Towards Machine Learning in LoD2+ Urban Models Generation",
+      "author_name": "Vasilis Naserentin",
+      "journal": "IFIP Advances in Information and Communication Technology",
+      "date": "2024-01-01",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "George Spaias",
+        "Anestis Kaimakamidis",
+        "Sanjay Somanath",
+        "Mariya Pantusheva",
+        "Radostin Mitkov",
+        "Asimina Dimara",
+        "Dessislava Petrova-Antonova",
+        "Christos-Nikolaos Anagnostopoulos",
+        "Anders Logg",
+        "Stelios Krinidis"
+      ]
+    },
+    {
+      "id": 72,
+      "doi": "10.3390/app142411834",
+      "title": "A Scalable and User-Friendly Framework Integrating IoT and Digital Twins for Home Energy Management Systems",
+      "author_name": "Myrto Stogia",
+      "journal": "Applied Sciences",
+      "date": "2024-12-18",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Vasilis Naserentin",
+        "Asimina Dimara",
+        "Orfeas Eleftheriou",
+        "Ioannis Tzitzios",
+        "Christoforos Papaioannou",
+        "Mariya Pantusheva",
+        "Alexios Papaioannou",
+        "George Spaias",
+        "Christos-Nikolaos Anagnostopoulos",
+        "Anders Logg",
+        "Stelios Krinidis"
+      ]
+    },
+    {
+      "id": 125,
+      "doi": "chalmers/531617",
+      "title": "Digital Twin Cities: Multi-Disciplinary Modeling and High-Performance Simulation of Cities",
+      "author_name": "Anders Logg",
+      "journal": "ECCOMAS Newsletter",
+      "date": "2022-01-01",
+      "url": "https://research.chalmers.se/publication/531617",
+      "publication_type": "Other",
+      "additional_authors": [
+        "Vasilis Naserentin"
+      ]
+    },
+    {
+      "id": 127,
+      "doi": "chalmers/534013",
+      "title": "Modeling and Simulating Cities with Digital Twins",
+      "author_name": "Anders Logg",
+      "journal": "GIM International",
+      "date": "2022-01-01",
+      "url": "https://research.chalmers.se/publication/534013",
+      "publication_type": "Other",
+      "additional_authors": [
+        "Vasilis Naserentin"
+      ]
+    }
+  ]
+}

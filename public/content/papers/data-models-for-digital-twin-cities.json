@@ -1,0 +1,46 @@
+{
+  "name": "Data models for digital twin cities",
+  "slug": "data-models-for-digital-twin-cities",
+  "count": 3,
+  "fetched_at": "2025-12-10T12:26:28.557580+00:00",
+  "papers": [
+    {
+      "id": 12,
+      "doi": "10.2148/benv.46.4.501",
+      "title": "City Information Modelling: A Conceptual Framework for Research and Practice in Digital Urban Planning",
+      "author_name": "Jorge Gil",
+      "journal": "Built Environment",
+      "date": "2020-12-01",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": []
+    },
+    {
+      "id": 22,
+      "doi": "10.1016/j.rcradv.2021.200058",
+      "title": "An entity-relationship model of the flow of waste and resources in city-regions: Improving knowledge management for the circular economy",
+      "author_name": "Jonathan Cohen",
+      "journal": "Resources, Conservation &amp; Recycling Advances",
+      "date": "2021-12-01",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Jorge Gil"
+      ]
+    },
+    {
+      "id": 101,
+      "doi": "10.1177/23998083241302578",
+      "title": "Redefining urban digital twins for the federated data spaces ecosystem: A perspective",
+      "author_name": "Jorge Gil",
+      "journal": "Environment and Planning B: Urban Analytics and City Science",
+      "date": "2024-12-04",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Dessislava Petrova-Antonova",
+        "Graham JL Kemp"
+      ]
+    }
+  ]
+}

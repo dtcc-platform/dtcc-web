@@ -1,0 +1,252 @@
+{
+  "name": "Digital twin of construction site",
+  "slug": "digital-twin-of-construction-site",
+  "count": 17,
+  "fetched_at": "2025-12-10T12:26:28.557580+00:00",
+  "papers": [
+    {
+      "id": 4,
+      "doi": "10.36680/J.ITCON.2021.042",
+      "title": "4D modelling using virtual collaborative planning and scheduling",
+      "author_name": "Mikael Viklund Tallgren",
+      "journal": "Journal of Information Technology in Construction",
+      "date": "2021-11-04",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Mattias Roupé",
+        "Mikael Johansson"
+      ]
+    },
+    {
+      "id": 6,
+      "doi": "10.36680/j.itcon.2020.022",
+      "title": "BIM tool development enhancing collaborative scheduling for pre-construction",
+      "author_name": "Mikael Viklund Tallgren",
+      "journal": "Journal of Information Technology in Construction",
+      "date": "2020-07-28",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Mattias Roupé",
+        "Mikael Johansson",
+        "Petra Bosch-Sijtsema"
+      ]
+    },
+    {
+      "id": 30,
+      "doi": "10.1108/SASBE-06-2022-0124",
+      "title": "Embracing BIM in its totality: a Total BIM case study",
+      "author_name": "Oliver Disney",
+      "journal": "Smart and Sustainable Built Environment",
+      "date": "2022-09-13",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Mattias Roupé",
+        "Mikael Johansson",
+        "Alessio Domenico Leto"
+      ]
+    },
+    {
+      "id": 44,
+      "doi": "10.36680/j.itcon.2023.027",
+      "title": "Total BIM on the construction site: a dynamic single source of information",
+      "author_name": "Oliver Disney",
+      "journal": "Journal of Information Technology in Construction",
+      "date": "2023-09-22",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Mattias Roupé",
+        "Mikael Johansson",
+        "Johannes Ris",
+        "Per Höglin"
+      ]
+    },
+    {
+      "id": 46,
+      "doi": "10.36253/979-12-215-0289-3.08",
+      "title": "Collaborative Site Layout Planning Using Multi-Touch Table and Immersive VR",
+      "author_name": "Mikael Johansson",
+      "journal": "Proceedings e report",
+      "date": "2023-01-01",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Mattias Roupé",
+        "Mikael Viklund Tallgren"
+      ]
+    },
+    {
+      "id": 48,
+      "doi": "10.36253/979-12-215-0289-3.56",
+      "title": "Identifying and Developing Prerequisites for Takt Planning in a BIM-Based Construction Process",
+      "author_name": "Efraim Ljung",
+      "journal": "Proceedings e report",
+      "date": "2023-01-01",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Mikael Viklund Tallgren",
+        "Mattias Roupé",
+        "Mikael Johansson"
+      ]
+    },
+    {
+      "id": 50,
+      "doi": "10.36253/979-12-215-0289-3.42",
+      "title": "Towards a Framework for Railway Network Assets Management Based on BIM/GIS Integration",
+      "author_name": "Mattia Mangia",
+      "journal": "Proceedings e report",
+      "date": "2023-01-01",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Carla Di Biccari",
+        "Mattias Roupé"
+      ]
+    },
+    {
+      "id": 52,
+      "doi": "10.1016/j.autcon.2023.105233",
+      "title": "Real-world applications of BIM and immersive VR in construction",
+      "author_name": "Mikael Johansson",
+      "journal": "Automation in Construction",
+      "date": "2024-02-01",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "Mattias Roupé"
+      ]
+    },
+    {
+      "id": 117,
+      "doi": "chalmers/526609",
+      "title": "Collaborative production planning with BIM – Design, development and evaluation of a Virtual Production Planning system",
+      "author_name": "Mikael Viklund Tallgren",
+      "journal": "Chalmers University of Technology (PhD Dissertation)",
+      "date": "2021-01-01",
+      "url": "https://research.chalmers.se/publication/526609",
+      "publication_type": "Other",
+      "additional_authors": []
+    },
+    {
+      "id": 119,
+      "doi": "chalmers/520868",
+      "title": "Collaborative Scheduling with 4D extended to Virtual Reality",
+      "author_name": "Mikael Viklund Tallgren",
+      "journal": "International Conference on Construction Applications of Virtual Reality (CONVR 2020)",
+      "date": "2020-01-01",
+      "url": "https://research.chalmers.se/publication/520868",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Mattias Roupé",
+        "Mikael Johansson"
+      ]
+    },
+    {
+      "id": 121,
+      "doi": "chalmers/528897",
+      "title": "ETAPP III: VIRTUELL PRODUKTIONS PLANERING - MED HJÄLP AV BIM OCH VISUALISERING",
+      "author_name": "Mikael Viklund Tallgren",
+      "journal": "Svenska Byggbranschens Utvecklingsfond (SBUF)",
+      "date": "2021-01-01",
+      "url": "https://research.chalmers.se/publication/528897",
+      "publication_type": "Other",
+      "additional_authors": [
+        "Mattias Roupé",
+        "Mikael Johansson"
+      ]
+    },
+    {
+      "id": 129,
+      "doi": "chalmers/533824",
+      "title": "VR in Construction – Multi-User and Multi-Purpose",
+      "author_name": "Mikael Johansson",
+      "journal": "CONVR 2022 - 22nd International Conference on Construction Applications of Virtual Reality",
+      "date": "2022-01-01",
+      "url": "https://research.chalmers.se/publication/533824",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Mattias Roupé"
+      ]
+    },
+    {
+      "id": 131,
+      "doi": "chalmers/533891",
+      "title": "Total BIM in Practice: A dynamic single source of information on the construction site",
+      "author_name": "Oliver Disney",
+      "journal": "CONVR 2022 - 22nd International Conference on Construction Applications of Virtual Reality",
+      "date": "2022-01-01",
+      "url": "https://research.chalmers.se/publication/533891",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Mattias Roupé",
+        "Mikael Johansson",
+        "Johannes Ris",
+        "Per Höglin"
+      ]
+    },
+    {
+      "id": 133,
+      "doi": "chalmers/533894",
+      "title": "Total BIM As a Digital Disruption",
+      "author_name": "Oliver Disney",
+      "journal": "ARCOM 2022 - 38th Annual Conference",
+      "date": "2022-01-01",
+      "url": "https://research.chalmers.se/publication/533894",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Dilek Ulutas Duman",
+        "Mattias Roupé",
+        "Mikael Johansson",
+        "Christina Claeson-Jonsson"
+      ]
+    },
+    {
+      "id": 135,
+      "doi": "chalmers/533892",
+      "title": "Developing support for BIM-based takt time schedules for production control",
+      "author_name": "Mikael Viklund Tallgren",
+      "journal": "CONVR 2022 - 22nd International Conference on Construction Applications of Virtual Reality",
+      "date": "2022-01-01",
+      "url": "https://research.chalmers.se/publication/533892",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Mikael Johansson",
+        "Mattias Roupé",
+        "Efraim Ljung"
+      ]
+    },
+    {
+      "id": 137,
+      "doi": "chalmers/533895",
+      "title": "Cost-Estimation in Construction: BIM versus Total BIM",
+      "author_name": "Daniel Påsse",
+      "journal": "ARCOM 2022 - 38th Annual Conference",
+      "date": "2022-01-01",
+      "url": "https://research.chalmers.se/publication/533895",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Oliver Disney",
+        "Mattias Roupé",
+        "Mikael Johansson"
+      ]
+    },
+    {
+      "id": 151,
+      "doi": "chalmers/543071",
+      "title": "Driving circularity with Total BIM: An integrated approach to data-driven design",
+      "author_name": "Oliver Disney",
+      "journal": "ARCOM 2023 - 39th Annual Conference",
+      "date": "2023-01-01",
+      "url": "https://research.chalmers.se/publication/543071",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Mattias Roupé",
+        "Mikael Johansson"
+      ]
+    }
+  ]
+}

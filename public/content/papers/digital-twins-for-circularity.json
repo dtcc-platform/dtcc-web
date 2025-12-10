@@ -1,0 +1,36 @@
+{
+  "name": "Digital twins for circularity",
+  "slug": "digital-twins-for-circularity",
+  "count": 2,
+  "fetched_at": "2025-12-10T12:26:28.557580+00:00",
+  "papers": [
+    {
+      "id": 40,
+      "doi": "10.1201/9781003450023-5",
+      "title": "Buildings as material mines",
+      "author_name": "Maud Lanau",
+      "journal": "Circular Economy for the Built Environment",
+      "date": "2024-03-25",
+      "url": "",
+      "publication_type": "Other",
+      "additional_authors": [
+        "Leonardo Rosado",
+        "Danielle Densley Tingley",
+        "Holger Wallbaum"
+      ]
+    },
+    {
+      "id": 104,
+      "doi": "10.1007/978-3-031-39206-1_4",
+      "title": "Regional Metabolism: A Material and Product Flow Accounting Model for Trentino, Italy",
+      "author_name": "Joana Bastos",
+      "journal": "Green Energy and Technology",
+      "date": "2023-12-14",
+      "url": "",
+      "publication_type": "Conference proceedings",
+      "additional_authors": [
+        "Leonardo Rosado"
+      ]
+    }
+  ]
+}

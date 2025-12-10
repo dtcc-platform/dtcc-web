@@ -98,14 +98,26 @@
       </div>
     </section>
 
-    <section v-if="papers.length" class="section papers">
+    <section v-if="fetchedPapers.length" class="section papers">
       <div class="container">
-        <h3 class="h3-30 section-title">Associated papers</h3>
-        <ol class="papers-list">
-          <li v-for="(paper, index) in papers" :key="`${index}-${paper}`">
-            <a :href="paper" target="_blank" rel="noopener">Paper {{ index + 1 }}</a>
+        <h3 class="h3-30 section-title">Publications</h3>
+        <ul class="papers-list">
+          <li v-for="paper in fetchedPapers" :key="paper.id" class="paper-item">
+            <a
+              v-if="getPaperUrl(paper)"
+              :href="getPaperUrl(paper)"
+              target="_blank"
+              rel="noopener"
+              class="paper-title"
+            >{{ paper.title }}</a>
+            <span v-else class="paper-title">{{ paper.title }}</span>
+            <div class="paper-meta">
+              <span class="paper-authors">{{ formatAuthors(paper) }}</span>
+              <span v-if="paper.journal" class="paper-journal">{{ paper.journal }}</span>
+              <span v-if="paper.date" class="paper-date">({{ formatYear(paper.date) }})</span>
+            </div>
           </li>
-        </ol>
+        </ul>
       </div>
     </section>
   </main>
@@ -130,6 +142,7 @@ if (slug && !isValidSlug(slug)) {
 const item = ref(null)
 const related = ref([])
 const contacts = ref([])
+const fetchedPapers = ref([])
 const MAX_CONTACTS = 2
 const { isAuthenticated } = usePostSession()
 const videoEmbed = computed(() => item.value?.video || null)
@@ -183,6 +196,30 @@ const isExternalLink = (value) => /^https?:\/\//i.test(value)
 const normalizePapers = (value) => {
   if (!Array.isArray(value)) return []
   return value.map((entry) => normalizeLink(entry)).filter(Boolean)
+}
+
+const getPaperUrl = (paper) => {
+  if (paper.doi && paper.doi.startsWith('10.')) {
+    return `https://doi.org/${paper.doi}`
+  }
+  if (paper.url) {
+    return paper.url
+  }
+  return null
+}
+
+const formatAuthors = (paper) => {
+  const authors = [paper.author_name]
+  if (Array.isArray(paper.additional_authors)) {
+    authors.push(...paper.additional_authors)
+  }
+  return authors.filter(Boolean).join(', ')
+}
+
+const formatYear = (dateStr) => {
+  if (!dateStr) return ''
+  const match = dateStr.match(/^(\d{4})/)
+  return match ? match[1] : dateStr
 }
 
 onMounted(async () => {
@@ -285,6 +322,17 @@ onMounted(async () => {
     } else {
       contacts.value = []
     }
+
+    // Fetch papers from papers JSON
+    try {
+      const papersRes = await fetch(resolveUrl(`content/papers/${slug}.json`), { cache: 'default' })
+      if (papersRes.ok) {
+        const papersData = await papersRes.json()
+        fetchedPapers.value = Array.isArray(papersData.papers) ? papersData.papers : []
+      }
+    } catch (_) {
+      // Papers not found for this MSP - that's fine
+    }
   } catch (_) {}
 })
 
@@ -362,9 +410,15 @@ async function loadUsersMap() {
 .project a.more { color: var(--cta-f26a2e); font-weight: 600; }
 .section-title { text-align: center; margin-bottom: 20px; }
 .papers { padding-top: 24px; padding-bottom: 24px; }
-.papers-list { margin-top: 12px; padding-left: 22px; list-style: decimal; }
-.papers-list li { margin-bottom: 6px; }
-.papers-list a { color: var(--cta-f26a2e); font-weight: 600; word-break: break-word; }
+.papers-list { margin-top: 12px; padding-left: 0; list-style: none; }
+.paper-item { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.08); }
+.paper-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.paper-title { color: var(--cta-f26a2e); font-weight: 600; word-break: break-word; display: block; margin-bottom: 4px; }
+a.paper-title:hover { text-decoration: underline; }
+.paper-meta { font-size: 14px; color: rgba(26, 26, 31, 0.7); line-height: 1.5; }
+.paper-authors { display: block; }
+.paper-journal { font-style: italic; }
+.paper-date { margin-left: 4px; }
 
 @media (max-width: 1000px) {
   .grid2 { grid-template-columns: 1fr; }
@@ -377,6 +431,5 @@ async function loadUsersMap() {
   .video-wrap { padding-top: 56.25%; }
   .contacts .people { grid-template-columns: 1fr; }
   .related .cards { grid-template-columns: 1fr; }
-  .papers-list { padding-left: 20px; }
 }
 </style>

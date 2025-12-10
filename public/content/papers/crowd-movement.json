@@ -1,0 +1,43 @@
+{
+  "name": "Crowd movement",
+  "slug": "crowd-movement",
+  "count": 2,
+  "fetched_at": "2025-12-10T12:26:28.557580+00:00",
+  "papers": [
+    {
+      "id": 14,
+      "doi": "10.2148/benv.46.4.620",
+      "title": "Data-Informed Urban Design: An Overview of the Use of Data and Digital Tools in Urban Planning and Design",
+      "author_name": "Alexander Gösta",
+      "journal": "Built Environment",
+      "date": "2020-12-01",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": [
+        "André Agi",
+        "Jacob Flårback",
+        "Jesper Karlsson",
+        "Ellen Simonsson"
+      ]
+    },
+    {
+      "id": 153,
+      "doi": "chalmers/538572",
+      "title": "Crowd Movement - DTCC Milestone Project (Research Report)",
+      "author_name": "Meta Berghauser Pont",
+      "journal": "Chalmers University of Technology (Report)",
+      "date": "2023-01-01",
+      "url": "https://research.chalmers.se/publication/538572",
+      "publication_type": "Other",
+      "additional_authors": [
+        "Ioanna Stavroulaki",
+        "Oscar Ivarsson",
+        "Anita Ullrich",
+        "Franziska Hunger",
+        "Lars Marcus",
+        "Alexander Gösta",
+        "Yury Tarakanov"
+      ]
+    }
+  ]
+}

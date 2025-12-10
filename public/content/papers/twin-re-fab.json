@@ -1,0 +1,19 @@
+{
+  "name": "Twin re-fab",
+  "slug": "twin-re-fab",
+  "count": 1,
+  "fetched_at": "2025-12-10T12:26:28.557580+00:00",
+  "papers": [
+    {
+      "id": 82,
+      "doi": "10.1080/00038628.2024.2427711",
+      "title": "Biobased coatings for architectural timber applied using the robotic 3D printing technique",
+      "author_name": "Malgorzata A. Zboinska",
+      "journal": "Architectural Science Review",
+      "date": "2024-11-13",
+      "url": "",
+      "publication_type": "Article in journal",
+      "additional_authors": []
+    }
+  ]
+}
