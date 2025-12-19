@@ -1,4 +1,4 @@
-import { sanitizeSrc, sanitizeUrl, isValidSlug } from './sanitize'
+import { sanitizeSrc, sanitizeUrl } from './sanitize'
 import { resolveUrl } from './paths.js'
 import { ensureYouTubeEmbed } from './video'
 
@@ -76,24 +76,6 @@ export function parseBodyParagraphs(body) {
   if (!body) return []
   if (Array.isArray(body)) return body
   return String(body).split(/\n\n+/).map(s => s.trim()).filter(Boolean)
-}
-
-/**
- * Get and validate slug from URL search params.
- * Logs error if invalid slug detected.
- *
- * @returns {{slug: string|null, isValid: boolean}} - Slug and validation result
- */
-export function getValidSlug() {
-  const params = new URLSearchParams(location.search)
-  const slug = params.get('slug')
-
-  if (slug && !isValidSlug(slug)) {
-    console.error('Invalid slug parameter')
-    return { slug: null, isValid: false }
-  }
-
-  return { slug, isValid: Boolean(slug) }
 }
 
 // Cache for users data
