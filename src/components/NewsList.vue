@@ -44,18 +44,12 @@
 
 <script setup>
 import { computed, ref, onMounted } from 'vue'
-import { sanitizeSrc } from '../utils/sanitize'
-import { withBase, resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
+import { withBase, resolveUrl } from '../utils/paths.js'
+import { normalizeImage } from '../utils/detailHelpers'
 
 const runtimeItems = ref([])
 const visibleCount = ref(4)
 const showMore = () => { visibleCount.value = Math.min(visibleCount.value + 4, items.value.length) }
-
-const normalizeImage = (value) => {
-  if (!value) return null
-  // Don't convert to WebP here - preserve original path for fallback
-  return sanitizeSrc(resolveUrl(value))
-}
 
 onMounted(async () => {
   try {
