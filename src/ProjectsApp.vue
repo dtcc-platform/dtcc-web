@@ -1,17 +1,12 @@
 <template>
-  <div>
-    <HeaderNav />
+  <PageShell>
     <ProjectsList />
-    <CTAStudents />
-    <FooterSection />
-  </div>
+  </PageShell>
 </template>
 
 <script setup>
-import HeaderNav from './components/HeaderNav.vue'
+import PageShell from './components/PageShell.vue'
 import ProjectsList from './components/ProjectsList.vue'
-import CTAStudents from './components/CTAStudents.vue'
-import FooterSection from './components/FooterSection.vue'
 </script>
 
 <style>

@@ -1,16 +1,11 @@
 <template>
-  <div>
-    <HeaderNav />
+  <PageShell>
     <GalleryPage />
-    <CTAStudents />
-    <FooterSection />
-  </div>
+  </PageShell>
 </template>
 
 <script setup>
-import HeaderNav from './components/HeaderNav.vue'
-import CTAStudents from './components/CTAStudents.vue'
-import FooterSection from './components/FooterSection.vue'
+import PageShell from './components/PageShell.vue'
 import GalleryPage from './components/GalleryPage.vue'
 </script>
 
