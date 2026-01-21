@@ -1,10 +1,6 @@
 {
   "items": [
     {
-      "base": "job-opening-doctoral-student-in-ai-3d-city-modelling",
-      "image": "content/projects/job-opening-doctoral-student-in-ai-3d-city-modelling-headline.webp"
-    },
-    {
       "base": "ai-3d-city-modeling",
       "image": "content/projects/ai-3d-city-modeling-headline.webp"
     },
