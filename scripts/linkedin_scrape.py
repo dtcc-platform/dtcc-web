@@ -171,7 +171,7 @@ params = {
     "author": f"urn:li:organization:{ORGANIZATION_ID}",
     "q": "author",
     "count": 20,
-    "sortBy": "LAST_MODIFIED"
+    "sortBy": "CREATED"
 }
 
 headers = {
