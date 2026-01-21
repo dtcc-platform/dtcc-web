@@ -460,9 +460,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQE27OWKRncEiQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1730983383961?e=1769594400&v=beta&t=XfLS_8osphydSLboxo7ZP5AQF_06K5R4SfK3PNtw9aU",
+        "image_url": "content/social/linkedin-images/726027071033-da5710df.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQE27OWKRncEiQ",
-        "source": "self"
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/726027071033-da5710df.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQE27OWKRncEiQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1730983383961?e=1769594400&v=beta&t=XfLS_8osphydSLboxo7ZP5AQF_06K5R4SfK3PNtw9aU"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
