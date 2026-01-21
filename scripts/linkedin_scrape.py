@@ -185,7 +185,21 @@ try:
     response.raise_for_status()
     
     data = response.json()
-    
+
+    # Debug: Show API response metadata
+    print("=== API Response Debug ===")
+    print(f"Total elements returned: {len(data.get('elements', []))}")
+    paging = data.get('paging', {})
+    print(f"Paging info: start={paging.get('start')}, count={paging.get('count')}, links={paging.get('links', [])}")
+
+    # Show first 3 post IDs and dates
+    from datetime import datetime
+    for i, p in enumerate(data.get('elements', [])[:3]):
+        ts = p.get('createdAt', 0) / 1000
+        dt = datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M')
+        print(f"  Post {i+1}: {p.get('id')} | created: {dt}")
+    print("")
+
     print("=== Processing Organization Posts ===\n")
     
     # Enhanced posts data with image URLs and shareable links
