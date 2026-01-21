@@ -5,27 +5,114 @@
   "posts_with_images": 20,
   "posts": [
     {
+      "post_id": "urn:li:share:7416752390453948416",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7416752390453948416/",
+      "published_at": 1768291566748,
+      "commentary": "New year, new opportunity! We are now strengthening our team with a PhD student in applied mathematics and machine learning within the DTCC. \n\nThis is an exciting chance to join us and work at the intersection of rigorous mathematics, modern AI, and large-scale software development, focusing on topology-correct 3D reconstruction of cities from multi-modal geospatial data. The research will contribute directly to open-source tools in the DTCC Platform and be validated on real urban data together with public and industrial partners.\n\nThe position is fully funded for four years \\(with the possibility of extension through teaching\\) and based at the @[Department of Mathematical Sciences, Gothenburg](urn:li:organization:103896810). We are looking for candidates with a strong background in mathematics, solid coding skills, and an interest in geometry processing, machine learning, and urban digital twins.\n\nWe look forward to your application before the 23rd of February! \n\nRead more and apply: https://lnkd.in/d78-nKBp\n",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "content/social/linkedin-images/741675239045-b22b35d0.jpg",
+        "thumbnail_urn": "urn:li:image:D4D22AQEyqEeAXo9A9A",
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/741675239045-b22b35d0.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQEyqEeAXo9A9A/feedshare-shrink_2048_1536/B4DZu2Y_LmG8Aw-/0/1768291563523?e=1770854400&v=beta&t=lRCRLUdaIFpqkV8ndct_YZ21ZeMzuKkP_nkFX6_3Bh4"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1768291566748,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1768291592440,
+        "visibility": "PUBLIC",
+        "publishedAt": 1768291566748,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7416752390453948416",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "Phone +46-317721000 Mail address Chalmers University of Technology 412 96 Gothenburg E-mail and more contact information Organisation number 556479-5598  Phone +46-317721000 Mail address Chalmers University of Technology 412 96 Gothenburg E-mail and...",
+            "thumbnail": "urn:li:image:D4D22AQEyqEeAXo9A9A",
+            "source": "https://www.chalmers.se/en/about-chalmers/work-with-us/vacancies/?rmpage=job&rmjob=14476&rm%E2%80%A6",
+            "title": "Vacancies"
+          }
+        },
+        "commentary": "New year, new opportunity! We are now strengthening our team with a PhD student in applied mathematics and machine learning within the DTCC. \n\nThis is an exciting chance to join us and work at the intersection of rigorous mathematics, modern AI, and large-scale software development, focusing on topology-correct 3D reconstruction of cities from multi-modal geospatial data. The research will contribute directly to open-source tools in the DTCC Platform and be validated on real urban data together with public and industrial partners.\n\nThe position is fully funded for four years \\(with the possibility of extension through teaching\\) and based at the @[Department of Mathematical Sciences, Gothenburg](urn:li:organization:103896810). We are looking for candidates with a strong background in mathematics, solid coding skills, and an interest in geometry processing, machine learning, and urban digital twins.\n\nWe look forward to your application before the 23rd of February! \n\nRead more and apply: https://lnkd.in/d78-nKBp\n",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7407336974547587073",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7407336974547587073/",
+      "published_at": 1766046756571,
+      "commentary": "@[Alexander Hollberg](urn:li:person:Vf3wqQAlwB), leader of the DTCC project Mixed Realities, shows you around the brand new Mixed Reality Studio at @[Chalmers Department of Architecture and Civil Engineering](urn:li:organization:105773234) in out this great video. Watch it on our Youtube channel.",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "content/social/linkedin-images/740733697454-ccc8ca72.jpg",
+        "thumbnail_urn": "urn:li:image:D4E27AQFOV1Y-QKjEVw",
+        "source": "reshare_parent",
+        "local_image_path": "content/social/linkedin-images/740733697454-ccc8ca72.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4E27AQFOV1Y-QKjEVw/articleshare-shrink_1280_800/B4EZssi_X1IQAU-/0/1765978929215?e=1769594400&v=beta&t=eRTOKzgalv-ZXETnOimCAqQQ-Ztkonn4ykevNMwzdVk"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1766046756571,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1766046832011,
+        "visibility": "PUBLIC",
+        "publishedAt": 1766046756571,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7407336974547587073",
+        "reshareContext": {
+          "parent": "urn:li:share:7407055813753663488",
+          "root": "urn:li:share:7407055813753663488"
+        },
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "commentary": "@[Alexander Hollberg](urn:li:person:Vf3wqQAlwB), leader of the DTCC project Mixed Realities, shows you around the brand new Mixed Reality Studio at @[Chalmers Department of Architecture and Civil Engineering](urn:li:organization:105773234) in out this great video. Watch it on our Youtube channel.",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": true
+        }
+      },
+      "reshare_parent_id": "urn:li:share:7407055813753663488",
+      "reshare_root_id": "urn:li:share:7407055813753663488",
+      "resolved_media_parent_id": "urn:li:share:7407055813753663488"
+    },
+    {
       "post_id": "urn:li:ugcPost:7399023677138173952",
       "post_url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7399023677138173952/",
       "published_at": 1764064712154,
-      "commentary": "On Friday we hosted the kick-off meeting for the PhD project Mixed Realities and Building Simulations for Sustainable Cities! This project explores how mixed reality \\(MR\\) can make urban planning and design more collaborative and engaging. By combining virtual and physical models, we aim to visualize simulation results such as wind, air pollution, noise, energy, daylight, and embodied carbon, from single buildings to entire neighbourhoods. Leading the project is @[Alexander Hollberg](urn:li:person:Vf3wqQAlwB), together with @[Sanjay Somanath](urn:li:person:QdW58Vi6c4), @[Jieming YAN](urn:li:person:02TksuXk-Y), and @[Arvid Hall](urn:li:person:2Bo8n1U3Qw), from the Research Area @[Sustainable Built Environments](urn:li:organization:84357770).\n\nThe project also marks the launch of our new Mixed Reality Studio at @[Chalmers Department of Architecture and Civil Engineering](urn:li:organization:105773234), supported by technology from DTCC. The studio will explore how immersive visualization can support better planning and decision-making and contribute to new and existing visualization labs, such as @[Universeum](urn:li:organization:3529472).\n\nPresent at Friday’s kickoff were our great partners @[Twinfinity](urn:li:organization:93112136), @[Fraunhofer-Chalmers Centre for Industrial Mathematics](urn:li:organization:872286), @[Visual Arena](urn:li:organization:38088874)/@[Lindholmen Science Park](urn:li:organization:2395819), @[Högskolan Väst](urn:li:organization:809370) and @[Sofia University St. Kliment Ohridski](urn:li:organization:1037568)/@[GATE Institute](urn:li:organization:29283368). We look forward to working together, along with @[Liljewall](urn:li:organization:3768270), @[InfraVis](urn:li:organization:91514167) and @[Göteborgs Stad](urn:li:organization:164101).\n\n{hashtag|\\#|MixedReality} {hashtag|\\#|DigitalTwin} {hashtag|\\#|UrbanPlanning} {hashtag|\\#|Visualization} {hashtag|\\#|DTCC} {hashtag|\\#|Chalmers}",
+      "commentary": "On Friday we hosted the kick-off meeting for the PhD project Mixed Realities and Building Simulations for Sustainable Cities! This project explores how mixed reality \\(MR\\) can make urban planning and design more collaborative and engaging. By combining virtual and physical models, we aim to visualize simulation results such as wind, air pollution, noise, energy, daylight, and embodied carbon, from single buildings to entire neighbourhoods. Leading the project is @[Alexander Hollberg](urn:li:person:Vf3wqQAlwB), together with @[Sanjay Somanath](urn:li:person:QdW58Vi6c4), @[Jieming YAN](urn:li:person:02TksuXk-Y), and @[Arvid Hall](urn:li:person:2Bo8n1U3Qw), from the Research Area @[Sustainable Built Environments](urn:li:organization:84357770).\n\nThe project also marks the launch of our new Mixed Reality Studio at @[Chalmers Department of Architecture and Civil Engineering](urn:li:organization:105773234), supported by technology from DTCC. The studio will explore how immersive visualization can support better planning and decision-making and contribute to new and existing visualization labs, such as @[Universeum](urn:li:organization:3529472).\n\nPresent at Friday’s kickoff were our great partners @[Twinfinity](urn:li:organization:93112136), @[Fraunhofer-Chalmers Centre for Industrial Mathematics](urn:li:organization:872286), @[Visual Arena](urn:li:organization:38088874)/@[Lindholmen Science Park](urn:li:organization:2395819), @[Högskolan Väst](urn:li:organization:809370) and @[Sofia University St. Kliment Ohridski](urn:li:organization:1037568)/@[GATE Institute](urn:li:organization:29283368). We look forward to working together, along with @[Liljewall](urn:li:organization:3768270) and @[Göteborgs Stad](urn:li:organization:164101).\n\nThis project is part of an ongoing collaboration between DTCC and @[InfraVis](urn:li:organization:91514167), the national infrastructure for data visualization. Many thanks to both the Gothenburg and Linkoping nodes for their continuous support!\n\n{hashtag|\\#|MixedReality} {hashtag|\\#|DigitalTwin} {hashtag|\\#|UrbanPlanning} {hashtag|\\#|Visualization} {hashtag|\\#|DTCC} {hashtag|\\#|Chalmers}",
       "lifecycle_state": "PUBLISHED",
       "visibility": "PUBLIC",
       "media": {
         "has_media": true,
         "media_type": "image",
         "media_urn": "urn:li:image:D4D22AQEnF6-p8jqWVw",
-        "image_url": "content/social/linkedin-images/739902367713-d8a2a543.jpg",
+        "image_url": "content/social/linkedin-images/739902367713-2fa121d8.jpg",
         "thumbnail_urn": null,
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/739902367713-d8a2a543.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQEnF6-p8jqWVw/feedshare-shrink_2048_1536/B4DZq6c0frHwAw-/0/1764064710133?e=1766016000&v=beta&t=UUSH6I21vY7M7ft0VT-GD2eS0zWaHN6LBPUcwlj6y_k"
+        "local_image_path": "content/social/linkedin-images/739902367713-2fa121d8.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQEnF6-p8jqWVw/feedshare-shrink_2048_1536/B4DZq6c0frHwAw-/0/1764064710133?e=1770854400&v=beta&t=RQUUzsR3BPm0ae9OQZQBnCbW9UH22057ylwP-dFy78U"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
         "createdAt": 1764064712154,
         "lifecycleState": "PUBLISHED",
-        "lastModifiedAt": 1764076268688,
+        "lastModifiedAt": 1764237761371,
         "visibility": "PUBLIC",
         "publishedAt": 1764064712154,
         "author": "urn:li:organization:100491988",
@@ -52,7 +139,7 @@
             ]
           }
         },
-        "commentary": "On Friday we hosted the kick-off meeting for the PhD project Mixed Realities and Building Simulations for Sustainable Cities! This project explores how mixed reality \\(MR\\) can make urban planning and design more collaborative and engaging. By combining virtual and physical models, we aim to visualize simulation results such as wind, air pollution, noise, energy, daylight, and embodied carbon, from single buildings to entire neighbourhoods. Leading the project is @[Alexander Hollberg](urn:li:person:Vf3wqQAlwB), together with @[Sanjay Somanath](urn:li:person:QdW58Vi6c4), @[Jieming YAN](urn:li:person:02TksuXk-Y), and @[Arvid Hall](urn:li:person:2Bo8n1U3Qw), from the Research Area @[Sustainable Built Environments](urn:li:organization:84357770).\n\nThe project also marks the launch of our new Mixed Reality Studio at @[Chalmers Department of Architecture and Civil Engineering](urn:li:organization:105773234), supported by technology from DTCC. The studio will explore how immersive visualization can support better planning and decision-making and contribute to new and existing visualization labs, such as @[Universeum](urn:li:organization:3529472).\n\nPresent at Friday’s kickoff were our great partners @[Twinfinity](urn:li:organization:93112136), @[Fraunhofer-Chalmers Centre for Industrial Mathematics](urn:li:organization:872286), @[Visual Arena](urn:li:organization:38088874)/@[Lindholmen Science Park](urn:li:organization:2395819), @[Högskolan Väst](urn:li:organization:809370) and @[Sofia University St. Kliment Ohridski](urn:li:organization:1037568)/@[GATE Institute](urn:li:organization:29283368). We look forward to working together, along with @[Liljewall](urn:li:organization:3768270), @[InfraVis](urn:li:organization:91514167) and @[Göteborgs Stad](urn:li:organization:164101).\n\n{hashtag|\\#|MixedReality} {hashtag|\\#|DigitalTwin} {hashtag|\\#|UrbanPlanning} {hashtag|\\#|Visualization} {hashtag|\\#|DTCC} {hashtag|\\#|Chalmers}",
+        "commentary": "On Friday we hosted the kick-off meeting for the PhD project Mixed Realities and Building Simulations for Sustainable Cities! This project explores how mixed reality \\(MR\\) can make urban planning and design more collaborative and engaging. By combining virtual and physical models, we aim to visualize simulation results such as wind, air pollution, noise, energy, daylight, and embodied carbon, from single buildings to entire neighbourhoods. Leading the project is @[Alexander Hollberg](urn:li:person:Vf3wqQAlwB), together with @[Sanjay Somanath](urn:li:person:QdW58Vi6c4), @[Jieming YAN](urn:li:person:02TksuXk-Y), and @[Arvid Hall](urn:li:person:2Bo8n1U3Qw), from the Research Area @[Sustainable Built Environments](urn:li:organization:84357770).\n\nThe project also marks the launch of our new Mixed Reality Studio at @[Chalmers Department of Architecture and Civil Engineering](urn:li:organization:105773234), supported by technology from DTCC. The studio will explore how immersive visualization can support better planning and decision-making and contribute to new and existing visualization labs, such as @[Universeum](urn:li:organization:3529472).\n\nPresent at Friday’s kickoff were our great partners @[Twinfinity](urn:li:organization:93112136), @[Fraunhofer-Chalmers Centre for Industrial Mathematics](urn:li:organization:872286), @[Visual Arena](urn:li:organization:38088874)/@[Lindholmen Science Park](urn:li:organization:2395819), @[Högskolan Väst](urn:li:organization:809370) and @[Sofia University St. Kliment Ohridski](urn:li:organization:1037568)/@[GATE Institute](urn:li:organization:29283368). We look forward to working together, along with @[Liljewall](urn:li:organization:3768270) and @[Göteborgs Stad](urn:li:organization:164101).\n\nThis project is part of an ongoing collaboration between DTCC and @[InfraVis](urn:li:organization:91514167), the national infrastructure for data visualization. Many thanks to both the Gothenburg and Linkoping nodes for their continuous support!\n\n{hashtag|\\#|MixedReality} {hashtag|\\#|DigitalTwin} {hashtag|\\#|UrbanPlanning} {hashtag|\\#|Visualization} {hashtag|\\#|DTCC} {hashtag|\\#|Chalmers}",
         "lifecycleStateInfo": {
           "isEditedByAuthor": true
         }
@@ -69,11 +156,11 @@
         "has_media": true,
         "media_type": "image",
         "media_urn": "urn:li:image:D4D22AQFokP2DGqmp6g",
-        "image_url": "content/social/linkedin-images/738377354867-1be84338.jpg",
+        "image_url": "content/social/linkedin-images/738377354867-3d570cae.jpg",
         "thumbnail_urn": null,
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/738377354867-1be84338.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFokP2DGqmp6g/feedshare-shrink_2048_1536/B4DZnhu6NOGkAw-/0/1760428796975?e=1766016000&v=beta&t=2NbMGLeViR_WzBsIlqiRATg-dkIBGcnH8dX8ah1I4Ac"
+        "local_image_path": "content/social/linkedin-images/738377354867-3d570cae.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFokP2DGqmp6g/feedshare-shrink_2048_1536/B4DZnhu6NOGkAw-/0/1760428796975?e=1770854400&v=beta&t=FxSlipoKsh5vtKpjzo_5RKBEcGumV-L5gNAdDq7RK50"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -111,11 +198,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/732871878503-5d2c291f.jpg",
+        "image_url": "content/social/linkedin-images/732871878503-0fea27af.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQEbdkWX0fusCg",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/732871878503-5d2c291f.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQEbdkWX0fusCg/articleshare-shrink_1280_800/B4DZbTV8WhGwAQ-/0/1747302467632?e=1764756000&v=beta&t=JQEvEpJY9kpAtgm-TV7TQu-FoZL1lozKV2MVn4LiOVg"
+        "local_image_path": "content/social/linkedin-images/732871878503-0fea27af.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQEbdkWX0fusCg/articleshare-shrink_1280_800/B4DZbTV8WhGwAQ-/0/1747302467632?e=1769594400&v=beta&t=5CPXLfnwIpmp1lpp5gL5sEuSls4CQz3EtzsvCXF-80w"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -155,11 +242,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/732831947115-8e6b2724.jpg",
+        "image_url": "content/social/linkedin-images/732831947115-d7ee8f66.jpg",
         "thumbnail_urn": "urn:li:image:D4D22AQFf5KLhqm3ptQ",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/732831947115-8e6b2724.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFf5KLhqm3ptQ/feedshare-shrink_2048_1536/B4DZbNrtKKGwAo-/0/1747207509426?e=1766016000&v=beta&t=5f4Tig6woGly0i67-tOCsI6ZBvSLa69JoxaFScvhpjs"
+        "local_image_path": "content/social/linkedin-images/732831947115-d7ee8f66.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFf5KLhqm3ptQ/feedshare-shrink_2048_1536/B4DZbNrtKKGwAo-/0/1747207509426?e=1770854400&v=beta&t=c230wZ_5e-Ucw0OJyLSFU7Lff1Gm2Gx9kjqqDPuQ0A4"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -199,11 +286,11 @@
         "has_media": true,
         "media_type": "image",
         "media_urn": "urn:li:image:D4D22AQHt9eWuLgyunQ",
-        "image_url": "content/social/linkedin-images/732041802260-b6435d26.jpg",
+        "image_url": "content/social/linkedin-images/732041802260-b6a11943.jpg",
         "thumbnail_urn": null,
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/732041802260-b6435d26.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQHt9eWuLgyunQ/feedshare-shrink_2048_1536/B4DZZdZZfHG0B4-/0/1745323662050?e=1766016000&v=beta&t=C1SFIuK_avOvegu-4BaGXa3wymby9Gn7NI1ODihTnIo"
+        "local_image_path": "content/social/linkedin-images/732041802260-b6a11943.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQHt9eWuLgyunQ/feedshare-shrink_2048_1536/B4DZZdZZfHG0B4-/0/1745323662050?e=1770854400&v=beta&t=QW0u6fUPdzuNL6791DZEh3m5g0dQJlVUxvWpYfkQyq0"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -241,11 +328,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/727541963087-b8f9137b.jpg",
+        "image_url": "content/social/linkedin-images/727541963087-a0fb9441.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQGOaJH5sfpV3g",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/727541963087-b8f9137b.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGOaJH5sfpV3g/articleshare-shrink_800/B4DZlicWnEGkAM-/0/1758293224884?e=1764756000&v=beta&t=LUgMWb1HzThtGwtSF04xgu0qlolt-TI70Ff3qhfYp_w"
+        "local_image_path": "content/social/linkedin-images/727541963087-a0fb9441.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGOaJH5sfpV3g/articleshare-shrink_800/B4DZlicWnEGkAM-/0/1758293224884?e=1769594400&v=beta&t=gs58tJwvqpSuaBhX-WCyqIN9DnwBNFfCKROloUr8vMA"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -285,11 +372,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/726752822013-78a01e48.jpg",
+        "image_url": "content/social/linkedin-images/726752822013-baab2318.jpg",
         "thumbnail_urn": "urn:li:image:D5627AQGtRoFGVXuVOQ",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/726752822013-78a01e48.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D5627AQGtRoFGVXuVOQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1732713690878?e=1764756000&v=beta&t=8l5pUfuFAymLPZSLXql5WEJB2v5M27z4oTOJ1DwpVpk"
+        "local_image_path": "content/social/linkedin-images/726752822013-baab2318.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D5627AQGtRoFGVXuVOQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1732713690878?e=1769594400&v=beta&t=-KBOs7kooQ46Z_ntdQkj9uj3-N-_M7WW3hMjULNmiFg"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -329,11 +416,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/726529002921-c7248dce.jpg",
+        "image_url": "content/social/linkedin-images/726529002921-1597b703.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQGMki-RixNzYg",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/726529002921-c7248dce.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGMki-RixNzYg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1732180092266?e=1764756000&v=beta&t=WKdoWOCOnPPrsJODbpGBkHLMjGxh_-eEdw0iy1IjMNY"
+        "local_image_path": "content/social/linkedin-images/726529002921-1597b703.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGMki-RixNzYg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1732180092266?e=1769594400&v=beta&t=kPnLiDDr-HedZGcNarzKnPQrnuDFIqAhsCZGd5fwND4"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -373,11 +460,9 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/726027071033-9842a3c1.jpg",
+        "image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQE27OWKRncEiQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1730983383961?e=1769594400&v=beta&t=XfLS_8osphydSLboxo7ZP5AQF_06K5R4SfK3PNtw9aU",
         "thumbnail_urn": "urn:li:image:D4D27AQE27OWKRncEiQ",
-        "source": "self",
-        "local_image_path": "content/social/linkedin-images/726027071033-9842a3c1.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQE27OWKRncEiQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1730983383961?e=1764756000&v=beta&t=H-xz4x8mVRzVPM6JPkQrNna9-cyN7AZiWQaCfboBUFs"
+        "source": "self"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -417,11 +502,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/725191033022-70df8ec9.jpg",
+        "image_url": "content/social/linkedin-images/725191033022-d1d0168f.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQFyIHpeckUhMg",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/725191033022-70df8ec9.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1764756000&v=beta&t=0tA5OgizRs7nNLzpRRFUwUge-KPy2VhpMB0Oa0IjrR4"
+        "local_image_path": "content/social/linkedin-images/725191033022-d1d0168f.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1769594400&v=beta&t=OecdGDU2YBlOQR4Y-T012Y6fBySIEZvADkyP5YdRRjg"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -461,11 +546,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/724752076475-70df8ec9.jpg",
+        "image_url": "content/social/linkedin-images/724752076475-d1d0168f.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQFyIHpeckUhMg",
         "source": "reshare_parent",
-        "local_image_path": "content/social/linkedin-images/724752076475-70df8ec9.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1764756000&v=beta&t=0tA5OgizRs7nNLzpRRFUwUge-KPy2VhpMB0Oa0IjrR4"
+        "local_image_path": "content/social/linkedin-images/724752076475-d1d0168f.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1769594400&v=beta&t=OecdGDU2YBlOQR4Y-T012Y6fBySIEZvADkyP5YdRRjg"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -504,11 +589,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/724724634953-bf20cbe8.jpg",
+        "image_url": "content/social/linkedin-images/724724634953-6a926c33.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQGnjpWFPiUGsQ",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/724724634953-bf20cbe8.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGnjpWFPiUGsQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1727877978070?e=1764756000&v=beta&t=wVnLj3rvhbW_rkvZJ-9YG5ku8wJztbyTCyJk8vpV0i4"
+        "local_image_path": "content/social/linkedin-images/724724634953-6a926c33.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGnjpWFPiUGsQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1727877978070?e=1769594400&v=beta&t=0ofYCGe3rggQjCMYXJh7t1kbb9treY0KkMAFAoY_VBY"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -549,11 +634,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/723484348445-70df8ec9.jpg",
+        "image_url": "content/social/linkedin-images/723484348445-d1d0168f.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQFyIHpeckUhMg",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/723484348445-70df8ec9.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1764756000&v=beta&t=0tA5OgizRs7nNLzpRRFUwUge-KPy2VhpMB0Oa0IjrR4"
+        "local_image_path": "content/social/linkedin-images/723484348445-d1d0168f.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1769594400&v=beta&t=OecdGDU2YBlOQR4Y-T012Y6fBySIEZvADkyP5YdRRjg"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -593,11 +678,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/721672228176-47b39df6.jpg",
+        "image_url": "content/social/linkedin-images/721672228176-ef234f31.jpg",
         "thumbnail_urn": "urn:li:image:D4D22AQFjmWNcmy_r-A",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/721672228176-47b39df6.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFjmWNcmy_r-A/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1720600523421?e=1766016000&v=beta&t=xLGIg3IY3CxtXusk9ejKgMB0hV_TKOjWpywDeB0kFt4"
+        "local_image_path": "content/social/linkedin-images/721672228176-ef234f31.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFjmWNcmy_r-A/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1720600523421?e=1770854400&v=beta&t=CZ7R-5Lpoua4p80KvcmNidSSRNXLIl7QxxQuA09q0Zo"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -637,11 +722,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/720843371636-21ed52dc.jpg",
+        "image_url": "content/social/linkedin-images/720843371636-76876e8c.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQFBUabdKNwGhg",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/720843371636-21ed52dc.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFBUabdKNwGhg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718623977187?e=1764756000&v=beta&t=xoMBK93CCL3rk66wZvN83w1xFiTffZ-ZKesG-5sdQgg"
+        "local_image_path": "content/social/linkedin-images/720843371636-76876e8c.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFBUabdKNwGhg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718623977187?e=1769594400&v=beta&t=lgLuOfaN645a4iugA2TZAdy16WFzvLmWhD1Bx_s7Kl4"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -681,11 +766,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/720697552710-7ff9637e.jpg",
+        "image_url": "content/social/linkedin-images/720697552710-0979f39a.jpg",
         "thumbnail_urn": "urn:li:image:D4D22AQEBqbmXhCz5uw",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/720697552710-7ff9637e.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQEBqbmXhCz5uw/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1718276798337?e=1766016000&v=beta&t=mqyA-UbAf5gID4eOsj-kebg54ODS4KlhM0WjEy1cES0"
+        "local_image_path": "content/social/linkedin-images/720697552710-0979f39a.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQEBqbmXhCz5uw/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1718276798337?e=1770854400&v=beta&t=ke0lEurSuIhEjRBBa5ZetYbqcn1rKr-Yg4pp72UGocE"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -725,11 +810,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/720587876548-dee2bef8.jpg",
+        "image_url": "content/social/linkedin-images/720587876548-6d4f5892.jpg",
         "thumbnail_urn": "urn:li:image:D4D22AQHJPOS12FMMFw",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/720587876548-dee2bef8.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQHJPOS12FMMFw/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1719174880957?e=1766016000&v=beta&t=K0zM_ZR-3TiEN37j3wSMWxv94h_TWcAwrQly6TRoanE"
+        "local_image_path": "content/social/linkedin-images/720587876548-6d4f5892.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQHJPOS12FMMFw/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1719174880957?e=1770854400&v=beta&t=6OywC4g_q7VW7HX0nnO4VS_2QRPG1iKWDEb9ODnHRV4"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -769,11 +854,11 @@
         "has_media": true,
         "media_type": "image",
         "media_urn": "urn:li:image:D4D22AQEQHr2u3kgFXg",
-        "image_url": "content/social/linkedin-images/720188693374-ea0f7f4b.jpg",
+        "image_url": "content/social/linkedin-images/720188693374-b6b10be1.jpg",
         "thumbnail_urn": null,
         "source": "reshare_parent",
-        "local_image_path": "content/social/linkedin-images/720188693374-ea0f7f4b.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQEQHr2u3kgFXg/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1717055789475?e=1766016000&v=beta&t=7qNNm_UDBHzMP0GgrEnxfUJJ4LyVL2ac16yD4F1cKgA"
+        "local_image_path": "content/social/linkedin-images/720188693374-b6b10be1.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQEQHr2u3kgFXg/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1717055789475?e=1770854400&v=beta&t=1ag9x3a-WlbbqTxWJmELgnoe4x9-ZReyDarNr35Bhg8"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -800,94 +885,6 @@
       "reshare_parent_id": "urn:li:share:7201853971911626752",
       "reshare_root_id": "urn:li:share:7201853971911626752",
       "resolved_media_parent_id": "urn:li:share:7201853971911626752"
-    },
-    {
-      "post_id": "urn:li:share:7199009538182696960",
-      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7199009538182696960/",
-      "published_at": 1716377625139,
-      "commentary": "LAST CHANCE: Tomorrow at 9 AM the sign-up for Total BIM-dagen on May 30th closes. Don't miss this opportunity to view many interesting speakers and meet industry colleagues at Runan, Chalmers. ",
-      "lifecycle_state": "PUBLISHED",
-      "visibility": "PUBLIC",
-      "media": {
-        "has_media": true,
-        "media_type": "article_thumbnail",
-        "media_urn": null,
-        "image_url": "content/social/linkedin-images/719900953818-3315e04b.jpg",
-        "thumbnail_urn": "urn:li:image:D4D27AQEFI4QMqcDPlw",
-        "source": "self",
-        "local_image_path": "content/social/linkedin-images/719900953818-3315e04b.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQEFI4QMqcDPlw/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1711439588191?e=1764756000&v=beta&t=_ylDmTyOnnk9hSlsXe3cb5H5Undf2SycuBTj1cfzsUQ"
-      },
-      "original_data": {
-        "isReshareDisabledByAuthor": false,
-        "createdAt": 1716377625139,
-        "lifecycleState": "PUBLISHED",
-        "lastModifiedAt": 1716377631770,
-        "visibility": "PUBLIC",
-        "publishedAt": 1716377625139,
-        "author": "urn:li:organization:100491988",
-        "id": "urn:li:share:7199009538182696960",
-        "distribution": {
-          "feedDistribution": "MAIN_FEED",
-          "thirdPartyDistributionChannels": []
-        },
-        "content": {
-          "article": {
-            "description": "Konferens",
-            "thumbnail": "urn:li:image:D4D27AQEFI4QMqcDPlw",
-            "source": "https://cmbchalmers.confetti.events/total-bim-dagen",
-            "title": "Total BIM – Framtidens digitala byggprocess är här!"
-          }
-        },
-        "commentary": "LAST CHANCE: Tomorrow at 9 AM the sign-up for Total BIM-dagen on May 30th closes. Don't miss this opportunity to view many interesting speakers and meet industry colleagues at Runan, Chalmers. ",
-        "lifecycleStateInfo": {
-          "isEditedByAuthor": false
-        }
-      }
-    },
-    {
-      "post_id": "urn:li:share:7196511790887759872",
-      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7196511790887759872/",
-      "published_at": 1715844609042,
-      "commentary": "By using a digital model as the only dynamic source of information on the construction site instead of traditional drawings, you can both make significant cost savings, shorten the project time and get an integrated communication flow. But to succeed you need to go \"Total BIM\" - completely abandon the 2D drawing and change your mindset. \n\nRead the interesting article with @[Mattias Roupé](urn:li:person:gpg-vzsrfh) and @[Oliver Disney](urn:li:person:YVPbFt4NdC) and make sure to join Total BIM-dagen on May 30th at Chalmers. More info and sign-up in the comments.",
-      "lifecycle_state": "PUBLISHED",
-      "visibility": "PUBLIC",
-      "media": {
-        "has_media": true,
-        "media_type": "article_thumbnail",
-        "media_urn": null,
-        "image_url": "content/social/linkedin-images/719651179088-88516eed.jpg",
-        "thumbnail_urn": "urn:li:image:D4D27AQFPCp-8IdsQwg",
-        "source": "self",
-        "local_image_path": "content/social/linkedin-images/719651179088-88516eed.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFPCp-8IdsQwg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1748869033093?e=1764756000&v=beta&t=N9C7MdVYsyMf2cpGcV_bRlDvFu73V_rUxi7tDysCYTw"
-      },
-      "original_data": {
-        "isReshareDisabledByAuthor": false,
-        "createdAt": 1715782116061,
-        "lifecycleState": "PUBLISHED",
-        "lastModifiedAt": 1715844609114,
-        "visibility": "PUBLIC",
-        "publishedAt": 1715844609042,
-        "author": "urn:li:organization:100491988",
-        "id": "urn:li:share:7196511790887759872",
-        "distribution": {
-          "feedDistribution": "MAIN_FEED",
-          "thirdPartyDistributionChannels": []
-        },
-        "content": {
-          "article": {
-            "description": "Using a digital model as a single dynamic source of information on the building site instead of traditional drawings, can deliver significant cost savings,…",
-            "thumbnail": "urn:li:image:D4D27AQFPCp-8IdsQwg",
-            "source": "https://www.chalmers.se/en/current/news/ace-total-bim/",
-            "title": "Total BIM: Toward transforming construction"
-          }
-        },
-        "commentary": "By using a digital model as the only dynamic source of information on the construction site instead of traditional drawings, you can both make significant cost savings, shorten the project time and get an integrated communication flow. But to succeed you need to go \"Total BIM\" - completely abandon the 2D drawing and change your mindset. \n\nRead the interesting article with @[Mattias Roupé](urn:li:person:gpg-vzsrfh) and @[Oliver Disney](urn:li:person:YVPbFt4NdC) and make sure to join Total BIM-dagen on May 30th at Chalmers. More info and sign-up in the comments.",
-        "lifecycleStateInfo": {
-          "isEditedByAuthor": false
-        }
-      }
     }
   ]
 }
