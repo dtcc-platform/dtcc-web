@@ -65,7 +65,7 @@ def get_image_details(image_urn, access_token):
     headers = {
         "Authorization": f"Bearer {access_token}",
         "X-Restli-Protocol-Version": "2.0.0",
-        "LinkedIn-Version": "202509"
+        "LinkedIn-Version": "202601"
     }
     
     try:
@@ -152,7 +152,7 @@ def fetch_post_details(post_urn, access_token, cache):
     headers = {
         "Authorization": f"Bearer {access_token}",
         "X-Restli-Protocol-Version": "2.0.0",
-        "LinkedIn-Version": "202509"
+        "LinkedIn-Version": "202601"
     }
 
     try:
@@ -177,7 +177,7 @@ params = {
 headers = {
     "Authorization": f"Bearer {ACCESS_TOKEN}",
     "X-Restli-Protocol-Version": "2.0.0",
-    "LinkedIn-Version": "202509"
+    "LinkedIn-Version": "202601"
 }
 
 try:
