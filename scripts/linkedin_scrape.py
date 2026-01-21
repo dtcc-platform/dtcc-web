@@ -267,6 +267,29 @@ try:
                 print("  ✓ Media sourced from parent reshare")
         print()
     
+    # Merge with existing posts to preserve history
+    existing_posts = []
+    if OUTPUT_FILE.exists():
+        try:
+            with OUTPUT_FILE.open('r', encoding='utf-8') as f:
+                existing_data = json.load(f)
+                existing_posts = existing_data.get('posts', [])
+        except (json.JSONDecodeError, KeyError):
+            existing_posts = []
+
+    # Create a dict of new posts by ID for quick lookup
+    new_posts_by_id = {p['post_id']: p for p in enhanced_posts}
+
+    # Keep existing posts that aren't in the new fetch (they rotated out)
+    for old_post in existing_posts:
+        if old_post['post_id'] not in new_posts_by_id:
+            enhanced_posts.append(old_post)
+
+    # Sort all posts by published_at descending (newest first)
+    enhanced_posts.sort(key=lambda p: p['published_at'], reverse=True)
+
+    print(f"  Merged: {len(new_posts_by_id)} from API + {len(enhanced_posts) - len(new_posts_by_id)} preserved = {len(enhanced_posts)} total")
+
     # Save enhanced data to JSON
     output_data = {
         "organization_id": ORGANIZATION_ID,
