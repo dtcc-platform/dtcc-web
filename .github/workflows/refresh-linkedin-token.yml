@@ -1,0 +1,39 @@
+name: Refresh LinkedIn Token
+
+on:
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Refresh token
+        env:
+          LINKEDIN_REFRESH_TOKEN: ${{ secrets.LINKEDIN_REFRESH_TOKEN }}
+          LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
+          LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
+        run: python3 scripts/linkedin_token_refresh.py
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## LinkedIn Token Refresh" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Check the job logs above for the new access token." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Next steps:**" >> $GITHUB_STEP_SUMMARY
+          echo "1. Copy the new access token from the 'Refresh token' step output" >> $GITHUB_STEP_SUMMARY
+          echo "2. Go to Settings > Secrets and variables > Actions" >> $GITHUB_STEP_SUMMARY
+          echo "3. Update the \`LINKEDIN_ACCESS_TOKEN\` secret with the new value" >> $GITHUB_STEP_SUMMARY
