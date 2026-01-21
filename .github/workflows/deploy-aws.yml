@@ -8,6 +8,13 @@ on:
         required: false
         type: boolean
         default: true
+  workflow_call:
+    inputs:
+      invalidate_cloudfront:
+        description: 'Invalidate CloudFront cache after deployment'
+        required: false
+        type: boolean
+        default: true
 
 jobs:
   deploy:
@@ -66,7 +73,7 @@ jobs:
             --delete
 
       - name: Invalidate CloudFront cache
-        if: ${{ github.event.inputs.invalidate_cloudfront == 'true' && env.CLOUDFRONT_DIST_ID != '' }}
+        if: ${{ inputs.invalidate_cloudfront == true && env.CLOUDFRONT_DIST_ID != '' }}
         run: |
           aws cloudfront create-invalidation \
             --distribution-id ${{ env.CLOUDFRONT_DIST_ID }} \
@@ -78,5 +85,5 @@ jobs:
           echo "📦 Bucket: s3://${{ secrets.S3_BUCKET }}"
           echo "🌍 Region: eu-north-1"
           if [ -n "${{ env.CLOUDFRONT_DIST_ID }}" ]; then
-            echo "🚀 CloudFront invalidation: ${{ github.event.inputs.invalidate_cloudfront }}"
+            echo "🚀 CloudFront invalidation: ${{ inputs.invalidate_cloudfront }}"
           fi
