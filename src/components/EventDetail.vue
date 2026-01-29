@@ -79,19 +79,15 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { sanitizeSrc, sanitizeUrl, isValidSlug } from '../utils/sanitize'
-import { resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
-import { ensureYouTubeEmbed } from '../utils/video'
+import { isValidSlug } from '../utils/sanitize'
+import { resolveUrl } from '../utils/paths.js'
+import {
+  normalizeImage,
+  normalizeVideo,
+  normalizeLink,
+  processImages
+} from '../utils/detailHelpers'
 import OptimizedImage from './OptimizedImage.vue'
-
-const normalizeLink = (value) => {
-  if (!value) return ''
-  const trimmed = value.trim()
-  if (!trimmed || trimmed === '#') return ''
-  const resolved = resolveUrl(trimmed)
-  if (typeof resolved !== 'string') return ''
-  return resolved.startsWith('/') ? resolved : sanitizeUrl(resolved)
-}
 
 const params = new URLSearchParams(location.search)
 const slug = params.get('slug')
@@ -139,55 +135,14 @@ const bodyParas = computed(() => {
   return String(body).split(/\n\n+/).map(s => s.trim()).filter(Boolean)
 })
 
-const normalizeImage = (value) => {
-  if (!value) return null
-  // Don't convert to WebP here - let OptimizedImage component handle it
-  // This preserves the fallback mechanism in the <picture> element
-  return sanitizeSrc(resolveUrl(value))
-}
-
-const normalizeVideo = (value) => {
-  if (!value) return null
-  const embed = ensureYouTubeEmbed(value)
-  if (!embed) return null
-  return sanitizeSrc(embed)
-}
-
 onMounted(async () => {
   if (!slug || !isValidSlug(slug)) return
   try {
     const r = await fetch(resolveUrl(`content/events/${slug}.json`), { cache: 'default' })
     if (!r.ok) return
     const data = await r.json()
-    const orderedImages = []
-    const orderedCaptions = []
-    const rawCaptions = Array.isArray(data.imageCaptions)
-      ? data.imageCaptions.map((entry) => (typeof entry === 'string' ? entry.trim() : ''))
-      : []
-    if (Array.isArray(data.images)) {
-      data.images.forEach((entry, idx) => {
-        const normalized = normalizeImage(entry)
-        if (normalized && !orderedImages.includes(normalized)) {
-          orderedImages.push(normalized)
-          orderedCaptions.push(rawCaptions[idx] || '')
-        }
-      })
-    }
-    let headlineImage = normalizeImage(data.image || null)
-    let headlineCaption = ''
-    if (headlineImage) {
-      const existingIndex = orderedImages.indexOf(headlineImage)
-      if (existingIndex !== -1) {
-        headlineCaption = orderedCaptions[existingIndex] || ''
-        orderedImages.splice(existingIndex, 1)
-        orderedCaptions.splice(existingIndex, 1)
-      }
-      orderedImages.unshift(headlineImage)
-      orderedCaptions.unshift(headlineCaption)
-    } else if (orderedImages.length) {
-      headlineImage = orderedImages[0]
-    }
-    const normalizedCaptions = orderedImages.map((_, idx) => orderedCaptions[idx] || '')
+
+    const { images: orderedImages, captions: normalizedCaptions, headlineImage } = processImages(data)
 
     item.value = {
       id: slug,
