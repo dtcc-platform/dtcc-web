@@ -68,7 +68,7 @@ const navLinks = [
   { label: 'Projects', href: `${base}projects/` },
   { label: 'Partners', href: `${base}partners/` },
   { label: 'About DTCC', href: `${base}about/` },
-  { label: 'News', href: `${base}#linkedin-feed` },
+  { label: 'News', href: `${base}#news` },
   { label: 'Events', href: `${base}events/`, disabled: true },
   { label: 'Gallery', href: `${base}gallery/` },
   { label: 'Contact', href: `${base}contact/` },
