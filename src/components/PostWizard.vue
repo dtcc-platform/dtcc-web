@@ -662,12 +662,14 @@ const TYPE_OPTIONS = [
   { value: 'projects', label: 'Projects' },
   { value: 'events-archive', label: 'Projects Archive' },
   { value: 'events', label: 'Events' },
+  { value: 'news', label: 'News' },
 ]
 
 const SECTION_CONFIG = {
   events: { label: 'Events', contentDir: 'events', urlPrefix: '/events/' },
   'events-archive': { label: 'Projects Archive', contentDir: 'dtcc-1', urlPrefix: '/dtcc-1/' },
   projects: { label: 'Projects', contentDir: 'projects', urlPrefix: '/projects/' },
+  news: { label: 'News', contentDir: 'news', urlPrefix: '/news/' },
 }
 
 const EVENT_TYPES = new Set(['events'])

@@ -167,5 +167,5 @@ const fallbackImage = withBase('content/Projects Placeholder.webp')
 </style>
 
 <style scoped>
-.section-title { text-align: center; margin-bottom: 20px; }
+.section-title { text-align: left; margin-bottom: 20px; }
 </style>
