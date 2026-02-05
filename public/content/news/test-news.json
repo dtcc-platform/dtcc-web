@@ -1,0 +1,20 @@
+{
+  "title": "Test news",
+  "abstract": "This is a test news article.",
+  "summary": "This is a test news article.",
+  "intro": "This is a test news article.",
+  "url": "/news/detail.html?slug=test-news",
+  "body": "Testing testing the news",
+  "eyebrow": "News",
+  "date": "2026-02-05",
+  "previewImage": "content/news/test-news-preview.webp",
+  "image": "content/news/test-news-headline.webp",
+  "headlineImage": "content/news/test-news-headline.webp",
+  "images": [
+    "content/news/test-news-headline.webp"
+  ],
+  "contacts": [
+    "bernt-ketzler",
+    "franziska-hunger"
+  ]
+}
