@@ -2,7 +2,7 @@
   <section id="linkedin-feed" class="section social-feed">
     <div class="container">
       <header class="feed-header">
-        <h2 class="h3-30">Latest news</h2>
+        <h2 class="h3-30">Latest from LinkedIn</h2>
         <a :href="companyUrl" target="_blank" rel="noopener" class="more">Visit our LinkedIn page »</a>
       </header>
       <p class="intro muted">Latest highlights and announcements from the Digital Twin Cities Centre community.</p>
