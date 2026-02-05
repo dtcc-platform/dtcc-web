@@ -5,7 +5,7 @@
     <IntroSection />
     <GradientFeature />
     <WhatAreTwins />
-    <NewsSection />
+    <LatestNews />
     <ProjectsSection />
     <SocialFeed />
     <CTAStudents />
@@ -20,7 +20,7 @@ import HeroSection from './components/HeroSection.vue'
 import IntroSection from './components/IntroSection.vue'
 import GradientFeature from './components/GradientFeature.vue'
 import WhatAreTwins from './components/WhatAreTwins.vue'
-import NewsSection from './components/NewsSection.vue'
+import LatestNews from './components/LatestNews.vue'
 import ProjectsSection from './components/ProjectsSection.vue'
 import SocialFeed from './components/SocialFeed.vue'  // Loaded eagerly to fix navigation
 import FooterSection from './components/FooterSection.vue'
