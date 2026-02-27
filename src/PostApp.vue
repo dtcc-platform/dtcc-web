@@ -1,18 +1,15 @@
 <template>
-  <div class="page-shell">
-    <HeaderNav />
+  <PageShell :showCTA="false">
     <main class="post-main">
       <PostWizard v-if="isAuthenticated" />
       <LoginGate v-else @authenticated="handleAuthenticated" />
     </main>
-    <FooterSection />
-  </div>
+  </PageShell>
 </template>
 
 <script setup>
 import { defineAsyncComponent } from 'vue'
-import HeaderNav from './components/HeaderNav.vue'
-import FooterSection from './components/FooterSection.vue'
+import PageShell from './components/PageShell.vue'
 import LoginGate from './components/LoginGate.vue'
 import LoadingSpinner from './components/LoadingSpinner.vue'
 import { usePostSession } from './utils/postSession'
@@ -33,13 +30,6 @@ function handleAuthenticated(token, expiresAt = 0) {
 </script>
 
 <style scoped>
-.page-shell {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: var(--unnamed-color-fafafa);
-}
-
 .post-main {
   flex: 1 0 auto;
   display: flex;

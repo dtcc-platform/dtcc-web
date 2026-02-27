@@ -125,10 +125,20 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { sanitizeSrc, sanitizeUrl, isValidSlug } from '../utils/sanitize'
-import { withBase, resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
-import { ensureYouTubeEmbed } from '../utils/video'
+import { isValidSlug } from '../utils/sanitize'
+import { withBase, resolveUrl } from '../utils/paths.js'
 import { usePostSession } from '../utils/postSession'
+import {
+  normalizeImage,
+  normalizeVideo,
+  normalizeLink,
+  isExternalLink,
+  normalizePapers,
+  parseBodyParagraphs,
+  processImages,
+  fetchContacts,
+  fetchRelatedItems
+} from '../utils/detailHelpers'
 import OptimizedImage from './OptimizedImage.vue'
 
 const params = new URLSearchParams(location.search)
@@ -145,6 +155,7 @@ const contacts = ref([])
 const fetchedPapers = ref([])
 const MAX_CONTACTS = 2
 const { isAuthenticated } = usePostSession()
+
 const videoEmbed = computed(() => item.value?.video || null)
 const galleryItems = computed(() => {
   const images = Array.isArray(item.value?.images) ? item.value.images : []
@@ -155,48 +166,12 @@ const galleryItems = computed(() => {
   }))
 })
 const papers = computed(() => Array.isArray(item.value?.papers) ? item.value.papers : [])
-
-const bodyParas = computed(() => {
-  const body = item.value?.body || ''
-  if (!body) return []
-  if (Array.isArray(body)) return body
-  return String(body).split(/\n\n+/).map(s => s.trim()).filter(Boolean)
-})
+const bodyParas = computed(() => parseBodyParagraphs(item.value?.body))
 
 const detailHref = (slug) => withBase(`dtcc-1/detail.html?slug=${encodeURIComponent(slug)}`)
 const wizardEditHref = computed(() =>
   slug && isValidSlug(slug) ? withBase(`post/?section=events-archive&slug=${encodeURIComponent(slug)}`) : ''
 )
-
-const normalizeImage = (value) => {
-  if (!value) return null
-  // Don't convert to WebP here - let OptimizedImage component handle it
-  // This preserves the fallback mechanism in the <picture> element
-  return sanitizeSrc(resolveUrl(value))
-}
-
-const normalizeVideo = (value) => {
-  if (!value) return null
-  const embed = ensureYouTubeEmbed(value)
-  if (!embed) return null
-  return sanitizeSrc(embed)
-}
-
-const normalizeLink = (value) => {
-  if (!value) return ''
-  const trimmed = value.trim()
-  if (!trimmed || trimmed === '#') return ''
-  const resolved = resolveUrl(trimmed)
-  if (typeof resolved !== 'string') return ''
-  return resolved.startsWith('/') ? resolved : sanitizeUrl(resolved)
-}
-
-const isExternalLink = (value) => /^https?:\/\//i.test(value)
-
-const normalizePapers = (value) => {
-  if (!Array.isArray(value)) return []
-  return value.map((entry) => normalizeLink(entry)).filter(Boolean)
-}
 
 const getPaperUrl = (paper) => {
   if (paper.doi && paper.doi.startsWith('10.')) {
@@ -228,35 +203,8 @@ onMounted(async () => {
     const r = await fetch(resolveUrl(`content/dtcc-1/${slug}.json`), { cache: 'default' })
     if (!r.ok) return
     const data = await r.json()
-    const orderedImages = []
-    const orderedCaptions = []
-    const rawCaptions = Array.isArray(data.imageCaptions)
-      ? data.imageCaptions.map((entry) => (typeof entry === 'string' ? entry.trim() : ''))
-      : []
-    if (Array.isArray(data.images)) {
-      data.images.forEach((entry, idx) => {
-        const normalized = normalizeImage(entry)
-        if (normalized && !orderedImages.includes(normalized)) {
-          orderedImages.push(normalized)
-          orderedCaptions.push(rawCaptions[idx] || '')
-        }
-      })
-    }
-    let headlineImage = normalizeImage(data.image || null)
-    let headlineCaption = ''
-    if (headlineImage) {
-      const existingIndex = orderedImages.indexOf(headlineImage)
-      if (existingIndex !== -1) {
-        headlineCaption = orderedCaptions[existingIndex] || ''
-        orderedImages.splice(existingIndex, 1)
-        orderedCaptions.splice(existingIndex, 1)
-      }
-      orderedImages.unshift(headlineImage)
-      orderedCaptions.unshift(headlineCaption)
-    } else if (orderedImages.length) {
-      headlineImage = orderedImages[0]
-    }
-    const normalizedCaptions = orderedImages.map((_, idx) => orderedCaptions[idx] || '')
+
+    const { images: orderedImages, captions: normalizedCaptions, headlineImage } = processImages(data)
 
     const normalizedDetailLink = normalizeLink(data.url || data.link || '')
     const normalizedWebsite = normalizeLink(
@@ -279,49 +227,12 @@ onMounted(async () => {
       date: data.date || data.updated || null,
       papers: normalizePapers(data.papers),
     }
-    const relatedSlugs = Array.isArray(data.related) ? data.related.slice(0, 3) : []
-    if (relatedSlugs.length) {
-      // Fetch all related items in parallel for better performance
-      const results = await Promise.all(
-        relatedSlugs.map(async (refSlug) => {
-          try {
-            const refRes = await fetch(resolveUrl(`content/dtcc-1/${refSlug}.json`), { cache: 'default' })
-            if (!refRes.ok) return null
-            const refData = await refRes.json()
-            return {
-              id: refSlug,
-              title: refData.title || refSlug,
-              summary: refData.summary || refData.excerpt || refData.description || '',
-              image: normalizeImage(refData.image || (Array.isArray(refData.images) ? refData.images[0] : null)),
-            }
-          } catch (_) {
-            return null
-          }
-        })
-      )
-      related.value = results.filter(Boolean)
-    } else {
-      related.value = []
-    }
 
-    const contactSlugs = Array.isArray(data.contacts) ? data.contacts.slice(0, MAX_CONTACTS) : []
-    if (contactSlugs.length) {
-      const userMap = await loadUsersMap()
-      const entries = contactSlugs.map((refSlug) => {
-        const user = userMap[refSlug]
-        if (!user) return null
-        return {
-          id: refSlug,
-          name: user.name || user.displayName || refSlug,
-          email: user.email || '',
-          title: user.title || user.role || '',
-          image: normalizeImage(user.photo || user.image || null),
-        }
-      }).filter(Boolean)
-      contacts.value = entries
-    } else {
-      contacts.value = []
-    }
+    const relatedSlugs = Array.isArray(data.related) ? data.related : []
+    related.value = await fetchRelatedItems(relatedSlugs, 'content/dtcc-1', 3)
+
+    const contactSlugs = Array.isArray(data.contacts) ? data.contacts : []
+    contacts.value = await fetchContacts(contactSlugs, MAX_CONTACTS)
 
     // Fetch papers from papers JSON
     try {
@@ -335,32 +246,6 @@ onMounted(async () => {
     }
   } catch (_) {}
 })
-
-let usersCache = null
-async function loadUsersMap() {
-  if (usersCache) return usersCache
-  try {
-    const res = await fetch(resolveUrl('content/users.json'), { cache: 'default' })
-    if (!res.ok) {
-      usersCache = {}
-      return usersCache
-    }
-    const payload = await res.json()
-    const items = Array.isArray(payload?.users) ? payload.users : Array.isArray(payload) ? payload : []
-    const map = {}
-    for (const entry of items) {
-      if (!entry) continue
-      const key = entry.slug || entry.id || entry.username || entry.email
-      if (!key) continue
-      map[key] = entry
-    }
-    usersCache = map
-    return usersCache
-  } catch (_) {
-    usersCache = {}
-    return usersCache
-  }
-}
 </script>
 
 <style scoped>

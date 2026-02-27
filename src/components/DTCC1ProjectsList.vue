@@ -50,9 +50,10 @@
 
 <script setup>
 import { computed, ref, onMounted } from 'vue'
-import { sanitizeUrl, sanitizeSrc } from '../utils/sanitize'
-import { withBase, resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
+import { sanitizeSrc } from '../utils/sanitize'
+import { withBase, resolveUrl } from '../utils/paths.js'
 import { usePostSession } from '../utils/postSession'
+import { normalizeImage, normalizeLink } from '../utils/detailHelpers'
 
 // Build-time fallback from src/dtcc-1
 const jsonModules = import.meta.glob('../dtcc-1/*.json', { eager: true, import: 'default' })
@@ -62,20 +63,10 @@ const imageModules = import.meta.glob('../dtcc-1/*.{jpg,jpeg,png,webp}', { eager
 const runtimeItems = ref([])
 const { isAuthenticated } = usePostSession()
 
-const normalizeImage = (value) => {
-  if (!value) return null
-  // Don't convert to WebP here - let OptimizedImage component handle it
-  // This preserves the fallback mechanism in the <picture> element
-  return sanitizeSrc(resolveUrl(value))
-}
-
-const normalizeLink = (value) => {
-  if (!value) return '#'
-  const trimmed = value.trim()
-  if (!trimmed || trimmed === '#') return '#'
-  const resolved = resolveUrl(trimmed)
-  if (typeof resolved !== 'string') return '#'
-  return resolved.startsWith('/') ? resolved : sanitizeUrl(resolved)
+// List-specific link normalizer (returns '#' instead of empty string)
+const normalizeLinkForList = (value) => {
+  const result = normalizeLink(value)
+  return result || '#'
 }
 
 onMounted(async () => {
@@ -98,7 +89,7 @@ onMounted(async () => {
       }
       const title = it.title || data.title || data.name || base || 'Untitled project'
       const description = it.description || data.description || data.summary || data.excerpt || ''
-      const url = normalizeLink(it.url || data.url || data.link || '')
+      const url = normalizeLinkForList(it.url || data.url || data.link || '')
       const date = it.date || data.date || data.published || data.updated || null
       const order = Number.isFinite(Number(it.order)) ? Number(it.order) : (Number.isFinite(Number(data.order)) ? Number(data.order) : undefined)
       const image = normalizeImage(
@@ -129,7 +120,7 @@ const items = computed(() => {
     const image = img ? sanitizeSrc(resolveUrl(img)) : remoteImage
     const title = data.title || data.name || name
     const description = data.description || data.summary || data.excerpt || ''
-    const url = normalizeLink(data.url || data.link || '')
+    const url = normalizeLinkForList(data.url || data.link || '')
     const date = data.date || data.published || data.updated || null
     const order = Number.isFinite(Number(data.order)) ? Number(data.order) : undefined
     result.push({ id: name, title, description, url, image, hasImage: Boolean(image), date, order })
