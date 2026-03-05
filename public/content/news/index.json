@@ -1,10 +1,6 @@
 {
   "items": [
     {
-      "base": "test-news",
-      "image": "content/news/test-news-headline.webp"
-    },
-    {
       "base": "extension-2025"
     }
   ]
