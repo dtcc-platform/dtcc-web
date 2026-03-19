@@ -2,6 +2,10 @@
   "items": [
     {
       "base": "extension-2025"
+    },
+    {
+      "base": "dtcc-project-in-focus-urban-trees",
+      "image": "content/news/dtcc-project-in-focus-urban-trees-headline.webp"
     }
   ]
 }
