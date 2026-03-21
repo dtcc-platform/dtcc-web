@@ -21,41 +21,36 @@
       </div>
     </section>
 
-    <!-- Body gradient section -->
+    <!-- Body section -->
     <section class="section gradient-sunrise body">
-      <div class="container grid2">
-        <div>
-          <h2 class="h3-30" v-text="item.subheading || 'Details'" />
+      <div class="container">
+        <p class="brodtext-20 muted" v-for="(p, i) in bodyParas" :key="i" v-html="renderInlineMarkdown(p)" />
+        <div v-if="galleryItems.length" class="gallery">
+          <figure
+            v-for="(image, i) in galleryItems"
+            :key="`${i}-${image.src}`"
+            class="gallery-card"
+          >
+            <a :href="image.src" target="_blank" rel="noopener">
+              <img
+                :src="image.src"
+                :alt="image.caption || `${item.title} image ${i + 2}`"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+            <figcaption v-if="image.caption" class="caption">{{ image.caption }}</figcaption>
+          </figure>
         </div>
-        <div>
-          <p class="brodtext-20 muted" v-for="(p, i) in bodyParas" :key="i" v-text="p" />
-          <div v-if="galleryItems.length" class="gallery">
-            <figure
-              v-for="(image, i) in galleryItems"
-              :key="`${i}-${image.src}`"
-              class="gallery-card"
-            >
-              <a :href="image.src" target="_blank" rel="noopener">
-                <img
-                  :src="image.src"
-                  :alt="image.caption || `${item.title} image ${i + 2}`"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </a>
-              <figcaption v-if="image.caption" class="caption">{{ image.caption }}</figcaption>
-            </figure>
-          </div>
-          <div v-if="videoEmbed" class="video-wrap">
-            <iframe
-              :src="videoEmbed"
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-              loading="lazy"
-            ></iframe>
-          </div>
+        <div v-if="videoEmbed" class="video-wrap">
+          <iframe
+            :src="videoEmbed"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
         </div>
       </div>
     </section>
@@ -76,7 +71,7 @@
     </section>
 
     <!-- Related posts -->
-    <section class="section gradient-sunrise related">
+    <section v-if="related.length" class="section gradient-sunrise related">
       <div class="container">
         <h3 class="h3-30 section-title">Related posts</h3>
         <div class="cards">
@@ -86,6 +81,23 @@
               <h4 class="h3-30" v-text="r.title" />
               <p class="brodtext-20 muted" v-text="r.summary || ''" />
               <a :href="detailHref(r.id)" class="more">Read more »</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related projects -->
+    <section v-if="relatedProjects.length" class="section gradient-sunrise related">
+      <div class="container">
+        <h3 class="h3-30 section-title">Related projects</h3>
+        <div class="cards">
+          <article v-for="rp in relatedProjects" :key="rp.id" class="card project">
+            <div class="img" :style="{ backgroundImage: rp.image ? `url(${rp.image})` : undefined }"></div>
+            <div class="body">
+              <h4 class="h3-30" v-text="rp.title" />
+              <p class="brodtext-20 muted" v-text="rp.summary || ''" />
+              <a :href="projectDetailHref(rp.id)" class="more">Read more &raquo;</a>
             </div>
           </article>
         </div>
@@ -110,6 +122,7 @@ import { ref, onMounted, computed } from 'vue'
 import { sanitizeSrc, isValidSlug } from '../utils/sanitize'
 import { withBase, resolveUrl, getOptimizedImageUrl } from '../utils/paths.js'
 import { ensureYouTubeEmbed } from '../utils/video'
+import { renderInlineMarkdown } from '../utils/markdown.js'
 import OptimizedImage from './OptimizedImage.vue'
 
 const params = new URLSearchParams(location.search)
@@ -123,6 +136,10 @@ if (slug && !isValidSlug(slug)) {
 
 const item = ref(null)
 const related = ref([])
+const relatedProjects = ref([])
+
+const projectDetailHref = (slug) => withBase(`projects/detail.html?slug=${encodeURIComponent(slug)}`)
+
 const contacts = ref([])
 const MAX_CONTACTS = 2
 const videoEmbed = computed(() => item.value?.video || null)
@@ -216,7 +233,6 @@ onMounted(async () => {
       id: slug,
       title: data.title || slug,
       intro: data.intro || data.summary || '',
-      subheading: data.subheading || data.headline || 'Details',
       body: data.body || '',
       image: headlineImage,
       images: orderedImages,
@@ -248,6 +264,29 @@ onMounted(async () => {
       related.value = results.filter(Boolean)
     } else {
       related.value = []
+    }
+
+    const relatedProjectSlugs = Array.isArray(data.relatedProjects) ? data.relatedProjects.slice(0, 4) : []
+    if (relatedProjectSlugs.length) {
+      const projectResults = await Promise.all(
+        relatedProjectSlugs.map(async (refSlug) => {
+          if (!isValidSlug(refSlug)) return null
+          try {
+            const refRes = await fetch(resolveUrl(`content/projects/${refSlug}.json`), { cache: 'default' })
+            if (!refRes.ok) return null
+            const refData = await refRes.json()
+            return {
+              id: refSlug,
+              title: refData.title || refSlug,
+              summary: refData.summary || refData.excerpt || '',
+              image: normalizeImage(refData.image || (Array.isArray(refData.images) ? refData.images[0] : null)),
+            }
+          } catch (_) {
+            return null
+          }
+        })
+      )
+      relatedProjects.value = projectResults.filter(Boolean)
     }
 
     const contactSlugs = Array.isArray(data.contacts) ? data.contacts.slice(0, MAX_CONTACTS) : []

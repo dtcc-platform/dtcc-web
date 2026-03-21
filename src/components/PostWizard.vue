@@ -80,6 +80,7 @@
             placeholder="Write the post body. Use blank lines to separate paragraphs."
             required
           ></textarea>
+          <p class="muted helper">Use blank lines to separate paragraphs. Use **bold** and *italic* for formatting.</p>
         </div>
 
         <div class="field">
@@ -109,6 +110,25 @@
               <span class="option-text">{{ option.title }}</span>
             </label>
             <p v-if="!relatedOptions.length" class="muted helper">No existing entries available yet.</p>
+          </div>
+        </div>
+
+        <div v-if="postType === 'news'" class="field selection-field">
+          <label>Related projects</label>
+          <p class="muted helper">Select up to {{ MAX_RELATED }} related projects to feature alongside this news item.</p>
+          <div v-if="relatedProjectsLoading" class="muted helper">Loading project options...</div>
+          <div v-else-if="relatedProjectsError" class="alert error">{{ relatedProjectsError }}</div>
+          <div v-else class="selection-list">
+            <label v-for="option in relatedProjectOptions" :key="option.slug" class="selection-option">
+              <input
+                type="checkbox"
+                :checked="isRelatedProjectSelected(option.slug)"
+                :disabled="!isRelatedProjectSelected(option.slug) && relatedProjectsSelectionFull"
+                @change="toggleRelatedProject(option.slug, $event.target.checked)"
+              >
+              <span class="option-text">{{ option.title }}</span>
+            </label>
+            <p v-if="!relatedProjectOptions.length" class="muted helper">No existing projects available yet.</p>
           </div>
         </div>
 
@@ -564,12 +584,9 @@
                 </section>
 
                 <section class="section gradient-sunrise body">
-                  <div class="container grid2">
-                    <div>
-                      <h2 class="h3-30">{{ previewData.subheading }}</h2>
-                    </div>
-                    <div>
-                      <p class="brodtext-20 muted" v-for="(paragraph, i) in previewData.bodyParagraphs" :key="i">{{ paragraph }}</p>
+                  <template v-if="previewData.section === 'news'">
+                    <div class="container">
+                      <p class="brodtext-20 muted" v-for="(paragraph, i) in previewData.bodyParagraphs" :key="i" v-html="renderInlineMarkdown(paragraph)" />
                       <div v-if="previewData.gallery.length" class="gallery">
                         <figure
                           v-for="(image, i) in previewData.gallery"
@@ -598,7 +615,44 @@
                         ></iframe>
                       </div>
                     </div>
-                  </div>
+                  </template>
+                  <template v-else>
+                    <div class="container grid2">
+                      <div>
+                        <h2 class="h3-30">{{ previewData.subheading }}</h2>
+                      </div>
+                      <div>
+                        <p class="brodtext-20 muted" v-for="(paragraph, i) in previewData.bodyParagraphs" :key="i" v-html="renderInlineMarkdown(paragraph)" />
+                        <div v-if="previewData.gallery.length" class="gallery">
+                          <figure
+                            v-for="(image, i) in previewData.gallery"
+                            :key="`${i}-${image.src}`"
+                            class="gallery-card"
+                          >
+                            <a :href="image.src" target="_blank" rel="noopener">
+                              <img
+                                :src="image.src"
+                                :alt="image.caption || `Gallery image ${i + 1}`"
+                                loading="lazy"
+                                decoding="async"
+                              >
+                            </a>
+                            <figcaption v-if="image.caption" class="caption">{{ image.caption }}</figcaption>
+                          </figure>
+                        </div>
+                        <div v-if="previewData.video" class="video-wrap">
+                          <iframe
+                            :src="previewData.video"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen
+                            loading="lazy"
+                          ></iframe>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
                 </section>
 
                 <section v-if="previewData.contacts.length" class="section contacts">
@@ -631,6 +685,22 @@
                   </div>
                 </section>
 
+                <section v-if="previewData.relatedProjects && previewData.relatedProjects.length" class="section gradient-sunrise related">
+                  <div class="container">
+                    <h3 class="h3-30 section-title">Related projects</h3>
+                    <div class="cards">
+                      <article v-for="rp in previewData.relatedProjects" :key="rp.id" class="card project">
+                        <div class="img" :style="{ backgroundImage: rp.image ? `url(${rp.image})` : undefined }"></div>
+                        <div class="body">
+                          <h4 class="h3-30">{{ rp.title }}</h4>
+                          <p class="brodtext-20 muted">{{ rp.summary }}</p>
+                          <span class="more">Read more &raquo;</span>
+                        </div>
+                      </article>
+                    </div>
+                  </div>
+                </section>
+
                 <section v-if="previewData.papers.length" class="section papers-section">
                   <div class="container papers-container">
                     <h3 class="h3-30">Associated papers</h3>
@@ -657,6 +727,7 @@ import { ensureYouTubeEmbed, toYouTubeEmbed } from '../utils/video'
 import { sanitizeSrc, sanitizeUrl, isValidSlug } from '../utils/sanitize'
 import { convertToWebP } from '../utils/imageConversion'
 import { resolveUrl, withBase } from '../utils/paths.js'
+import { renderInlineMarkdown } from '../utils/markdown.js'
 
 const TYPE_OPTIONS = [
   { value: 'projects', label: 'Projects' },
@@ -717,6 +788,11 @@ const relatedLoading = ref(false)
 const relatedError = ref('')
 const selectedRelated = ref([])
 const relatedSelectionFull = computed(() => selectedRelated.value.length >= MAX_RELATED)
+const selectedRelatedProjects = ref([])
+const relatedProjectOptions = ref([])
+const relatedProjectsLoading = ref(false)
+const relatedProjectsError = ref('')
+const relatedProjectsSelectionFull = computed(() => selectedRelatedProjects.value.length >= MAX_RELATED)
 const contactOptions = ref([])
 const contactLoading = ref(false)
 const contactError = ref('')
@@ -838,6 +914,12 @@ watch(slug, (value) => {
 watch(postType, (section) => {
   selectedRelated.value = []
   refreshRelatedOptions(section)
+  if (section === 'news') {
+    refreshRelatedProjectOptions()
+  } else {
+    relatedProjectOptions.value = []
+    selectedRelatedProjects.value = []
+  }
   selectedContacts.value = []
   if (isEventSection(section)) {
     contactOptions.value = []
@@ -850,6 +932,9 @@ watch(postType, (section) => {
 
 onMounted(async () => {
   await refreshRelatedOptions(postType.value)
+  if (postType.value === 'news') {
+    await refreshRelatedProjectOptions()
+  }
   if (!isEventSection(postType.value)) {
     await ensureContactsLoaded()
   }
@@ -885,6 +970,9 @@ async function prefillExistingEntry(section, slugValue) {
     }
 
     selectedRelated.value = cleanSlugList(data.related, MAX_RELATED)
+    selectedRelatedProjects.value = section === 'news'
+      ? cleanSlugList(data.relatedProjects, MAX_RELATED)
+      : []
     selectedContacts.value = isEventSection(section)
       ? []
       : cleanSlugList(data.contacts, MAX_CONTACTS)
@@ -1547,6 +1635,45 @@ async function refreshRelatedOptions(section) {
   }
 }
 
+async function refreshRelatedProjectOptions() {
+  relatedProjectsLoading.value = true
+  relatedProjectsError.value = ''
+  try {
+    const manifestUrl = `${basePath}/content/projects/index.json`
+    const res = await fetch(manifestUrl, { cache: 'no-store' })
+    const manifest = res.ok ? await res.json() : null
+    const items = Array.isArray(manifest?.items) ? manifest.items : []
+    const options = []
+
+    for (const item of items) {
+      const slug = item.base || item.slug
+      if (!slug || !isValidSlug(slug)) continue
+      try {
+        const detailUrl = resolveUrl(`content/projects/${slug}.json`)
+        const detailRes = await fetch(detailUrl, { cache: 'no-store' })
+        if (!detailRes.ok) continue
+        const detail = await detailRes.json()
+        options.push({
+          slug,
+          title: detail.title || detail.name || slug,
+        })
+      } catch (_) {
+        // ignore individual fetch failures
+      }
+    }
+
+    relatedProjectOptions.value = options
+    selectedRelatedProjects.value = selectedRelatedProjects.value.filter((slug) =>
+      options.some((option) => option.slug === slug)
+    )
+  } catch (err) {
+    relatedProjectsError.value = err instanceof Error ? err.message : String(err)
+    relatedProjectOptions.value = []
+  } finally {
+    relatedProjectsLoading.value = false
+  }
+}
+
 function isRelatedSelected(slugValue) {
   return selectedRelated.value.includes(slugValue)
 }
@@ -1557,6 +1684,19 @@ function toggleRelated(slugValue, checked) {
     selectedRelated.value = [...selectedRelated.value, slugValue]
   } else {
     selectedRelated.value = selectedRelated.value.filter((item) => item !== slugValue)
+  }
+}
+
+function isRelatedProjectSelected(slug) {
+  return selectedRelatedProjects.value.includes(slug)
+}
+
+function toggleRelatedProject(slug, checked) {
+  if (checked) {
+    if (isRelatedProjectSelected(slug) || selectedRelatedProjects.value.length >= MAX_RELATED) return
+    selectedRelatedProjects.value = [...selectedRelatedProjects.value, slug]
+  } else {
+    selectedRelatedProjects.value = selectedRelatedProjects.value.filter((s) => s !== slug)
   }
 }
 
@@ -1870,6 +2010,11 @@ function prepareDraft() {
     } else {
       delete payload.contacts
     }
+    if (postType.value === 'news' && selectedRelatedProjects.value.length) {
+      payload.relatedProjects = [...selectedRelatedProjects.value]
+    } else {
+      delete payload.relatedProjects
+    }
   }
 
     draftSection.value = section
@@ -2111,6 +2256,11 @@ async function publishDraft() {
       parsed.contacts = [...selectedContacts.value]
     } else {
       delete parsed.contacts
+    }
+    if (postType.value === 'news' && selectedRelatedProjects.value.length) {
+      parsed.relatedProjects = [...selectedRelatedProjects.value]
+    } else {
+      delete parsed.relatedProjects
     }
   } else {
     delete parsed.related
@@ -2418,6 +2568,7 @@ function resetWizard() {
   errorMessage.value = ''
   forceOverwrite.value = false
   selectedRelated.value = []
+  selectedRelatedProjects.value = []
   selectedContacts.value = []
 }
 
@@ -2494,6 +2645,10 @@ async function openPreview() {
       ? []
       : await loadPreviewRelated(section, Array.isArray(parsed.related) ? parsed.related : [])
 
+    const relatedProjectsList = (section === 'news' && Array.isArray(parsed.relatedProjects))
+      ? await loadPreviewRelated('projects', parsed.relatedProjects)
+      : []
+
     const contacts = isEventSection(section)
       ? []
       : await loadPreviewContacts(Array.isArray(parsed.contacts) ? parsed.contacts : [])
@@ -2516,6 +2671,7 @@ async function openPreview() {
       registration,
       visitUrl,
       related,
+      relatedProjects: relatedProjectsList,
       contacts,
       papers,
     }
@@ -2710,7 +2866,7 @@ async function loadPreviewRelated(section, slugs) {
 }
 
 async function fetchContentEntry(section, slug) {
-  if (!slug) return null
+  if (!slug || !isValidSlug(slug)) return null
   try {
     const url = resolveUrl(`content/${section}/${slug}.json`)
     const res = await fetch(url, { cache: 'no-store' })

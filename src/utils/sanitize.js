@@ -29,16 +29,21 @@ export function sanitizeSrc(input) {
   }
 }
 
-/** Escape all HTML then permit <br> tags back (simple allowlist). */
-export function allowBrText(input) {
+/** Escape HTML special characters. */
+export function escapeHtml(input) {
   if (typeof input !== 'string') return ''
-  const escaped = input
+  return input
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-  // Restore line breaks represented as <br> or <br/> in the source
-  return escaped
-    .replace(/&lt;br\s*\/?&gt;/gi, '<br>')
+    .replace(/"/g, '&quot;')
+}
+
+/** Escape all HTML then permit <br> tags back (simple allowlist). */
+export function allowBrText(input) {
+  if (typeof input !== 'string') return ''
+  const escaped = escapeHtml(input)
+  return escaped.replace(/&lt;br\s*\/?&gt;/gi, '<br>')
 }
 
 /**

@@ -12,6 +12,9 @@ export default defineConfig(({ mode }) => {
   const isCloudFront = process.env.DEPLOY_TARGET === 'cloudfront'
   const base = isCloudFront ? '/' : (isGhActions && repo ? `/${repo}/` : '/')
   return {
+    test: {
+      globals: true,
+    },
     plugins: [
       vue(),
       visualizer({
