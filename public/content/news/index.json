@@ -1,15 +1,15 @@
 {
   "items": [
     {
+      "base": "new-dtcc-phd-forum-opens-doors-for-collaboration",
+      "image": "content/news/new-dtcc-phd-forum-opens-doors-for-collaboration-headline.webp"
+    },
+    {
       "base": "dtcc-project-in-focus-urban-trees",
       "image": "content/news/dtcc-project-in-focus-urban-trees-headline.webp"
     },
     {
       "base": "extension-2025"
-    },
-    {
-      "base": "new-dtcc-phd-forum-opens-doors-for-collaboration",
-      "image": "content/news/new-dtcc-phd-forum-opens-doors-for-collaboration-headline.webp"
     }
   ]
 }
