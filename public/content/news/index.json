@@ -1,6 +1,10 @@
 {
   "items": [
     {
+      "base": "new-project-assistants-onboard-at-dtcc",
+      "image": "content/news/new-project-assistants-onboard-at-dtcc-headline.webp"
+    },
+    {
       "base": "new-dtcc-phd-forum-opens-doors-for-collaboration",
       "image": "content/news/new-dtcc-phd-forum-opens-doors-for-collaboration-headline.webp"
     },
@@ -10,10 +14,6 @@
     },
     {
       "base": "extension-2025"
-    },
-    {
-      "base": "new-project-assistants-onboard-at-dtcc",
-      "image": "content/news/new-project-assistants-onboard-at-dtcc-headline.webp"
     }
   ]
 }
