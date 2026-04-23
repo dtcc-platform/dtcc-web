@@ -1,9 +1,52 @@
 {
   "organization_id": "100491988",
-  "total_posts": 25,
-  "posts_with_media": 25,
-  "posts_with_images": 25,
+  "total_posts": 26,
+  "posts_with_media": 26,
+  "posts_with_images": 26,
   "posts": [
+    {
+      "post_id": "urn:li:share:7452691949175767041",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7452691949175767041/",
+      "published_at": 1776860225241,
+      "commentary": "A big welcome to our two new project assistants, @[Ammar Kasem](urn:li:person:pa5mjjl8nb) and Nuri Sechkin! By engaging directly with municipalities and end users, Ammar and Nuri are set to help shape how digital twin tools create value in practice. \n\n“It’s exciting to be a part of DTCC. Right now, we are contacting municipalities and collecting feedback so developers can build according to real user stories. That way, development becomes more purposeful. We see ourselves as a bridge between DTCC and the municipalities, where we can help translate needs into concrete actions and support real case projects. Instead of just presenting tools, we want to help them achieve what they actually need and bring that feedback back into the system,” says @[Ammar Kasem](urn:li:person:pa5mjjl8nb).\n\nRead the full story on our website.\n\nhttps://lnkd.in/dKSpdBXU",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "content/social/linkedin-images/745269194917-6f4116b2.jpg",
+        "thumbnail_urn": "urn:li:image:D4D22AQGYrFDrKX3gmw",
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/745269194917-6f4116b2.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQGYrFDrKX3gmw/feedshare-shrink_2048_1536/B4DZ21GF5xGQAk-/0/1776859766997?e=1778716800&v=beta&t=WTuplQhRUdP62vHkJyA-9Drl0pP8bE2tEVb1iMUy71s"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1776860225241,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1776860255256,
+        "visibility": "PUBLIC",
+        "publishedAt": 1776860225241,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7452691949175767041",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "title": "DTCC — News",
+            "thumbnail": "urn:li:image:D4D22AQGYrFDrKX3gmw",
+            "source": "https://www.dtcc.chalmers.se/news/detail.html?slug=new-project-assistants-onboard-at-dtcc"
+          }
+        },
+        "commentary": "A big welcome to our two new project assistants, @[Ammar Kasem](urn:li:person:pa5mjjl8nb) and Nuri Sechkin! By engaging directly with municipalities and end users, Ammar and Nuri are set to help shape how digital twin tools create value in practice. \n\n“It’s exciting to be a part of DTCC. Right now, we are contacting municipalities and collecting feedback so developers can build according to real user stories. That way, development becomes more purposeful. We see ourselves as a bridge between DTCC and the municipalities, where we can help translate needs into concrete actions and support real case projects. Instead of just presenting tools, we want to help them achieve what they actually need and bring that feedback back into the system,” says @[Ammar Kasem](urn:li:person:pa5mjjl8nb).\n\nRead the full story on our website.\n\nhttps://lnkd.in/dKSpdBXU",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
     {
       "post_id": "urn:li:share:7445375774364372992",
       "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7445375774364372992/",
@@ -15,11 +58,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/744537577436-0f69adca.jpg",
+        "image_url": "content/social/linkedin-images/744537577436-3b813cc7.jpg",
         "thumbnail_urn": "urn:li:image:D4D22AQGxgE0tSSNwcQ",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/744537577436-0f69adca.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQGxgE0tSSNwcQ/feedshare-shrink_2048_1536/B4DZ1NJajGKMAg-/0/1775115807730?e=1776902400&v=beta&t=H5oDdJdiMYkDA-REO9RTS5aI4BXnIh7gAQ82nWPFzHM"
+        "local_image_path": "content/social/linkedin-images/744537577436-3b813cc7.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQGxgE0tSSNwcQ/feedshare-shrink_2048_1536/B4DZ1NJajGKMAg-/0/1775115807730?e=1778716800&v=beta&t=kOI1BQDkQ8LPV2wfWrHKcNfmYcDr42qcgCu0ruD9_qs"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -58,11 +101,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/744216725840-785942e3.jpg",
+        "image_url": "content/social/linkedin-images/744216725840-5f9eba18.jpg",
         "thumbnail_urn": "urn:li:image:D5622AQHtygSrDFcb7A",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/744216725840-785942e3.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D5622AQHtygSrDFcb7A/feedshare-shrink_2048_1536/B56Z0fio1uG8Ag-/0/1774350667389?e=1776902400&v=beta&t=Y1K6d3y8IWWKCISSWl8SBhR2I83Q552st1WdlvqhKHA"
+        "local_image_path": "content/social/linkedin-images/744216725840-5f9eba18.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D5622AQHtygSrDFcb7A/feedshare-shrink_2048_1536/B56Z0fio1uG8Ag-/0/1774350667389?e=1778716800&v=beta&t=gb1kfiYQXy02mGfRJa2szT0sebMbS6CwyL_2C69_wFc"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -101,11 +144,11 @@
         "has_media": true,
         "media_type": "image",
         "media_urn": "urn:li:image:D4D22AQFJH4g0Vnuh8A",
-        "image_url": "content/social/linkedin-images/743779927114-a8944139.jpg",
+        "image_url": "content/social/linkedin-images/743779927114-8a8758cc.jpg",
         "thumbnail_urn": null,
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/743779927114-a8944139.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFJH4g0Vnuh8A/feedshare-shrink_2048_1536/B4DZzhfA_AGwAk-/0/1773309532712?e=1776902400&v=beta&t=R9Xp2_aBAMCpq_W60vdk4xjuTcpHer6YzUCfq0iXBqA"
+        "local_image_path": "content/social/linkedin-images/743779927114-8a8758cc.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFJH4g0Vnuh8A/feedshare-shrink_2048_1536/B4DZzhfA_AGwAk-/0/1773309532712?e=1778716800&v=beta&t=7528s4poGpRs7UC9Hd6niyn2cliA2kpJThCnuT-aUfc"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -142,11 +185,11 @@
         "has_media": true,
         "media_type": "image",
         "media_urn": "urn:li:image:D4D22AQFjGrO-pajcyg",
-        "image_url": "content/social/linkedin-images/743672350339-e32c22df.jpg",
+        "image_url": "content/social/linkedin-images/743672350339-ee9fba8f.jpg",
         "thumbnail_urn": null,
         "source": "reshare_parent",
-        "local_image_path": "content/social/linkedin-images/743672350339-e32c22df.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFjGrO-pajcyg/feedshare-shrink_2048_1536/B4DZzDTTR9GkAk-/0/1772803143025?e=1776902400&v=beta&t=pWmuRtADDyAcax-TPoMa58QcM7eFo5YsNsTlwrTUwc8"
+        "local_image_path": "content/social/linkedin-images/743672350339-ee9fba8f.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFjGrO-pajcyg/feedshare-shrink_2048_1536/B4DZzDTTR9GkAk-/0/1772803143025?e=1778716800&v=beta&t=8MoHdcPV_BB_0UnbKUqxESIZrUjzp9TXaeuq9fLoQ3E"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -185,11 +228,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/743162070200-b4ccc217.jpg",
+        "image_url": "content/social/linkedin-images/743162070200-7c4e7684.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQF9HbPttE5xEg",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/743162070200-b4ccc217.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQF9HbPttE5xEg/articleshare-shrink_1280_800/B4DZyJqGJVGQAQ-/0/1771836040282?e=1775790000&v=beta&t=PhAPx4kLy2Ro9BRDh66ZhYXitB-DqEWqDeITZ4TLjKw"
+        "local_image_path": "content/social/linkedin-images/743162070200-7c4e7684.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQF9HbPttE5xEg/articleshare-shrink_1280_800/B4DZyJqGJVGQAQ-/0/1771836040282?e=1777518000&v=beta&t=aBV8-B09ICF988zq_kWgldrICLLxogLCe0R2nz7osxc"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -229,11 +272,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/741675239045-b0a7c2e5.jpg",
+        "image_url": "content/social/linkedin-images/741675239045-9f21de0f.jpg",
         "thumbnail_urn": "urn:li:image:D4D22AQEyqEeAXo9A9A",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/741675239045-b0a7c2e5.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQEyqEeAXo9A9A/feedshare-shrink_2048_1536/B4DZu2Y_LmG8Aw-/0/1768291563523?e=1776902400&v=beta&t=knsF-zaka8-abWmSPg4k883xzpI_uXRnVDRzuHhLyfc"
+        "local_image_path": "content/social/linkedin-images/741675239045-9f21de0f.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQEyqEeAXo9A9A/feedshare-shrink_2048_1536/B4DZu2Y_LmG8Aw-/0/1768291563523?e=1778716800&v=beta&t=5-KFaJEXqW6p0Tbns3NpQ_dN1WH5GXCnj8UTA742gX8"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -273,11 +316,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/740733697454-6f68f8c5.jpg",
+        "image_url": "content/social/linkedin-images/740733697454-6ca84d1d.jpg",
         "thumbnail_urn": "urn:li:image:D4E27AQFOV1Y-QKjEVw",
         "source": "reshare_parent",
-        "local_image_path": "content/social/linkedin-images/740733697454-6f68f8c5.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4E27AQFOV1Y-QKjEVw/articleshare-shrink_1280_800/B4EZssi_X1IQAU-/0/1765978929215?e=1775790000&v=beta&t=m4zlilArBnKqs98WaqeCAV29FgXX3j0IJUHGBJDkRlY"
+        "local_image_path": "content/social/linkedin-images/740733697454-6ca84d1d.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4E27AQFOV1Y-QKjEVw/articleshare-shrink_1280_800/B4EZssi_X1IQAU-/0/1765978929215?e=1777518000&v=beta&t=u0BCzoTrju-PA5TbiUzOLMHre96BWvSlkMvNqSNTdm0"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -316,11 +359,11 @@
         "has_media": true,
         "media_type": "image",
         "media_urn": "urn:li:image:D4D22AQEnF6-p8jqWVw",
-        "image_url": "content/social/linkedin-images/739902367713-61466bb2.jpg",
+        "image_url": "content/social/linkedin-images/739902367713-518e8cd9.jpg",
         "thumbnail_urn": null,
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/739902367713-61466bb2.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQEnF6-p8jqWVw/feedshare-shrink_2048_1536/B4DZq6c0frHwAw-/0/1764064710133?e=1776902400&v=beta&t=Ek8WfYU9GTeHxsgC0NLuda-qK1wrB8scEKJv-_U8ODs"
+        "local_image_path": "content/social/linkedin-images/739902367713-518e8cd9.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQEnF6-p8jqWVw/feedshare-shrink_2048_1536/B4DZq6c0frHwAw-/0/1764064710133?e=1778716800&v=beta&t=C6pJtzk5VfQXt0JC3cU487Jd3MEA1ThdqngbDBcwXGU"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -370,11 +413,11 @@
         "has_media": true,
         "media_type": "image",
         "media_urn": "urn:li:image:D4D22AQFokP2DGqmp6g",
-        "image_url": "content/social/linkedin-images/738377354867-682fc8bc.jpg",
+        "image_url": "content/social/linkedin-images/738377354867-ee340311.jpg",
         "thumbnail_urn": null,
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/738377354867-682fc8bc.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFokP2DGqmp6g/feedshare-shrink_2048_1536/B4DZnhu6NOGkAw-/0/1760428796975?e=1776902400&v=beta&t=9ffLTAlDulTFP0-suFmZq9gtrJZzHWDXdjPQgFuDlbQ"
+        "local_image_path": "content/social/linkedin-images/738377354867-ee340311.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFokP2DGqmp6g/feedshare-shrink_2048_1536/B4DZnhu6NOGkAw-/0/1760428796975?e=1778716800&v=beta&t=SOo6xNm1PTLsYFis9X6fUoRX6Zk0d33cxOQJx5tAN7A"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -412,11 +455,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/732871878503-40781339.jpg",
+        "image_url": "content/social/linkedin-images/732871878503-e1cc78d5.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQEbdkWX0fusCg",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/732871878503-40781339.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQEbdkWX0fusCg/articleshare-shrink_1280_800/B4DZbTV8WhGwAQ-/0/1747302467632?e=1775790000&v=beta&t=r_elWLS4qC8raDed0vBdPuq8leLW3Hg2X_ApwUj-auQ"
+        "local_image_path": "content/social/linkedin-images/732871878503-e1cc78d5.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQEbdkWX0fusCg/articleshare-shrink_1280_800/B4DZbTV8WhGwAQ-/0/1747302467632?e=1777518000&v=beta&t=Ts1ITY-1qMXGlmN7bmKWaStt_Ig1Sc4YmQtr5Q1-3t0"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -456,11 +499,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/732831947115-dbbd0553.jpg",
+        "image_url": "content/social/linkedin-images/732831947115-a9da6ed2.jpg",
         "thumbnail_urn": "urn:li:image:D4D22AQFf5KLhqm3ptQ",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/732831947115-dbbd0553.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFf5KLhqm3ptQ/feedshare-shrink_2048_1536/B4DZbNrtKKGwAo-/0/1747207509426?e=1776902400&v=beta&t=oFq62xuv8ClvKowSvwKENEGNZFQLr-JHXOzCAZCxUPY"
+        "local_image_path": "content/social/linkedin-images/732831947115-a9da6ed2.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFf5KLhqm3ptQ/feedshare-shrink_2048_1536/B4DZbNrtKKGwAo-/0/1747207509426?e=1778716800&v=beta&t=fEgDTV_OaSdnwR5NX2vtevf8IGRYVZW4zRDpyuL9TFs"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -500,11 +543,11 @@
         "has_media": true,
         "media_type": "image",
         "media_urn": "urn:li:image:D4D22AQHt9eWuLgyunQ",
-        "image_url": "content/social/linkedin-images/732041802260-97c644a0.jpg",
+        "image_url": "content/social/linkedin-images/732041802260-dc442a3b.jpg",
         "thumbnail_urn": null,
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/732041802260-97c644a0.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQHt9eWuLgyunQ/feedshare-shrink_2048_1536/B4DZZdZZfHG0B4-/0/1745323662050?e=1776902400&v=beta&t=mLO5syWvLSVN7iIcs2gUCF9YR_vZZLt8g57ctyTxdcc"
+        "local_image_path": "content/social/linkedin-images/732041802260-dc442a3b.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQHt9eWuLgyunQ/feedshare-shrink_2048_1536/B4DZZdZZfHG0B4-/0/1745323662050?e=1778716800&v=beta&t=45VFlDuGPQ_f7YRFVb4t1G2dmq3T40_ehiiL1U7_CtE"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -542,11 +585,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/727541963087-45cc12fa.jpg",
+        "image_url": "content/social/linkedin-images/727541963087-5a431979.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQGOaJH5sfpV3g",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/727541963087-45cc12fa.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGOaJH5sfpV3g/articleshare-shrink_800/B4DZlicWnEGkAM-/0/1758293224884?e=1775790000&v=beta&t=OMtlETg04JQ4z6jGYqggYFZDa-gskzaTmjrdnUNqmR8"
+        "local_image_path": "content/social/linkedin-images/727541963087-5a431979.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGOaJH5sfpV3g/articleshare-shrink_800/B4DZlicWnEGkAM-/0/1758293224884?e=1777518000&v=beta&t=giTipER-RldA4QqrPrm3M9Q_NqiPbOWNAeZGEnRTEhg"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -586,11 +629,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/726752822013-df4cd777.jpg",
+        "image_url": "content/social/linkedin-images/726752822013-45126a2d.jpg",
         "thumbnail_urn": "urn:li:image:D5627AQGtRoFGVXuVOQ",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/726752822013-df4cd777.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D5627AQGtRoFGVXuVOQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1732713690878?e=1775790000&v=beta&t=tIYhuMD9ht5OBT1np4jGMe53MIDIdmh6XzpjsY0QakU"
+        "local_image_path": "content/social/linkedin-images/726752822013-45126a2d.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D5627AQGtRoFGVXuVOQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1732713690878?e=1777518000&v=beta&t=_Uy-6yuQKIonR4k9JXkOlmIu-NTzzuFhPPCzsy-jA9U"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -630,11 +673,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/726529002921-df6f91fc.jpg",
+        "image_url": "content/social/linkedin-images/726529002921-c7ae148a.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQGMki-RixNzYg",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/726529002921-df6f91fc.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGMki-RixNzYg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1732180092266?e=1775790000&v=beta&t=cFDYqoLjLw6lm0DMXws2zkyP1Aa2-kalp9MVHKhZ7_k"
+        "local_image_path": "content/social/linkedin-images/726529002921-c7ae148a.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGMki-RixNzYg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1732180092266?e=1777518000&v=beta&t=uNo0WtbUKfr0ckVSR5AQodnoAi0Fd_wPb0bsj0lk2HY"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -674,11 +717,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/726027071033-65c5b1f6.jpg",
+        "image_url": "content/social/linkedin-images/726027071033-cb24dfab.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQE27OWKRncEiQ",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/726027071033-65c5b1f6.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQE27OWKRncEiQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1730983383961?e=1775790000&v=beta&t=06XuYlCHijtpcGtdmrfOAMQYQ_QuEO9qk6bUtHwKxTE"
+        "local_image_path": "content/social/linkedin-images/726027071033-cb24dfab.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQE27OWKRncEiQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1730983383961?e=1777518000&v=beta&t=gmjdVF_a7dRNA7lPMwuEklBvB428QNrOY-HroOk9peE"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -718,11 +761,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/725191033022-147db5bc.jpg",
+        "image_url": "content/social/linkedin-images/725191033022-936ddcf4.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQFyIHpeckUhMg",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/725191033022-147db5bc.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1775790000&v=beta&t=4kV7wl6_UiYWqhDBV_8rxh372Ok7Xxdyr3RdeJNbz1g"
+        "local_image_path": "content/social/linkedin-images/725191033022-936ddcf4.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1777518000&v=beta&t=_W_-89ekOxfAR8_4hQhJA1y7Xjtk3t4I7KI48sv_tcI"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -762,11 +805,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/724752076475-147db5bc.jpg",
+        "image_url": "content/social/linkedin-images/724752076475-936ddcf4.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQFyIHpeckUhMg",
         "source": "reshare_parent",
-        "local_image_path": "content/social/linkedin-images/724752076475-147db5bc.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1775790000&v=beta&t=4kV7wl6_UiYWqhDBV_8rxh372Ok7Xxdyr3RdeJNbz1g"
+        "local_image_path": "content/social/linkedin-images/724752076475-936ddcf4.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFyIHpeckUhMg/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1718276775421?e=1777518000&v=beta&t=_W_-89ekOxfAR8_4hQhJA1y7Xjtk3t4I7KI48sv_tcI"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -805,11 +848,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/724724634953-19065e0c.jpg",
+        "image_url": "content/social/linkedin-images/724724634953-0a08b830.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQGnjpWFPiUGsQ",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/724724634953-19065e0c.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGnjpWFPiUGsQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1727877978070?e=1775790000&v=beta&t=ScSlZvl5sXAG6haqSIeEoFbh6_HYAY53OTc_uer1sHk"
+        "local_image_path": "content/social/linkedin-images/724724634953-0a08b830.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGnjpWFPiUGsQ/articleshare-shrink_1280_800/articleshare-shrink_1280_800/0/1727877978070?e=1777518000&v=beta&t=1COWPv5sVpgSi2q8DgRt4dzSkbVhXV8JqpTDY4C2Znw"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
