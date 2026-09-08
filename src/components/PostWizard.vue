@@ -80,7 +80,7 @@
             placeholder="Write the post body. Use blank lines to separate paragraphs."
             required
           ></textarea>
-          <p class="muted helper">Use blank lines to separate paragraphs. Use **bold** and *italic* for formatting.</p>
+          <p class="muted helper">Use blank lines to separate paragraphs. News posts support **bold**, *italic*, [link text](https://example.com), and [**link text**](https://example.com) for bold links.</p>
         </div>
 
         <div class="field">
@@ -622,7 +622,7 @@
                         <h2 class="h3-30">{{ previewData.subheading }}</h2>
                       </div>
                       <div>
-                        <p class="brodtext-20 muted" v-for="(paragraph, i) in previewData.bodyParagraphs" :key="i" v-html="renderInlineMarkdown(paragraph)" />
+                        <p class="brodtext-20 muted" v-for="(paragraph, i) in previewData.bodyParagraphs" :key="i" v-text="paragraph" />
                         <div v-if="previewData.gallery.length" class="gallery">
                           <figure
                             v-for="(image, i) in previewData.gallery"
