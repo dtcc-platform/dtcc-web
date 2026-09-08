@@ -20,6 +20,7 @@ permissions:
 jobs:
   fetch-linkedin-posts:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     outputs:
       has_changes: ${{ steps.check_changes.outputs.has_changes }}
 
@@ -38,6 +39,9 @@ jobs:
         run: |
           pip install requests
 
+      - name: Test LinkedIn import
+        run: python3 -B -m unittest discover -s scripts/tests -v
+
       - name: Create backup of current posts
         run: |
           if [ -f "public/content/social/linkedin_posts_complete.json" ]; then
@@ -46,7 +50,9 @@ jobs:
 
       - name: Fetch LinkedIn posts
         env:
-          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_REFRESH_TOKEN: ${{ secrets.LINKEDIN_REFRESH_TOKEN }}
+          LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
+          LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
         run: |
           echo "Starting LinkedIn posts fetch..."
           python3 scripts/linkedin_scrape.py
@@ -185,7 +191,9 @@ jobs:
           echo "## LinkedIn Posts Update Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
 
-          if [ "${{ steps.check_changes.outputs.has_changes }}" = "true" ]; then
+          if [ "${{ job.status }}" != "success" ]; then
+            echo "❌ **Status:** LinkedIn update failed. See the failed step above; existing feed data may be stale." >> $GITHUB_STEP_SUMMARY
+          elif [ "${{ steps.check_changes.outputs.has_changes }}" = "true" ]; then
             echo "✅ **Status:** Posts updated successfully" >> $GITHUB_STEP_SUMMARY
             echo "📝 **Changes:** ${{ steps.check_changes.outputs.change_summary }}" >> $GITHUB_STEP_SUMMARY
           else

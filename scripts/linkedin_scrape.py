@@ -1,21 +1,21 @@
-import requests
 import json
 from urllib.parse import quote, urlparse
 import os
 from pathlib import Path
 import hashlib
 import mimetypes
+import sys
+import tempfile
+
+from linkedin_http import request
+from linkedin_token_refresh import refresh_token
 
 
 # Configuration
-ACCESS_TOKEN = os.getenv("LINKEDIN_ACCESS_TOKEN")
 ORGANIZATION_ID = "100491988"
 POSTS_API_BASE = "https://api.linkedin.com/rest/posts"
 OUTPUT_FILE = Path("public/content/social/linkedin_posts_complete.json")
 IMAGES_DIR = Path("public/content/social/linkedin-images")
-
-# Ensure images directory exists
-IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 
 def get_post_url(post_id):
     """Convert post ID/URN to a shareable LinkedIn URL"""
@@ -32,8 +32,7 @@ def download_image(image_url, post_id):
         post_slug = post_id.split(':')[-1][:12] if post_id else 'unknown'
 
         # Download image
-        response = requests.get(image_url, timeout=10)
-        response.raise_for_status()
+        response = request("GET", image_url)
 
         # Detect extension from content-type
         content_type = response.headers.get('content-type', '')
@@ -45,8 +44,7 @@ def download_image(image_url, post_id):
         filename = f"{post_slug}-{url_hash}{ext}"
         filepath = IMAGES_DIR / filename
 
-        with filepath.open('wb') as f:
-            f.write(response.content)
+        atomic_write(filepath, response.content)
 
         # Return relative path for JSON
         relative_path = f"content/social/linkedin-images/{filename}"
@@ -69,8 +67,7 @@ def get_image_details(image_urn, access_token):
     }
     
     try:
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
+        response = request("GET", url, headers=headers)
         return response.json()
     except Exception as e:
         print(f"Error fetching image {image_urn}: {e}")
@@ -156,8 +153,7 @@ def fetch_post_details(post_urn, access_token, cache):
     }
 
     try:
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
+        response = request("GET", url, headers=headers)
         data = response.json()
         cache[post_urn] = data
         return data
@@ -165,26 +161,49 @@ def fetch_post_details(post_urn, access_token, cache):
         print(f"Error fetching parent post {post_urn}: {e}")
         return None
 
-# Fetch posts
-url = "https://api.linkedin.com/rest/posts"
-params = {
-    "author": f"urn:li:organization:{ORGANIZATION_ID}",
-    "q": "author",
-    "count": 20,
-    "sortBy": "CREATED"
-}
+def atomic_write(path, content):
+    """Replace a file only after its complete contents have been written."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    mode = path.stat().st_mode & 0o777 if path.exists() else 0o644
+    temporary_path = None
+    try:
+        with tempfile.NamedTemporaryFile(dir=path.parent, prefix=f'.{path.name}.', suffix='.tmp', delete=False) as handle:
+            temporary_path = Path(handle.name)
+            handle.write(content)
+            os.fchmod(handle.fileno(), mode)
+        os.replace(temporary_path, path)
+    finally:
+        if temporary_path is not None:
+            temporary_path.unlink(missing_ok=True)
 
-headers = {
-    "Authorization": f"Bearer {ACCESS_TOKEN}",
-    "X-Restli-Protocol-Version": "2.0.0",
-    "LinkedIn-Version": "202601"
-}
 
-try:
-    response = requests.get(url, headers=headers, params=params)
-    response.raise_for_status()
+def fetch_posts(access_token):
+    url = "https://api.linkedin.com/rest/posts"
+    params = {
+        "author": f"urn:li:organization:{ORGANIZATION_ID}",
+        "q": "author",
+        "count": 20,
+        "sortBy": "CREATED"
+    }
+
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "X-Restli-Protocol-Version": "2.0.0",
+        "LinkedIn-Version": "202601"
+    }
+
+    response = request("GET", url, headers=headers, params=params)
     
     data = response.json()
+
+    if not isinstance(data, dict) or not isinstance(data.get('elements'), list):
+        raise ValueError('Invalid posts response: expected an elements list')
+    for post in data['elements']:
+        if (not isinstance(post, dict) or not isinstance(post.get('id'), str)
+                or not post['id'] or type(post.get('publishedAt')) is not int):
+            raise ValueError('Invalid post: expected an ID and publication timestamp')
+        if 'commentary' in post and not isinstance(post['commentary'], str):
+            raise ValueError('Invalid post: commentary must be text')
 
     # Debug: Show API response metadata
     print("=== API Response Debug ===")
@@ -215,14 +234,14 @@ try:
         print(f"Processing Post {i}/{len(data.get('elements', []))}...")
         
         # Extract media info
-        media_info = extract_media_info(post, ACCESS_TOKEN)
+        media_info = extract_media_info(post, access_token)
 
         reshare_context = post.get('reshareContext')
         if (not media_info["has_media"]) and reshare_context:
             parent_urn = reshare_context.get('parent') or reshare_context.get('root')
-            parent_post = fetch_post_details(parent_urn, ACCESS_TOKEN, post_cache)
+            parent_post = fetch_post_details(parent_urn, access_token, post_cache)
             if parent_post:
-                parent_media = extract_media_info(parent_post, ACCESS_TOKEN)
+                parent_media = extract_media_info(parent_post, access_token)
                 if parent_media["has_media"]:
                     parent_media["source"] = "reshare_parent"
                     media_info = parent_media
@@ -270,12 +289,11 @@ try:
     # Merge with existing posts to preserve history
     existing_posts = []
     if OUTPUT_FILE.exists():
-        try:
-            with OUTPUT_FILE.open('r', encoding='utf-8') as f:
-                existing_data = json.load(f)
-                existing_posts = existing_data.get('posts', [])
-        except (json.JSONDecodeError, KeyError):
-            existing_posts = []
+        with OUTPUT_FILE.open('r', encoding='utf-8') as f:
+            existing_data = json.load(f)
+        if not isinstance(existing_data, dict) or not isinstance(existing_data.get('posts'), list):
+            raise ValueError('Invalid existing feed: expected a posts list')
+        existing_posts = existing_data['posts']
 
     # Create a dict of new posts by ID for quick lookup
     new_posts_by_id = {p['post_id']: p for p in enhanced_posts}
@@ -299,17 +317,22 @@ try:
         "posts": enhanced_posts
     }
     
-    OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
-    with OUTPUT_FILE.open('w', encoding='utf-8') as f:
-        json.dump(output_data, f, indent=2, ensure_ascii=False)
+    atomic_write(OUTPUT_FILE, json.dumps(output_data, indent=2, ensure_ascii=False, allow_nan=False).encode('utf-8'))
     
     print("=" * 50)
     print(f"✓ Saved {len(enhanced_posts)} posts to {OUTPUT_FILE}")
     print(f"  - Posts with media: {output_data['posts_with_media']}")
     print(f"  - Posts with images: {output_data['posts_with_images']}")
-        
-except requests.exceptions.HTTPError as e:
-    print(f"HTTP Error: {e}")
-    print(f"Response: {response.text}")
-except requests.exceptions.RequestException as e:
-    print(f"Error: {e}")
+
+def main():
+    try:
+        access_token = refresh_token()
+        fetch_posts(access_token)
+        return 0
+    except (RuntimeError, ValueError, OSError) as exc:
+        print(f'LinkedIn import failed: {exc}', file=sys.stderr)
+        return 1
+
+
+if __name__ == '__main__':
+    sys.exit(main())

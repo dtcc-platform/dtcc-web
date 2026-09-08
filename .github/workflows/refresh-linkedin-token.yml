@@ -6,6 +6,7 @@ on:
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     steps:
       - name: Checkout repository
@@ -31,9 +32,8 @@ jobs:
         run: |
           echo "## LinkedIn Token Refresh" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Check the job logs above for the new access token." >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Next steps:**" >> $GITHUB_STEP_SUMMARY
-          echo "1. Copy the new access token from the 'Refresh token' step output" >> $GITHUB_STEP_SUMMARY
-          echo "2. Go to Settings > Secrets and variables > Actions" >> $GITHUB_STEP_SUMMARY
-          echo "3. Update the \`LINKEDIN_ACCESS_TOKEN\` secret with the new value" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ job.status }}" = "success" ]; then
+            echo "✅ Token renewal succeeded. Each import renews its own access token in memory; no secret update is needed." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Token renewal failed. Check the failed step. An expired or revoked refresh token requires local reauthorization and an update to LINKEDIN_REFRESH_TOKEN." >> $GITHUB_STEP_SUMMARY
+          fi

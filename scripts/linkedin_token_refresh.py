@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Refresh LinkedIn access token using a refresh token.
 
-This script is designed to run in GitHub Actions. It uses the refresh token
-to obtain a new access token and prints it for manual copying to the
-LINKEDIN_ACCESS_TOKEN secret.
+The importer calls refresh_token() before each fetch and keeps the access
+token in memory. Running this script directly checks that renewal works;
+neither mode prints tokens or requires copying an access token into secrets.
 
 Required environment variables:
 - LINKEDIN_REFRESH_TOKEN: Your refresh token (lasts 1 year)
@@ -16,12 +16,12 @@ from __future__ import annotations
 import os
 import sys
 
-import requests
+from linkedin_http import request
 
 TOKEN_URL = "https://www.linkedin.com/oauth/v2/accessToken"
 
 
-def refresh_token() -> int:
+def refresh_token() -> str:
     refresh_token = os.environ.get("LINKEDIN_REFRESH_TOKEN")
     client_id = os.environ.get("LINKEDIN_CLIENT_ID")
     client_secret = os.environ.get("LINKEDIN_CLIENT_SECRET")
@@ -35,10 +35,10 @@ def refresh_token() -> int:
         missing.append("LINKEDIN_CLIENT_SECRET")
 
     if missing:
-        print(f"Missing required environment variables: {', '.join(missing)}", file=sys.stderr)
-        return 1
+        raise RuntimeError(f"Missing required environment variables: {', '.join(missing)}")
 
-    response = requests.post(
+    response = request(
+        "POST",
         TOKEN_URL,
         data={
             "grant_type": "refresh_token",
@@ -46,37 +46,36 @@ def refresh_token() -> int:
             "client_id": client_id,
             "client_secret": client_secret,
         },
-        timeout=30,
     )
-
-    if response.status_code != 200:
-        print(f"Token refresh failed with status {response.status_code}: {response.text}", file=sys.stderr)
-        return 2
 
     data = response.json()
 
+    if not isinstance(data, dict):
+        raise RuntimeError("Invalid token response: expected an object")
     access_token = data.get("access_token")
-    if not access_token:
-        print(f"Response did not contain access_token: {data}", file=sys.stderr)
-        return 3
+    if not isinstance(access_token, str) or not access_token.strip():
+        raise RuntimeError("Token response did not contain a valid access token")
+    expires_in = data.get("expires_in")
+    if type(expires_in) is not int or expires_in <= 0:
+        raise RuntimeError("Token response did not contain a valid expiry")
 
-    expires_in = data.get("expires_in", 0)
-    expires_in_days = expires_in // 86400
+    # GitHub stores the reusable refresh token, not each short-lived access token.
+    # A changed grant needs a secure secret update, never a token printed in CI.
+    if data.get("refresh_token", refresh_token) != refresh_token:
+        raise RuntimeError("LinkedIn returned a replacement refresh token. Reauthorize locally and update LINKEDIN_REFRESH_TOKEN in GitHub secrets.")
 
-    print("=" * 60)
-    print("NEW ACCESS TOKEN (copy this to LINKEDIN_ACCESS_TOKEN secret):")
-    print("=" * 60)
-    print(access_token)
-    print("=" * 60)
-    print(f"Expires in: {expires_in_days} days ({expires_in} seconds)")
+    print(f"LinkedIn access token renewed successfully; expires in {expires_in // 86400} days.")
+    return access_token
 
-    if "refresh_token" in data:
-        print()
-        print("New refresh token also returned (update LINKEDIN_REFRESH_TOKEN if different):")
-        print(data["refresh_token"])
 
-    return 0
+def main() -> int:
+    try:
+        refresh_token()
+        return 0
+    except (RuntimeError, ValueError) as exc:
+        print(f"LinkedIn token renewal failed: {exc}", file=sys.stderr)
+        return 1
 
 
 if __name__ == "__main__":
-    sys.exit(refresh_token())
+    sys.exit(main())
