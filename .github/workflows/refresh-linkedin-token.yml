@@ -3,10 +3,13 @@ name: Refresh LinkedIn Token
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  refresh:
+  verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
 
     steps:
       - name: Checkout repository
@@ -20,20 +23,39 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Refresh token
+      - name: Test LinkedIn import
+        run: python3 -B -m unittest discover -s scripts/tests -v
+
+      - name: Verify full LinkedIn import
         env:
           LINKEDIN_REFRESH_TOKEN: ${{ secrets.LINKEDIN_REFRESH_TOKEN }}
           LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
           LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
-        run: python3 scripts/linkedin_token_refresh.py
+        run: python3 -B scripts/linkedin_scrape.py
 
-      - name: Summary
-        if: always()
+      - name: Validate generated feed
         run: |
-          echo "## LinkedIn Token Refresh" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          if [ "${{ job.status }}" = "success" ]; then
-            echo "✅ Token renewal succeeded. Each import renews its own access token in memory; no secret update is needed." >> $GITHUB_STEP_SUMMARY
-          else
-            echo "❌ Token renewal failed. Check the failed step. An expired or revoked refresh token requires local reauthorization and an update to LINKEDIN_REFRESH_TOKEN." >> $GITHUB_STEP_SUMMARY
-          fi
+          python3 -B - <<'PY'
+          from datetime import datetime, timezone
+          import json
+          from pathlib import Path
+          import subprocess
+
+          feed = 'public/content/social/linkedin_posts_complete.json'
+          before = json.loads(subprocess.check_output(['git', 'show', f'HEAD:{feed}']))
+          after = json.loads(Path(feed).read_text())
+          old_ids = {post['post_id'] for post in before['posts']}
+          new_ids = {post['post_id'] for post in after['posts']}
+          assert old_ids <= new_ids, 'Import lost existing posts'
+          assert after['total_posts'] == len(after['posts']) == len(new_ids), 'Invalid post count'
+          assert all(post['media']['image_url'].startswith('content/')
+                     and Path('public', post['media']['image_url']).is_file()
+                     for post in after['posts']
+                     if post['media']['image_url']), 'Image was not saved locally'
+          print(f"Previous feed: {before['total_posts']} posts")
+          print(f"Verified feed: {after['total_posts']} posts")
+          print(f'New posts: {len(new_ids - old_ids)}')
+          latest = max(post['published_at'] for post in after['posts'])
+          print(f'Latest post: {datetime.fromtimestamp(latest / 1000, timezone.utc).isoformat()}')
+          print('Generated files remain in this verification runner only.')
+          PY
