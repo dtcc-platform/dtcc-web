@@ -192,7 +192,8 @@ def fetch_posts(access_token):
         "LinkedIn-Version": "202601"
     }
 
-    response = request("GET", url, headers=headers, params=params)
+    # A freshly renewed token can be rejected briefly before posts access works.
+    response = request("GET", url, headers=headers, params=params, retry_unauthorized=True)
     
     data = response.json()
 

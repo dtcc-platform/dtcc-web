@@ -120,14 +120,72 @@ class LinkedInImportTests(unittest.TestCase):
             self.assertNotIn(secret, self.output.getvalue())
 
     def test_authentication_failure_fails_job_and_preserves_feed(self):
-        for status in [401, 403]:
+        for status, attempts, delays in [(401, 3, [15, 45]), (403, 1, [])]:
             with self.subTest(status=status):
                 self.calls.clear()
                 self.posts_responses = [response(status, {'message': 'Unauthorized'})]
-                code, _ = self.run_script()
+                code, sleeps = self.run_script()
                 self.assertNotEqual(code, 0)
                 self.assertEqual(FEED.read_bytes(), self.original)
-                self.assertEqual(sum('/rest/posts' in url for _, url, _ in self.calls), 1)
+                self.assertEqual(sum('/rest/posts' in url for _, url, _ in self.calls), attempts)
+                self.assertEqual([call.args[0] for call in sleeps], delays)
+                self.assertEqual(sum(method == 'POST' for method, _, _ in self.calls), 1)
+
+    def test_fresh_token_rejection_recovers_without_renewing_again(self):
+        self.posts_responses.insert(0, response(401, {
+            'code': 'REVOKED_ACCESS_TOKEN', 'serviceErrorCode': 65601, 'message': TOKEN,
+        }))
+        code, sleeps = self.run_script()
+        self.assertEqual(code, 0)
+        self.assertEqual(json.loads(FEED.read_text())['total_posts'], 2)
+        self.assertEqual([call.args[0] for call in sleeps], [15])
+        self.assertEqual([method for method, _, _ in self.calls], ['POST', 'GET', 'GET'])
+        self.assertTrue(all(kwargs['headers']['Authorization'] == 'Bearer private-fresh-access-token'
+                            for _, _, kwargs in self.calls[1:]))
+        self.assertIn('HTTP 401', self.output.getvalue())
+        self.assert_secrets_hidden()
+
+    def test_fresh_token_rejection_can_recover_on_final_attempt(self):
+        self.posts_responses = [response(401, {}), response(401, {}),
+                                response(200, {'elements': [POST]})]
+        code, sleeps = self.run_script()
+        self.assertEqual(code, 0)
+        self.assertEqual(json.loads(FEED.read_text())['total_posts'], 2)
+        self.assertEqual([call.args[0] for call in sleeps], [15, 45])
+        self.assertEqual([method for method, _, _ in self.calls], ['POST', 'GET', 'GET', 'GET'])
+        self.assertTrue(all(kwargs['headers']['Authorization'] == 'Bearer private-fresh-access-token'
+                            for _, _, kwargs in self.calls[1:]))
+        self.assert_secrets_hidden()
+
+    def test_mixed_auth_and_transient_errors_share_attempt_limit(self):
+        self.posts_responses = [response(status, {}) for status in [401, 503, 401]]
+        self.posts_responses.append(response(200, {'elements': [POST]}))
+        code, sleeps = self.run_script()
+        self.assertNotEqual(code, 0)
+        self.assertEqual(FEED.read_bytes(), self.original)
+        self.assertEqual([method for method, _, _ in self.calls], ['POST', 'GET', 'GET', 'GET'])
+        self.assertEqual([call.args[0] for call in sleeps], [15, 2])
+
+    def test_first_auth_retry_waits_fifteen_seconds_after_a_server_error(self):
+        self.posts_responses = [response(503, {}), response(401, {}),
+                                response(200, {'elements': [POST]})]
+        code, sleeps = self.run_script()
+        self.assertEqual(code, 0)
+        self.assertEqual(json.loads(FEED.read_text())['total_posts'], 2)
+        self.assertEqual([call.args[0] for call in sleeps], [1, 15])
+        self.assertEqual([method for method, _, _ in self.calls], ['POST', 'GET', 'GET', 'GET'])
+
+    def test_media_authentication_failure_is_not_retried(self):
+        self.posts_responses = [response(200, {'elements': [{**POST, 'content': {'media': {'id': 'urn:li:image:fixture'}}}]})]
+        self.media_responses = {
+            'https://api.linkedin.com/rest/images/urn%3Ali%3Aimage%3Afixture': response(401, {'message': TOKEN}),
+        }
+        code, sleeps = self.run_script()
+        self.assertEqual(code, 0)
+        self.assertEqual(json.loads(FEED.read_text())['posts_with_images'], 0)
+        self.assertEqual(sum('/rest/images/' in url for _, url, _ in self.calls), 1)
+        self.assertEqual(sleeps, [])
+        self.assert_secrets_hidden()
 
     def test_transient_failure_is_retried_then_imports_and_preserves_history(self):
         self.posts_responses.insert(0, response(503, {'message': 'Unavailable'}))
@@ -220,8 +278,9 @@ class LinkedInImportTests(unittest.TestCase):
         self.assertEqual(list(FEED.parent.glob('.*.tmp')), [])
 
     def test_refreshes_before_fetch_and_uses_fresh_token_with_timeouts(self):
-        code, _ = self.run_script()
+        code, sleeps = self.run_script()
         self.assertEqual(code, 0)
+        self.assertEqual(sleeps, [])
         method, url, kwargs = self.calls[0]
         self.assertEqual((method, url), ('POST', 'https://www.linkedin.com/oauth/v2/accessToken'))
         self.assertEqual(kwargs['data']['grant_type'], 'refresh_token')
@@ -234,12 +293,16 @@ class LinkedInImportTests(unittest.TestCase):
         self.assert_secrets_hidden()
 
     def test_failed_refresh_stops_before_fetch_and_does_not_log_response_secrets(self):
-        self.token_responses = [response(400, {'error': 'invalid_grant', 'echo': TOKEN})]
-        code, _ = self.run_script()
-        self.assertNotEqual(code, 0)
-        self.assertEqual(len(self.calls), 1)
-        self.assertEqual(FEED.read_bytes(), self.original)
-        self.assert_secrets_hidden()
+        for status in [400, 401]:
+            with self.subTest(status=status):
+                self.calls.clear()
+                self.token_responses = [response(status, {'error': 'invalid_grant', 'echo': TOKEN})]
+                code, sleeps = self.run_script()
+                self.assertNotEqual(code, 0)
+                self.assertEqual(len(self.calls), 1)
+                self.assertEqual(sleeps, [])
+                self.assertEqual(FEED.read_bytes(), self.original)
+                self.assert_secrets_hidden()
 
     def test_missing_refresh_credentials_fails_before_any_request(self):
         os.environ.pop('LINKEDIN_REFRESH_TOKEN')

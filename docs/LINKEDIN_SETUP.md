@@ -61,7 +61,9 @@ workflow.
 
 Requests have connect/read timeouts and at most three attempts for temporary
 connection failures, timeouts, rate limits, and transient server errors. Retry
-delays are capped at 60 seconds. Authentication errors fail immediately. Failed
+delays are capped at 60 seconds. Authentication errors fail immediately except
+for HTTP 401 on the initial posts request after renewal, which shares the same
+three-attempt limit and waits 15 then 45 seconds before retrying. Failed
 requests or invalid responses fail the job and preserve the existing feed JSON.
 JSON and downloaded images are written to temporary files before replacement.
 
@@ -81,6 +83,7 @@ After each run, check the workflow summary for:
 ### Common Issues
 
 1. **Authentication Error**
+   - After renewal, the initial posts request retries HTTP 401 up to twice, waiting 15 seconds and then 45 seconds with the same access token. Persistent rejection fails the run and preserves the existing feed; HTTP 403 is not retried.
    - Verify all three credential secrets are correctly set
    - Run **Refresh LinkedIn Token** to check that renewal works; this reports success or failure without printing tokens or changing secrets
    - An expired, revoked, or replaced refresh token requires local reauthorization and a secure update to `LINKEDIN_REFRESH_TOKEN`
