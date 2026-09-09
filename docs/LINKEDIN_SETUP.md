@@ -61,9 +61,18 @@ workflow.
 
 Requests have connect/read timeouts and at most three attempts for temporary
 connection failures, timeouts, rate limits, and transient server errors. Retry
-delays are capped at 60 seconds. Authentication errors fail immediately. Failed
+delays are capped at 60 seconds. Authentication errors fail immediately except
+for HTTP 401 on the initial posts request after renewal, which shares the same
+three-attempt limit and waits 15 then 45 seconds before retrying. Failed
 requests or invalid responses fail the job and preserve the existing feed JSON.
 JSON and downloaded images are written to temporary files before replacement.
+
+The retry policy follows CI observations: the
+[diagnostic run](https://github.com/dtcc-platform/dtcc-web/actions/runs/34321767841)
+and [import verification](https://github.com/dtcc-platform/dtcc-web/actions/runs/34323022560)
+both recovered from an initial 401 with the same token after a 15-second wait.
+The cause of LinkedIn's initial rejection remains unconfirmed; the 45-second
+fallback is covered by offline regression tests.
 
 Optional image and reshare-parent lookups retain their existing fallback behavior;
 their failures are logged and do not abort an otherwise valid posts fetch.
@@ -81,6 +90,7 @@ After each run, check the workflow summary for:
 ### Common Issues
 
 1. **Authentication Error**
+   - After renewal, the initial posts request retries HTTP 401 up to twice, waiting 15 seconds and then 45 seconds with the same access token. Persistent rejection fails the run and preserves the existing feed; HTTP 403 is not retried.
    - Verify all three credential secrets are correctly set
    - Run **Refresh LinkedIn Token** to check that renewal works; this reports success or failure without printing tokens or changing secrets
    - An expired, revoked, or replaced refresh token requires local reauthorization and a secure update to `LINKEDIN_REFRESH_TOKEN`
