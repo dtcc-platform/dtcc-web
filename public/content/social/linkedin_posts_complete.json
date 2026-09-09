@@ -1,9 +1,372 @@
 {
   "organization_id": "100491988",
-  "total_posts": 28,
-  "posts_with_media": 28,
-  "posts_with_images": 28,
+  "total_posts": 36,
+  "posts_with_media": 36,
+  "posts_with_images": 36,
   "posts": [
+    {
+      "post_id": "urn:li:share:7503047497276284928",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7503047497276284928/",
+      "published_at": 1788865924010,
+      "commentary": "We're happy to announce that our Director @[Anders Logg](urn:li:person:kh7K8aieoy) and Co-Director @[Minna Karstunen](urn:li:person:08o21EqG70) have received the 2026 Areas of Advance Award for their work with @[Digital Twin Cities Centre](urn:li:organization:100491988)! The award, presented since 2010 at @[Chalmers tekniska högskola](urn:li:organization:5074), recognises research at Chalmers that, through cross-disciplinary collaboration, contributes to solving major challenges of the future and promotes a sustainable society.\n\nDTCC has strengthened Sweden’s position in an emerging international field while laying the foundation for better-informed, more transparent and more sustainable decision-making in urban development, reads part of the award citation.\n\n\"It’s a great honour to receive this recognition from Chalmers for all our hard work with DTCC. We have a great team, great researchers and partners, so this award is for everyone involved. We are very motivated to keep working and developing the digital twin concept through our projects and in collaboration with academia, municipalities and the industry\", says @[Anders Logg](urn:li:person:kh7K8aieoy).\n\n\"I’m very proud that Chalmers chose to recognize DTCC through this award. We’ve come a long way since the start, and thanks to our many engaged partners and skilled researchers, we’ve had some great results. I’m looking forward to continuing working towards making city planning and construction smarter and more sustainable\", says @[Minna Karstunen](urn:li:person:08o21EqG70).\n\nRead the full article on our website.\n\nhttps://lnkd.in/dfCH\\_qeY",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "content/social/linkedin-images/750304749727-198afd63.jpg",
+        "thumbnail_urn": "urn:li:image:D4D22AQFlv9CKziDwSA",
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/750304749727-198afd63.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFlv9CKziDwSA/feedshare-image-high-res/B4DaCAsUF_IYAY-/0/1788865497527?e=1790812800&v=beta&t=LT1a3JXfA4h3c_pJod200abdqBWOftCiGUVY9TMFHMg"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1788865924010,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1788866213095,
+        "visibility": "PUBLIC",
+        "publishedAt": 1788865924010,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7503047497276284928",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "title": "DTCC — News",
+            "thumbnail": "urn:li:image:D4D22AQFlv9CKziDwSA",
+            "source": "https://www.dtcc.chalmers.se/news/detail.html?slug=dtcc-director-and-co-director-receive-areas-of-advance-award-2026"
+          }
+        },
+        "commentary": "We're happy to announce that our Director @[Anders Logg](urn:li:person:kh7K8aieoy) and Co-Director @[Minna Karstunen](urn:li:person:08o21EqG70) have received the 2026 Areas of Advance Award for their work with @[Digital Twin Cities Centre](urn:li:organization:100491988)! The award, presented since 2010 at @[Chalmers tekniska högskola](urn:li:organization:5074), recognises research at Chalmers that, through cross-disciplinary collaboration, contributes to solving major challenges of the future and promotes a sustainable society.\n\nDTCC has strengthened Sweden’s position in an emerging international field while laying the foundation for better-informed, more transparent and more sustainable decision-making in urban development, reads part of the award citation.\n\n\"It’s a great honour to receive this recognition from Chalmers for all our hard work with DTCC. We have a great team, great researchers and partners, so this award is for everyone involved. We are very motivated to keep working and developing the digital twin concept through our projects and in collaboration with academia, municipalities and the industry\", says @[Anders Logg](urn:li:person:kh7K8aieoy).\n\n\"I’m very proud that Chalmers chose to recognize DTCC through this award. We’ve come a long way since the start, and thanks to our many engaged partners and skilled researchers, we’ve had some great results. I’m looking forward to continuing working towards making city planning and construction smarter and more sustainable\", says @[Minna Karstunen](urn:li:person:08o21EqG70).\n\nRead the full article on our website.\n\nhttps://lnkd.in/dfCH\\_qeY",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7501647147642019840",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7501647147642019840/",
+      "published_at": 1788762626955,
+      "commentary": "If you missed Total BIM Day last week, you'll find all the presentations in this playlist. Enjoy!\n\nhttps://lnkd.in/d7qMQ6p7",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "content/social/linkedin-images/750164714764-34cb319b.jpg",
+        "thumbnail_urn": "urn:li:image:D4D27AQGs46tbKL5kzw",
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/750164714764-34cb319b.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGs46tbKL5kzw/articleshare-shrink_1280_800/B4DaBs0H6ZGkAg-/0/1788531999109?e=1789545600&v=beta&t=MRquNNLP6wV-7_TWQSq-DKOGI-C5Dt85RknmetJqKig"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1788532054045,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1788762629053,
+        "visibility": "PUBLIC",
+        "publishedAt": 1788762626955,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7501647147642019840",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "Den 1 september hölls Total BIM Dagen 2026.",
+            "thumbnail": "urn:li:image:D4D27AQGs46tbKL5kzw",
+            "source": "https://www.youtube.com/playlist?list=PLGLyuhupsw8M",
+            "title": "Total BIM Dagen 2026"
+          }
+        },
+        "commentary": "If you missed Total BIM Day last week, you'll find all the presentations in this playlist. Enjoy!\n\nhttps://lnkd.in/d7qMQ6p7",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:ugcPost:7500911577366360065",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7500911577366360065/",
+      "published_at": 1788356680517,
+      "commentary": "Yesterday, hundreds of people gathered at Chalmers to learn more about Total BIM at our event Total BIM Day 2026 organized by @[Mattias Roupé](urn:li:person:gpg-vzsrfh). Thank you to everyone who came and made this a great event! \n\nA big thanks also to our great speakers @[Mikael Johansson](urn:li:person:wV5i0Q9EQs), @[Oliver Disney](urn:li:person:YVPbFt4NdC), Mats Karlsson, @[Maziar Alizadeh](urn:li:person:xmLkuae3W5), @[Per Höglin](urn:li:person:-TDDuMzi80), @[Mattias Stein](urn:li:person:nQPSeIEoPA), @[Nina Borgström](urn:li:person:SAVOWyQsTj), @[Johan Stribeck](urn:li:person:Z2gtIl72lh), @[Magnus Nilsson](urn:li:person:7eteJsWEei), @[Andreas Eggesten](urn:li:person:2KwVjxniiZ), @[Kristen Broberg](urn:li:person:qEJxGsylfO), @[Johan Josefsson](urn:li:person:J\\_cRmblZ4I), @[Rebecca Baltra Persson](urn:li:person:a9hp9AEg7f), @[David Möller](urn:li:person:7ikzcqHue0), @[Dilek ULUTAS DUMAN](urn:li:person:qnWjIwj62S), @[Riccardo Levante](urn:li:person:1xM18yL9mg), @[Efraim Ljung](urn:li:person:spr2MQihdr), @[Ahmet Arif Yakupogullari](urn:li:person:N3co1EPxNV), @[Vilhelm Hjert](urn:li:person:heQYQCKVXi), @[Johanna Fredhsdotter Lager](urn:li:person:ifEKHfof5J) and moderators @[Daniella Troje](urn:li:person:PwmRdJvEQG) and @[Christina Claeson-Jonsson](urn:li:person:T2RBZ5ev3X). \n\nSee you next time! \n\n@[Chalmers Department of Architecture and Civil Engineering](urn:li:organization:105773234) @[cmb – dynamisk prakademi för samhällsbyggare](urn:li:organization:1736184) @[Svenska Byggbranschens Utvecklingsfond \\(SBUF\\)](urn:li:organization:10842205)",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "image",
+        "media_urn": "urn:li:image:D4D22AQGMaQ0Uc6ta3g",
+        "image_url": "content/social/linkedin-images/750091157736-eb266c81.jpg",
+        "thumbnail_urn": null,
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/750091157736-eb266c81.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQGMaQ0Uc6ta3g/feedshare-image-high-res/B4DaBiXU4TKcAU-/0/1788356678621?e=1790812800&v=beta&t=swH1GhgNHsQEYDW-Ihen6Haf32Rl0goc35hxpRlv0XQ"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1788356680517,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1788356730892,
+        "visibility": "PUBLIC",
+        "publishedAt": 1788356680517,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:ugcPost:7500911577366360065",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "multiImage": {
+            "images": [
+              {
+                "altText": "",
+                "id": "urn:li:image:D4D22AQGMaQ0Uc6ta3g"
+              },
+              {
+                "altText": "",
+                "id": "urn:li:image:D4D22AQHCw56DV43xtg"
+              },
+              {
+                "altText": "",
+                "id": "urn:li:image:D4D22AQF2UCnhxcudwg"
+              },
+              {
+                "altText": "",
+                "id": "urn:li:image:D4D22AQEiSw3oMJ8Yvg"
+              }
+            ]
+          }
+        },
+        "commentary": "Yesterday, hundreds of people gathered at Chalmers to learn more about Total BIM at our event Total BIM Day 2026 organized by @[Mattias Roupé](urn:li:person:gpg-vzsrfh). Thank you to everyone who came and made this a great event! \n\nA big thanks also to our great speakers @[Mikael Johansson](urn:li:person:wV5i0Q9EQs), @[Oliver Disney](urn:li:person:YVPbFt4NdC), Mats Karlsson, @[Maziar Alizadeh](urn:li:person:xmLkuae3W5), @[Per Höglin](urn:li:person:-TDDuMzi80), @[Mattias Stein](urn:li:person:nQPSeIEoPA), @[Nina Borgström](urn:li:person:SAVOWyQsTj), @[Johan Stribeck](urn:li:person:Z2gtIl72lh), @[Magnus Nilsson](urn:li:person:7eteJsWEei), @[Andreas Eggesten](urn:li:person:2KwVjxniiZ), @[Kristen Broberg](urn:li:person:qEJxGsylfO), @[Johan Josefsson](urn:li:person:J\\_cRmblZ4I), @[Rebecca Baltra Persson](urn:li:person:a9hp9AEg7f), @[David Möller](urn:li:person:7ikzcqHue0), @[Dilek ULUTAS DUMAN](urn:li:person:qnWjIwj62S), @[Riccardo Levante](urn:li:person:1xM18yL9mg), @[Efraim Ljung](urn:li:person:spr2MQihdr), @[Ahmet Arif Yakupogullari](urn:li:person:N3co1EPxNV), @[Vilhelm Hjert](urn:li:person:heQYQCKVXi), @[Johanna Fredhsdotter Lager](urn:li:person:ifEKHfof5J) and moderators @[Daniella Troje](urn:li:person:PwmRdJvEQG) and @[Christina Claeson-Jonsson](urn:li:person:T2RBZ5ev3X). \n\nSee you next time! \n\n@[Chalmers Department of Architecture and Civil Engineering](urn:li:organization:105773234) @[cmb – dynamisk prakademi för samhällsbyggare](urn:li:organization:1736184) @[Svenska Byggbranschens Utvecklingsfond \\(SBUF\\)](urn:li:organization:10842205)",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": true
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7500472418486943744",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7500472418486943744/",
+      "published_at": 1788251976804,
+      "commentary": "Great to see so many of you at Chalmers today for our event Total Bim Day 2026. For those of you who are unable to attend, the event will be posted on our Youtube channel afterwards.",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "image",
+        "media_urn": "urn:li:image:D4D22AQF3gsF3MH7MRg",
+        "image_url": "content/social/linkedin-images/750047241848-97f1e7e9.jpg",
+        "thumbnail_urn": null,
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/750047241848-97f1e7e9.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQF3gsF3MH7MRg/feedshare-image-high-res/B4DaBcH5ySGkAU-/0/1788251975894?e=1790812800&v=beta&t=6_PE5Qbd8lAHk87Isz9rHm7Qz1G-HhQeAlOOmfJWhpM"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1788251976804,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1788251988123,
+        "visibility": "PUBLIC",
+        "publishedAt": 1788251976804,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7500472418486943744",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "media": {
+            "id": "urn:li:image:D4D22AQF3gsF3MH7MRg"
+          }
+        },
+        "commentary": "Great to see so many of you at Chalmers today for our event Total Bim Day 2026. For those of you who are unable to attend, the event will be posted on our Youtube channel afterwards.",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7496470673163423744",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7496470673163423744/",
+      "published_at": 1787297886344,
+      "commentary": "On September 1st, hundreds of people will gather at Chalmers in Gothenburg to fint out more about Total BIM and the paradigm shift that is happening in the industry. @[Mattias Roupé](urn:li:person:gpg-vzsrfh) will lead the event together with research colleagues and many voices from the industry. If you want to join, make sure to sign up before it's full! \n\nNote: This event will be in Swedish.",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "image",
+        "media_urn": "urn:li:image:D4D22AQGM6WvfSmDZWw",
+        "image_url": "content/social/linkedin-images/749647067316-8d62f2f2.jpg",
+        "thumbnail_urn": null,
+        "source": "reshare_parent",
+        "local_image_path": "content/social/linkedin-images/749647067316-8d62f2f2.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQGM6WvfSmDZWw/feedshare-image-high-res/B4DaAfO_jdGYAU-/0/1787230419419?e=1790812800&v=beta&t=BuWn8CkerdffKmmjfebCijDcbZuodGb5iqatceVWVaM"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1787297886344,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1787297916370,
+        "visibility": "PUBLIC",
+        "publishedAt": 1787297886344,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7496470673163423744",
+        "reshareContext": {
+          "parent": "urn:li:share:7496187698064515072",
+          "root": "urn:li:share:7496187698064515072"
+        },
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "commentary": "On September 1st, hundreds of people will gather at Chalmers in Gothenburg to fint out more about Total BIM and the paradigm shift that is happening in the industry. @[Mattias Roupé](urn:li:person:gpg-vzsrfh) will lead the event together with research colleagues and many voices from the industry. If you want to join, make sure to sign up before it's full! \n\nNote: This event will be in Swedish.",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      },
+      "reshare_parent_id": "urn:li:share:7496187698064515072",
+      "reshare_root_id": "urn:li:share:7496187698064515072",
+      "resolved_media_parent_id": "urn:li:share:7496187698064515072"
+    },
+    {
+      "post_id": "urn:li:share:7475890616586047488",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7475890616586047488/",
+      "published_at": 1782391218588,
+      "commentary": "Don't miss our event Total BIM - ett paradigmskifte från ambition till implementering, hosted by @[Mattias Roupe](urn:li:person:S-zvbWbIAx)! On September 1st, we meet at Chalmers to discuss everything Total BIM. Listen to speakers from companies and municipalities who have successfully used Total BIM and saved both time and money. Limited number of participants, so sign up today!\n\nNote: The event will be in Swedish. Sign up and full agenda in comments.",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "image",
+        "media_urn": "urn:li:image:D4E22AQFwZkNwvGRw5A",
+        "image_url": "content/social/linkedin-images/747589061658-0315f9a9.jpg",
+        "thumbnail_urn": null,
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/747589061658-0315f9a9.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4E22AQFwZkNwvGRw5A/feedshare-image-high-res/B4EZ7.y50EJ0AU-/0/1782391217753?e=1790812800&v=beta&t=rhUm7-yvonl8xUr9lcYPDTPebxiwEH4L2pmpRUvz0Vs"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1782391218588,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1782391220635,
+        "visibility": "PUBLIC",
+        "publishedAt": 1782391218588,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7475890616586047488",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "media": {
+            "altText": "",
+            "id": "urn:li:image:D4E22AQFwZkNwvGRw5A"
+          }
+        },
+        "commentary": "Don't miss our event Total BIM - ett paradigmskifte från ambition till implementering, hosted by @[Mattias Roupe](urn:li:person:S-zvbWbIAx)! On September 1st, we meet at Chalmers to discuss everything Total BIM. Listen to speakers from companies and municipalities who have successfully used Total BIM and saved both time and money. Limited number of participants, so sign up today!\n\nNote: The event will be in Swedish. Sign up and full agenda in comments.",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:share:7470148711084380162",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7470148711084380162/",
+      "published_at": 1781076603340,
+      "commentary": "Our centre day last week was a success! With partners and researchers joining us at @[Visual Arena](urn:li:organization:38088874) and online, we got to listen to great keynotes from @[Thomas H. Kolbe](urn:li:person:H2ElLxyAbF), @[Mila Koeva 🟥](urn:li:person:qfIN2fRKe7), @[Dessislava Petrova-Antonova](urn:li:person:qfjiOFvUw5) and @[Anton Gustafsson](urn:li:person:FkpzFE5nun), and an interesting panel discussion where @[Anders Logg](urn:li:person:kh7K8aieoy) and @[Eric Jeansson](urn:li:person:WnP1lt0iLN) joined some of the keynotes to discuss our topic urban digital twins in the age of AI. \n\nThank you to all speakers and participants, we hope to see you soon again! Until next time, you can watch the full day on our Youtube channel. \n\nhttps://lnkd.in/gfv8qfs3",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "article_thumbnail",
+        "media_urn": null,
+        "image_url": "content/social/linkedin-images/747014871108-74bf18f5.jpg",
+        "thumbnail_urn": "urn:li:image:D5627AQG-91v2VbEqpA",
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/747014871108-74bf18f5.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D5627AQG-91v2VbEqpA/articleshare-shrink_1280_800/B56Z6tMTgaHIAk-/0/1781022145920?e=1789545600&v=beta&t=1No_iIbFIOm_IAlK-z0cmIR3uB96gL0bz-lBbeFOdGQ"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1781022241606,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1781076605373,
+        "visibility": "PUBLIC",
+        "publishedAt": 1781076603340,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:share:7470148711084380162",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "article": {
+            "description": "Tune in to our centre day on June 4th, held at Visual Arena in Gothenburg. The day entailed updates from the first year of DTCC2, our current projects and what's coming next. In this video, you can also listen to the following keynote presentations...",
+            "thumbnail": "urn:li:image:D5627AQG-91v2VbEqpA",
+            "source": "https://www.youtube.com/watch?v=n2MwlcjN52Y",
+            "title": "DTCC Centre Day 2026"
+          }
+        },
+        "commentary": "Our centre day last week was a success! With partners and researchers joining us at @[Visual Arena](urn:li:organization:38088874) and online, we got to listen to great keynotes from @[Thomas H. Kolbe](urn:li:person:H2ElLxyAbF), @[Mila Koeva 🟥](urn:li:person:qfIN2fRKe7), @[Dessislava Petrova-Antonova](urn:li:person:qfjiOFvUw5) and @[Anton Gustafsson](urn:li:person:FkpzFE5nun), and an interesting panel discussion where @[Anders Logg](urn:li:person:kh7K8aieoy) and @[Eric Jeansson](urn:li:person:WnP1lt0iLN) joined some of the keynotes to discuss our topic urban digital twins in the age of AI. \n\nThank you to all speakers and participants, we hope to see you soon again! Until next time, you can watch the full day on our Youtube channel. \n\nhttps://lnkd.in/gfv8qfs3",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
+    {
+      "post_id": "urn:li:ugcPost:7468247852444557314",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7468247852444557314/",
+      "published_at": 1780569041638,
+      "commentary": "DTCC Centre Day 2026 in full swing at @[Visual Arena](urn:li:organization:38088874) and online! This years theme is ”Urban Digital Twins in the Age of AI”, and this morning we had the pleasure of listening to two great keynote presentations by @[Thomas H. Kolbe](urn:li:person:H2ElLxyAbF) and @[Mila Koeva 🟥](urn:li:person:qfIN2fRKe7) on this theme. We also had a very interesting panel discussion where @[Eric Jeansson](urn:li:person:WnP1lt0iLN) and @[Anders Logg](urn:li:person:kh7K8aieoy) joined in.\n\nAfter lunch, the day continues with a showcase of all of our projects, keynotes from @[Dessislava Petrova-Antonova](urn:li:person:qfjiOFvUw5) and @[Anton Gustafsson](urn:li:person:FkpzFE5nun).",
+      "lifecycle_state": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "media": {
+        "has_media": true,
+        "media_type": "image",
+        "media_urn": "urn:li:image:D4D22AQHfO1CzRpDnww",
+        "image_url": "content/social/linkedin-images/746824785244-c9be36dd.jpg",
+        "thumbnail_urn": null,
+        "source": "self",
+        "local_image_path": "content/social/linkedin-images/746824785244-c9be36dd.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQHfO1CzRpDnww/feedshare-image-high-res/B4DZ6SL1W0HgAU-/0/1780569039666?e=1790812800&v=beta&t=zoaEdvCa3-z0KNZ4j_TDjrqteyt9uHL97hgVVXiOzvk"
+      },
+      "original_data": {
+        "isReshareDisabledByAuthor": false,
+        "createdAt": 1780569041638,
+        "lifecycleState": "PUBLISHED",
+        "lastModifiedAt": 1780569045605,
+        "visibility": "PUBLIC",
+        "publishedAt": 1780569041638,
+        "author": "urn:li:organization:100491988",
+        "id": "urn:li:ugcPost:7468247852444557314",
+        "distribution": {
+          "feedDistribution": "MAIN_FEED",
+          "thirdPartyDistributionChannels": []
+        },
+        "content": {
+          "multiImage": {
+            "images": [
+              {
+                "id": "urn:li:image:D4D22AQHfO1CzRpDnww"
+              },
+              {
+                "id": "urn:li:image:D4D22AQHTa_a2kb38XQ"
+              }
+            ]
+          }
+        },
+        "commentary": "DTCC Centre Day 2026 in full swing at @[Visual Arena](urn:li:organization:38088874) and online! This years theme is ”Urban Digital Twins in the Age of AI”, and this morning we had the pleasure of listening to two great keynote presentations by @[Thomas H. Kolbe](urn:li:person:H2ElLxyAbF) and @[Mila Koeva 🟥](urn:li:person:qfIN2fRKe7) on this theme. We also had a very interesting panel discussion where @[Eric Jeansson](urn:li:person:WnP1lt0iLN) and @[Anders Logg](urn:li:person:kh7K8aieoy) joined in.\n\nAfter lunch, the day continues with a showcase of all of our projects, keynotes from @[Dessislava Petrova-Antonova](urn:li:person:qfjiOFvUw5) and @[Anton Gustafsson](urn:li:person:FkpzFE5nun).",
+        "lifecycleStateInfo": {
+          "isEditedByAuthor": false
+        }
+      }
+    },
     {
       "post_id": "urn:li:ugcPost:7460235655948955648",
       "post_url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7460235655948955648/",
@@ -15,11 +378,11 @@
         "has_media": true,
         "media_type": "image",
         "media_urn": "urn:li:image:D4D22AQFa9Uo6DT0YBw",
-        "image_url": "content/social/linkedin-images/746023565594-d2de4f21.jpg",
+        "image_url": "content/social/linkedin-images/746023565594-236d8e00.jpg",
         "thumbnail_urn": null,
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/746023565594-d2de4f21.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFa9Uo6DT0YBw/feedshare-image-high-res/B4DZ4gUydYJYAU-/0/1778658781338?e=1780531200&v=beta&t=j29wo7WfpzsG5SMeYlfEebugjgDyJ8SQE9olGYKyAgU"
+        "local_image_path": "content/social/linkedin-images/746023565594-236d8e00.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFa9Uo6DT0YBw/feedshare-image-high-res/B4DZ4gUydYJYAU-/0/1778658781338?e=1790812800&v=beta&t=yibm8tn2vrewmNHdm42JRcTn9V3-ME1d3kFrepwyLs8"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -65,11 +428,11 @@
         "has_media": true,
         "media_type": "image",
         "media_urn": "urn:li:image:D4D22AQFMcpteU2humw",
-        "image_url": "content/social/linkedin-images/745989490713-a3087b2f.jpg",
+        "image_url": "content/social/linkedin-images/745989490713-74ee0f93.jpg",
         "thumbnail_urn": null,
         "source": "reshare_parent",
-        "local_image_path": "content/social/linkedin-images/745989490713-a3087b2f.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFMcpteU2humw/feedshare-image-high-res/B4DZ4awTRIGwAU-/0/1778565330415?e=1780531200&v=beta&t=6p-lVdM5aJ8wBaqu8VsWhx_Xw_J4TFdwmMOr7MVys4c"
+        "local_image_path": "content/social/linkedin-images/745989490713-74ee0f93.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFMcpteU2humw/feedshare-image-high-res/B4DZ4awTRIGwAU-/0/1778565330415?e=1790812800&v=beta&t=SjCe-n_AvCM0ApRlpeNmAYWO4elgrs2O6kjdLYtGQiQ"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -108,11 +471,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/745269194917-1f114153.jpg",
+        "image_url": "content/social/linkedin-images/745269194917-66736ef4.jpg",
         "thumbnail_urn": "urn:li:image:D4D22AQGYrFDrKX3gmw",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/745269194917-1f114153.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQGYrFDrKX3gmw/feedshare-image-high-res/B4DZ21GF5xGQAY-/0/1776859766997?e=1780531200&v=beta&t=fy4OhBISSTU8EetYlxsPCAkQIzBKQgapBUoh5Se027U"
+        "local_image_path": "content/social/linkedin-images/745269194917-66736ef4.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQGYrFDrKX3gmw/feedshare-image-high-res/B4DZ21GF5xGQAY-/0/1776859766997?e=1790812800&v=beta&t=lnqWleWkomGYacv-DVpws5zbljK4N3LtlK9b0ZtAuqI"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -151,11 +514,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/744537577436-0b4a96e4.jpg",
+        "image_url": "content/social/linkedin-images/744537577436-35c229a7.jpg",
         "thumbnail_urn": "urn:li:image:D4D22AQGxgE0tSSNwcQ",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/744537577436-0b4a96e4.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQGxgE0tSSNwcQ/feedshare-image-high-res/B4DZ1NJajGKMAU-/0/1775115807175?e=1780531200&v=beta&t=1isKL0cnDAuIeSZkuD4WgIAD93_FNwrOwTPC2x7WM8k"
+        "local_image_path": "content/social/linkedin-images/744537577436-35c229a7.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQGxgE0tSSNwcQ/feedshare-image-high-res/B4DZ1NJajGKMAU-/0/1775115807175?e=1790812800&v=beta&t=CotGHZf1sgxAk7CohK4wIO4Gm3y5awf96bntdWHOwlg"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -194,11 +557,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/744216725840-61a40646.jpg",
+        "image_url": "content/social/linkedin-images/744216725840-b4b798ce.jpg",
         "thumbnail_urn": "urn:li:image:D5622AQHtygSrDFcb7A",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/744216725840-61a40646.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D5622AQHtygSrDFcb7A/feedshare-image-high-res/B56Z0fio1uG8AU-/0/1774350667389?e=1780531200&v=beta&t=-ZmLB1KGXwD2hGKoxioRTPcBNePuSLi7jUU7Uj9JD-k"
+        "local_image_path": "content/social/linkedin-images/744216725840-b4b798ce.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D5622AQHtygSrDFcb7A/feedshare-image-high-res/B56Z0fio1uG8AU-/0/1774350667389?e=1790812800&v=beta&t=6_42-Jx9V8U3b_ng4vd9yyXTv9T21_sjahosDpNgTUU"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -237,11 +600,11 @@
         "has_media": true,
         "media_type": "image",
         "media_urn": "urn:li:image:D4D22AQFJH4g0Vnuh8A",
-        "image_url": "content/social/linkedin-images/743779927114-a3a529cc.jpg",
+        "image_url": "content/social/linkedin-images/743779927114-b60415fd.jpg",
         "thumbnail_urn": null,
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/743779927114-a3a529cc.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFJH4g0Vnuh8A/feedshare-image-high-res/B4DZzhfA_AGwAY-/0/1773309532712?e=1780531200&v=beta&t=x8WbpcUCO0BYL9BOjSjJMaT3rsI5bzkFDDo0ETUh5-k"
+        "local_image_path": "content/social/linkedin-images/743779927114-b60415fd.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFJH4g0Vnuh8A/feedshare-image-high-res/B4DZzhfA_AGwAY-/0/1773309532712?e=1790812800&v=beta&t=6z1WWiJxJMG4hTdN2otPe6HUKNZ05XmPxnGhvsuRcHk"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -278,11 +641,11 @@
         "has_media": true,
         "media_type": "image",
         "media_urn": "urn:li:image:D4D22AQFjGrO-pajcyg",
-        "image_url": "content/social/linkedin-images/743672350339-703ade4f.jpg",
+        "image_url": "content/social/linkedin-images/743672350339-bd40e374.jpg",
         "thumbnail_urn": null,
         "source": "reshare_parent",
-        "local_image_path": "content/social/linkedin-images/743672350339-703ade4f.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFjGrO-pajcyg/feedshare-shrink_1280/B4DZzDTTR9GkAc-/0/1772803143026?e=1780531200&v=beta&t=teUvVr46w2sd6-U9s6_QI8b5Enm04Ca3mYl9CinL9Ak"
+        "local_image_path": "content/social/linkedin-images/743672350339-bd40e374.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFjGrO-pajcyg/feedshare-shrink_1280/B4DZzDTTR9GkAc-/0/1772803143026?e=1790812800&v=beta&t=aaPdFDuf1RoRdVED01NK-NOQKV6qTH9OwCRnXOD_lyI"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -321,11 +684,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/743162070200-56756464.jpg",
+        "image_url": "content/social/linkedin-images/743162070200-78257a50.jpg",
         "thumbnail_urn": "urn:li:image:D4D27AQF9HbPttE5xEg",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/743162070200-56756464.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQF9HbPttE5xEg/articleshare-shrink_1280_800/B4DZyJqGJVGQAQ-/0/1771836040282?e=1779336000&v=beta&t=gGhJz8AUD1BfVgxKRYrI7DLDE2fwUUEnJFFNpKV0dec"
+        "local_image_path": "content/social/linkedin-images/743162070200-78257a50.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQF9HbPttE5xEg/articleshare-shrink_1280_800/B4DZyJqGJVGQAQ-/0/1771836040282?e=1789545600&v=beta&t=UpVjniR8lC1jvBVwOBfGMllUHLwVOUE1qtiYbqU29r4"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -365,11 +728,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/741675239045-b0f1f1a2.jpg",
+        "image_url": "content/social/linkedin-images/741675239045-d2a45120.jpg",
         "thumbnail_urn": "urn:li:image:D4D22AQEyqEeAXo9A9A",
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/741675239045-b0f1f1a2.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQEyqEeAXo9A9A/feedshare-image-high-res/B4DZu2Y_LmG8Ao-/0/1768291563523?e=1780531200&v=beta&t=xJeKkT6887eaYUvgPvN1GRkRcO3T9AbGo8r3WGqRgXs"
+        "local_image_path": "content/social/linkedin-images/741675239045-d2a45120.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQEyqEeAXo9A9A/feedshare-image-high-res/B4DZu2Y_LmG8Ao-/0/1768291563523?e=1790812800&v=beta&t=lLA3Wln9qlsh5i-OH9c9njKttS1ihfKBriahnIWuvNY"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -409,11 +772,11 @@
         "has_media": true,
         "media_type": "article_thumbnail",
         "media_urn": null,
-        "image_url": "content/social/linkedin-images/740733697454-871ba635.jpg",
+        "image_url": "content/social/linkedin-images/740733697454-cda10bdb.jpg",
         "thumbnail_urn": "urn:li:image:D4E27AQFOV1Y-QKjEVw",
         "source": "reshare_parent",
-        "local_image_path": "content/social/linkedin-images/740733697454-871ba635.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4E27AQFOV1Y-QKjEVw/articleshare-shrink_1280_800/B4EZssi_X1IQAU-/0/1765978929215?e=1779336000&v=beta&t=A-8ZOepqSvShROc1cWAvoS59zvto2Ey7DxB-ju5DPUk"
+        "local_image_path": "content/social/linkedin-images/740733697454-cda10bdb.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/sync/v2/D4E27AQFOV1Y-QKjEVw/articleshare-shrink_1280_800/B4EZssi_X1IQAU-/0/1765978929215?e=1789545600&v=beta&t=uZXLVcPz1e5uTeizukqVsXQwZ8hJ6vszBdCl7nT3Xmc"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -452,11 +815,11 @@
         "has_media": true,
         "media_type": "image",
         "media_urn": "urn:li:image:D4D22AQEnF6-p8jqWVw",
-        "image_url": "content/social/linkedin-images/739902367713-30d1cc1e.jpg",
+        "image_url": "content/social/linkedin-images/739902367713-92d2701d.jpg",
         "thumbnail_urn": null,
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/739902367713-30d1cc1e.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQEnF6-p8jqWVw/feedshare-image-high-res/B4DZq6c0frHwAo-/0/1764064710133?e=1780531200&v=beta&t=ihJX7USQ_Gl_TLyUIY7A1fXEYcim8Kk0JsCRSEI9xJg"
+        "local_image_path": "content/social/linkedin-images/739902367713-92d2701d.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQEnF6-p8jqWVw/feedshare-image-high-res/B4DZq6c0frHwAo-/0/1764064710133?e=1790812800&v=beta&t=ts89h1YXEXeu2rTP2uA8gqp_VbT0gRmo7_qMzlRzcF0"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
@@ -506,11 +869,11 @@
         "has_media": true,
         "media_type": "image",
         "media_urn": "urn:li:image:D4D22AQFokP2DGqmp6g",
-        "image_url": "content/social/linkedin-images/738377354867-3a34ebb5.jpg",
+        "image_url": "content/social/linkedin-images/738377354867-4349414f.jpg",
         "thumbnail_urn": null,
         "source": "self",
-        "local_image_path": "content/social/linkedin-images/738377354867-3a34ebb5.jpg",
-        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFokP2DGqmp6g/feedshare-image-high-res/B4DZnhu6NOGkAo-/0/1760428796975?e=1780531200&v=beta&t=FWZKUuR1kMYS3jrR1N4hoWnvRnWNFoiAiYTLOyXSyho"
+        "local_image_path": "content/social/linkedin-images/738377354867-4349414f.jpg",
+        "original_image_url": "https://media.licdn.com/dms/image/v2/D4D22AQFokP2DGqmp6g/feedshare-image-high-res/B4DZnhu6NOGkAo-/0/1760428796975?e=1790812800&v=beta&t=65vGG6GynAlNWkrc23ycxQYR6o2NOdrO_PpBlE42Vew"
       },
       "original_data": {
         "isReshareDisabledByAuthor": false,
