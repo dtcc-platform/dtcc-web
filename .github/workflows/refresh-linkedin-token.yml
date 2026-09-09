@@ -3,6 +3,9 @@ name: Refresh LinkedIn Token
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -20,20 +23,24 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Refresh token
+      - name: Test LinkedIn scripts
+        run: python3 -B -m unittest discover -s scripts/tests -v
+
+      - name: Diagnose token acceptance
         env:
           LINKEDIN_REFRESH_TOKEN: ${{ secrets.LINKEDIN_REFRESH_TOKEN }}
           LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
           LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
-        run: python3 scripts/linkedin_token_refresh.py
+        run: python3 -B scripts/linkedin_diagnose.py
 
       - name: Summary
         if: always()
         run: |
-          echo "## LinkedIn Token Refresh" >> $GITHUB_STEP_SUMMARY
+          echo "## LinkedIn Token Acceptance Diagnostic" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           if [ "${{ job.status }}" = "success" ]; then
-            echo "✅ Token renewal succeeded. Each import renews its own access token in memory; no secret update is needed." >> $GITHUB_STEP_SUMMARY
+            echo "✅ The final posts probe succeeded. Compare the immediate, 15-second and 60-second results in the diagnostic step." >> $GITHUB_STEP_SUMMARY
           else
-            echo "❌ Token renewal failed. Check the failed step. An expired or revoked refresh token requires local reauthorization and an update to LINKEDIN_REFRESH_TOKEN." >> $GITHUB_STEP_SUMMARY
+            echo "❌ The diagnostic did not establish posts access at the final probe. See the failed step and safe error codes above." >> $GITHUB_STEP_SUMMARY
           fi
+          echo "No feed files or repository secrets were updated." >> $GITHUB_STEP_SUMMARY

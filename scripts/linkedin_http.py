@@ -5,13 +5,14 @@ import time
 import requests
 
 
-def request(method, url, **kwargs):
-    for attempt in range(3):
+def request(method, url, *, retry=True, **kwargs):
+    attempts = 3 if retry else 1
+    for attempt in range(attempts):
         delay = 2 ** attempt
         try:
             response = requests.request(method, url, timeout=(5, 30), **kwargs)
         except requests.RequestException as exc:
-            if attempt == 2 or not isinstance(exc, (requests.Timeout, requests.ConnectionError)):
+            if attempt == attempts - 1 or not isinstance(exc, (requests.Timeout, requests.ConnectionError)):
                 # Exception messages and response bodies can contain credentials.
                 raise RuntimeError(f'{method} request failed ({type(exc).__name__})') from None
         else:
@@ -20,7 +21,7 @@ def request(method, url, **kwargs):
             status = response.status_code
             retry_after = response.headers.get('Retry-After', '')
             response.close()
-            if status not in (429, 500, 502, 503, 504) or attempt == 2:
+            if status not in (429, 500, 502, 503, 504) or attempt == attempts - 1:
                 raise RuntimeError(f'{method} request failed (HTTP {status})')
             try:
                 delay = max(delay, min(int(retry_after), 60))

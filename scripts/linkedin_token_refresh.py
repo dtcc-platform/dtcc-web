@@ -21,7 +21,7 @@ from linkedin_http import request
 TOKEN_URL = "https://www.linkedin.com/oauth/v2/accessToken"
 
 
-def refresh_token() -> str:
+def refresh_token(*, retry=True) -> str:
     refresh_token = os.environ.get("LINKEDIN_REFRESH_TOKEN")
     client_id = os.environ.get("LINKEDIN_CLIENT_ID")
     client_secret = os.environ.get("LINKEDIN_CLIENT_SECRET")
@@ -40,6 +40,7 @@ def refresh_token() -> str:
     response = request(
         "POST",
         TOKEN_URL,
+        retry=retry,
         data={
             "grant_type": "refresh_token",
             "refresh_token": refresh_token,
