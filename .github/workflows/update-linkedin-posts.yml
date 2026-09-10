@@ -21,6 +21,11 @@ jobs:
   fetch-linkedin-posts:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    # Share the branch writer queue with the keepalive workflow.
+    concurrency:
+      group: repository-content-${{ github.ref }}
+      cancel-in-progress: false
+      queue: max
     outputs:
       has_changes: ${{ steps.check_changes.outputs.has_changes }}
 
@@ -28,6 +33,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
         with:
+          ref: ${{ github.ref_name }}
           fetch-depth: 1
 
       - name: Setup Python

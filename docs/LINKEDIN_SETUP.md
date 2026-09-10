@@ -51,6 +51,32 @@ If GitHub has disabled it for repository inactivity, use **Enable workflow** on
 its Actions page. Updating the code does not itself verify or re-enable a disabled
 workflow.
 
+### Keeping schedules active
+
+GitHub can disable scheduled workflows in public repositories after 60 days
+without repository activity. **Keep scheduled workflows active** checks the
+default branch daily at 03:17 UTC and commits a timestamp to `.github/keepalive`
+only when its latest commit is at least 50 days old. Normal commits postpone the
+next keepalive, so a quiet repository gets roughly seven maintenance commits a
+year. The file is created on the first keepalive; no extra secret is needed.
+
+The keepalive and LinkedIn import share a concurrency queue and check out the
+latest branch after waiting. A racing human push is preserved. Keepalive failures
+appear in their own workflow, without changing the LinkedIn run's result. Its
+`GITHUB_TOKEN` push does not trigger the site's push-based deployment workflows.
+
+Check the keepalive run's final step for whether activity was recent, a timestamp
+was pushed, or the push failed. **Run workflow** on the default branch performs
+the same check; choosing another branch skips the job.
+
+This is preventive maintenance, not automatic recovery: if schedules are already
+disabled, enable them on their Actions pages, including keepalive itself. It does
+not re-enable deliberately disabled workflows. The 50-day threshold leaves a
+margin, but GitHub does not guarantee scheduled execution, and survival across a
+real 60-day quiet period still needs observation. See GitHub's
+[inactivity rule](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/disable-and-enable-workflows)
+and [token-trigger behavior](https://docs.github.com/en/actions/concepts/security/github_token).
+
 ## What the Workflow Does
 
 1. **Renews access and fetches LinkedIn posts**: Uses the stored refresh token to obtain an access token, then gets the 20 most recent posts
