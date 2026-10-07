@@ -1,6 +1,10 @@
 {
   "items": [
     {
+      "base": "dtcc-project-in-focus-reclaimed-redesigned-re-twinned",
+      "image": "content/news/dtcc-project-in-focus-reclaimed-redesigned-re-twinned-headline.webp"
+    },
+    {
       "base": "dtcc-director-and-co-director-receive-areas-of-advance-award-2026",
       "image": "content/news/dtcc-director-and-co-director-receive-areas-of-advance-award-2026-headline.webp"
     },
@@ -18,10 +22,6 @@
     },
     {
       "base": "extension-2025"
-    },
-    {
-      "base": "dtcc-project-in-focus-reclaimed-redesigned-re-twinned",
-      "image": "content/news/dtcc-project-in-focus-reclaimed-redesigned-re-twinned-headline.webp"
     }
   ]
 }
