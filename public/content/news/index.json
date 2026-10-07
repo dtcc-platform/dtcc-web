@@ -18,6 +18,10 @@
     },
     {
       "base": "extension-2025"
+    },
+    {
+      "base": "dtcc-project-in-focus-reclaimed-redesigned-re-twinned",
+      "image": "content/news/dtcc-project-in-focus-reclaimed-redesigned-re-twinned-headline.webp"
     }
   ]
 }
