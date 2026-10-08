@@ -412,13 +412,14 @@ const phdStudents = [
     role: 'PhD Student',
     image: contentImage('Oliver-Disney-BW.webp'),
     imageFallback: contentImage('Oliver-Disney-BW.jpg'),
+    imagePosition: 'center 10%',
   },
   {
     name: 'Florian Fleischmann',
     role: 'PhD Student',
     image: contentImage('Florian-Fleischmann-BW.webp'),
     imageFallback: contentImage('Florian-Fleischmann-BW.jpg'),
-    imagePosition: 'center 70%',
+    imagePosition: 'center 60%',
   },
   {
     name: 'Mohammadreza Harisaz',
@@ -449,6 +450,7 @@ const phdStudents = [
     role: 'PhD Student',
     image: contentImage('Jieming-Yan-BW.webp'),
     imageFallback: contentImage('Jieming-Yan-BW.jpg'),
+    imagePosition: 'center 10%',
   },
   {
     name: 'You-Wei Yen',
