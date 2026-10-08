@@ -97,10 +97,18 @@ function handleLogout() {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: linear-gradient(180deg, rgba(8,8,12,0.86) 0%, rgba(10,10,14,0.83) 100%);
-  backdrop-filter: saturate(140%) blur(6px);
   border-bottom: 1px solid rgba(255,255,255,0.06);
   box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+}
+/* Blur lives on a pseudo-element: backdrop-filter on .nav-wrap itself would make it
+   the containing block for the fixed mobile menu and overlay. */
+.nav-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(8,8,12,0.86) 0%, rgba(10,10,14,0.83) 100%);
+  backdrop-filter: saturate(140%) blur(6px);
 }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
 .brand { display: flex; align-items: center; gap: 10px; color: white; text-decoration: none; }
