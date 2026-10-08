@@ -9,7 +9,11 @@
  * 3. Resizing to max 1920px width (maintaining aspect ratio)
  * 4. Generating a report of size savings
  *
- * Usage: node scripts/optimize-images.js
+ * Usage: node scripts/optimize-images.js [image ...]
+ *
+ * With no arguments, optimizes IMAGES_TO_OPTIMIZE. Otherwise optimizes only
+ * the given images, e.g.:
+ *   npm run optimize-images -- public/content/Jane-Doe-BW.jpg
  */
 
 import sharp from 'sharp';
@@ -158,8 +162,13 @@ async function main() {
 
   const results = [];
 
+  const args = process.argv.slice(2);
+  const images = args.length > 0
+    ? args.map((arg) => path.relative(CONFIG.publicDir, path.resolve(arg)))
+    : IMAGES_TO_OPTIMIZE;
+
   // Process each image
-  for (const imagePath of IMAGES_TO_OPTIMIZE) {
+  for (const imagePath of images) {
     const result = await optimizeImage(imagePath);
     if (result) {
       results.push(result);
