@@ -54,7 +54,7 @@ async function getFileSize(filePath) {
 
 async function ensureBackupDir(originalPath) {
   const relativePath = path.relative(CONFIG.publicDir, path.dirname(originalPath));
-  const backupPath = path.join(CONFIG.publicDir, 'originals', relativePath);
+  const backupPath = path.join(projectRoot, 'originals', relativePath);
   await fs.mkdir(backupPath, { recursive: true });
   return backupPath;
 }

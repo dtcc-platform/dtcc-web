@@ -27,7 +27,7 @@ const CONFIG = {
   maxWidth: 800, // Partner logos don't need to be huge
   webpQuality: 85,
   partnersDir: path.join(projectRoot, 'public', 'content', 'partners'),
-  backupDir: path.join(projectRoot, 'public', 'content', 'partners', 'originals'),
+  backupDir: path.join(projectRoot, 'originals', 'content', 'partners'),
 };
 
 /**
