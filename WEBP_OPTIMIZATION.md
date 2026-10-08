@@ -9,7 +9,7 @@ Your site now uses WebP images with automatic PNG/JPEG fallback, reducing image 
 ### 1. Image Optimization Script ✅
 - Created `scripts/optimize-images.js` to convert large PNGs to WebP
 - Optimized 10 large images (7.2MB → 820KB, 5MB → 518KB, etc.)
-- Original files backed up to `public/originals/`
+- Original files backed up to `originals/` (outside `public/`, so not deployed)
 
 ### 2. Utility Functions ✅
 Added to `src/utils/paths.js`:
@@ -87,7 +87,7 @@ The script will:
 1. Look for PNG/JPEG files in the public directory
 2. Create WebP versions with 85% quality
 3. Resize to max 1920px width
-4. Backup originals to `public/originals/`
+4. Backup originals to `originals/`
 5. Show size savings report
 
 ## Results
@@ -119,7 +119,7 @@ For older browsers, the system automatically falls back to PNG/JPEG.
 2. **Use descriptive alt text** for accessibility
 3. **Use lazy loading** for images below the fold: `loading="lazy"`
 4. **Specify dimensions** when possible for better layout stability
-5. **Keep originals backed up** in `/public/originals`
+5. **Keep originals backed up** in `/originals`
 
 ## Troubleshooting
 

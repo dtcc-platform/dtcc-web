@@ -31,7 +31,7 @@ const CONFIG = {
   maxWidth: 1920,
   webpQuality: 85,
   publicDir: path.join(projectRoot, 'public'),
-  backupDir: path.join(projectRoot, 'public', 'originals'),
+  backupDir: path.join(projectRoot, 'originals'),
 };
 
 // List of images to optimize (identified from audit)
