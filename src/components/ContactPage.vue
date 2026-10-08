@@ -228,6 +228,12 @@ const boardEntries = [
     imagePosition: 'center 75%',
   },
   {
+    name: 'Ann-Margret Hvitt Strömvall',
+    role: 'Chalmers',
+    image: contentImage('Ann-Margret-Hvitt-Stromvall-BW.webp'),
+    imageFallback: contentImage('Ann-Margret-Hvitt-Stromvall-BW.jpg'),
+  },
+  {
     name: 'Eric Jeansson',
     role: 'Göteborgs Kommun',
     image: contentImage('Eric-Jeansson-BW.webp'),
@@ -240,12 +246,6 @@ const boardEntries = [
     image: contentImage('Mila-Koeva-BW.webp'),
     imageFallback: contentImage('Mila-Koeva-BW.jpg'),
     imagePosition: 'center 32%',
-  },
-  {
-    name: 'Oskar Modin',
-    role: 'Chalmers',
-    image: contentImage('Oskar-Modin-BW.webp'),
-    imageFallback: contentImage('Oskar-Modin-BW.jpg'),
   },
   {
     name: 'Peter Samuelsson',
