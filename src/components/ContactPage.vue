@@ -412,7 +412,7 @@ const phdStudents = [
     role: 'PhD Student',
     image: contentImage('Oliver-Disney-BW.webp'),
     imageFallback: contentImage('Oliver-Disney-BW.jpg'),
-    imagePosition: 'center 10%',
+    imagePosition: 'center 18%',
   },
   {
     name: 'Florian Fleischmann',
@@ -501,5 +501,6 @@ const phdStudents = [
 }
 @media (max-width: 640px) {
   .people { grid-template-columns: 1fr; }
+  .avatar { height: auto; aspect-ratio: 4 / 5; }
 }
 </style>
