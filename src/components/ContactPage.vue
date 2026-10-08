@@ -144,6 +144,42 @@
         </div>
       </div>
     </section>
+
+    <!-- PhD Students -->
+    <section class="section gradient-sunrise phd">
+      <div class="container grid2">
+        <div>
+          <h2 class="h3-30">PhD Students</h2>
+        </div>
+        <div>
+          <p class="brodtext-20 muted">
+            Our PhD students play a key role in DTCC’s research, contributing to projects in close collaboration
+            with project leads. Through the PhD Forum, they also have the opportunity to exchange ideas, share
+            knowledge and explore synergies across projects.
+          </p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="people">
+          <div class="person" v-for="(p, i) in phdStudents" :key="i">
+            <div :class="['avatar', { placeholder: !(p.image || p.imageFallback) }]">
+              <picture v-if="p.image || p.imageFallback">
+                <source v-if="p.image" :srcset="p.image" type="image/webp">
+                <img
+                  :src="p.imageFallback || p.image"
+                  :alt="p.name"
+                  loading="lazy"
+                  decoding="async"
+                  :style="{ objectPosition: p.imagePosition || 'center top' }"
+                >
+              </picture>
+            </div>
+            <div class="name" v-text="p.name" />
+            <div class="role muted" v-text="p.role" />
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </template>
 
@@ -367,6 +403,58 @@ const technicalBoard = [
     image: contentImage('Malgorzata-Zboinska-BW.webp'),
     imageFallback: contentImage('Malgorzata-Zboinska-BW.jpg'),
     imagePosition: 'center 38%',
+  },
+]
+
+const phdStudents = [
+  {
+    name: 'Oliver Disney',
+    role: 'PhD Student',
+    image: contentImage('Oliver-Disney-BW.webp'),
+    imageFallback: contentImage('Oliver-Disney-BW.jpg'),
+  },
+  {
+    name: 'Florian Fleischmann',
+    role: 'PhD Student',
+    image: contentImage('Florian-Fleischmann-BW.webp'),
+    imageFallback: contentImage('Florian-Fleischmann-BW.jpg'),
+    imagePosition: 'center 70%',
+  },
+  {
+    name: 'Mohammadreza Harisaz',
+    role: 'PhD Student',
+    image: contentImage('Mohammadreza-Harisaz-BW.webp'),
+    imageFallback: contentImage('Mohammadreza-Harisaz-BW.jpg'),
+  },
+  {
+    name: 'Efraim Ljung',
+    role: 'PhD Student',
+    image: contentImage('Efraim-Ljung-BW.webp'),
+    imageFallback: contentImage('Efraim-Ljung-BW.jpg'),
+  },
+  {
+    name: 'Kseniia Muratova',
+    role: 'PhD Student',
+    image: contentImage('Kseniia-Muratova-BW.webp'),
+    imageFallback: contentImage('Kseniia-Muratova-BW.jpg'),
+  },
+  {
+    name: 'Ahmet Arif Yakupogullari',
+    role: 'PhD Student',
+    image: contentImage('Ahmet-Arif-Yakupogullari-BW.webp'),
+    imageFallback: contentImage('Ahmet-Arif-Yakupogullari-BW.jpg'),
+  },
+  {
+    name: 'Jieming Yan',
+    role: 'PhD Student',
+    image: contentImage('Jieming-Yan-BW.webp'),
+    imageFallback: contentImage('Jieming-Yan-BW.jpg'),
+  },
+  {
+    name: 'You-Wei Yen',
+    role: 'PhD Student',
+    image: contentImage('You-Wei-Yen-BW.webp'),
+    imageFallback: contentImage('You-Wei-Yen-BW.jpg'),
   },
 ]
 </script>
