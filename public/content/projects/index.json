@@ -1,6 +1,9 @@
 {
   "items": [
     {
+      "base": "test"
+    },
+    {
       "base": "ai-3d-city-modeling",
       "image": "content/projects/ai-3d-city-modeling-headline.webp"
     },
@@ -39,9 +42,6 @@
     {
       "base": "reclaimed-redesigned-re-twinned-digital-twins-for-architectural-reuse",
       "image": "content/projects/reclaimed-redesigned-re-twinned-digital-twins-for-architectural-reuse-headline.webp"
-    },
-    {
-      "base": "test"
     }
   ]
 }
