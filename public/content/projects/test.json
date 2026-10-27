@@ -1,0 +1,17 @@
+{
+  "title": "test",
+  "abstract": "is it working?",
+  "intro": "is it working?",
+  "description": "is it working?",
+  "summary": "is it working?",
+  "body": "is it working?",
+  "subheading": "Details",
+  "url": "/projects/detail.html?slug=test",
+  "date": "2026-10-27",
+  "related": [
+    "ai-3d-city-modeling"
+  ],
+  "contacts": [
+    "nadia-tahir"
+  ]
+}
