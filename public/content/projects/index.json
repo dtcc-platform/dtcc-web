@@ -1,9 +1,6 @@
 {
   "items": [
     {
-      "base": "test"
-    },
-    {
       "base": "ai-3d-city-modeling",
       "image": "content/projects/ai-3d-city-modeling-headline.webp"
     },
