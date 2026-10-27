@@ -39,6 +39,9 @@
     {
       "base": "reclaimed-redesigned-re-twinned-digital-twins-for-architectural-reuse",
       "image": "content/projects/reclaimed-redesigned-re-twinned-digital-twins-for-architectural-reuse-headline.webp"
+    },
+    {
+      "base": "test"
     }
   ]
 }
