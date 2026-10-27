@@ -1,0 +1,24 @@
+{
+  "title": "Winning Idea at DTCC Hackathon Bridging the Physical and Digital Worlds",
+  "abstract": "How can a physical 3D-printed model become a more interactive gateway to digital data? This was the winning idea when researchers, PhD students and interns gathered for a two-day hackathon at the Digital Twin Cities Centre.",
+  "summary": "How can a physical 3D-printed model become a more interactive gateway to digital data? This was the winning idea when researchers, PhD students and interns gathered for a two-day hackathon at the Digital Twin Cities Centre.",
+  "intro": "How can a physical 3D-printed model become a more interactive gateway to digital data? This was the winning idea when researchers, PhD students and interns gathered for a two-day hackathon at the Digital Twin Cities Centre.",
+  "url": "/news/detail.html?slug=winning-idea-at-dtcc-hackathon-bridging-the-physical-and-digital-worlds",
+  "body": "Last week, a DTCC hackathon brought together participants from across the centre to develop new ideas for DTCC's Digital Twin Platform. The first day focused on the platform's vision, user experience and future applications, while the second was dedicated to hands-on development and presentations to a review panel.\n\n\"We wanted to experiment with new ways of collaborating, bringing together younger and more senior team members. It felt very natural and self-propelling. The work just flowed, and we're now considering doing something similar on a larger scale\", says Vasilis Naserentin, Head of Development at DTCC.\n\nThe winning team, consisting of Dag Wästberg, project lead for the DTCC project AI First Digital Twins, and DTCC interns Nawarat Eriksson and Femeeda Muhammed Haneef, presented a concept called “Cooler ways to use the physical model”, exploring new ways to connect physical models with digital information.\n\n\"We’re very happy to have won with our project. A physical model that people can gather around is one of the most natural and intuitive ways to communicate. We wanted to explore how to blur the boundaries between the physical and digital worlds, both in how we visualise data and how people access and interact with it”, says Dag Wästberg.\n\nThe hackathon also contributed to DTCC's ambition to launch an online beta version of its Digital Twin Platform. The planned release will allow users to explore and download datasets, including 3D building data from Lantmäteriet, through a web interface supported by an AI assistant. Preliminary simulation capabilities are also under development.\n\n\"The hackathon gave us an opportunity to experiment with new ideas while making concrete progress towards the beta release. We want to make the platform accessible and easy to use, allowing people to explore urban data and digital twin functionalities without needing extensive technical knowledge. The ideas and collaboration from these two days are valuable inputs as we continue developing the platform,\" says Vasilis Naserentin.",
+  "eyebrow": "News",
+  "date": "2026-10-27",
+  "previewImage": "content/news/winning-idea-at-dtcc-hackathon-bridging-the-physical-and-digital-worlds-preview.webp",
+  "image": "content/news/winning-idea-at-dtcc-hackathon-bridging-the-physical-and-digital-worlds-headline.webp",
+  "headlineImage": "content/news/winning-idea-at-dtcc-hackathon-bridging-the-physical-and-digital-worlds-headline.webp",
+  "images": [
+    "content/news/winning-idea-at-dtcc-hackathon-bridging-the-physical-and-digital-worlds-headline.webp"
+  ],
+  "contacts": [
+    "dag-wastberg",
+    "vasilis-naserentin"
+  ],
+  "relatedProjects": [
+    "data-platform-for-ai-first-digital-twins",
+    "digital-twin-platform"
+  ]
+}
