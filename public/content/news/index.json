@@ -1,6 +1,10 @@
 {
   "items": [
     {
+      "base": "winning-idea-at-dtcc-hackathon-bridging-the-physical-and-digital-worlds",
+      "image": "content/news/winning-idea-at-dtcc-hackathon-bridging-the-physical-and-digital-worlds-headline.webp"
+    },
+    {
       "base": "dtcc-project-in-focus-reclaimed-redesigned-re-twinned",
       "image": "content/news/dtcc-project-in-focus-reclaimed-redesigned-re-twinned-headline.webp"
     },
@@ -22,10 +26,6 @@
     },
     {
       "base": "extension-2025"
-    },
-    {
-      "base": "winning-idea-at-dtcc-hackathon-bridging-the-physical-and-digital-worlds",
-      "image": "content/news/winning-idea-at-dtcc-hackathon-bridging-the-physical-and-digital-worlds-headline.webp"
     }
   ]
 }
