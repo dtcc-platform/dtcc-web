@@ -1,6 +1,10 @@
 {
   "items": [
     {
+      "base": "dtcc-partners-digital-tools-that-support-creative-practice-at-liljewall",
+      "image": "content/news/dtcc-partners-digital-tools-that-support-creative-practice-at-liljewall-headline.webp"
+    },
+    {
       "base": "winning-idea-at-dtcc-hackathon-bridging-the-physical-and-digital-worlds",
       "image": "content/news/winning-idea-at-dtcc-hackathon-bridging-the-physical-and-digital-worlds-headline.webp"
     },
